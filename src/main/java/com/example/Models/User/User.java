@@ -22,17 +22,53 @@ public class User {
     protected boolean roleName;
     protected ArrayList<Address> address;
 
-    public static Client getInstance(String user_id, String username, String firstName, String lastName,
-            String passwordHash, String email, String phone, String createdAt, String roleName) throws BuildException {
+    public static User getInstance(String userId, String username, String firstName, String lastName,
+            String passwordHash, String email, String phone, String createdAt, boolean roleName) throws BuildException {
         String message = "";
 
-        Client client = new Client();
+        User user = new User();
+
+        if ((user.setUserId(userId) != 0)) {
+            message += "El user id no se ha creado correctamente, ";
+        }
+
+        if ((user.setUserId(username) != 0)) {
+            message += "El username no es correcto, ";
+        }
+
+        if ((user.setFirstName(firstName) != 0)) {
+            message += "El nombre no es correcto, ";
+        }
+
+        if ((user.setLastName(lastName) != 0)) {
+            message += "El apellido no es correcto, ";
+        }
+
+        if ((user.setPasswordHash(passwordHash) != 0)) {
+            message += "La contraseña no es correcta, ";
+        }
+
+        if ((user.setEmail(email) != 0)) {
+            message += "El mail no es correcto, ";
+        }
+
+        if ((user.setPhone(phone) != 0)) {
+            message += "El numero de telefono no es correcto, ";
+        }
+
+        if ((user.setCreatedAt(createdAt) != 0)) {
+            message += "La fecha de creacion del usuario no es correcto, ";
+        }
+
+        if ((user.setRoleName(roleName) != 0)) {
+            message += "El rol del usuario no es correcto, ";
+        }
 
         if (message.length() > 0) {
-            client = null;
+            user = null;
             throw new BuildException(message);
         }
-        return client;
+        return user;
     }
 
     public String getUserId() {
@@ -68,11 +104,11 @@ public class User {
     }
 
     public int setFirstName(String firstName) {
-        if ((Checker.isNull(username)) != 0)
+        if ((Checker.isNull(firstName)) != 0)
             return -1;
-        if ((Checker.minLength(3, username)) != 0)
+        if ((Checker.minLength(3, firstName)) != 0)
             return -2;
-        if ((Checker.maxLenght(30, username)) != 0)
+        if ((Checker.maxLenght(30, firstName)) != 0)
             return -10;
         this.firstName = firstName;
         return 0;
@@ -128,9 +164,9 @@ public class User {
     public int setPhone(String phone) {
         if ((Checker.isNull(phone)) != 0)
             return -3;
-        if ((Checker.minLength(8, phone)) != 0)
+        if ((Checker.minLength(7, phone)) != 0)
             return -5;
-        if ((Checker.maxLenght(13, phone)) != 0)
+        if ((Checker.maxLenght(10, phone)) != 0)
             return -6;
         if ((Checker.verifyPhone(phone) != 0))
             return -15;
@@ -155,8 +191,9 @@ public class User {
         return address;
     }
 
-    public void setAddress(ArrayList<Address> address) {
+    public int setAddress(ArrayList<Address> address) {
         this.address = address;
+        return 0;
     }
 
     public boolean isRoleName() {
@@ -168,6 +205,13 @@ public class User {
             return -1;
         this.roleName = roleName;
         return 0;
+    }
+
+    @Override
+    public String toString() {
+        return "User [userId=" + userId + ", username=" + username + ", firstName=" + firstName + ", lastName="
+                + lastName + ", passwordHash=" + passwordHash + ", email=" + email + ", phone=" + phone + ", createdAt="
+                + createdAt + ", roleName=" + roleName + ", address=" + address + "]";
     }
 
 }
