@@ -1,9 +1,10 @@
 package com.example.Models.User;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import com.example.Operations.Checker;
 import org.springframework.boot.autoconfigure.amqp.RabbitConnectionDetails.Address;
-import org.springframework.boot.autoconfigure.info.ProjectInfoProperties.Build;
 import org.springframework.boot.autoconfigure.integration.IntegrationProperties.RSocket.Client;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -17,7 +18,7 @@ public class User {
     protected String passwordHash;
     protected String email;
     protected String phone;
-    protected String createdAt;
+    protected LocalDateTime createdAt;
     protected boolean roleName;
     protected ArrayList<Address> address;
 
@@ -38,15 +39,11 @@ public class User {
         return userId;
     }
 
-    public int setUserId(String userId) {
+    public int setUserId(String userId) throws BuildException {
         String result = "";
-        try {
-            result = java.util.UUID.randomUUID().toString();
-            result.replace("-", "");
-            result.substring(0, 32);
-        } catch (BuildException ex) {
-            return ex.getMessage();
-        }
+        result = java.util.UUID.randomUUID().toString();
+        result.replace("-", "");
+        result.substring(0, 32);
         this.userId = result;
         return 0;
     }
@@ -100,18 +97,14 @@ public class User {
         return passwordHash;
     }
 
-    public int setPasswordHash(String passwordHash) {
+    public int setPasswordHash(String passwordHash) throws BuildException {
         if ((Checker.isNull(passwordHash)) != 0)
             return -1;
         if ((Checker.verifyPassword(passwordHash)) != 0)
             return -12;
-        try {
-            PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
-            String hashedPassword = passwordEncoder.encode(passwordHash);
-            this.passwordHash = hashedPassword;
-        } catch (BuildException ex) {
-            return ex.getMessage();
-        }
+        PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+        String hashedPassword = passwordEncoder.encode(passwordHash);
+        this.passwordHash = hashedPassword;
         return 0;
     }
 
@@ -146,11 +139,16 @@ public class User {
     }
 
     public String getCreatedAt() {
-        return createdAt;
+        return createdAt.format(DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss"));
     }
 
-    public void setCreatedAt(String createdAt) {
-        this.createdAt = createdAt;
+    public int setCreatedAt(String createdAt) {
+        try {
+            this.createdAt = Checker.checkDateAndTime(createdAt);
+        } catch (BuildException ex) {
+            return -22;
+        }
+        return 0;
     }
 
     public ArrayList<Address> getAddress() {
