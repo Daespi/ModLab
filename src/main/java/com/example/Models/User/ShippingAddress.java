@@ -3,7 +3,7 @@ package com.example.Models.User;
 import com.example.Exceptions.BuildException;
 import com.example.Operations.Checker;
 
-public class Address {
+public class ShippingAddress {
     protected int addressId;
     protected String address;
     protected String zipCode;
@@ -11,13 +11,13 @@ public class Address {
     protected String state;
     protected String country;
 
-    protected Address() {
+    protected ShippingAddress() {
     }
 
-    public static Address getInstance(int addressId, String address, String zipCode, String city, String state, String country) throws BuildException {
+    public static ShippingAddress getInstance(int addressId, String address, String zipCode, String city, String state, String country) throws BuildException {
         String message = "";
 
-            Address addressObject = new Address();
+            ShippingAddress addressObject = new ShippingAddress();
 
             if ((addressObject.setAddress(address) != 0)) { 
                 message += "Direccion incorrecta, ";

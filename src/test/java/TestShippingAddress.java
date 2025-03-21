@@ -3,7 +3,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 import com.example.Operations.Checker;
 
-public class TestAddress {
+public class TestShippingAddress {
     
     @Test
     void correctAddress() {  // Método debe ser void

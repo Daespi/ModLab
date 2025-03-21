@@ -3,8 +3,9 @@ package com.example.Models.User;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.HashSet;
+
 import com.example.Operations.Checker;
-import org.springframework.boot.autoconfigure.amqp.RabbitConnectionDetails.Address;
 import org.springframework.boot.autoconfigure.integration.IntegrationProperties.RSocket.Client;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -20,7 +21,11 @@ public class User {
     protected String phone;
     protected LocalDateTime createdAt;
     protected boolean roleName;
-    protected ArrayList<Address> address;
+    protected ArrayList<ShippingAddress> shippingAddresses;
+
+    protected User(){
+        this.shippingAddresses = new ArrayList<ShippingAddress>();
+    }
 
     public static User getInstance(String userId, String username, String firstName, String lastName,
             String passwordHash, String email, String phone, String createdAt, boolean roleName) throws BuildException {
@@ -61,6 +66,10 @@ public class User {
         }
 
         if ((user.setRoleName(roleName) != 0)) {
+            message += "El rol del usuario no es correcto, ";
+        }
+
+        if ((user.setShippingAddresses(shippingAddresses) != 0)){
             message += "El rol del usuario no es correcto, ";
         }
 
@@ -189,13 +198,37 @@ public class User {
         return 0;
     }
 
-    public ArrayList<Address> getAddress() {
-        return address;
+    public int setShippingAddresses(ArrayList<ShippingAddress> newShippingAddresses) throws BuildException {
+        for (ShippingAddress newAddress : newShippingAddresses) {
+
+            for (ShippingAddress existingAddress : shippingAddresses) {
+                if (existingAddress.getAddressId() == newAddress.getAddressId()) {
+                    throw new BuildException("El ID de dirección " + newAddress.getAddressId() + " ya existe");
+                }
+            }
+
+            try {
+                shippingAddresses.add(newAddress);
+            } catch (Exception ex) {
+                throw new BuildException("Ha habido algún error al crear la dirección");
+            }
+        }
+        return 0;
     }
 
-    public int setAddress(ArrayList<Address> address) {
-        this.address = address;
-        return 0;
+    public int setShippingAddresses(int addressId, String address, String zipCode, 
+        String city, String state, String country) throws BuildException{
+
+        for (ShippingAddress input : shippingAddresses ){
+            if (input.getAddressId() == addressId) {
+                throw new BuildException ("Este id de adress ya existe");
+            }
+        }
+
+        ShippingAddress newAdress = ShippingAddress.getInstance(addressId, address, zipCode, city, state, country);
+        shippingAddresses.add(newAdress);
+        return 0; 
+        
     }
 
     public boolean isRoleName() {
@@ -211,7 +244,7 @@ public class User {
     public String toString() {
         return "User [userId=" + userId + ", username=" + username + ", firstName=" + firstName + ", lastName="
                 + lastName + ", passwordHash=" + passwordHash + ", email=" + email + ", phone=" + phone + ", createdAt="
-                + createdAt + ", roleName=" + roleName + ", address=" + address + "]";
+                + createdAt + ", roleName=" + roleName + ", address=" + shippingAddresses + "]";
     }
 
 }
