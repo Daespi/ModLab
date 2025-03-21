@@ -69,10 +69,6 @@ public class User {
             message += "El rol del usuario no es correcto, ";
         }
 
-        if ((user.setShippingAddresses(shippingAddresses) != 0)){
-            message += "El rol del usuario no es correcto, ";
-        }
-
         if (message.length() > 0) {
             user = null;
             throw new BuildException(message);
