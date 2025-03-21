@@ -11,11 +11,13 @@ import com.example.Exceptions.BuildException;
 
 public class Checker {
     public static int isNull(String s) {
-        if (s == null || s.trim().equals("") || s.trim().equals(" ")) {
-            return -1;  // Si es null, vacío o contiene solo espacios, retorna -1
-        }
-        return 0;  // Si no es null ni vacío, retorna 0
+        if (s == null) return -1;
+        String sTrimed = s.trim();
+        if (sTrimed == " " || sTrimed == "")
+            return -1;
+        return 0;
     }
+
 
     public static int minLength(int numeral, String s) {
         if (s.trim().length() < numeral)
@@ -116,7 +118,7 @@ public class Checker {
     }
 
     public static int verifyPhone(String phoneNumber) {
-        String regex = "^(\\+\\d{1,3}\\s?)?(\\(\\d{3}\\)|\\d{3})[-\\s]?\\d{3}[-\\s]?\\d{4}$";
+        String regex = "^\\d{9}$"; 
         if (!phoneNumber.matches(regex)) {
             return -15;
         } else {
@@ -287,12 +289,13 @@ public class Checker {
             return 0;
         }
         return -2;
-    }   
+    } 
 
-
-
-
-
-
+    public static int needsToBeNull (String s){
+        if (s != "" || s != null){
+            return -21;
+        }
+        return 0;
+    }
 
 }

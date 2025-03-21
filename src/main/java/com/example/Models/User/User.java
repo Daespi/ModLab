@@ -75,7 +75,9 @@ public class User {
         return userId;
     }
 
-    public int setUserId(String userId) throws BuildException {
+    public int setUserId(String userId) {
+        if ((Checker.needsToBeNull(username)) != 0)
+            return -21;
         String result = "";
         result = java.util.UUID.randomUUID().toString();
         result.replace("-", "");
@@ -201,8 +203,6 @@ public class User {
     }
 
     public int setRoleName(boolean roleName) {
-        if ((Checker.isNull(roleName)) != 0)
-            return -1;
         this.roleName = roleName;
         return 0;
     }
