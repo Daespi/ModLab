@@ -11,17 +11,13 @@ import com.example.Exceptions.BuildException;
 
 public class Checker {
     public static int isNull(String s) {
+        if (s == null) return -1;
         String sTrimed = s.trim();
-        if (sTrimed == null || sTrimed == " " || sTrimed == "")
+        if (sTrimed == " " || sTrimed == "")
             return -1;
         return 0;
     }
 
-    public static int isNull(boolean s) {
-        if (s != false || s != true)
-            return -1;
-        return 0;
-    }
 
     public static int minLength(int numeral, String s) {
         if (s.trim().length() < numeral)
@@ -122,7 +118,7 @@ public class Checker {
     }
 
     public static int verifyPhone(String phoneNumber) {
-        String regex = "^(\\+\\d{1,3}\\s?)?(\\(\\d{3}\\)|\\d{3})[-\\s]?\\d{3}[-\\s]?\\d{4}$";
+        String regex = "^\\d{9}$"; 
         if (!phoneNumber.matches(regex)) {
             return -15;
         } else {
@@ -231,11 +227,73 @@ public class Checker {
     }
 
     public static int verifyAddress(String address) {
+        if( isNull(address) != 0){
+            return -1;
+        }
         String patron = "^(Calle|Av\\.?|Avenida|Paseo|C/|Plaza|Camino|Carretera|Ronda)\\s+[A-Za-zÀ-ÿ0-9'\\-\\.\\s]+,\\s*\\d+[A-Za-z0-9ºª\\s]*$";
         Pattern pattern = Pattern.compile(patron);
         Matcher matcher = pattern.matcher(address);
         if (!matcher.matches()) {
-            throw new IllegalArgumentException("Dirección inválida");
+            return -1;
+        }
+        return 0;
+    }
+
+    public static int verifyZipCode(String zipCode) {
+        if( isNull(zipCode) != 0){
+            return -1;
+        }
+        String patron =  "^(0[1-9]|[1-4][0-9]|5[0-2])[0-9]{3}$";
+        Pattern pattern = Pattern.compile(patron);
+        Matcher matcher = pattern.matcher(zipCode);
+        if (!matcher.matches()) {
+            return -1;
+        }
+        return 0;
+    }
+
+    public static int verifyCity(String city) {
+        if( isNull(city) != 0){
+            return -1;
+        }
+        String regex = "^[\\p{L}]+(?:[ '\\-][\\p{L}]+)*$";
+        Pattern pattern = Pattern.compile(regex, Pattern.UNICODE_CHARACTER_CLASS);
+        Matcher matcher = pattern.matcher(city.trim());
+        if (matcher.matches()) {
+            // Llamada a API para validar existencia real de la ciudad
+            return 0;
+        }
+        return -2;
+    }
+
+
+    public static int verifyState(String state) {
+        if( isNull(state) != 0){
+            return -1;
+        }
+        String regex = "^[\\p{L}]+(?:[ '\\-][\\p{L}]+)*$";
+        Pattern pattern = Pattern.compile(regex, Pattern.UNICODE_CHARACTER_CLASS);
+        Matcher matcher = pattern.matcher(state.trim());
+        if (matcher.matches()) {
+            // Llamada a API para validar existencia real del estado
+            return 0;
+        }
+        return -2;
+    }
+
+    public static int verifyCountry(String country) {
+        if( isNull(country) != 0){
+            return -1;
+        }       
+        if (country == "España" || country == "españa") {
+            return 0;
+        }
+        return -2;
+    } 
+
+    public static int needsToBeNull (String s){
+        if (s != "" || s != null){
+            return -21;
         }
         return 0;
     }

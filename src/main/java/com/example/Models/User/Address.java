@@ -1,5 +1,6 @@
 package com.example.Models.User;
 
+import com.example.Exceptions.BuildException;
 import com.example.Operations.Checker;
 
 public class Address {
@@ -13,8 +14,36 @@ public class Address {
     protected Address() {
     }
 
-    public stataic Address getInstance(int addressId, String address, String zipCode, String city, String state, String country) {
+    public static Address getInstance(int addressId, String address, String zipCode, String city, String state, String country) throws BuildException {
         String message = "";
+
+            Address addressObject = new Address();
+
+            if ((addressObject.setAddress(address) != 0)) { 
+                message += "Direccion incorrecta, ";
+            }
+
+            if ((addressObject.setZipCode(zipCode) != 0)) {
+                message += "Codigo postal incorrecto, ";  
+            }
+
+            if ((addressObject.setCity(city) != 0)) {
+                message += "Ciudad incorrecta, ";
+            }
+
+            if ((addressObject.setState(state) != 0)) {
+                message += "Estado incorrecto, ";
+            }
+
+            if ((addressObject.setCountry(country) != 0)) {
+                message += "Pais incorrecto, ";
+            }
+
+            if (message != "") {
+                throw new BuildException(message);
+            }
+
+            return addressObject;
     }
 
         public int getAddressId() {
@@ -26,13 +55,9 @@ public class Address {
         }
 
         public int setAddress(String address) {
-            if (Checker.isNull(address) != 0) {
-                return -1;
-            }
-            try{
-                Checker.verifyAddress(address);
-            } catch (IllegalArgumentException e) {
-                return -1;
+
+            if(Checker.verifyAddress(address) != 0){
+                throw new IllegalArgumentException("BadFormat;");
             }
             this.address = address;
             return 0;
@@ -43,7 +68,14 @@ public class Address {
         }
 
         public int setZipCode(String zipCode) {
+            try{
+                Checker.verifyZipCode(zipCode);
+            } catch (IllegalArgumentException e) {
+                throw new IllegalArgumentException("BadFormat;");
+            }
+
             this.zipCode = zipCode;
+            return 0;
         }
 
         public String getCity() {
@@ -51,7 +83,13 @@ public class Address {
         }
 
         public int setCity(String city) {
+
+            if(Checker.verifyCity(city) != 0){
+                throw new IllegalArgumentException("BadFormat;");
+            }
+
             this.city = city;
+            return 0;
         }
 
         public String getState() {
@@ -59,7 +97,12 @@ public class Address {
         }
 
         public int setState(String state) {
+
+            if (Checker.verifyState(state) != 0){
+                throw new IllegalArgumentException("BadFormat;");           
+            }
             this.state = state;
+            return 0;
         }
 
         public String getCountry() {
@@ -68,6 +111,7 @@ public class Address {
 
         public int setCountry(String country) {
             this.country = country;
+            return 0;
         }
             
     }
