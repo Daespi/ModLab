@@ -3,10 +3,8 @@ package com.example.Models.User;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
-import java.util.HashSet;
 
 import com.example.Operations.Checker;
-import org.springframework.boot.autoconfigure.integration.IntegrationProperties.RSocket.Client;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import com.example.Exceptions.BuildException;
@@ -24,7 +22,7 @@ public class User {
     protected ArrayList<ShippingAddress> shippingAddresses;
 
     protected User(){
-        this.shippingAddresses = new ArrayList<ShippingAddress>();
+        // this.shippingAddresses = new ArrayList<ShippingAddress>();
     }
 
     public static User getInstance(String userId, String username, String firstName, String lastName,
@@ -81,8 +79,6 @@ public class User {
     }
 
     public int setUserId(String userId) {
-        if ((Checker.needsToBeNull(username)) != 0)
-            return -21;
         String result = "";
         result = java.util.UUID.randomUUID().toString();
         result.replace("-", "");
@@ -194,23 +190,23 @@ public class User {
         return 0;
     }
 
-    public int setShippingAddresses(ArrayList<ShippingAddress> newShippingAddresses) throws BuildException {
-        for (ShippingAddress newAddress : newShippingAddresses) {
+    // public int setShippingAddresses(ArrayList<ShippingAddress> newShippingAddresses) throws BuildException {
+    //     for (ShippingAddress newAddress : newShippingAddresses) {
 
-            for (ShippingAddress existingAddress : shippingAddresses) {
-                if (existingAddress.getAddressId() == newAddress.getAddressId()) {
-                    throw new BuildException("El ID de dirección " + newAddress.getAddressId() + " ya existe");
-                }
-            }
+    //         for (ShippingAddress existingAddress : shippingAddresses) {
+    //             if (existingAddress.getAddressId() == newAddress.getAddressId()) {
+    //                 throw new BuildException("El ID de dirección " + newAddress.getAddressId() + " ya existe");
+    //             }
+    //         }
 
-            try {
-                shippingAddresses.add(newAddress);
-            } catch (Exception ex) {
-                throw new BuildException("Ha habido algún error al crear la dirección");
-            }
-        }
-        return 0;
-    }
+    //         try {
+    //             shippingAddresses.add(newAddress);
+    //         } catch (Exception ex) {
+    //             throw new BuildException("Ha habido algún error al crear la dirección");
+    //         }
+    //     }
+    //     return 0;
+    // }
 
     public int setShippingAddresses(int addressId, String address, String zipCode, 
         String city, String state, String country) throws BuildException{
@@ -220,9 +216,13 @@ public class User {
                 throw new BuildException ("Este id de adress ya existe");
             }
         }
-
-        ShippingAddress newAdress = ShippingAddress.getInstance(addressId, address, zipCode, city, state, country);
-        shippingAddresses.add(newAdress);
+        try{
+            ShippingAddress newAdress = ShippingAddress.getInstance(addressId, address, zipCode, city, state, country);
+            shippingAddresses.add(newAdress);
+        } catch (BuildException ex){
+            ex.getMessage();
+        }
+        
         return 0; 
         
     }

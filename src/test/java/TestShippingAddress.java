@@ -1,6 +1,9 @@
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
+import com.example.Exceptions.BuildException;
+import com.example.Models.User.ShippingAddress;
+import com.example.Models.User.User;
 import com.example.Operations.Checker;
 
 public class TestShippingAddress {
@@ -105,6 +108,17 @@ public class TestShippingAddress {
             Checker.verifyAddress("12345, 67");  // No tiene tipo de vía
         });
         assertEquals("Dirección inválida", exception.getMessage());
+    }
+
+    @Test
+    void tryAddress(){
+        try{
+            ShippingAddress alex = ShippingAddress.getInstance(0, null, null, null, null, null);
+        } catch (BuildException ex){
+            assertEquals("", ex.getMessage());
+            
+        }
+        
     }
 }
 

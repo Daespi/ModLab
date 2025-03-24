@@ -54,10 +54,10 @@ public class ShippingAddress {
             return address;
         }
 
-        public int setAddress(String address) {
+        public int setAddress(String address) throws BuildException{
 
             if(Checker.verifyAddress(address) != 0){
-                throw new IllegalArgumentException("BadFormat;");
+                throw new BuildException("BadFormat;");
             }
             this.address = address;
             return 0;
@@ -67,11 +67,11 @@ public class ShippingAddress {
             return zipCode;
         }
 
-        public int setZipCode(String zipCode) {
+        public int setZipCode(String zipCode) throws BuildException {
             try{
                 Checker.verifyZipCode(zipCode);
             } catch (IllegalArgumentException e) {
-                throw new IllegalArgumentException("BadFormat;");
+                throw new BuildException("BadFormat;");
             }
 
             this.zipCode = zipCode;
@@ -82,10 +82,10 @@ public class ShippingAddress {
             return city;
         }
 
-        public int setCity(String city) {
+        public int setCity(String city) throws BuildException {
 
             if(Checker.verifyCity(city) != 0){
-                throw new IllegalArgumentException("BadFormat;");
+                throw new BuildException("BadFormat;");
             }
 
             this.city = city;
@@ -96,10 +96,10 @@ public class ShippingAddress {
             return state;
         }
 
-        public int setState(String state) {
+        public int setState(String state) throws BuildException {
 
             if (Checker.verifyState(state) != 0){
-                throw new IllegalArgumentException("BadFormat;");           
+                throw new BuildException("BadFormat;");           
             }
             this.state = state;
             return 0;
@@ -113,5 +113,13 @@ public class ShippingAddress {
             this.country = country;
             return 0;
         }
+
+        @Override
+        public String toString() {
+            return "ShippingAddress [addressId=" + addressId + ", address=" + address + ", zipCode=" + zipCode
+                    + ", city=" + city + ", state=" + state + ", country=" + country + "]";
+        }
+
+        
             
     }

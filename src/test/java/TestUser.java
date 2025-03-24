@@ -2,10 +2,12 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.TestInstance;
 
 import com.example.Exceptions.BuildException;
 import com.example.Models.User.User;
 
+@TestInstance(TestInstance.Lifecycle.PER_CLASS) 
 public class TestUser {
     private User ash;
     
@@ -101,6 +103,20 @@ public class TestUser {
     void testLastNameGood(){
         int result = ash.setFirstName("Espinosa");
         assertEquals(0, result);
+    }
+
+    @Test
+    void tryClient(){
+        try{
+            User David = User.getInstance(
+                "", "SSSSSSSS", "Ash", "G", "Abcd1234?", 
+                "ashgraunuriacefp@gmail.com", "648293958", "21-03-2025 16:12:00", false
+            );
+        } catch (BuildException ex){
+            assertEquals("", ex.getMessage());
+            
+        }
+        
     }
 
     
