@@ -227,7 +227,7 @@ public class User {
         
     }
 
-    public boolean isRoleName() {
+    public boolean getRoleName() {
         return roleName;
     }
 
