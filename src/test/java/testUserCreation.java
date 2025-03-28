@@ -1,5 +1,5 @@
 import com.example.Exceptions.BuildException;
-import com.example.Models.User.User;
+import com.example.Models.User.Entity.User;
 
 public class testUserCreation {
     public static void main(String[] args) {

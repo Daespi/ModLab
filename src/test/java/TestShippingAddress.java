@@ -2,8 +2,8 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
 import com.example.Exceptions.BuildException;
-import com.example.Models.User.ShippingAddress;
-import com.example.Models.User.User;
+import com.example.Models.ShippingAddress.Entity.ShippingAddress;
+import com.example.Models.User.Entity.User;
 import com.example.Operations.Checker;
 
 public class TestShippingAddress {

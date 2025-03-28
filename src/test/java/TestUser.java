@@ -5,7 +5,7 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestInstance;
 
 import com.example.Exceptions.BuildException;
-import com.example.Models.User.User;
+import com.example.Models.User.Entity.User;
 
 @TestInstance(TestInstance.Lifecycle.PER_CLASS) 
 public class TestUser {
