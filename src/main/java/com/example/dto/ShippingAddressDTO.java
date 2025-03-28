@@ -4,16 +4,15 @@ package com.example.dto;
 
 public class ShippingAddressDTO {
 
-    private final int addressId;
+
     private final String address;
     private final String zipCode;
     private final String city;
     private final String state;
     private final String country;
 
-    public ShippingAddressDTO(int addressId, String address,
+    public ShippingAddressDTO( String address,
                               String zipCode, String city, String state, String country) {
-        this.addressId = addressId;
         this.address = address;
         this.zipCode = zipCode;
         this.city = city;
@@ -21,9 +20,6 @@ public class ShippingAddressDTO {
         this.country = country;
     }
 
-    public int getAddressId() {
-        return addressId;
-    }
 
     public String getAddress() {
         return address;

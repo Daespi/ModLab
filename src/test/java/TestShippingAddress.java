@@ -113,7 +113,7 @@ public class TestShippingAddress {
     @Test
     void tryAddress(){
         try{
-            ShippingAddress alex = ShippingAddress.getInstance(0, null, null, null, null, null);
+            ShippingAddress alex = ShippingAddress.getInstance(null, null, null, null, null);
         } catch (BuildException ex){
             assertEquals("", ex.getMessage());
             
