@@ -22,7 +22,7 @@ public class User {
     protected ArrayList<ShippingAddress> shippingAddresses;
 
     protected User(){
-        // this.shippingAddresses = new ArrayList<ShippingAddress>();
+        
     }
 
     public static User getInstance(String userId, String username, String firstName, String lastName,
@@ -32,16 +32,24 @@ public class User {
         User user = new User();
 
         if ((user.setUserId(userId) != 0)) {
-            message += "El user id no se ha creado correctamente, ";
+            message += "El user id no se ha creado correctamente. \n";
         }
+
+        
 
         if ((user.setUserId(username) != 0)) {
             message += "El username no es correcto, ";
         }
 
         if ((user.setFirstName(firstName) != 0)) {
-            message += "El nombre no es correcto, ";
+            message += "El nombre no es correcto porque ";
         }
+
+        int result = user.setFirstName(firstName);
+        if (result != 0) {
+            message += Checker.getErrorMessage(result, 3, 15);
+        }
+
 
         if ((user.setLastName(lastName) != 0)) {
             message += "El apellido no es correcto, ";
@@ -51,8 +59,9 @@ public class User {
             message += "La contraseña no es correcta, ";
         }
 
-        if ((user.setEmail(email) != 0)) {
-            message += "El mail no es correcto, ";
+        int resultEmail = user.setEmail(email);
+        if (resultEmail != 0) {
+            message += "El mail no es correcto porque" + Checker.getErrorMessage(resultEmail, 0, 0) + "\n";
         }
 
         if ((user.setPhone(phone) != 0)) {
@@ -111,7 +120,7 @@ public class User {
             return -1;
         if ((Checker.minLength(3, firstName)) != 0)
             return -2;
-        if ((Checker.maxLenght(30, firstName)) != 0)
+        if ((Checker.maxLenght(15, firstName)) != 0)
             return -10;
         this.firstName = firstName;
         return 0;
@@ -189,24 +198,6 @@ public class User {
         }
         return 0;
     }
-
-    // public int setShippingAddresses(ArrayList<ShippingAddress> newShippingAddresses) throws BuildException {
-    //     for (ShippingAddress newAddress : newShippingAddresses) {
-
-    //         for (ShippingAddress existingAddress : shippingAddresses) {
-    //             if (existingAddress.getAddressId() == newAddress.getAddressId()) {
-    //                 throw new BuildException("El ID de dirección " + newAddress.getAddressId() + " ya existe");
-    //             }
-    //         }
-
-    //         try {
-    //             shippingAddresses.add(newAddress);
-    //         } catch (Exception ex) {
-    //             throw new BuildException("Ha habido algún error al crear la dirección");
-    //         }
-    //     }
-    //     return 0;
-    // }
 
     public int setShippingAddresses(int addressId, String address, String zipCode, 
         String city, String state, String country) throws BuildException{

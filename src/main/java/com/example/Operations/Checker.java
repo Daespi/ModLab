@@ -298,4 +298,18 @@ public class Checker {
         return 0;
     }
 
+    public static String getErrorMessage(int errorCode, int minLength, int maxLenght ) {
+        switch (errorCode) {
+            case -1:
+                return " no puede ser nulo.";
+            case -2:
+                return " tiene que tener al menos " + minLength + " caracteres.";
+            case -10:
+                return "no puede tener más de " + maxLenght +" caracteres.";
+            // case 
+            default:
+                return "Error desconocido.";
+        }
+    }
+
 }
