@@ -14,13 +14,13 @@ public class testUserCreation {
 
             System.out.println(ash.toString());
 
-            String address = "Calle Valencia 20 1-1";
+            String address = "Ronda de Valencia 15";
             String zipCode = "08014";
             String city = "Barcelona";
             String state = "Catalunya";
             String country = "España";
             ArrayList<ShippingAddress> AddressList = new ArrayList<>();
-            int respuesta = ash.setShippingAddresses(address, zipCode, city, state, country);
+            String respuesta = ash.setShippingAddresses(address, zipCode, city, state, country);
             AddressList.addAll(ash.getShippingAddresses());
             System.out.println("Shipping address set response: " + respuesta);
             System.out.println("Direcciones de envío: " + ash.getShippingAddresses());

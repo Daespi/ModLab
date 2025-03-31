@@ -196,17 +196,17 @@ public class User {
         return shippingAddresses;
     }
 
-    public int setShippingAddresses(String address, String zipCode, 
+    public String setShippingAddresses(String address, String zipCode, 
         String city, String state, String country) throws BuildException{
 
         try{
             ShippingAddress newAdress = ShippingAddress.getInstance(address, zipCode, city, state, country);
             shippingAddresses.add(newAdress);
         } catch (BuildException ex){
-            ex.getMessage();
+            return ex.getMessage();
         }
         
-        return 0; 
+        return ""; 
         
     }
 

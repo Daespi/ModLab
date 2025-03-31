@@ -230,7 +230,7 @@ public class Checker {
         if( isNull(address) != 0){
             return -1;
         }
-        String patron = "^(Calle|Av\\.?|Avenida|Paseo|C/|Plaza|Camino|Carretera|Ronda)\\s+[A-Za-zÀ-ÿ0-9'\\-\\.\\s]+,\\s*\\d+[A-Za-z0-9ºª\\s]*$";
+        String patron = "^(Calle|Av\\.?|Avenida|Paseo|C/|Plaza|Camino|Carretera|Ronda)\\s+[A-Za-zÀ-ÿ0-9'\\-\\.\\s]+(,\\s*\\d+[A-Za-z0-9ºª\\s]*)?$";
         Pattern pattern = Pattern.compile(patron);
         Matcher matcher = pattern.matcher(address);
         if (!matcher.matches()) {
