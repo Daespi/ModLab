@@ -289,6 +289,16 @@ public class Checker {
         return -20;
     } 
 
+    public static int verifyUuid (String uuid){
+        String patron = "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$";
+        Pattern pattern = Pattern.compile(patron);
+        Matcher matcher = pattern.matcher(uuid);
+        if (!matcher.matches()) {
+            return -21;
+        }
+        return 0;
+    }
+
 
     public static String getErrorMessage(int errorCode, int minLength, int maxLenght ) {
         switch (errorCode) {
@@ -309,7 +319,9 @@ public class Checker {
             case -17:
                 return " no cumple con el formato estándar de 5 dígitos numéricos.";
             case -18, -19, -20:
-                return " el formato no es correcto, solo acepta letras y la primera tiene que ser mayúscula";
+                return " el formato no es correcto, solo acepta letras y la primera tiene que ser mayúscula.";
+            case -21:
+                return " el formato no es correcto, deberian de ser 36 caracteres incluyendo los guiones.";
             default:
                 return " Error desconocido.";
         }
