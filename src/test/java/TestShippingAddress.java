@@ -47,6 +47,29 @@ public class TestShippingAddress {
     }
 
     @Test
+    void invalidAddressWithSpecialChar(){
+        int result = Checker.verifyAddress("Calle 1 @ ");
+        assertEquals(-16, result);
+    }
+    @Test
+    void invalidAddressWithSpecialCharAndNegative(){
+        int result = Checker.verifyAddress("Calle 1 @ -2");
+        assertEquals(-16, result);
+    }
+
+    @Test
+    void correctAddressWithNegative(){
+        int result = Checker.verifyAddress("Calle -2");
+        assertEquals(0, result);
+    }
+
+    @Test
+    void correctAddressWithLong(){
+        int result = Checker.verifyAddress("Calle Del Españolisimo Español de España grande de Imperio Español ESPAÑOL");
+        assertEquals(0, result);
+    }
+
+    @Test
     void invalidAddress3() {
         Exception exception = assertThrows(IllegalArgumentException.class, () -> {
             Checker.verifyAddress("Avenida, 10");  // Falta nombre de la calle

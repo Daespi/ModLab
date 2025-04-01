@@ -134,6 +134,84 @@ public class TestUser {
     }
 
     @Test
+    void testPasswordWithoutMayus(){
+        int result = ash.setPasswordHash("abcd1234?");
+        assertEquals(-13, result);
+    }
+
+    @Test
+    void testPasswordWithoutNumbers(){
+        int result = ash.setPasswordHash("Abcd?");
+        assertEquals(-13, result);
+    }
+
+    @Test
+    void testPasswordOnlyOneNumber(){
+        int result = ash.setPasswordHash("Abcd1?");
+        assertEquals(-13, result);
+    }
+
+    @Test
+    void testPasswordWithoutSpecialChar(){
+        int result = ash.setPasswordHash("Abcd1234");
+        assertEquals(-13, result);
+    }
+
+    @Test
+    void testCreationDate(){
+        int result = ash.setCreatedAt("21-03-2025 16:12:00");
+        assertEquals(0, result);
+    }
+
+    @Test
+    void testCreationDateWithDiferentSeparador(){
+        int result = ash.setCreatedAt("21/03/2025 16:12:00");
+        assertEquals(-22, result);
+    }
+
+    @Test
+    void testCreationDateWrongDay(){
+        int result = ash.setCreatedAt("32/03/2025 16:12:00");
+        assertEquals(-22, result);
+    }
+
+    @Test
+    void testCreationDateWrongMonth(){
+        int result = ash.setCreatedAt("30/13/2025 16:12:00");
+        assertEquals(-22, result);
+    }
+
+    @Test
+    void testCreationDateWrongYear(){
+        int result = ash.setCreatedAt("30/12/20 16:12:00");
+        assertEquals(-22, result);
+    }
+
+    @Test
+    void testCreationDateWrongDate(){
+        int result = ash.setCreatedAt("31/06/2025 16:12:00");
+        assertEquals(-22, result);
+    }
+
+    @Test
+    void testCreationDateWrongHour(){
+        int result = ash.setCreatedAt("31/06/2025 25:12:00");
+        assertEquals(-22, result);
+    }
+
+    @Test
+    void testCreationDateWrongMinute(){
+        int result = ash.setCreatedAt("31/06/2025 20:99:00");
+        assertEquals(-22, result);
+    }
+
+    @Test
+    void testCreationDateWrongSecond(){
+        int result = ash.setCreatedAt("31/06/2025 20:00:99");
+        assertEquals(-22, result);
+    }
+
+    @Test
     void tryClient(){
         try{
             User David = User.getInstance(
