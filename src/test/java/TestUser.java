@@ -1,6 +1,4 @@
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.fail;
-
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestInstance;
@@ -21,8 +19,6 @@ public class TestUser {
             ex.getMessage();
         }
     }
-
-
 
     @Test
     void testUsernameValid (){
@@ -147,9 +143,5 @@ public class TestUser {
         
     }
 
-    
 }
-
-
-
 
