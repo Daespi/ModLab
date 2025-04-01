@@ -230,11 +230,11 @@ public class Checker {
         if( isNull(address) != 0){
             return -1;
         }
-        String patron = "^(Calle|Av\\.?|Avenida|Paseo|C/|Plaza|Camino|Carretera|Ronda)\\s+[A-Za-zÀ-ÿ0-9'\\-\\.\\s]+,\\s*\\d+[A-Za-z0-9ºª\\s]*$";
+        String patron = "^(Calle|Av\\.?|Avenida|Paseo|C/|Plaza|Camino|Carretera|Ronda)\\s+[A-Za-zÀ-ÿ0-9'\\-\\.\\s]+(,\\s*\\d+[A-Za-z0-9ºª\\s]*)?$";
         Pattern pattern = Pattern.compile(patron);
         Matcher matcher = pattern.matcher(address);
         if (!matcher.matches()) {
-            return -1;
+            return -16;
         }
         return 0;
     }
@@ -247,7 +247,7 @@ public class Checker {
         Pattern pattern = Pattern.compile(patron);
         Matcher matcher = pattern.matcher(zipCode);
         if (!matcher.matches()) {
-            return -1;
+            return -17;
         }
         return 0;
     }
@@ -260,10 +260,9 @@ public class Checker {
         Pattern pattern = Pattern.compile(regex, Pattern.UNICODE_CHARACTER_CLASS);
         Matcher matcher = pattern.matcher(city.trim());
         if (matcher.matches()) {
-            // Llamada a API para validar existencia real de la ciudad
             return 0;
         }
-        return -2;
+        return -18;
     }
 
 
@@ -275,10 +274,9 @@ public class Checker {
         Pattern pattern = Pattern.compile(regex, Pattern.UNICODE_CHARACTER_CLASS);
         Matcher matcher = pattern.matcher(state.trim());
         if (matcher.matches()) {
-            // Llamada a API para validar existencia real del estado
             return 0;
         }
-        return -2;
+        return -19;
     }
 
     public static int verifyCountry(String country) {
@@ -288,14 +286,45 @@ public class Checker {
         if (country == "España" || country == "españa") {
             return 0;
         }
-        return -2;
+        return -20;
     } 
 
-    public static int needsToBeNull (String s){
-        if (s != "" || s != null){
+    public static int verifyUuid (String uuid){
+        String patron = "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$";
+        Pattern pattern = Pattern.compile(patron);
+        Matcher matcher = pattern.matcher(uuid);
+        if (!matcher.matches()) {
             return -21;
         }
         return 0;
+    }
+
+
+    public static String getErrorMessage(int errorCode, int minLength, int maxLenght ) {
+        switch (errorCode) {
+            case -1:
+                return " no puede dejarse en blanco.";
+            case -2:
+                return " tiene que tener al menos " + minLength + " caracteres.";
+            case -10:
+                return " no puede tener más de " + maxLenght +" caracteres.";
+            case -13:
+                return " tiene que contener al menos 4 minusculas, 3 numeros, 1 mayúscula y 1 carácter especial.";
+            case -14:
+                return " el formato no es correcto (ejemplo@ejemplo.com).";
+            case -15: 
+                return " el formato no es correcto, deberían de ser 9 digitos.";
+            case -16: 
+                return " debe de empezar con Calle/Avenida/etc, luego el nombre, un numero de edificio como mínimo.";
+            case -17:
+                return " no cumple con el formato estándar de 5 dígitos numéricos.";
+            case -18, -19, -20:
+                return " el formato no es correcto, solo acepta letras y la primera tiene que ser mayúscula.";
+            case -21:
+                return " el formato no es correcto, deberian de ser 36 caracteres incluyendo los guiones.";
+            default:
+                return " Error desconocido.";
+        }
     }
 
 }
