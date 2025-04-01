@@ -1,6 +1,6 @@
-package com.example.Models.sharedkernel.appservices.serializers;
+package com.example.sharedkernel.appservices.serializers;
 
-import com.example.softlearning.applicationcore.entity.sharedkernel.model.exceptions.ServiceException;
+import com.example.Exceptions.ServiceException;
 
 public interface Serializer<T> {
 

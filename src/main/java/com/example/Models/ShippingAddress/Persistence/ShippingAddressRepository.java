@@ -1,4 +1,4 @@
-package com.example.Models.User.Persistence;
+package com.example.Models.ShippingAddress.Persistence;
 
 import java.util.List;
 import java.util.Optional;
@@ -9,7 +9,7 @@ import com.example.Models.User.DTO.UserDTO;
 
 
 @Repository
-public interface UserRepository  {
+public interface ShippingAddressRepository  {
 
     public Optional<UserDTO> findById(String isbn);
 

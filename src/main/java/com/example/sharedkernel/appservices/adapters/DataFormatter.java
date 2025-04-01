@@ -1,4 +1,4 @@
-package com.example.Models.sharedkernel.appservices.adapters;
+package com.example.sharedkernel.appservices.adapters;
 
 public class DataFormatter {
     public static String changeDateFormat(String data) {

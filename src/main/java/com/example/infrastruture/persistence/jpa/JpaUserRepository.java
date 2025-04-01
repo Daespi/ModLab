@@ -8,7 +8,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 import com.example.Models.User.DTO.UserDTO;
-import com.example.softlearning.applicationcore.entity.book.persistence.UserRepository;
+import com.example.Models.User.Persistence.UserRepository;
 
 import jakarta.transaction.Transactional;
 

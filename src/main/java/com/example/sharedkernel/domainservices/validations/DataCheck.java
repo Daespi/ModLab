@@ -1,11 +1,12 @@
-package com.example.softlearning.applicationcore.entity.sharedkernel.domainservices.validations;
+package com.example.sharedkernel.domainservices.validations;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
-import com.example.softlearning.applicationcore.entity.sharedkernel.model.exceptions.GeneralDateTimeException;
+import com.example.Exceptions.GeneralDateTimeException;
+
 
 public class DataCheck {
     public static int checkDNI(String dni) {

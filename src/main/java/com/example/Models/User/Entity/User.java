@@ -37,8 +37,6 @@ public class User {
             message += "El user id no se ha creado correctamente. \n";
         }
 
-        
-
         if ((user.setUserId(username) != 0)) {
             message += "El username no es correcto, ";
         }
@@ -51,7 +49,6 @@ public class User {
         if (result != 0) {
             message += Checker.getErrorMessage(result, 3, 15);
         }
-
 
         if ((user.setLastName(lastName) != 0)) {
             message += "El apellido no es correcto, ";
