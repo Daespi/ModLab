@@ -1,4 +1,4 @@
-package com.example.infrastruture.persistence.jpa;
+/*package com.example.infrastruture.persistence.jpa;
 
 import java.util.List;
 import java.util.Optional;
@@ -29,4 +29,4 @@ public interface JpaShippingAddressRepository extends JpaRepository<ShippingAddr
     @Transactional
     public void deleteByNif(String nif);
     
-}
+}*/

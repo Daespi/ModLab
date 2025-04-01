@@ -4,9 +4,9 @@ import com.example.Exceptions.BuildException;
 import com.example.Models.User.ShippingAddress;
 import com.example.Models.User.User;
 
-public class TestUserCreation {
+public class testUserCreation {
     public static void main(String[] args) {
-        try {
+       /* try {
             User ash = User.getInstance(
                  "Ash", "Ash", "Grau Ayala", "Abcd134?", 
                 "ashgraunuriacefp@gmail.com", "648293958", "21-03-2025 16:12:00", false
@@ -29,11 +29,11 @@ public class TestUserCreation {
 
         } catch (BuildException ex) {
             System.out.println( ex.getMessage());
-        }
+        }*/
 
         try {
 
-        User alex = User.getInstance("Galsaan", "Alex", "Salas Galán", "!Alumnes2024", 
+        User alex = User.getInstance("Galsaan", "Alex", "Salas Galán", "@Alumnes2024", 
         "alexsalas.nuria@gmail.com", "606665432", "01-04-2025 16:12:53", true);
 
         System.out.println(alex.toString());
