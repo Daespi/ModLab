@@ -24,55 +24,116 @@ public class User {
     protected ArrayList<ShippingAddress> shippingAddresses;
 
     protected User(){
-        
+        shippingAddresses = new ArrayList<>();
     }
 
-    public static User getInstance(String userId, String username, String firstName, String lastName,
+    public static User getInstance( String username, String firstName, String lastName,
             String passwordHash, String email, String phone, String createdAt, boolean roleName) throws BuildException {
         String message = "";
 
         User user = new User();
 
-        if ((user.setUserId(userId) != 0)) {
-            message += "El user id no se ha creado correctamente. \n";
-        }
+        String uuid = java.util.UUID.randomUUID().toString();
+        uuid.replace("-", "");
+        uuid.substring(0, 32);
+        user.userId = uuid;
 
-        if ((user.setUserId(username) != 0)) {
-            message += "El username no es correcto, ";
-        }
 
-        if ((user.setFirstName(firstName) != 0)) {
-            message += "El nombre no es correcto porque ";
+        int resultUsername = user.setUsername(username);
+        if (resultUsername != 0) {
+            message += "El username no es correcto porque" + Checker.getErrorMessage(resultUsername, 3, 30);
         }
 
         int result = user.setFirstName(firstName);
         if (result != 0) {
-            message += Checker.getErrorMessage(result, 3, 15);
+            message += "El nombre no es correcto porque" + Checker.getErrorMessage(result, 3, 15);
         }
 
-        if ((user.setLastName(lastName) != 0)) {
-            message += "El apellido no es correcto, ";
+
+        int resultLastName = user.setLastName(lastName);
+        if (resultLastName != 0) {
+            message += "El apellido es correcto porque" + Checker.getErrorMessage(resultLastName, 4, 60);
         }
 
-        if ((user.setPasswordHash(passwordHash) != 0)) {
-            message += "La contraseña no es correcta, ";
+        int resultPassword = user.setPasswordHash(passwordHash);
+        if (resultPassword != 0) {
+            message += "La contraseña no es correcta porque" + Checker.getErrorMessage(resultPassword, 0, 0);
+        }
+
+        int resultPhone = user.setPhone(phone);
+        if (resultPhone != 0) {
+            message += "El teléfono no es correcto porque" + Checker.getErrorMessage(resultPhone, 0, 0);
         }
 
         int resultEmail = user.setEmail(email);
         if (resultEmail != 0) {
-            message += "El mail no es correcto porque" + Checker.getErrorMessage(resultEmail, 0, 0) + "\n";
-        }
-
-        if ((user.setPhone(phone) != 0)) {
-            message += "El numero de telefono no es correcto, ";
+            message += "El mail no es correcto porque" + Checker.getErrorMessage(resultEmail, 0, 0);
         }
 
         if ((user.setCreatedAt(createdAt) != 0)) {
-            message += "La fecha de creacion del usuario no es correcto, ";
+            message += "La fecha de creacion del usuario no es correcto.";
         }
 
         if ((user.setRoleName(roleName) != 0)) {
-            message += "El rol del usuario no es correcto, ";
+            message += "El rol del usuario no es correcto.";
+        }
+
+        if (message.length() > 0) {
+            user = null;
+            throw new BuildException(message);
+        }
+        return user;
+    }
+
+    public static User getInstance( String userId, String username, String firstName, String lastName,
+    String passwordHash, String email, String phone, String createdAt, boolean roleName) throws BuildException {
+        String message = "";
+
+        User user = new User();
+
+        user.userId = userId;
+
+        int resultUsername = user.setUsername(username);
+        if (resultUsername != 0) {
+            message += "El username no es correcto porque" + Checker.getErrorMessage(resultUsername, 3, 30);
+        }
+
+        int resultId = user.setUserId(userId);
+        if (resultId != 0) {
+            message += "El Id no es correcto porque" + Checker.getErrorMessage(resultId, 0, 0);
+        }
+
+        int result = user.setFirstName(firstName);
+        if (result != 0) {
+            message += "El nombre no es correcto porque" + Checker.getErrorMessage(result, 3, 15);
+        }
+
+        int resultLastName = user.setLastName(lastName);
+        if (resultLastName != 0) {
+            message += "El apellido es correcto porque" + Checker.getErrorMessage(resultLastName, 4, 60);
+        }
+
+        int resultPassword = user.setPasswordHash(passwordHash);
+        if (resultPassword != 0) {
+            message += "La contraseña no es correcta porque" + Checker.getErrorMessage(resultPassword, 0, 0);
+        }
+
+        int resultPhone = user.setPhone(phone);
+        if (resultPhone != 0) {
+            message += "El teléfono no es correcto porque" + Checker.getErrorMessage(resultPhone, 0, 0);
+        }
+
+        int resultEmail = user.setEmail(email);
+        if (resultEmail != 0) {
+            message += "El mail no es correcto porque" + Checker.getErrorMessage(resultEmail, 0, 0);
+        }
+
+        if ((user.setCreatedAt(createdAt) != 0)) {
+            message += "La fecha de creacion del usuario no es correcto.";
+        }
+
+        if ((user.setRoleName(roleName) != 0)) {
+            message += "El rol del usuario no es correcto.";
         }
 
         if (message.length() > 0) {
@@ -86,12 +147,12 @@ public class User {
         return userId;
     }
 
-    public int setUserId(String userId) {
-        String result = "";
-        result = java.util.UUID.randomUUID().toString();
-        result.replace("-", "");
-        result.substring(0, 32);
-        this.userId = result;
+    private int setUserId(String userId){
+        if ((Checker.isNull(userId)) != 0)
+            return -1;
+        if ((Checker.verifyUuid(userId)) != 0)
+            return -21;
+        this.userId = userId;
         return 0;
     }
 
@@ -144,11 +205,11 @@ public class User {
         return passwordHash;
     }
 
-    public int setPasswordHash(String passwordHash) throws BuildException {
+    public int setPasswordHash(String passwordHash) {
         if ((Checker.isNull(passwordHash)) != 0)
             return -1;
         if ((Checker.verifyPassword(passwordHash)) != 0)
-            return -12;
+            return -13;
         PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
         String hashedPassword = passwordEncoder.encode(passwordHash);
         this.passwordHash = hashedPassword;
@@ -163,7 +224,7 @@ public class User {
         if ((Checker.isNull(email)) != 0)
             return -1;
         if ((Checker.verifyMail(email) != 0))
-            return -22;
+            return -14;
         this.email = email;
         return 0;
     }
@@ -175,10 +236,6 @@ public class User {
     public int setPhone(String phone) {
         if ((Checker.isNull(phone)) != 0)
             return -3;
-        if ((Checker.minLength(7, phone)) != 0)
-            return -5;
-        if ((Checker.maxLenght(10, phone)) != 0)
-            return -6;
         if ((Checker.verifyPhone(phone) != 0))
             return -15;
         this.phone = phone;
@@ -198,22 +255,20 @@ public class User {
         return 0;
     }
 
-    public int setShippingAddresses(int addressId, String address, String zipCode, 
+    public ArrayList<ShippingAddress> getShippingAddresses() {
+        return shippingAddresses;
+    }
+
+    public String setShippingAddresses(String address, String zipCode, 
         String city, String state, String country) throws BuildException{
 
-        for (ShippingAddress input : shippingAddresses ){
-            if (input.getAddressId() == addressId) {
-                throw new BuildException ("Este id de adress ya existe");
-            }
-        }
         try{
-            ShippingAddress newAdress = ShippingAddress.getInstance(addressId, address, zipCode, city, state, country);
-            shippingAddresses.add(newAdress);
+            shippingAddresses.add(ShippingAddress.getInstance(address, zipCode, city, state, country));
         } catch (BuildException ex){
-            ex.getMessage();
+            return ex.getMessage();
         }
         
-        return 0; 
+        return ""; 
         
     }
 
@@ -230,7 +285,9 @@ public class User {
     public String toString() {
         return "User [userId=" + userId + ", username=" + username + ", firstName=" + firstName + ", lastName="
                 + lastName + ", passwordHash=" + passwordHash + ", email=" + email + ", phone=" + phone + ", createdAt="
-                + createdAt + ", roleName=" + roleName + ", address=" + shippingAddresses + "]";
+                + createdAt + ", roleName=" + roleName + ", shippingAddresses=" + shippingAddresses + "]";
     }
+
+    
 
 }

@@ -61,6 +61,14 @@ public class UserServicesImpl implements UserServices {
         }
     }
 
+
+
+
+
+
+
+    
+
     @Override
     public String getByIdToJson(String userId) throws ServiceException {
         return SerializersCatalog.getInstance(Serializers.USER_JSON)

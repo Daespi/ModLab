@@ -8,7 +8,6 @@ public class ShippingAddressMapper {
 
     public static ShippingAddress addressFromDTO(ShippingAddressDTO dto) throws BuildException {
         return ShippingAddress.getInstance(
-                dto.getAddressId(),
                 dto.getAddress(),
                 dto.getZipCode(),
                 dto.getCity(),
@@ -19,7 +18,6 @@ public class ShippingAddressMapper {
 
     public static ShippingAddressDTO dtoFromAddress(ShippingAddress address) {
         return new ShippingAddressDTO(
-                address.getAddressId(),
                 address.getAddress(),
                 address.getZipCode(),
                 address.getCity(),
