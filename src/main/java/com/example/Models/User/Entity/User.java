@@ -4,12 +4,11 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
+import com.example.Operations.Checker;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
-
 import com.example.Exceptions.BuildException;
 import com.example.Models.ShippingAddress.Entity.ShippingAddress;
-import com.example.Operations.Checker;
 
 public class User {
     protected String userId;
@@ -38,7 +37,6 @@ public class User {
         uuid.substring(0, 32);
         user.userId = uuid;
 
-
         int resultUsername = user.setUsername(username);
         if (resultUsername != 0) {
             message += "El username no es correcto porque" + Checker.getErrorMessage(resultUsername, 3, 30);
@@ -48,7 +46,6 @@ public class User {
         if (result != 0) {
             message += "El nombre no es correcto porque" + Checker.getErrorMessage(result, 3, 15);
         }
-
 
         int resultLastName = user.setLastName(lastName);
         if (resultLastName != 0) {
@@ -150,7 +147,7 @@ public class User {
     private int setUserId(String userId){
         if ((Checker.isNull(userId)) != 0)
             return -1;
-        if ((Checker.verifyUuid(userId)) != 0)
+        if ((Checker.isNull(userId)) != 0)
             return -21;
         this.userId = userId;
         return 0;
@@ -167,6 +164,8 @@ public class User {
             return -2;
         if ((Checker.maxLenght(30, username)) != 0)
             return -10;
+        if ((Checker.verifyUsername(username)) != 0)
+            return -22;
         this.username = username;
         return 0;
     }
