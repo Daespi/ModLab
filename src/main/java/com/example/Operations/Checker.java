@@ -94,7 +94,7 @@ public class Checker {
     }
 
     public static int verifyPassword(String password) {
-        String patron = "^(?=.*\\d)(?=.*[a-z])(?=.*[A-Z])(?!.* )(?!^[^a-zA-Z0-9]).{8,25}$";
+        String patron = "^(?=.*[!@#$%^&*(),.?\":{}|<>])(?=(.*[a-z]){4,})(?=(.*[A-Z]){1,})(?=(.*\\d){3,})[a-zA-Z0-9!@#$%^&*(),.?\":{}|<>]{8,25}$";
         Pattern pattern = Pattern.compile(patron);
         Matcher matcher = pattern.matcher(password);
         if (!matcher.matches()) {
@@ -326,5 +326,5 @@ public class Checker {
                 return " Error desconocido.";
         }
     }
-
 }
+

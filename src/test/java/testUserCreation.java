@@ -9,7 +9,7 @@ public class testUserCreation {
         try {
             User ash = User.getInstance(
                  "Ash", "Ash", "Grau Ayala", "Abcd134?", 
-                "ashgraunuriacefp@gmail.com", "648293958", "21-03-2025 16:12:00", false
+                "ashgraunuriacefp@gmail.com", "648293958", false
             );
 
             System.out.println(ash.toString());
@@ -30,5 +30,16 @@ public class testUserCreation {
         } catch (BuildException ex) {
             System.out.println( ex.getMessage());
         }
+
+        try {
+
+        User alex = User.getInstance("Galsaan", "Alex", "Salas Galán", "!Alumnes2024", 
+        "alexsalas.nuria@gmail.com", "606665432", true);
+
+        System.out.println(alex.toString());
+    }
+    catch (BuildException ex) {
+        System.out.println( ex.getMessage());
+    }
     }
 }

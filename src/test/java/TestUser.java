@@ -1,12 +1,10 @@
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.fail;
-
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestInstance;
 
 import com.example.Exceptions.BuildException;
-import com.example.Models.User.User;
+import com.example.Models.User.Entity.User;
 
 @TestInstance(TestInstance.Lifecycle.PER_CLASS) 
 public class TestUser {
@@ -16,13 +14,11 @@ public class TestUser {
     void createUser (){
         try{
             this.ash = User.getInstance( "AshAyala", "Ash", "Grau Ayala", "Abcd1234?", 
-            "ashgraunuriacefp@gmail.com", "648293958", "21-03-2025 16:12:00", false);
+            "ashgraunuriacefp@gmail.com", "648293958", false);
         } catch (BuildException ex){
             ex.getMessage();
         }
     }
-
-
 
     @Test
     void testUsernameValid (){
@@ -158,65 +154,11 @@ public class TestUser {
     }
 
     @Test
-    void testCreationDate(){
-        int result = ash.setCreatedAt("21-03-2025 16:12:00");
-        assertEquals(0, result);
-    }
-
-    @Test
-    void testCreationDateWithDiferentSeparador(){
-        int result = ash.setCreatedAt("21/03/2025 16:12:00");
-        assertEquals(-22, result);
-    }
-
-    @Test
-    void testCreationDateWrongDay(){
-        int result = ash.setCreatedAt("32/03/2025 16:12:00");
-        assertEquals(-22, result);
-    }
-
-    @Test
-    void testCreationDateWrongMonth(){
-        int result = ash.setCreatedAt("30/13/2025 16:12:00");
-        assertEquals(-22, result);
-    }
-
-    @Test
-    void testCreationDateWrongYear(){
-        int result = ash.setCreatedAt("30/12/20 16:12:00");
-        assertEquals(-22, result);
-    }
-
-    @Test
-    void testCreationDateWrongDate(){
-        int result = ash.setCreatedAt("31/06/2025 16:12:00");
-        assertEquals(-22, result);
-    }
-
-    @Test
-    void testCreationDateWrongHour(){
-        int result = ash.setCreatedAt("31/06/2025 25:12:00");
-        assertEquals(-22, result);
-    }
-
-    @Test
-    void testCreationDateWrongMinute(){
-        int result = ash.setCreatedAt("31/06/2025 20:99:00");
-        assertEquals(-22, result);
-    }
-
-    @Test
-    void testCreationDateWrongSecond(){
-        int result = ash.setCreatedAt("31/06/2025 20:00:99");
-        assertEquals(-22, result);
-    }
-
-    @Test
-    void tryClient(){
+    void tryClientAllOk(){
         try{
             User David = User.getInstance(
                 "AshGrau", "Ash", "Grau Ayala", "Abcd1234?", 
-                "ashgraunuriacefp@gmail.com", "648293958", "21-03-2025 16:12:00", false
+                "ashgraunuriacefp@gmail.com", "648293958", false
             );
         } catch (BuildException ex){
             assertEquals("", ex.getMessage());
@@ -225,9 +167,19 @@ public class TestUser {
         
     }
 
-    
+    @Test
+    void tryClient(){
+        try{
+            User David = User.getInstance(
+                "AshGrau", "Ash", "Grau Ayala", "Abcd1234?", 
+                "ashgraunuriacefp@gmail.com", "648293958", false
+            );
+        } catch (BuildException ex){
+            assertEquals("", ex.getMessage());
+            
+        }
+        
+    }
+
 }
-
-
-
 
