@@ -38,7 +38,6 @@ public class User {
         uuid.substring(0, 32);
         user.userId = uuid;
 
-
         int resultUsername = user.setUsername(username);
         if (resultUsername != 0) {
             message += "El username no es correcto porque" + Checker.getErrorMessage(resultUsername, 3, 30);
@@ -48,7 +47,6 @@ public class User {
         if (result != 0) {
             message += "El nombre no es correcto porque" + Checker.getErrorMessage(result, 3, 15);
         }
-
 
         int resultLastName = user.setLastName(lastName);
         if (resultLastName != 0) {
@@ -70,9 +68,8 @@ public class User {
             message += "El mail no es correcto porque" + Checker.getErrorMessage(resultEmail, 0, 0);
         }
 
-
         user.createdAt = LocalDateTime.now();
-        
+
 
         if ((user.setRoleName(roleName) != 0)) {
             message += "El rol del usuario no es correcto.";
@@ -85,6 +82,7 @@ public class User {
         return user;
     }
 
+    
 
     public String getUserId() {
         return userId;
