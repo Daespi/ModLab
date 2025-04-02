@@ -13,9 +13,8 @@ public class TestUser {
     @BeforeAll
     void createUser (){
         try{
-            this.ash = User.getInstance("Galsaan", "Alex", "Salas Galán", "@Alumnes2024", 
-            "alexsalas.nuria@gmail.com", "606665432", "01-04-2025 16:12:53", true);
-    
+            this.ash = User.getInstance( "AshAyala", "Ash", "Grau Ayala", "Abcd1234?", 
+            "ashgraunuriacefp@gmail.com", "648293958", false);
         } catch (BuildException ex){
             ex.getMessage();
         }
@@ -137,11 +136,49 @@ public class TestUser {
     }
 
     @Test
+    void testPasswordWithoutMayus(){
+        int result = ash.setPasswordHash("abcd1234?");
+        assertEquals(-13, result);
+    }
+
+    @Test
+    void testPasswordWithoutNumbers(){
+        int result = ash.setPasswordHash("Abcd?");
+        assertEquals(-13, result);
+    }
+
+    @Test
+    void testPasswordOnlyOneNumber(){
+        int result = ash.setPasswordHash("Abcd1?");
+        assertEquals(-13, result);
+    }
+
+    @Test
+    void testPasswordWithoutSpecialChar(){
+        int result = ash.setPasswordHash("Abcd1234");
+        assertEquals(-13, result);
+    }
+
+    @Test
+    void tryClientAllOk(){
+        try{
+            User David = User.getInstance(
+                "AshGrau", "Ash", "Grau Ayala", "Abcd1234?", 
+                "ashgraunuriacefp@gmail.com", "648293958", false
+            );
+        } catch (BuildException ex){
+            assertEquals("", ex.getMessage());
+            
+        }
+        
+    }
+
+    @Test
     void tryClient(){
         try{
             User David = User.getInstance(
-                "AshGrau", "Ash", "Grau Ayala", "Akbcd1234?", 
-                "ashgraunuriacefp@gmail.com", "648293958", "21-03-2025 16:12:00", false
+                "AshGrau", "Ash", "Grau Ayala", "Abcd1234?", 
+                "ashgraunuriacefp@gmail.com", "648293958", false
             );
 
             System.out.println(David.toString());

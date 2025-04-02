@@ -4,11 +4,12 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
-import com.example.Operations.Checker;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+
 import com.example.Exceptions.BuildException;
 import com.example.Models.ShippingAddress.Entity.ShippingAddress;
+import com.example.Operations.Checker;
 
 public class User {
     protected String userId;
@@ -27,7 +28,7 @@ public class User {
     }
 
     public static User getInstance( String username, String firstName, String lastName,
-            String passwordHash, String email, String phone, String createdAt, boolean roleName) throws BuildException {
+            String passwordHash, String email, String phone, boolean roleName) throws BuildException {
         String message = "";
 
         User user = new User();
@@ -67,9 +68,8 @@ public class User {
             message += "El mail no es correcto porque" + Checker.getErrorMessage(resultEmail, 0, 0);
         }
 
-        if ((user.setCreatedAt(createdAt) != 0)) {
-            message += "La fecha de creacion del usuario no es correcto.";
-        }
+        user.createdAt = LocalDateTime.now();
+
 
         if ((user.setRoleName(roleName) != 0)) {
             message += "El rol del usuario no es correcto.";
@@ -82,77 +82,11 @@ public class User {
         return user;
     }
 
-    public static User getInstance( String userId, String username, String firstName, String lastName,
-    String passwordHash, String email, String phone, String createdAt, boolean roleName) throws BuildException {
-        String message = "";
-
-        User user = new User();
-
-        user.userId = userId;
-
-        int resultUsername = user.setUsername(username);
-        if (resultUsername != 0) {
-            message += "El username no es correcto porque" + Checker.getErrorMessage(resultUsername, 3, 30);
-        }
-
-        int resultId = user.setUserId(userId);
-        if (resultId != 0) {
-            message += "El Id no es correcto porque" + Checker.getErrorMessage(resultId, 0, 0);
-        }
-
-        int result = user.setFirstName(firstName);
-        if (result != 0) {
-            message += "El nombre no es correcto porque" + Checker.getErrorMessage(result, 3, 15);
-        }
-
-        int resultLastName = user.setLastName(lastName);
-        if (resultLastName != 0) {
-            message += "El apellido es correcto porque" + Checker.getErrorMessage(resultLastName, 4, 60);
-        }
-
-        int resultPassword = user.setPasswordHash(passwordHash);
-        if (resultPassword != 0) {
-            message += "La contraseña no es correcta porque" + Checker.getErrorMessage(resultPassword, 0, 0);
-        }
-
-        int resultPhone = user.setPhone(phone);
-        if (resultPhone != 0) {
-            message += "El teléfono no es correcto porque" + Checker.getErrorMessage(resultPhone, 0, 0);
-        }
-
-        int resultEmail = user.setEmail(email);
-        if (resultEmail != 0) {
-            message += "El mail no es correcto porque" + Checker.getErrorMessage(resultEmail, 0, 0);
-        }
-
-        if ((user.setCreatedAt(createdAt) != 0)) {
-            message += "La fecha de creacion del usuario no es correcto.";
-        }
-
-        if ((user.setRoleName(roleName) != 0)) {
-            message += "El rol del usuario no es correcto.";
-        }
-
-        if (message.length() > 0) {
-            user = null;
-            throw new BuildException(message);
-        }
-        return user;
-    }
+    
 
     public String getUserId() {
         return userId;
     }
-
-    private int setUserId(String userId){
-        if ((Checker.isNull(userId)) != 0)
-            return -1;
-        if ((Checker.isNull(userId)) != 0)
-            return -21;
-        this.userId = userId;
-        return 0;
-    }
-
     public String getUsername() {
         return username;
     }
@@ -243,15 +177,6 @@ public class User {
 
     public String getCreatedAt() {
         return createdAt.format(DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss"));
-    }
-
-    public int setCreatedAt(String createdAt) {
-        try {
-            this.createdAt = Checker.checkDateAndTime(createdAt);
-        } catch (BuildException ex) {
-            return -22;
-        }
-        return 0;
     }
 
     public ArrayList<ShippingAddress> getShippingAddresses() {

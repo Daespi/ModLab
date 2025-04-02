@@ -6,7 +6,7 @@ public class testUserCreation {
        /* try {
             User ash = User.getInstance(
                  "Ash", "Ash", "Grau Ayala", "Abcd134?", 
-                "ashgraunuriacefp@gmail.com", "648293958", "21-03-2025 16:12:00", false
+                "ashgraunuriacefp@gmail.com", "648293958", false
             );
 
             System.out.println(ash.toString());
@@ -30,11 +30,10 @@ public class testUserCreation {
 
         try {
 
-
             System.out.println("\n\n*****   A P P L I C A T I O N    S T A R T E D   *****\n\n");
 
         User Pau = com.example.Models.User.Entity.User.getInstance("Galssaan-dasc", "Alex-dasc", "SalasGalán", "@Alumnes2024", 
-        "alexsalas.nuria@gmail.com", "606665432", "2022-04-25 16:12:53", true);
+        "alexsalas.nuria@gmail.com", "606665432", true);
 
         System.out.println(Pau.toString());
 
@@ -43,7 +42,7 @@ public class testUserCreation {
 
 
         User Alex = com.example.Models.User.Entity.User.getInstance("Alquimista-curioso33", "Alex-dasc", "SalasGalán", "@Alumnes2024", 
-        "alexsalas.nuria@gmail.com", "906654323", "2022-04-25 16:12:53", true);
+        "alexsalas.nuria@gmail.com", "906654323", true);
 
         System.out.println(Alex.toString());
 

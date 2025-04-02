@@ -14,8 +14,9 @@ import jakarta.transaction.Transactional;
 
 @Repository
 public interface JpaShippingAddressRepository extends JpaRepository<ShippingAddressDTO, Integer>, ShippingAddressRepository {
-    public Optional<ShippingAddressDTO> findByNif(String nif);
+    // public Optional<ShippingAddressDTO> findByNif(String nif);
 
+<<<<<<< HEAD
     public List<ShippingAddressDTO> findByAddress(String address);
  
     @Query(value="SELECT c FROM ShippingAddressDTO c WHERE c.address LIKE %:address%")
@@ -28,5 +29,19 @@ public interface JpaShippingAddressRepository extends JpaRepository<ShippingAddr
     public ShippingAddressDTO save(ShippingAddressDTO ShippingAddress);
     @Transactional
     public void deleteByNif(String nif);
+=======
+    // public List<ShippingAddressDTO> findByName(String name);
+ 
+    // @Query(value="SELECT c FROM ShippingAddressDTO c WHERE c.name LIKE %:name%")
+    // public List<ShippingAddressDTO> findByPartialName(String name);
+
+    // @Query(value="SELECT count(*) FROM ShippingAddressDTO c WHERE c.name LIKE %:name%")
+    // public Integer countByPartialName(String name);
+
+    // @Transactional
+    // public ShippingAddressDTO save(ShippingAddressDTO client);
+    // @Transactional
+    // public void deleteByNif(String nif);
+>>>>>>> origin/dev_ash
     
 }*/
