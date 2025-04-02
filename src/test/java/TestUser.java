@@ -140,9 +140,11 @@ public class TestUser {
     void tryClient(){
         try{
             User David = User.getInstance(
-                "AshGrau", "Ash", "Grau Ayala", "Abcd1234?", 
+                "AshGrau", "Ash", "Grau Ayala", "Akbcd1234?", 
                 "ashgraunuriacefp@gmail.com", "648293958", "21-03-2025 16:12:00", false
             );
+
+            System.out.println(David.toString());
         } catch (BuildException ex){
             assertEquals("", ex.getMessage());
             
