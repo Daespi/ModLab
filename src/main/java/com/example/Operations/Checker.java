@@ -50,7 +50,7 @@ public class Checker {
     }
 
     public static int nonNegative(double numeral) {
-        if (numeral < 0)
+        if (numeral < 0 || numeral < 0.00)
             return -4;
         return 0;
     }
