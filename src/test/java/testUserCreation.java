@@ -37,7 +37,6 @@ public class testUserCreation {
 
         System.out.println(Pau.toString());
 
-
         System.out.println("\n\n\n*****   - - - - - - - - - - - - - - - - - - - - - - - - - -   *****\n\n");
 
 
@@ -45,7 +44,6 @@ public class testUserCreation {
         "alexsalas.nuria@gmail.com", "906654323", true);
 
         System.out.println(Alex.toString());
-
 
         System.out.println("\n\n\n*****   A P P L I C A T I O N    E N D E D   *****\n\n\n");
     }

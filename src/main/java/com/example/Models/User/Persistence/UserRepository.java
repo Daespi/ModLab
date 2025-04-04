@@ -7,21 +7,18 @@ import org.springframework.stereotype.Repository;
 
 import com.example.Models.User.DTO.UserDTO;
 
-
 @Repository
-public interface UserRepository  {
+public interface UserRepository {
 
-    public Optional<UserDTO> findById(String isbn);
+    Optional<UserDTO> findById(String userId);
 
-    public List<UserDTO> findByName(String title);
- 
-    public List<UserDTO> findByPartialTitle(String title);
+    List<UserDTO> findByUsername(String username);
 
-    public Integer countByPartialTitle(String title);
+    List<UserDTO> findByUsernameContaining(String Username);
 
-    public UserDTO save(UserDTO book);
-    
-    public void deleteById(String isbn);
-    
+    Integer countByUsernameContaining(String Username);
+
+    UserDTO save(UserDTO user);
+
+    void deleteById(String userId);
 }
-

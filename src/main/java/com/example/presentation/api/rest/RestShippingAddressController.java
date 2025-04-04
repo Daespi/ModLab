@@ -13,51 +13,65 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.Exceptions.ServiceException;
-import com.example.Models.User.Appservices.UserServices;
-
+import com.example.Models.ShippingAddress.Appservices.ShippingAddressServices;
 
 @RestController
 @RequestMapping("/ModLab/ShippingAddress")
 public class RestShippingAddressController {
 
     @Autowired
-    UserServices userServices;
+    private ShippingAddressServices shippingAddressServices;
 
-    @GetMapping(value = "/{userId}", produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<String> getJsonUserById(@PathVariable(value = "userId") String userId) {
+    /**
+     * GET - Obtener dirección por ID
+     */
+    @GetMapping(value = "/{addressId}", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<String> getJsonById(@PathVariable int addressId) {
         try {
-            return ResponseEntity.ok(userServices.getByIdToJson(userId));
+            String json = shippingAddressServices.getByIdToJson(addressId);
+            return ResponseEntity.ok(json);
         } catch (ServiceException e) {
-            return ResponseEntity.status(400).body(e.getMessage());
+            return ResponseEntity.badRequest().body(e.getMessage());
         }
     }
 
+    /**
+     * POST - Crear nueva dirección
+     */
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<String> newUserFromJson(@RequestBody String userdata) {
+    public ResponseEntity<String> newAddressFromJson(@RequestBody String addressJson) {
         try {
-            return ResponseEntity.ok(userServices.addFromJson(userdata));
+            String json = shippingAddressServices.addFromJson(addressJson);
+            return ResponseEntity.ok(json);
         } catch (ServiceException e) {
-            return ResponseEntity.status(400).body(e.getMessage());
+            return ResponseEntity.badRequest().body(e.getMessage());
         }
     }
 
-    @PutMapping(value = "/{userId}", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<String> updateUserFromJson(@PathVariable(value = "userId") String userId,
-            @RequestBody String userdata) {
+    /**
+     * PUT - Actualizar dirección existente
+     */
+    @PutMapping(value = "/{addressId}", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<String> updateAddressFromJson(@PathVariable int addressId,
+                                                        @RequestBody String addressJson) {
         try {
-            return ResponseEntity.ok(userServices.updateOneFromJson(userdata));
+            String json = shippingAddressServices.updateOneFromJson(addressJson);
+            return ResponseEntity.ok(json);
         } catch (ServiceException e) {
-            return ResponseEntity.status(400).body(e.getMessage());
+            return ResponseEntity.badRequest().body(e.getMessage());
         }
     }
 
-    @DeleteMapping("/{userId}")
-    public ResponseEntity<String> deleteByID(@PathVariable(value = "userId") String userId) {
+    /**
+     * DELETE - Eliminar dirección por ID
+     */
+    @DeleteMapping("/{addressId}")
+    public ResponseEntity<String> deleteById(@PathVariable int addressId) {
         try {
-            userServices.deleteById(userId);
-            return ResponseEntity.ok().build();
+            shippingAddressServices.deleteById(addressId);
+            return ResponseEntity.ok("Dirección eliminada correctamente.");
         } catch (ServiceException e) {
-            return ResponseEntity.status(400).body(e.getMessage());
+            return ResponseEntity.badRequest().body(e.getMessage());
         }
     }
 }

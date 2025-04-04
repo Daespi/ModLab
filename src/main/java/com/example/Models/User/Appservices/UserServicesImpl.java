@@ -17,57 +17,44 @@ public class UserServicesImpl implements UserServices {
 
     @Autowired
     private UserRepository userRepository;
+
     private Serializer<UserDTO> serializer;
 
-    protected UserDTO getDTO(String user_id)  {
-        return userRepository.findById(user_id).orElse(null );
+    protected UserDTO getDTO(String userId) {
+        return userRepository.findById(userId).orElse(null);
     }
 
-    protected UserDTO getById(String user_id) throws ServiceException {
-        UserDTO bdto = this.getDTO(user_id);
-
-        if ( bdto == null ) {
-            throw new ServiceException("user " + user_id + " not found");
+    protected UserDTO getById(String userId) throws ServiceException {
+        UserDTO dto = this.getDTO(userId);
+        if (dto == null) {
+            throw new ServiceException("User " + userId + " not found");
         }
-        return bdto;
+        return dto;
     }
-    
-    protected UserDTO checkInputData(String user) throws ServiceException {
+
+    protected UserDTO checkInputData(String json) throws ServiceException {
         try {
-            UserDTO bdto = (UserDTO) this.serializer.deserialize(user, UserDTO.class);
-            UserMapper.userFromDTO(bdto);
-            return bdto;
+            UserDTO dto = this.serializer.deserialize(json, UserDTO.class);
+            UserMapper.userFromDTO(dto); // Validación de negocio
+            return dto;
         } catch (BuildException e) {
-            throw new ServiceException("error in the input user data: " + e.getMessage());
+            throw new ServiceException("Error in user input: " + e.getMessage());
         }
     }
 
-    protected UserDTO newUser(String user) throws ServiceException {
-        UserDTO bdto = this.checkInputData(user);
-          
-        if (this.getDTO(bdto.getUserId()) == null) {
-            return userRepository.save(bdto);
-        } 
-        throw new ServiceException("user " + bdto.getUserId() + " already exists");
-    }
-
-    protected UserDTO updateUser(String user) throws ServiceException {
-        try {
-            UserDTO bdto = this.checkInputData(user);
-            this.getById(bdto.getUserId());
-            return userRepository.save(bdto);
-        } catch (ServiceException e) {
-            throw e;
+    protected UserDTO newUser(String json) throws ServiceException {
+        UserDTO dto = this.checkInputData(json);
+        if (this.getDTO(dto.getUserId()) == null) {
+            return userRepository.save(dto);
         }
+        throw new ServiceException("User " + dto.getUserId() + " already exists");
     }
 
-
-
-
-
-
-
-    
+    protected UserDTO updateUser(String json) throws ServiceException {
+        UserDTO dto = this.checkInputData(json);
+        this.getById(dto.getUserId());
+        return userRepository.save(dto);
+    }
 
     @Override
     public String getByIdToJson(String userId) throws ServiceException {
@@ -76,24 +63,20 @@ public class UserServicesImpl implements UserServices {
     }
 
     @Override
-    public String addFromJson(String user) throws ServiceException {
+    public String addFromJson(String userJson) throws ServiceException {
         this.serializer = SerializersCatalog.getInstance(Serializers.USER_JSON);
-        return serializer.serialize(this.newUser(user));
+        return serializer.serialize(this.newUser(userJson));
     }
 
     @Override
-    public String updateOneFromJson(String user) throws ServiceException {
+    public String updateOneFromJson(String userJson) throws ServiceException {
         this.serializer = SerializersCatalog.getInstance(Serializers.USER_JSON);
-        return serializer.serialize(this.updateUser(user));
+        return serializer.serialize(this.updateUser(userJson));
     }
 
     @Override
     public void deleteById(String userId) throws ServiceException {
-        try {
-            this.getById(userId);
-            userRepository.deleteById(userId);
-        } catch (ServiceException e) {
-            throw e;
-        }
+        this.getById(userId);
+        userRepository.deleteById(userId);
     }
 }
