@@ -2,6 +2,8 @@ package com.example.Models.Product.Entity;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.Set;
 
 import com.example.Exceptions.BuildException;
 import com.example.Operations.Checker;
@@ -14,12 +16,13 @@ public abstract class Product {
     protected int stockQuantity;
     protected double rating;
     protected LocalDateTime createdAt;
-    protected String imageUrl;
+    protected Set<String> imageUrl;
     protected String brand;
     protected ArrayList<Review> reviews;
 
     protected Product() throws BuildException {
         // Valida los datos con el método checkData
+        this.imageUrl = new HashSet<String>();
         checkData(name, description, price, stockQuantity, rating, imageUrl, brand);
     }
     
@@ -143,21 +146,10 @@ public abstract class Product {
         return rating;
     }
 
-    public int setRating(double rating) { //Lo pongo en Double o lo dejo en double preguntar Jose
+    public int setRating(double rating) {
         if ((Checker.nonNegative(stockQuantity)) != 0) return -4;
         if ((Checker.maxValue(stockQuantity, 5)) != 0) return -5; 
         this.rating = rating;
-        return 0;
-    }
-
-    public String getImageUrl() {
-        return imageUrl;
-    }
-
-    public int setImageUrl(String imageUrl) {
-        if ((Checker.isNull(name)) != 0)
-            return -1;
-        this.imageUrl = imageUrl;
         return 0;
     }
 
@@ -175,6 +167,31 @@ public abstract class Product {
         this.brand = brand;
         return 0;
     }
+
+
+    public String getImageUrl() {
+        return imageUrl.toString();
+    }
+
+
+    public int setImageUrl(String imageUrl) {
+        if ((Checker.isNull(name)) != 0)
+            return -1;
+        this.imageUrl.add(imageUrl);
+        return 0;
+    }
+
+
+    public ArrayList<Review> getReviews() {
+        return reviews;
+    }
+
+
+    public void setReviews(ArrayList<Review> reviews) {
+        this.reviews = reviews;
+    }
+
+    
 
 
     
