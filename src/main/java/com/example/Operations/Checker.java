@@ -326,5 +326,21 @@ public class Checker {
                 return " Error desconocido.";
         }
     }
+
+    public static String getErrorMessage(int errorCode, double minLength, double maxLenght ) {
+        switch (errorCode) {
+            case -3:
+                return " no puede ser 0.";
+            case -4:
+                return " no pueden ser numeros negativos";
+            case -5:
+                return " lo máximo permitido es " + maxLenght + ".";
+            case -7:
+                return " lo minimo permitido es " + minLength + ".";
+            default:
+                return " Error desconocido."; 
+        
+            }  
+        }
 }
 

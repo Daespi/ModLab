@@ -1,6 +1,7 @@
 package com.example.Models.Product.Entity;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 
 import com.example.Exceptions.BuildException;
 import com.example.Operations.Checker;
@@ -15,41 +16,43 @@ public abstract class Product {
     protected LocalDateTime createdAt;
     protected String imageUrl;
     protected String brand;
+    protected ArrayList<Review> reviews;
 
     protected Product() throws BuildException {
         // Valida los datos con el método checkData
-        checkData(productId, name, description, price, stockQuantity, rating, imageUrl, brand);
+        checkData(name, description, price, stockQuantity, rating, imageUrl, brand);
     }
+    
 
-    public static void checkData(String productId, String name, String description, double price, int stockQuantity,
-        double rating, String imageUrl, String brand, String createdAt) throws BuildException {
+    protected void checkData( String name, String description, double price, int stockQuantity,
+        double rating, String imageUrl, String brand) throws BuildException {
 
             String message = "";
 
             String uuid = java.util.UUID.randomUUID().toString();
             uuid.replace("-", "");
             uuid.substring(0, 32);
-            this.productId = uuid;
+            productId = uuid;
             
 
             int resultName = setName(name);
             if (resultName != 0) {
-                message += "El nombre de este producto no es correcto porque" + Checker.getErrorMessage(resultName, 3, 30);
+                message += "El nombre de este producto no es correcto porque" + Checker.getErrorMessage(resultName, 10, 150);
             }
 
             int resultDescription = setDescription(description);
             if (resultDescription != 0) {
-                message += "La descripción de este producto no es correcta porque" + Checker.getErrorMessage(resultDescription, 3, 30);
+                message += "La descripción de este producto no es correcta porque" + Checker.getErrorMessage(resultDescription, 50, 1024);
             }
 
             int resultPrice = setPrice(price);
             if (resultPrice != 0) {
-                message += "El precio de este producto no es correcto porque" + Checker.getErrorMessage(resultPrice, 3, 30);
+                message += "El precio de este producto no es correcto porque" + Checker.getErrorMessage(resultPrice, 1.00, 0.00);
             }
 
             int resultStockQuantity = setStockQuantity(stockQuantity);
-            if (resultPrice != 0) {
-                message += "El stock de este producto no es correcto porque" + Checker.getErrorMessage(resultPrice, 3, 30);
+            if (resultStockQuantity != 0) {
+                message += "El stock de este producto no es correcto porque" + Checker.getErrorMessage(resultStockQuantity, 0, 100);
             }
 
             int resultImageUrl = setImageUrl(imageUrl);
@@ -59,15 +62,15 @@ public abstract class Product {
 
             int resultRating = setRating(rating);
             if (resultRating != 0) {
-                message += "La valoracion de este producto no es correcta porque" + Checker.getErrorMessage(resultRating, 3, 30);
+                message += "La valoracion de este producto no es correcta porque" + Checker.getErrorMessage(resultRating, 0.00, 5.00);
             }
 
             int resultBrand = setBrand(brand);
             if (resultBrand != 0) {
-                message += "La valoracion de este producto no es correcta porque" + Checker.getErrorMessage(resultBrand, 3, 30);
+                message += "La valoracion de este producto no es correcta porque" + Checker.getErrorMessage(resultBrand, 2, 50);
             }
 
-            this.createdAt = LocalDateTime.now();
+            createdAt = LocalDateTime.now();
 
             if (message.length() > 0) {
                 throw new BuildException(message);
@@ -91,7 +94,7 @@ public abstract class Product {
             return -1;
         if ((Checker.minLength(10, name)) != 0)
             return -2;
-        if ((Checker.maxLenght(250, name)) != 0)
+        if ((Checker.maxLenght(150, name)) != 0)
             return -10;
         this.name = name;
         return 0;
@@ -143,7 +146,6 @@ public abstract class Product {
     public int setRating(double rating) { //Lo pongo en Double o lo dejo en double preguntar Jose
         if ((Checker.nonNegative(stockQuantity)) != 0) return -4;
         if ((Checker.maxValue(stockQuantity, 5)) != 0) return -5; 
-        if ((Checker.minValue(stockQuantity, 0)) != 0) return -6;
         this.rating = rating;
         return 0;
     }
@@ -166,7 +168,7 @@ public abstract class Product {
     public int setBrand(String brand) {
         if ((Checker.isNull(name)) != 0)
             return -1;
-        if ((Checker.minLength(3, name)) != 0)
+        if ((Checker.minLength(2, name)) != 0)
             return -2;
         if ((Checker.maxLenght(50, name)) != 0)
             return -10;
