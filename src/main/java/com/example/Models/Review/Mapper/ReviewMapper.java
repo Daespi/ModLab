@@ -5,14 +5,14 @@ import com.example.Models.Review.DTO.ReviewDTO;
 import com.example.Models.Review.Entity.Review;
 
 public class ReviewMapper {
-    public static Review userFromDTO(ReviewDTO dto) throws BuildException {
+    public static Review reviewFromDTO(ReviewDTO dto) throws BuildException {
         return Review.getInstance(
             dto.getRating(),
             dto.getComment()
         );
     }
 
-    public static ReviewDTO dtoFromUser(Review review) {
+    public static ReviewDTO dtoFromReview(Review review) {
         return new ReviewDTO(
             review.getReviewId(),
             review.getRating(),
