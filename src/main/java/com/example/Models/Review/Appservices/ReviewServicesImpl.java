@@ -8,10 +8,12 @@ import com.example.Exceptions.ServiceException;
 import com.example.Models.Review.DTO.ReviewDTO;
 import com.example.Models.Review.Mapper.ReviewMapper;
 import com.example.Models.Review.Persistance.ReviewRepository;
+import com.example.sharedkernel.appservices.serializers.Serializer;
+import com.example.sharedkernel.appservices.serializers.Serializers;
 import com.example.sharedkernel.appservices.serializers.SerializersCatalog;
 
 @Controller
-public class ReviewServicesImpl {
+public class ReviewServicesImpl implements ReviewServices{
 
     @Autowired
     private ReviewRepository reviewRepository;
@@ -34,9 +36,9 @@ public class ReviewServicesImpl {
     }
     
     
-    protected ReviewDTO checkInputData(String book) throws ServiceException {
+    protected ReviewDTO checkInputData(String review) throws ServiceException {
         try {
-            ReviewDTO bdto = (ReviewDTO) this.serializer.deserialize(book, ReviewDTO.class);
+            ReviewDTO bdto = (ReviewDTO) this.serializer.deserialize(review, ReviewDTO.class);
             ReviewMapper.reviewFromDTO(bdto);
             return bdto;
         } catch (BuildException e) {
@@ -45,20 +47,20 @@ public class ReviewServicesImpl {
     }
 
 
-    protected ReviewDTO newBook(String book) throws ServiceException {
-        ReviewDTO bdto = this.checkInputData(book);
+    protected ReviewDTO newReview(String review) throws ServiceException {
+        ReviewDTO bdto = this.checkInputData(review);
           
-        if (this.getDTO(bdto.getId()) == null) {
+        if (this.getDTO(bdto.getReviewId()) == null) {
             return reviewRepository.save(bdto);
         } 
-        throw new ServiceException("book " + bdto.getId() + " already exists");
+        throw new ServiceException("review " + bdto.getReviewId() + " already exists");
     }
 
 
-    protected ReviewDTO updateBook(String book) throws ServiceException {
+    protected ReviewDTO updateReview(String review) throws ServiceException {
         try {
-            ReviewDTO bdto = this.checkInputData(book);
-            this.getById(bdto.getId());
+            ReviewDTO bdto = this.checkInputData(review);
+            this.getById(bdto.getReviewId());
             return reviewRepository.save(bdto);
         } catch (ServiceException e) {
             throw e;
@@ -71,21 +73,21 @@ public class ReviewServicesImpl {
 
     @Override
     public String getByIdToJson(int id) throws ServiceException {
-        return SerializersCatalog.getInstance(Serializers.BOOK_JSON)
+        return SerializersCatalog.getInstance(Serializers.REVIEW_JSON)
                 .serialize(this.getById(id));
     }
 
     
     @Override
-    public String addFromJson(String book) throws ServiceException {
-        this.serializer = SerializersCatalog.getInstance(Serializers.BOOK_JSON);
-        return serializer.serialize(this.newBook(book));
+    public String addFromJson(String review) throws ServiceException {
+        this.serializer = SerializersCatalog.getInstance(Serializers.REVIEW_JSON);
+        return serializer.serialize(this.newReview(review));
     }
 
     @Override
-    public String updateOneFromJson(String book) throws ServiceException {
-        this.serializer = SerializersCatalog.getInstance(Serializers.BOOK_JSON);
-        return serializer.serialize(this.updateBook(book));
+    public String updateOneFromJson(String review) throws ServiceException {
+        this.serializer = SerializersCatalog.getInstance(Serializers.REVIEW_JSON);
+        return serializer.serialize(this.updateReview(review));
     }
 
     @Override

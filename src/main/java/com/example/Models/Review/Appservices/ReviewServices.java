@@ -4,10 +4,11 @@ import org.springframework.stereotype.Service;
 
 import com.example.Exceptions.ServiceException;
 
-public class ReviewServices {
+@Service
+public interface ReviewServices {
     public String getByIdToJson (int reviewId) throws ServiceException;
-    public String addFromJson (String review) throws ServiceException;
-    public String updateOneFromJson(String review) throws ServiceException;
+    public String addFromJson (String comment) throws ServiceException;
+    public String updateOneFromJson(String comment) throws ServiceException;
     public void deleteById(int reviewId) throws ServiceException;
 }
 

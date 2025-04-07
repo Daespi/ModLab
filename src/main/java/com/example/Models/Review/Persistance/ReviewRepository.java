@@ -9,7 +9,7 @@ import com.example.Models.Review.DTO.ReviewDTO;
 
 
 @Repository
-public class ReviewRepository {
+public interface ReviewRepository {
     public Optional<ReviewDTO> findById(int reviewId);
 
     public List<ReviewDTO> findByComment(String comment);

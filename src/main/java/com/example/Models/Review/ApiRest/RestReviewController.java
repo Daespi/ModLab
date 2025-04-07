@@ -32,9 +32,9 @@ public class RestReviewController {
     }
     
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<String> newBookFromJson(@RequestBody String bookdata) {
+    public ResponseEntity<String> newBookFromJson(@RequestBody String reviewdata) {
         try {
-            return ResponseEntity.ok(reviewServices.addFromJson(bookdata));
+            return ResponseEntity.ok(reviewServices.addFromJson(reviewdata));
         } catch (ServiceException e) {
             return ResponseEntity.status(400).body(e.getMessage());
         }
@@ -42,9 +42,9 @@ public class RestReviewController {
     
     @PutMapping(value = "/{id}", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<String> updateBookFromJson(@PathVariable(value = "id") Integer id,
-            @RequestBody String bookdata) {
+            @RequestBody String reviewdata) {
         try {
-            return ResponseEntity.ok(reviewServices.updateOneFromJson(bookdata));
+            return ResponseEntity.ok(reviewServices.updateOneFromJson(reviewdata));
         } catch (ServiceException e) {
             return ResponseEntity.status(400).body(e.getMessage());
         }
