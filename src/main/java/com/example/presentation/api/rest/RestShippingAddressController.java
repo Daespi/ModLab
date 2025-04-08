@@ -16,7 +16,7 @@ import com.example.Exceptions.ServiceException;
 import com.example.Models.ShippingAddress.Appservices.ShippingAddressServices;
 
 @RestController
-@RequestMapping("/ModLab/ShippingAddress")
+@RequestMapping("/modlab/ShippingAddress")
 public class RestShippingAddressController {
 
     @Autowired

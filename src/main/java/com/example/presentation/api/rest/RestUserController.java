@@ -16,7 +16,7 @@ import com.example.Exceptions.ServiceException;
 import com.example.Models.User.Appservices.UserServices;
 
 @RestController
-@RequestMapping("/ModLab/User")
+@RequestMapping("/modlab/User")
 public class RestUserController {
 
     @Autowired
