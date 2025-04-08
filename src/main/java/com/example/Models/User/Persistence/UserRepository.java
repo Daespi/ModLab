@@ -11,17 +11,17 @@ import com.example.Models.User.DTO.UserDTO;
 @Repository
 public interface UserRepository  {
 
-    public Optional<UserDTO> findById(String isbn);
+    public Optional<UserDTO> findById(String id);
 
-    public List<UserDTO> findByName(String title);
+    public List<UserDTO> findByName(String username);
  
-    public List<UserDTO> findByPartialTitle(String title);
+    public List<UserDTO> findByPartialTitle(String username);
 
-    public Integer countByPartialTitle(String title);
+    public Integer countByPartialTitle(String username);
 
-    public UserDTO save(UserDTO book);
+    public UserDTO save(UserDTO client);
     
-    public void deleteById(String isbn);
+    public void deleteById(String id);
     
 }
 
