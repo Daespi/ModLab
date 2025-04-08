@@ -39,4 +39,8 @@ public class UserMapper {
                 user.getRoleName()
         );
     }
+<<<<<<< HEAD
 }
+=======
+}
+>>>>>>> dev_alex

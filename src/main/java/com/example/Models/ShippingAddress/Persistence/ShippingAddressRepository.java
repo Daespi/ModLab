@@ -5,6 +5,7 @@ import java.util.Optional;
 
 import org.springframework.stereotype.Repository;
 
+<<<<<<< HEAD
 import com.example.Models.ShippingAddress.DTO.ShippingAddressDTO;
 
 @Repository
@@ -22,3 +23,25 @@ public interface ShippingAddressRepository {
 
     void deleteById(int addressId);
 }
+=======
+import com.example.Models.User.DTO.UserDTO;
+
+
+@Repository
+public interface ShippingAddressRepository  {
+
+    public Optional<UserDTO> findById(String isbn);
+
+    public List<UserDTO> findByName(String title);
+ 
+    public List<UserDTO> findByPartialTitle(String title);
+
+    public Integer countByPartialTitle(String title);
+
+    public UserDTO save(UserDTO book);
+    
+    public void deleteById(String isbn);
+    
+}
+
+>>>>>>> dev_alex

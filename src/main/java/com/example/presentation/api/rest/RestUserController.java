@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.example.Exceptions.ServiceException;
 import com.example.Models.User.Appservices.UserServices;
 
+<<<<<<< HEAD
 @RestController
 @RequestMapping("/modlab/User")
 public class RestUserController {
@@ -74,3 +75,51 @@ public class RestUserController {
         }
     }
 }
+=======
+
+@RestController
+@RequestMapping("/ModLab/User")
+public class RestUserController {
+
+    @Autowired
+    UserServices userServices;
+
+    @GetMapping(value = "/{userId}", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<String> getJsonUserById(@PathVariable(value = "userId") String userId) {
+        try {
+            return ResponseEntity.ok(userServices.getByIdToJson(userId));
+        } catch (ServiceException e) {
+            return ResponseEntity.status(400).body(e.getMessage());
+        }
+    }
+
+    @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<String> newUserFromJson(@RequestBody String userdata) {
+        try {
+            return ResponseEntity.ok(userServices.addFromJson(userdata));
+        } catch (ServiceException e) {
+            return ResponseEntity.status(400).body(e.getMessage());
+        }
+    }
+
+    @PutMapping(value = "/{userId}", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<String> updateUserFromJson(@PathVariable(value = "userId") String userId,
+            @RequestBody String userdata) {
+        try {
+            return ResponseEntity.ok(userServices.updateOneFromJson(userdata));
+        } catch (ServiceException e) {
+            return ResponseEntity.status(400).body(e.getMessage());
+        }
+    }
+
+    @DeleteMapping("/{userId}")
+    public ResponseEntity<String> deleteByID(@PathVariable(value = "userId") String userId) {
+        try {
+            userServices.deleteById(userId);
+            return ResponseEntity.ok().build();
+        } catch (ServiceException e) {
+            return ResponseEntity.status(400).body(e.getMessage());
+        }
+    }
+}
+>>>>>>> dev_alex

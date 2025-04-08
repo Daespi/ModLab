@@ -24,4 +24,8 @@ public class JacksonSerializer<T> implements Serializer<T> {
             throw new ServiceException(e.getMessage());
         }
     }
+<<<<<<< HEAD
 }
+=======
+}
+>>>>>>> dev_alex

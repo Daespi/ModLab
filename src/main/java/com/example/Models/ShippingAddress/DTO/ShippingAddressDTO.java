@@ -1,5 +1,6 @@
 package com.example.Models.ShippingAddress.DTO;
 
+<<<<<<< HEAD
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -42,6 +43,21 @@ public class ShippingAddressDTO {
     public ShippingAddressDTO(int addressId, String address,
                               String zipCode, String city, String state, String country) {
         this.addressId = addressId;
+=======
+
+
+public class ShippingAddressDTO {
+
+
+    private final String address;
+    private final String zipCode;
+    private final String city;
+    private final String state;
+    private final String country;
+
+    public ShippingAddressDTO( String address,
+                              String zipCode, String city, String state, String country) {
+>>>>>>> dev_alex
         this.address = address;
         this.zipCode = zipCode;
         this.city = city;
@@ -49,9 +65,12 @@ public class ShippingAddressDTO {
         this.country = country;
     }
 
+<<<<<<< HEAD
     public int getAddressId() {
         return addressId;
     }
+=======
+>>>>>>> dev_alex
 
     public String getAddress() {
         return address;

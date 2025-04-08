@@ -79,4 +79,8 @@ public class UserServicesImpl implements UserServices {
         this.getById(userId);
         userRepository.deleteById(userId);
     }
+<<<<<<< HEAD
 }
+=======
+}
+>>>>>>> dev_alex

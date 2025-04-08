@@ -87,6 +87,10 @@ public class User {
     public String getUserId() {
         return userId;
     }
+<<<<<<< HEAD
+=======
+
+>>>>>>> dev_alex
     public String getUsername() {
         return username;
     }
@@ -98,8 +102,11 @@ public class User {
             return -2;
         if ((Checker.maxLenght(30, username)) != 0)
             return -10;
+<<<<<<< HEAD
         if ((Checker.verifyUsername(username)) != 0)
             return -22;
+=======
+>>>>>>> dev_alex
         this.username = username;
         return 0;
     }

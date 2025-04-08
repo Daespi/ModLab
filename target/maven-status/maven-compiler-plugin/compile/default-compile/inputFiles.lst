@@ -2,6 +2,11 @@
 /Users/galsaan/Documents/ModLab/src/main/java/com/example/Exceptions/GeneralDateTimeException.java
 /Users/galsaan/Documents/ModLab/src/main/java/com/example/Exceptions/ServiceException.java
 /Users/galsaan/Documents/ModLab/src/main/java/com/example/Main.java
+<<<<<<< HEAD
+=======
+/Users/galsaan/Documents/ModLab/src/main/java/com/example/Models/PhysicalData/Entity/PhysicalData.java
+/Users/galsaan/Documents/ModLab/src/main/java/com/example/Models/Review/Entity/Review.java
+>>>>>>> dev_alex
 /Users/galsaan/Documents/ModLab/src/main/java/com/example/Models/ShippingAddress/Appservices/ShippingAddressServices.java
 /Users/galsaan/Documents/ModLab/src/main/java/com/example/Models/ShippingAddress/DTO/ShippingAddressDTO.java
 /Users/galsaan/Documents/ModLab/src/main/java/com/example/Models/ShippingAddress/Entity/ShippingAddress.java
@@ -13,8 +18,11 @@
 /Users/galsaan/Documents/ModLab/src/main/java/com/example/Models/User/Entity/User.java
 /Users/galsaan/Documents/ModLab/src/main/java/com/example/Models/User/MAPPER/UserMapper.java
 /Users/galsaan/Documents/ModLab/src/main/java/com/example/Models/User/Persistence/UserRepository.java
+<<<<<<< HEAD
 /Users/galsaan/Documents/ModLab/src/main/java/com/example/Models/User/ShippingAddress.java
 /Users/galsaan/Documents/ModLab/src/main/java/com/example/Models/User/User.java
+=======
+>>>>>>> dev_alex
 /Users/galsaan/Documents/ModLab/src/main/java/com/example/Operations/Checker.java
 /Users/galsaan/Documents/ModLab/src/main/java/com/example/ServletInitializer.java
 /Users/galsaan/Documents/ModLab/src/main/java/com/example/SoftlearningApplication.java

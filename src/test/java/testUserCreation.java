@@ -1,15 +1,26 @@
+<<<<<<< HEAD
 import java.util.ArrayList;
 
 import com.example.Exceptions.BuildException;
 import com.example.Models.ShippingAddress.Entity.ShippingAddress;
+=======
+import com.example.Exceptions.BuildException;
+>>>>>>> dev_alex
 import com.example.Models.User.Entity.User;
 
 public class testUserCreation {
     public static void main(String[] args) {
+<<<<<<< HEAD
         try {
             User ash = User.getInstance(
                  "Ash", "Ash", "Grau Ayala", "Abcd134?", 
                 "ashgraunuriacefp@gmail.com", "648293958", false
+=======
+       /* try {
+            User ash = User.getInstance(
+                 "Ash", "Ash", "Grau Ayala", "Abcd134?", 
+                "ashgraunuriacefp@gmail.com", "648293958", "21-03-2025 16:12:00", false
+>>>>>>> dev_alex
             );
 
             System.out.println(ash.toString());
@@ -29,6 +40,7 @@ public class testUserCreation {
 
         } catch (BuildException ex) {
             System.out.println( ex.getMessage());
+<<<<<<< HEAD
         }
 
         try {
@@ -37,6 +49,31 @@ public class testUserCreation {
         "alexsalas.nuria@gmail.com", "606665432", true);
 
         System.out.println(alex.toString());
+=======
+        }*/
+
+        try {
+
+
+            System.out.println("\n\n*****   A P P L I C A T I O N    S T A R T E D   *****\n\n");
+
+        User Pau = com.example.Models.User.Entity.User.getInstance("Galssaan-dasc", "Alex-dasc", "SalasGalán", "@Alumnes2024", 
+        "alexsalas.nuria@gmail.com", "606665432", true);
+
+        System.out.println(Pau.toString());
+
+
+        System.out.println("\n\n\n*****   - - - - - - - - - - - - - - - - - - - - - - - - - -   *****\n\n");
+
+
+        User Alex = com.example.Models.User.Entity.User.getInstance("Alquimista-curioso33", "Alex-dasc", "SalasGalán", "@Alumnes2024", 
+        "alexsalas.nuria@gmail.com", "906654323", true);
+
+        System.out.println(Alex.toString());
+
+
+        System.out.println("\n\n\n*****   A P P L I C A T I O N    E N D E D   *****\n\n\n");
+>>>>>>> dev_alex
     }
     catch (BuildException ex) {
         System.out.println( ex.getMessage());

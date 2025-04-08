@@ -20,4 +20,8 @@ public class SerializersCatalog {
         }
         return catalog.get(type);
     }
+<<<<<<< HEAD
 }
+=======
+}
+>>>>>>> dev_alex

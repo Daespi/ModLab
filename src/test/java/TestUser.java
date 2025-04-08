@@ -13,8 +13,14 @@ public class TestUser {
     @BeforeAll
     void createUser (){
         try{
+<<<<<<< HEAD
             this.ash = User.getInstance( "AshAyala", "Ash", "Grau Ayala", "Abcd1234?", 
             "ashgraunuriacefp@gmail.com", "648293958", false);
+=======
+            this.ash = User.getInstance("Galsaan", "Alex", "Salas Galán", "@Alumnes2024", 
+            "alexsalas.nuria@gmail.com", "606665432", true);
+    
+>>>>>>> dev_alex
         } catch (BuildException ex){
             ex.getMessage();
         }
@@ -136,6 +142,7 @@ public class TestUser {
     }
 
     @Test
+<<<<<<< HEAD
     void testPasswordWithoutMayus(){
         int result = ash.setPasswordHash("abcd1234?");
         assertEquals(-13, result);
@@ -178,6 +185,12 @@ public class TestUser {
         try{
             User David = User.getInstance(
                 "AshGrau", "Ash", "Grau Ayala", "Abcd1234?", 
+=======
+    void tryClient(){
+        try{
+            User David = User.getInstance(
+                "AshGrau", "Ash", "Grau Ayala", "Akbcd1234?", 
+>>>>>>> dev_alex
                 "ashgraunuriacefp@gmail.com", "648293958", false
             );
 

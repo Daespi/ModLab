@@ -3,9 +3,13 @@ com/example/Models/ShippingAddress/Entity/ShippingAddress.class
 com/example/SoftlearningApplication.class
 com/example/Operations/Checker.class
 com/example/Models/ShippingAddress/Appservices/ShippingAddressServices.class
+<<<<<<< HEAD
 com/example/infrastruture/persistence/jpa/JpaUserRepository.class
 com/example/sharedkernel/appservices/serializers/Serializer.class
 com/example/Models/User/MAPPER/UserMapper.class
+=======
+com/example/sharedkernel/appservices/serializers/Serializer.class
+>>>>>>> dev_alex
 com/example/Models/User/Appservices/UserServices.class
 com/example/Exceptions/GeneralDateTimeException.class
 com/example/Models/User/Appservices/UserServicesImpl.class
@@ -15,14 +19,21 @@ com/example/ServletInitializer.class
 com/example/Models/ShippingAddress/MAPPERS/ShippingAddressMapper.class
 com/example/Models/User/Persistence/UserRepository.class
 com/example/sharedkernel/appservices/adapters/DataFormatter.class
+<<<<<<< HEAD
 com/example/sharedkernel/appservices/serializers/JacksonSerializer.class
 com/example/sharedkernel/appservices/serializers/Serializers.class
+=======
+>>>>>>> dev_alex
 com/example/presentation/api/rest/RestUserController.class
 com/example/Models/ShippingAddress/Persistence/ShippingAddressRepository.class
 com/example/Exceptions/BuildException.class
 com/example/Models/User/DTO/UserDTO.class
+<<<<<<< HEAD
 com/example/sharedkernel/appservices/serializers/SerializersCatalog.class
 com/example/Models/User/ShippingAddress.class
 com/example/Models/User/Entity/User.class
 com/example/Models/User/User.class
+=======
+com/example/Models/User/Entity/User.class
+>>>>>>> dev_alex
 com/example/Models/ShippingAddress/DTO/ShippingAddressDTO.class
