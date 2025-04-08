@@ -3,8 +3,8 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { User } from '../models/User/User';
 
+const baseUrl = 'http://localhost:8080/api/users'; // ajusta según tu backend
 
-const baseUrl = 'http';
 @Injectable({
   providedIn: 'root'
 })
@@ -12,31 +12,21 @@ export class UserService {
 
   constructor(private http: HttpClient ) {}
 
-    getDTO(id: String): Observable<User>{
-        return this.http.get(`${baseUrl}/{id}`);
-    };
+  getById(id: string): Observable<User> {
+    return this.http.get<User>(`${baseUrl}/${id}`);
+  }
 
-    findById(id: String): Observable<User>{
-        return this.http.get(`${baseUrl}/{id}`);
-    };
+  newUser(user: User): Observable<User> {
+    return this.http.post<User>(baseUrl, user);
+  }
 
-    getById(id: String): Observable<User>{
-        return this.http.get(`${baseUrl}/{id}`);
-    };
+  updateUser(user: User): Observable<User> {
+    return this.http.put<User>(baseUrl, user);
+  }
 
-    checkInputData(json: String): Observable<User>{
-        return this.http.get(`${baseUrl}`);
-    };
+  deleteById(id: string): Observable<void> {
+    return this.http.delete<void>(`${baseUrl}/${id}`);
+  }
 
-    newUser(json: String): Observable<User>{
-        return this.http.post(`${baseUrl}`);
-    };
-
-
-
-
-
-
-
-
+  
 }
