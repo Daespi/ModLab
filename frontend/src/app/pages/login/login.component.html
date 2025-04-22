@@ -1,0 +1,48 @@
+
+<div class="login-body">
+    <div class="login-form">
+        <div class="login-form-title">
+            <p class="form-title">INICIAR SESIÓN</p>
+        </div>
+        <div class="login-form-google">
+            <script src="https://accounts.google.com/gsi/client" async></script>
+            <div id="g_id_onload"
+                data-client_id="YOUR_GOOGLE_CLIENT_ID"
+                data-login_uri="https://your.domain/your_login_endpoint"
+                data-auto_prompt="false">
+            </div>
+            <div class="g_id_signin"
+                data-type="standard"
+                data-size="large"
+                data-theme="outline"
+                data-text="sign_in_with"
+                data-shape="rectangular"
+                data-logo_alignment="left">
+            </div>
+        </div>
+        <div class="login-form-separator">
+            <div class="separator-line"></div>
+            <p class="separator-text">o bien</p>
+            <div class="separator-line"></div>
+        </div>
+        <div class="login-form-form">
+            <form  action="" method="post">
+                <div class="login-form-wrapper">
+                    <input class="form-input" type="email" name="email" id="email" placeholder="Correo electronico">
+                    <input class="form-input" type="password" name="password" id="password" placeholder="Contraseña">
+                </div>
+                <div class="login-form-forgot">
+                    <a href="">¿Has olvidado la contraseña?</a>
+                </div>
+                <div class="login-form-button">
+                    <button class="form-button">Iniciar Sesión</button>
+                </div>
+            </form>
+        </div>
+        <div class="login-form-register">
+            <p>¿No tienes una cuenta? </p>
+            <a href="">Registrar-se</a>
+        </div>
+    </div>
+</div>
+
