@@ -5,6 +5,9 @@ import { FormsModule } from '@angular/forms';  // Importa FormsModule
 import { AppRoutingModule } from './app-routing.module';
 import { RegisterComponent } from './pages/register/register.component';
 import { LoginComponent } from './pages/login/login.component';
+import { HomeComponent } from './pages/home/home.component';
+import { HeaderComponent } from './pages/header/header.component';
+import { FooterComponent } from './pages/footer/footer.component';
 
 
 @NgModule({
@@ -12,6 +15,9 @@ import { LoginComponent } from './pages/login/login.component';
     AppComponent,
     RegisterComponent,
     LoginComponent,
+    HomeComponent,
+    HeaderComponent,
+    FooterComponent,
   ],
   imports: [
     BrowserModule,

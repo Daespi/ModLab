@@ -96,9 +96,22 @@
 }
 
 .navegation-bar-search-icon{
-    max-width: 2vh;
+    max-width: 3.5vh;
+    max-height: 3.5vh;
     padding-right: 1.5vh;
-    object-fit: contain;
+}
+
+.navegation-bar-search-icon:hover{
+    cursor: pointer;
+}
+
+.navegation-bar-search-button{
+background: none;
+border: none;
+}
+
+.navegation-bar-search-button:hover{
+    cursor: pointer;
 }
 
 .navegation-bar-user{
@@ -109,6 +122,7 @@
     align-items: center;
     gap: 2vh;
 }
+
 
 .navegation-bar-icon{
     text-decoration: none;
@@ -124,11 +138,91 @@
     object-fit: contain;
 }
 
+.navegation-bar-user {
+    position: relative; /* Para que el menú desplegable se posicione correctamente */
+}
+
+.user-profile-container {
+    position: relative;
+}
+
+.dropdown-menu {
+    display: none; /* El menú estará oculto por defecto */
+    position: absolute;
+    top: 100%; /* Se coloca justo debajo del ícono */
+    left: 0;
+    background-color: white;
+    border: 1px solid #ccc;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    width: 150px;
+    z-index: 1;
+}
+
+.dropdown-menu a {
+    display: block;
+    padding: 10px;
+    text-decoration: none;
+    color: #53199E;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    font-size: 13px;
+    font-weight: 300;
+}
+
+.dropdown-menu a:hover {
+    background-color: #f0f0f0;
+}
+
+/* Agregar transición suave */
+.dropdown-menu a {
+    transition: background-color 0.3s ease;
+}
+
+.user-profile-container:hover .dropdown-menu {
+    display: block; /* Mostrar el menú cuando pasas el ratón por encima del contenedor */
+}
 
 
 
+.space-register-and-login-completo{
+    width: 100%;
+    display: flex;
+    justify-content: start;
+    
+}
+
+.space-register-and-login{
+    width: 30vh;
+    margin-left: 5vh;
+}
+
+.space-register-and-login-div{
+    width: 100%;
+    height: 12vh;
+    display: flex;
+}
+
+.login-and-register-logo{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
 
 
+.login-and-register-volver-atras-container{
+    width: 100%;
+    display: flex;
+    justify-content: end;
+    align-items: center;
+}
+
+.volver-atras{
+    color: #53199E;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    font-size: 2.2vh;
+    font-weight: 300;
+    margin-right: 5vh;
+}
 
 
 
@@ -140,35 +234,36 @@
 
 
 
-.login-body{
+.login-body {
     width: 100%;
-    height: 100vh;
+    height: 120vh;
     background-image: url('../../../assets/img/pexels-athena-2582937.png');
     background-color: #53199E;
-    background-size: cover;        
-    background-position: center;   
-    background-repeat: no-repeat;  
-    height: 100vh;                 
-    margin: 0;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
     display: flex;
     justify-content: center;
     align-items: center;
+    position: relative; /* Necesario para contener los elementos hijos */
+    z-index: 0;
+    margin: 0;
 }
 
-.login-body::before{
+.login-body::before {
     content: "";
     position: absolute;
     top: 0;
     left: 0;
     width: 100%;
-    height: 100%;
+    height: 120vh;
     background-color: rgba(83, 25, 158, 0.6);
     z-index: -1;
 }
 
 .login-form{
     width: 50vh;
-    height: 60vh;
+    height: 65vh;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -184,7 +279,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    margin-bottom: 2vh;
+    margin-bottom: 1vh;
     margin-top: 1vh;
 }
 
@@ -195,13 +290,6 @@
     color: #53199E;
 }
 
-.login-form-google{
-    width: 100%;
-    height: 10%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
 
 .login-form-separator{
     width: 100%;
@@ -215,13 +303,13 @@
 .separator-text{
     font-family: "Montserrat", sans-serif;
     font-weight: lighter;
-    width: 5.7vh;
+    width: 10vh;
     font-size: 2vh;
     color: #53199E;
 }
 
 .separator-line{
-    width: 18vh;
+    width: 17vh;
     height: 1px;
     background-color: #53199E;
 }
@@ -386,13 +474,6 @@
     color: #53199E;
 }
 
-.register-form-google {
-    width: 100%;
-    height: 10%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
 
 .register-form-separator {
     width: 100%;
