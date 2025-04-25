@@ -1,15 +1,19 @@
+
 import java.util.ArrayList;
 
 import com.example.Exceptions.BuildException;
 import com.example.Models.ShippingAddress.Entity.ShippingAddress;
+
 import com.example.Models.User.Entity.User;
 
 public class testUserCreation {
     public static void main(String[] args) {
+
         try {
             User ash = User.getInstance(
                  "Ash", "Ash", "Grau Ayala", "Abcd134?", 
                 "ashgraunuriacefp@gmail.com", "648293958", false
+
             );
 
             System.out.println(ash.toString());
@@ -29,6 +33,7 @@ public class testUserCreation {
 
         } catch (BuildException ex) {
             System.out.println( ex.getMessage());
+
         }
 
         try {
@@ -37,6 +42,7 @@ public class testUserCreation {
         "alexsalas.nuria@gmail.com", "606665432", true);
 
         System.out.println(alex.toString());
+
     }
     catch (BuildException ex) {
         System.out.println( ex.getMessage());

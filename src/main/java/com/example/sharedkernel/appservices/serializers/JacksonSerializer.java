@@ -5,8 +5,9 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 public class JacksonSerializer<T> implements Serializer<T> {
-    private ObjectMapper objectMapper = new ObjectMapper();
+    private final ObjectMapper objectMapper = new ObjectMapper();
 
+    @Override
     public String serialize(T object) throws ServiceException {
         try {
             return this.objectMapper.writeValueAsString(object);
@@ -15,12 +16,13 @@ public class JacksonSerializer<T> implements Serializer<T> {
         }
     }
 
-    public T deserialize(String s, Class<T> c) throws ServiceException{
+    @Override
+    public T deserialize(String s, Class<T> c) throws ServiceException {
         try {
-            return (T) this.objectMapper.readValue(s, c);
+            return objectMapper.readValue(s, c);
         } catch (JsonProcessingException e) {
             throw new ServiceException(e.getMessage());
         }
     }
-
 }
+

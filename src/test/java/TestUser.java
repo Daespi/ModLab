@@ -13,8 +13,10 @@ public class TestUser {
     @BeforeAll
     void createUser (){
         try{
+
             this.ash = User.getInstance( "AshAyala", "Ash", "Grau Ayala", "Abcd1234?", 
             "ashgraunuriacefp@gmail.com", "648293958", false);
+
         } catch (BuildException ex){
             ex.getMessage();
         }
@@ -112,7 +114,7 @@ public class TestUser {
 
     @Test
     void testPasswordGood(){
-        int result = ash.setPasswordHash("Abcd1234?");
+        int result = ash.setPasswordHash("Adbcd1234?");
         assertEquals(0, result);
     }
 
@@ -120,6 +122,12 @@ public class TestUser {
     void testPasswordNull(){
         int result = ash.setPasswordHash(null);
         assertEquals(-1, result);
+    }
+
+    @Test
+    void testPasswordBad(){
+        int result = ash.setPasswordHash("CacaDeVaca13");
+        assertEquals(-13, result);
     }
 
 
@@ -172,8 +180,11 @@ public class TestUser {
         try{
             User David = User.getInstance(
                 "AshGrau", "Ash", "Grau Ayala", "Abcd1234?", 
+
                 "ashgraunuriacefp@gmail.com", "648293958", false
             );
+
+            System.out.println(David.toString());
         } catch (BuildException ex){
             assertEquals("", ex.getMessage());
             

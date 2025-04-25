@@ -87,7 +87,6 @@ public class User {
     public String getUserId() {
         return userId;
     }
-
     public String getUsername() {
         return username;
     }
@@ -99,6 +98,9 @@ public class User {
             return -2;
         if ((Checker.maxLenght(30, username)) != 0)
             return -10;
+        if ((Checker.verifyUsername(username)) != 0)
+            return -22;
+
         this.username = username;
         return 0;
     }

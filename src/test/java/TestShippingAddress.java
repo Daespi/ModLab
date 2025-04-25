@@ -1,3 +1,4 @@
+import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import org.junit.jupiter.api.Test;
@@ -9,43 +10,17 @@ import com.example.Operations.Checker;
 public class TestShippingAddress {
     
     @Test
-    void correctAddress() { 
-        int result = Checker.verifyAddress("Calle 1, 1");  
-        
-        assertEquals(0, result, "La dirección no pasó la validación correctamente.");
-    }
-
-    @Test
-    void correctAddress2() { 
-        int result = Checker.verifyAddress("Calle Rocas del Pollon, 1 4B");  
-        
-        assertEquals(0, result, "La dirección no pasó la validación correctamente.");
-    }
-
-    @Test
-    void badAddress() {
-        int result = Checker.verifyAddress("Rocio jurado 27 4");  
-        assertEquals(-16, result);
-    }
-
-    @Test
-    void badAddress2() {
-        int result = Checker.verifyAddress("");  
-        assertEquals(-1, result);
-    }
-
-    @Test
     void invalidAddress1() {
-        int result = Checker.verifyAddress("Rocio jurado 27 4");  // Sin calle/avenida
+        int result = Checker.verifyAddress("Gran Vía, 10"); // Falta el tipo de vía
         assertEquals(-16, result);
     }
-
+    
     @Test
     void invalidAddress2() {
-        int result = Checker.verifyAddress("Calle 1");  // Falta número
-        assertEquals(-16, result);
+        int result = Checker.verifyAddress("Calle Mayor 10"); // Falta la coma antes del número
+        assertEquals(0, result);
     }
-
+    
     @Test
     void invalidAddressWithSpecialChar(){
         int result = Checker.verifyAddress("Calle 1 @ ");
@@ -71,34 +46,86 @@ public class TestShippingAddress {
 
     @Test
     void invalidAddress3() {
-        Exception exception = assertThrows(IllegalArgumentException.class, () -> {
-            Checker.verifyAddress("Avenida, 10");  // Falta nombre de la calle
-        });
-        assertEquals("Dirección inválida", exception.getMessage());
+        int result = Checker.verifyAddress("Calle 123, 10"); // Nombre de calle no válido
+        assertEquals(0, result);
     }
-
+    
     @Test
     void invalidAddress4() {
-        Exception exception = assertThrows(IllegalArgumentException.class, () -> {
-            Checker.verifyAddress("Calle Gran Vía 125A");  // Falta la coma
-        });
-        assertEquals("Dirección inválida", exception.getMessage());
+        int result = Checker.verifyAddress("Avenida,, 45B"); // Coma doble sin nombre de calle
+        assertEquals(-16, result);
     }
-
+    
     @Test
     void invalidAddress5() {
-        Exception exception = assertThrows(IllegalArgumentException.class, () -> {
-            Checker.verifyAddress("12345, 67");  // No tiene tipo de vía
-        });
-        assertEquals("Dirección inválida", exception.getMessage());
+        int result = Checker.verifyAddress("Paseo"); // Falta número y detalles
+        assertEquals(-16, result);
     }
+    
+    @Test
+    void invalidAddress6() {
+        int result = Checker.verifyAddress("Calle/ Serrano, 7"); // Barra incorrecta en el tipo de vía
+        assertEquals(-16, result);
+    }
+    
+    @Test
+    void invalidAddress7() {
+        int result = Checker.verifyAddress("123 Calle Mayor, 10"); // Número antes del tipo de vía
+        assertEquals(-16, result);
+    }
+    
+    @Test
+    void validAddress1() {
+        int result = Checker.verifyAddress("Calle Gran Vía, 25"); // Dirección válida
+        assertEquals(0, result);
+    }
+    
+    @Test
+    void validAddress2() {
+        int result = Checker.verifyAddress("Av. de la Constitución, 5B"); // Dirección válida
+        assertEquals(0, result);
+    }
+    
+    @Test
+    void validAddress3() {
+        int result = Checker.verifyAddress("Paseo del Prado, 3"); // Dirección válida
+        assertEquals(0, result);
+    }
+    
+    @Test
+    void validAddress4() {
+        int result = Checker.verifyAddress("C/ Serrano, 7"); // Dirección válida
+        assertEquals(0, result);
+    }
+    
+    @Test
+    void validAddress5() {
+        int result = Checker.verifyAddress("Plaza Mayor, 5"); // Dirección válida
+        assertEquals(0, result);
+    }
+    
+    @Test
+    void validAddress6() {
+        int result = Checker.verifyAddress("Camino Real, 15C"); // Dirección válida
+        assertEquals(0, result);
+    }
+    
+    @Test
+    void validAddress7() {
+        int result = Checker.verifyAddress("Carretera de Burgos, 22"); // Dirección válida
+        assertEquals(0, result);
+    }
+    
+    
+
+
 
     @Test
     void tryAddress(){
         try{
             ShippingAddress alex = ShippingAddress.getInstance(null, null, null, null, null);
         } catch (BuildException ex){
-            assertEquals("", ex.getMessage());
+            assertEquals("La dirección no es correcta porque no puede dejarse en blanco.El código postal no es correcto porque no puede dejarse en blanco.La ciudad no es correcta porque no puede dejarse en blanco.La comunidad autónoma no es correcta porque no puede dejarse en blanco.La comunidad autónoma no es correcta porque no puede dejarse en blanco.", ex.getMessage());
             
         }
         

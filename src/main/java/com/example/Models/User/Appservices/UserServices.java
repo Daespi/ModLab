@@ -6,8 +6,9 @@ import com.example.Exceptions.ServiceException;
 
 @Service
 public interface UserServices {
-    public String getByIdToJson (String isbn) throws ServiceException;
-    public String addFromJson (String book) throws ServiceException;
-    public String updateOneFromJson(String book) throws ServiceException;
-    public void deleteById(String isbn) throws ServiceException;
+    String getByIdToJson(String userId) throws ServiceException;
+    String addFromJson(String userJson) throws ServiceException;
+    String updateOneFromJson(String userJson) throws ServiceException;
+    void deleteById(String userId) throws ServiceException;
 }
+

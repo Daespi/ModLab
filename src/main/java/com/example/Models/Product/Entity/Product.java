@@ -6,6 +6,8 @@ import java.util.HashSet;
 import java.util.Set;
 
 import com.example.Exceptions.BuildException;
+
+import com.example.Models.Review.Entity.Review;
 import com.example.Operations.Checker;
 
 public abstract class Product {
@@ -20,15 +22,16 @@ public abstract class Product {
     protected String brand;
     protected ArrayList<Review> reviews;
 
+
     protected Product() throws BuildException {
         // Valida los datos con el método checkData
         this.imageUrl = new HashSet<String>();
-        checkData(name, description, price, stockQuantity, rating, imageUrl, brand);
+        checkData(name, description, price, stockQuantity, rating, /*imageUrl,*/ brand);
     }
     
 
     protected void checkData( String name, String description, double price, int stockQuantity,
-        double rating, String imageUrl, String brand) throws BuildException {
+        double rating, /*String imageUrl,*/ String brand) throws BuildException {
 
             String message = "";
 
@@ -58,10 +61,10 @@ public abstract class Product {
                 message += "El stock de este producto no es correcto porque" + Checker.getErrorMessage(resultStockQuantity, 0, 100);
             }
 
-            int resultImageUrl = setImageUrl(imageUrl);
-            if (resultImageUrl != 0) {
-                message += "La valoracion de este producto no es correcta porque" + Checker.getErrorMessage(resultImageUrl, 3, 30);
-            }
+            // int resultImageUrl = setImageUrl(imageUrl);
+            // if (resultImageUrl != 0) {
+            //     message += "La valoracion de este producto no es correcta porque" + Checker.getErrorMessage(resultImageUrl, 3, 30);
+            // }
 
             int resultRating = setRating(rating);
             if (resultRating != 0) {
@@ -187,9 +190,18 @@ public abstract class Product {
     }
 
 
-    public void setReviews(ArrayList<Review> reviews) {
-        this.reviews = reviews;
+    public String setReviews(int rating, String comment) throws BuildException{
+
+        try{
+            reviews.add(Review.getInstance(rating, comment));
+        } catch (BuildException ex){
+            return ex.getMessage();
+        }
+        
+        return ""; 
+        
     }
+    
 
     
 

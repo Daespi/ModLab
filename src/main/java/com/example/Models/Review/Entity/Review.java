@@ -15,7 +15,9 @@ public class Review {
 
     public Review(){};
 
+
     public static Review getInstance(int rating, String comment) throws BuildException{
+
 
         String message = "";
         Review r = new Review();
@@ -36,6 +38,7 @@ public class Review {
         }
         
         return r;
+
 
     };
 
@@ -85,5 +88,4 @@ public class Review {
         return "Review [getReviewId()=" + getReviewId() + ", getRating()=" + getRating() + ", getComment()="
                 + getComment() + ", getReviewDate()=" + getReviewDate() + "]";
     }
-    
 }
