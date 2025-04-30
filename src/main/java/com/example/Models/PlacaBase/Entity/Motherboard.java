@@ -20,12 +20,22 @@ public class Motherboard extends Product{
     }
 
 
-    public static Motherboard getInstance(String cpu, String memory, String storage, String factorForm, Double high, Double width, Double length, Double weight, boolean fragile) throws BuildException{
+    public static Motherboard getInstance(String name, String description, double price, int stockQuantity,
+    double rating, String brand, String cpu, String memory, String storage, 
+    String factorForm, double high, double width, double length, double weight, 
+    boolean fragile) throws BuildException{
+        
 
 
         String message = "";
 
         Motherboard motherboard = new Motherboard();
+
+        try {
+            motherboard.checkData(name, description, price, stockQuantity, rating, brand);
+        } catch (BuildException e) {
+            message = e.getMessage();
+        }
 
 
         int resultCpu = motherboard.setCpu(cpu);
@@ -84,8 +94,11 @@ public class Motherboard extends Product{
     }
 
 
-    public void setMemory(String memory) {
+    public int setMemory(String memory) {
+        if ((Checker.isNull(memory)) != 0)
+            return -1;
         this.memory = memory;
+        return 0;
     }
 
 
@@ -94,8 +107,11 @@ public class Motherboard extends Product{
     }
 
 
-    public void setStorage(String storage) {
+    public int setStorage(String storage) {
+        if ((Checker.isNull(cpu)) != 0)
+            return -1;
         this.storage = storage;
+        return 0;
     }
 
 
@@ -104,8 +120,11 @@ public class Motherboard extends Product{
     }
 
 
-    public void setFactorForm(String factorForm) {
+    public int setFactorForm(String factorForm) {
+        if ((Checker.isNull(factorForm)) != 0)
+            return -1;
         this.factorForm = factorForm;
+        return 0;
     }
 
 

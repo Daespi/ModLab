@@ -17,12 +17,19 @@ public class Ram extends Product {
     protected Ram() throws BuildException {
     }
 
-    public static Ram getInstance(int latency, String typeDdr, String internalMemory, String memorySpeed, 
-                                  Double high, Double width, Double length, Double weight, boolean fragile) throws BuildException {
+    public static Ram getInstance(String name, String description, double price, int stockQuantity,
+    double rating, String brand, int latency, String typeDdr, String internalMemory, String memorySpeed, 
+    double high, double width, double length, double weight, boolean fragile) throws BuildException {
 
         String message = "";
 
         Ram ram = new Ram();
+
+        try {
+            ram.checkData(name, description, price, stockQuantity, rating, brand);
+        } catch (BuildException e) {
+            message = e.getMessage();
+        }
 
         int resultLatency = ram.setLatency(latency);
         if (resultLatency != 0) {
