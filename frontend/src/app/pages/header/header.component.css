@@ -126,6 +126,7 @@ border: none;
 
 .navegation-bar-icon{
     text-decoration: none;
+    cursor: pointer;
 }
 
 .navegation-bag-icon{
@@ -222,6 +223,7 @@ border: none;
     font-size: 2.2vh;
     font-weight: 300;
     margin-right: 5vh;
+    cursor: pointer;
 }
 
 
