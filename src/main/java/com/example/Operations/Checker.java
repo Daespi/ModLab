@@ -105,11 +105,8 @@ public class Checker {
     }
 
     public static int verifyMail(String correo) {
-<<<<<<< HEAD
         String expresionRegular = "^[A-Za-z0-9]{1,15}[._-]*[A-Za-z0-9]{1,}[@]{1}[a-z]{2,8}[.]{1}[a-z]{2,4}$";
-=======
-        String expresionRegular = "^[a-zA-Z0-9._%+-]{5,64}@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,6}$";
->>>>>>> dev_alex
+
 
         Pattern pattern = Pattern.compile(expresionRegular);
         Matcher matcher = pattern.matcher(correo);
@@ -122,11 +119,8 @@ public class Checker {
     }
 
     public static int verifyPhone(String phoneNumber) {
-<<<<<<< HEAD
         String regex = "^[69]\\d{8}$"; 
-=======
-        String regex = "^\\d{9}$"; 
->>>>>>> dev_alex
+
         if (!phoneNumber.matches(regex)) {
             return -15;
         } else {
@@ -297,8 +291,6 @@ public class Checker {
         return -20;
     } 
 
-<<<<<<< HEAD
-
     public static int verifyUsername(String username) {
         if( isNull(username) != 0){
             return -1;
@@ -312,8 +304,6 @@ public class Checker {
         return 0;
     }
 
-=======
->>>>>>> dev_alex
     public static int verifyUuid (String uuid){
         String patron = "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$";
         Pattern pattern = Pattern.compile(patron);
@@ -347,11 +337,9 @@ public class Checker {
                 return " el formato no es correcto, solo acepta letras y la primera tiene que ser mayúscula.";
             case -21:
                 return " el formato no es correcto, deberian de ser 36 caracteres incluyendo los guiones.";
-<<<<<<< HEAD
             case -22:
                 return " el formato no es correcto, solo puede contener letras, numeros, puntos, guiones y guiones bajos.";
-=======
->>>>>>> dev_alex
+
             default:
                 return " Error desconocido.";
         }
@@ -372,9 +360,4 @@ public class Checker {
         
             }  
         }
-<<<<<<< HEAD
 }
-
-=======
-}
->>>>>>> dev_alex

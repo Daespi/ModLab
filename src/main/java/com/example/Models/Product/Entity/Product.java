@@ -16,7 +16,7 @@ public abstract class Product {
     protected LocalDateTime createdAt;
     protected String imageUrl;
     protected String brand;
-    protected ArrayList<Review> reviews;
+    //protected ArrayList<Review> reviews;
 
     protected Product() throws BuildException {
         // Valida los datos con el método checkData

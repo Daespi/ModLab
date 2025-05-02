@@ -22,7 +22,6 @@ public class TestShippingAddress {
     }
     
     @Test
-<<<<<<< HEAD
     void invalidAddressWithSpecialChar(){
         int result = Checker.verifyAddress("Calle 1 @ ");
         assertEquals(-16, result);
@@ -46,8 +45,7 @@ public class TestShippingAddress {
     }
 
     @Test
-=======
->>>>>>> dev_alex
+
     void invalidAddress3() {
         int result = Checker.verifyAddress("Calle 123, 10"); // Nombre de calle no válido
         assertEquals(0, result);

@@ -10,8 +10,5 @@ public interface UserServices {
     String addFromJson(String userJson) throws ServiceException;
     String updateOneFromJson(String userJson) throws ServiceException;
     void deleteById(String userId) throws ServiceException;
-<<<<<<< HEAD
 }
-=======
-}
->>>>>>> dev_alex
+

@@ -14,7 +14,6 @@ import jakarta.transaction.Transactional;
 
 @Repository
 public interface JpaUserRepository extends JpaRepository<UserDTO, String>, UserRepository {
-<<<<<<< HEAD
     public Optional<UserDTO> findByEmail(String email);
 
     public List<UserDTO> findByusername(String username);
@@ -27,21 +26,8 @@ public interface JpaUserRepository extends JpaRepository<UserDTO, String>, UserR
 
     @Transactional
     public UserDTO save(UserDTO user);
-=======
-    public Optional<UserDTO> findByIsbn(String isbn);
-
-    public List<UserDTO> findByName(String name);
- 
-    @Query(value="SELECT b FROM UserDTO b WHERE b.name LIKE %:name%")
-    public List<UserDTO> findByPartialTitle(String name);
-
-    @Query(value="SELECT count(*) FROM UserDTO b WHERE b.name LIKE %:name%")
-    public Integer countByPartialTitle(String name);
 
     @Transactional
-    public UserDTO save(UserDTO book);
->>>>>>> dev_alex
-    @Transactional
-    public void deleteByIsbn(String isbn);
+    public void deleteByUsername(String username);
     
 }
