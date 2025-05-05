@@ -25,3 +25,4 @@ public class JacksonSerializer<T> implements Serializer<T> {
         }
     }
 }
+

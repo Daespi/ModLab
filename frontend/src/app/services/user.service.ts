@@ -2,8 +2,9 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { User } from '../models/User/User';
+import { environment } from '../../environments/environment';
 
-const baseUrl = 'http://localhost:8080/api/users'; // ajusta según tu backend
+const baseUrl = environment.apiUrl; // Usar la URL del entorno
 
 @Injectable({
   providedIn: 'root'
@@ -21,12 +22,10 @@ export class UserService {
   }
 
   updateUser(user: User): Observable<User> {
-    return this.http.put<User>(baseUrl, user);
+    return this.http.put<User>(`${baseUrl}/${user.userId}`, user); // Corregido para incluir el id
   }
 
   deleteById(id: string): Observable<void> {
     return this.http.delete<void>(`${baseUrl}/${id}`);
   }
-
-  
 }

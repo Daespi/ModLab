@@ -6,3 +6,4 @@ public interface Serializer<T> {
     String serialize(T object) throws ServiceException;
     T deserialize(String s, Class<T> c) throws ServiceException;
 }
+

@@ -11,3 +11,4 @@ public interface UserServices {
     String updateOneFromJson(String userJson) throws ServiceException;
     void deleteById(String userId) throws ServiceException;
 }
+

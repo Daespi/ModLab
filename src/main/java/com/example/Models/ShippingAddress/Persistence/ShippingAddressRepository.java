@@ -5,23 +5,21 @@ import java.util.Optional;
 
 import org.springframework.stereotype.Repository;
 
-import com.example.Models.User.DTO.UserDTO;
-
+import com.example.Models.ShippingAddress.DTO.ShippingAddressDTO;
 
 @Repository
-public interface ShippingAddressRepository  {
+public interface ShippingAddressRepository {
 
-    public Optional<UserDTO> findById(String isbn);
+    Optional<ShippingAddressDTO> findById(int addressId);
 
-    public List<UserDTO> findByName(String title);
- 
-    public List<UserDTO> findByPartialTitle(String title);
+    List<ShippingAddressDTO> findByAddress(String address);
 
-    public Integer countByPartialTitle(String title);
+    List<ShippingAddressDTO> findByAddressContaining(String partialAddress);
 
-    public UserDTO save(UserDTO book);
-    
-    public void deleteById(String isbn);
-    
+    Integer countByAddressContaining(String partialAddress);
+
+    ShippingAddressDTO save(ShippingAddressDTO address);
+
+    void deleteById(int addressId);
 }
 

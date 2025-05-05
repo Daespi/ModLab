@@ -1,28 +1,45 @@
 import { Component } from '@angular/core';
 import { UserService } from '../../services/user.service';
 import { User } from '../../models/User/User';
+import { Router } from '@angular/router';  // Asegúrate de tener el Router importado
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-register',
+  standalone: true, // Este es el indicador de un componente standalone
+  imports: [FormsModule],
   templateUrl: './register.component.html',
   styleUrls: ['./register.component.css']
 })
 export class RegisterComponent {
-  user: User = new User(); // Objeto vacío de tipo User
-  confirmPassword: string = '';  // Campo solo para confirmar la contraseña
+  user: User = new User(); // Aquí no necesitas asignar el `userId`
+  confirmPassword: string = '';
 
-  constructor(private userService: UserService) {}
+  constructor(private userService: UserService, private router: Router) {}
 
   onSubmit(): void {
-    if (this.user.passwordHash === this.confirmPassword) {
-      this.userService.newUser(this.user).subscribe(
+    if (this.user.passwordHash && this.user.passwordHash === this.confirmPassword) {
+      // Creamos un objeto solo con los datos necesarios para el POST
+      const userToSend = {
+        "userId": this.user.userId,
+        username: this.user.username,
+        firstName: this.user.firstName,
+        lastName: this.user.lastName,
+        passwordHash: this.user.passwordHash,
+        email: this.user.email,
+        phone: this.user.phone,
+        "0": this.user.roleName, // Si es necesario
+      };
+
+      // Enviar solo los datos necesarios al backend
+      this.userService.newUser(userToSend).subscribe(
         (response) => {
           console.log('Usuario registrado exitosamente', response);
-          // Aquí podrías redirigir al usuario o mostrar un mensaje de éxito
+          // Redirige a la página de login después de un registro exitoso
+          this.router.navigate(['/home']);
         },
         (error) => {
           console.error('Error al registrar el usuario', error);
-          // Mostrar un mensaje de error
         }
       );
     } else {
@@ -30,3 +47,4 @@ export class RegisterComponent {
     }
   }
 }
+

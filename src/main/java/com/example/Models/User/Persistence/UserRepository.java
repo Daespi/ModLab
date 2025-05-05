@@ -6,22 +6,18 @@ import java.util.Optional;
 import org.springframework.stereotype.Repository;
 
 import com.example.Models.User.DTO.UserDTO;
-
-
 @Repository
-public interface UserRepository  {
+public interface UserRepository {
 
-    public Optional<UserDTO> findById(String id);
+    Optional<UserDTO> findById(String userId);
 
-    public List<UserDTO> findByName(String username);
- 
-    public List<UserDTO> findByPartialTitle(String username);
+    List<UserDTO> findByUsername(String username);
 
-    public Integer countByPartialTitle(String username);
+    List<UserDTO> findByUsernameContaining(String Username);
 
-    public UserDTO save(UserDTO client);
-    
-    public void deleteById(String id);
-    
+    Integer countByUsernameContaining(String Username);
+
+    UserDTO save(UserDTO user);
+
+    void deleteById(String userId);
 }
-

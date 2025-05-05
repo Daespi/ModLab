@@ -3,6 +3,9 @@ package com.example.Models.User.DTO;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
@@ -13,7 +16,7 @@ import jakarta.persistence.Table;
 public class UserDTO {
 
     @Id
-    @Column(name = "user_id")
+    @Column(name = "userId")
     private String userId;
 
     @Column(name = "first_name", nullable = false)
@@ -34,19 +37,26 @@ public class UserDTO {
     @Column(name = "phone", nullable = false)
     private String phone;
 
-    @Column(name = "created_at", nullable = false)
+    @Column(name = "created_at")
     private LocalDateTime createdAt;
 
     @Column(name = "role", nullable = false)
     private boolean role;
 
-    // 👇 Constructor vacío requerido por JPA
     public UserDTO() {}
 
-    // 👇 Constructor completo para instanciación manual
-    public UserDTO(String userId, String firstName, String lastName, String username,
-                   String passwordHash, String email, String phone,
-                   LocalDateTime createdAt, boolean role) {
+    @JsonCreator
+    public UserDTO(
+        @JsonProperty("userId") String userId,
+        @JsonProperty("firstName") String firstName,
+        @JsonProperty("lastName") String lastName,
+        @JsonProperty("username") String username,
+        @JsonProperty("passwordHash") String passwordHash,
+        @JsonProperty("email") String email,
+        @JsonProperty("phone") String phone,
+        @JsonProperty("createdAt") LocalDateTime createdAt,
+        @JsonProperty("role") boolean role
+    ) {
         this.userId = userId;
         this.firstName = firstName;
         this.lastName = lastName;
@@ -54,23 +64,44 @@ public class UserDTO {
         this.passwordHash = passwordHash;
         this.email = email;
         this.phone = phone;
-        this.createdAt = createdAt;
+        this.createdAt = createdAt != null ? createdAt : LocalDateTime.now();
         this.role = role;
     }
 
     public String getUserId() { return userId; }
+    public void setUserId(String userId) { this.userId = userId; }
+
     public String getFirstName() { return firstName; }
+    public void setFirstName(String firstName) { this.firstName = firstName; }
+
     public String getLastName() { return lastName; }
+    public void setLastName(String lastName) { this.lastName = lastName; }
+
     public String getUsername() { return username; }
+    public void setUsername(String username) { this.username = username; }
+
     public String getPasswordHash() { return passwordHash; }
+    public void setPasswordHash(String passwordHash) { this.passwordHash = passwordHash; }
+
     public String getEmail() { return email; }
+    public void setEmail(String email) { this.email = email; }
+
     public String getPhone() { return phone; }
+    public void setPhone(String phone) { this.phone = phone; }
 
     public String getCreatedAt() {
-        return createdAt.format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
+        return createdAt != null
+            ? createdAt.format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"))
+            : null;
     }
 
-    public boolean getRoleName() { return role; }
+    public void setCreatedAt(LocalDateTime createdAt) {
+        this.createdAt = createdAt;
+    }
+
+    public boolean getRole() {
+        return role;
+    }
 
     @Override
     public String toString() {

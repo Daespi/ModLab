@@ -4,8 +4,8 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.crypto.password.PasswordEncoder;
+// import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+// import org.springframework.security.crypto.password.PasswordEncoder;
 
 import com.example.Exceptions.BuildException;
 import com.example.Models.ShippingAddress.Entity.ShippingAddress;
@@ -99,6 +99,9 @@ public class User {
             return -2;
         if ((Checker.maxLenght(30, username)) != 0)
             return -10;
+        if ((Checker.verifyUsername(username)) != 0)
+            return -22;
+
         this.username = username;
         return 0;
     }
@@ -142,9 +145,9 @@ public class User {
             return -1;
         if ((Checker.verifyPassword(passwordHash)) != 0)
             return -13;
-        PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
-        String hashedPassword = passwordEncoder.encode(passwordHash);
-        this.passwordHash = hashedPassword;
+        // PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+        // String hashedPassword = passwordEncoder.encode(passwordHash);
+        this.passwordHash = passwordHash;
         return 0;
     }
 

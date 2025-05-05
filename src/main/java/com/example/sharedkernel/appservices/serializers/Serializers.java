@@ -4,3 +4,4 @@ public enum Serializers {
     USER_JSON,
     SHIPPINGADDRESS_JSON
 }
+
