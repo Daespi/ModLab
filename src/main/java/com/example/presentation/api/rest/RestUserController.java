@@ -14,7 +14,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.example.Exceptions.ServiceException;
 import com.example.Models.User.Appservices.UserServices;
-
 @RestController
 @RequestMapping("/modlab/User")
 public class RestUserController {
@@ -25,6 +24,13 @@ public class RestUserController {
     /**
      * GET - Obtener un usuario por ID (devuelve JSON)
      */
+
+     @GetMapping (value = "/", produces = MediaType.APPLICATION_JSON_VALUE)
+     public ResponseEntity<String> getHola() {       
+             return ResponseEntity.ok("hola");  
+     }
+ 
+//sino dejarlo con userId
     @GetMapping(value = "/{userId}", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<String> getJsonUserById(@PathVariable String userId) {
         try {

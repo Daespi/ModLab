@@ -9,24 +9,17 @@ import org.springframework.stereotype.Repository;
 import com.example.Models.ShippingAddress.DTO.ShippingAddressDTO;
 import com.example.Models.ShippingAddress.Persistence.ShippingAddressRepository;
 
-import jakarta.transaction.Transactional;
-
 @Repository
-public interface JpaShippingAddressRepository extends JpaRepository<ShippingAddressDTO, Integer>, ShippingAddressRepository {
-    // public Optional<ShippingAddressDTO> findByNif(String nif);
+public interface JpaShippingAddressRepository extends JpaRepository<ShippingAddressDTO, Integer>, ShippingAddressRepository
+ {
 
-    public List<ShippingAddressDTO> findByAddress(String address);
- 
-    @Query(value="SELECT c FROM ShippingAddressDTO c WHERE c.address LIKE %:address%")
-    public List<ShippingAddressDTO> findByPartialAddress(String address);
+    List<ShippingAddressDTO> findByAddress(String address);
 
-    @Query(value="SELECT count(*) FROM ShippingAddressDTO c WHERE c.address LIKE %:address%")
-    public Integer countByPartialAddress(String address);
+    @Query("SELECT c FROM ShippingAddressDTO c WHERE c.address LIKE %:address%")
+    List<ShippingAddressDTO> findByPartialAddress(String address);
 
-    @Transactional
-    public ShippingAddressDTO save(ShippingAddressDTO ShippingAddress);
-    @Transactional
-    public void deleteByNif(String nif);
-
-    
+    @Query("SELECT count(c) FROM ShippingAddressDTO c WHERE c.address LIKE %:address%")
+    Integer countByPartialAddress(String address);
 }
+
+

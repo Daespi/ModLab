@@ -6,12 +6,12 @@ import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
 import com.example.Exceptions.GeneralDateTimeException;
-
 public class DataCheck {
 
     /**
      * Verifica que el DNI no sea nulo y tenga 9 caracteres.
      */
+
     public static int checkDNI(String dni) {
         if (dni == null || dni.trim().length() != 9) {
             return -1;
@@ -24,6 +24,7 @@ public class DataCheck {
      */
     public static int checkEmail(String email) {
         if (email == null || email.trim().length() <= 20) {
+
             return -1;
         }
         return 0;
@@ -43,12 +44,12 @@ public class DataCheck {
      * Verifica que un número entero sea igual o mayor al mínimo.
      */
     public static int checkNumber(int value, int min) {
+
         if (value < min) {
             return -1;
         }
         return 0;
     }
-
     /**
      * Verifica que un número decimal sea igual o mayor al mínimo.
      */

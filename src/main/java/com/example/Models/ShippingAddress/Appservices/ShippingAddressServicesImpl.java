@@ -26,7 +26,6 @@ public class ShippingAddressServicesImpl implements ShippingAddressServices {
 
     protected ShippingAddressDTO getById(int addressId) throws ServiceException {
         ShippingAddressDTO dto = this.getDTO(addressId);
-
         if (dto == null) {
             throw new ServiceException("Shipping address " + addressId + " not found");
         }
@@ -36,7 +35,7 @@ public class ShippingAddressServicesImpl implements ShippingAddressServices {
     protected ShippingAddressDTO checkInputData(String json) throws ServiceException {
         try {
             ShippingAddressDTO dto = this.serializer.deserialize(json, ShippingAddressDTO.class);
-            ShippingAddressMapper.addressFromDTO(dto); // Validación con lógica de negocio
+            ShippingAddressMapper.addressFromDTO(dto); // Validación lógica
             return dto;
         } catch (BuildException e) {
             throw new ServiceException("Error in the input shipping address data: " + e.getMessage());
@@ -45,21 +44,30 @@ public class ShippingAddressServicesImpl implements ShippingAddressServices {
 
     protected ShippingAddressDTO newAddress(String json) throws ServiceException {
         ShippingAddressDTO dto = this.checkInputData(json);
-
-        if (this.getDTO(dto.getAddressId()) == null) {
-            return shippingAddressRepository.save(dto);
-        }
-        throw new ServiceException("Shipping address " + dto.getAddressId() + " already exists");
+        return shippingAddressRepository.save(dto);
     }
 
     protected ShippingAddressDTO updateAddress(String json) throws ServiceException {
-        try {
-            ShippingAddressDTO dto = this.checkInputData(json);
-            this.getById(dto.getAddressId());
-            return shippingAddressRepository.save(dto);
-        } catch (ServiceException e) {
-            throw e;
-        }
+        ShippingAddressDTO dto = this.checkInputData(json);
+        this.getById(dto.getAddressId());
+        return shippingAddressRepository.save(dto);
+    }
+
+    // ✅ NUEVO MÉTODO para actualizar con ID externo
+    protected ShippingAddressDTO updateAddressWithId(int addressId, String json) throws ServiceException {
+        ShippingAddressDTO dto = this.checkInputData(json);
+        this.getById(addressId);
+        // Forzamos que el ID del DTO sea el correcto
+        ShippingAddressDTO updatedDto = new ShippingAddressDTO(
+            addressId,
+            dto.getUserId(),
+            dto.getAddress(),
+            dto.getZipCode(),
+            dto.getCity(),
+            dto.getState(),
+            dto.getCountry()
+        );
+        return shippingAddressRepository.save(updatedDto);
     }
 
     @Override
@@ -78,6 +86,12 @@ public class ShippingAddressServicesImpl implements ShippingAddressServices {
     public String updateOneFromJson(String json) throws ServiceException {
         this.serializer = SerializersCatalog.getInstance(Serializers.SHIPPINGADDRESS_JSON);
         return serializer.serialize(this.updateAddress(json));
+    }
+
+    // ✅ Método público que llamas desde el controlador
+    public String updateOneFromJsonWithId(int addressId, String json) throws ServiceException {
+        this.serializer = SerializersCatalog.getInstance(Serializers.SHIPPINGADDRESS_JSON);
+        return serializer.serialize(this.updateAddressWithId(addressId, json));
     }
 
     @Override

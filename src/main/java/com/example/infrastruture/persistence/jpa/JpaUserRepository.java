@@ -26,7 +26,8 @@ public interface JpaUserRepository extends JpaRepository<UserDTO, String>, UserR
 
     @Transactional
     public UserDTO save(UserDTO user);
+
     @Transactional
-    public void deleteByIsbn(String isbn);
+    public void deleteByUsername(String username);
     
 }

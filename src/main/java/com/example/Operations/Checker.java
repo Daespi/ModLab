@@ -50,7 +50,7 @@ public class Checker {
     }
 
     public static int nonNegative(double numeral) {
-        if (numeral < 0)
+        if (numeral < 0 || numeral < 0.00)
             return -4;
         return 0;
     }
@@ -107,6 +107,7 @@ public class Checker {
     public static int verifyMail(String correo) {
         String expresionRegular = "^[A-Za-z0-9]{1,15}[._-]*[A-Za-z0-9]{1,}[@]{1}[a-z]{2,8}[.]{1}[a-z]{2,4}$";
 
+
         Pattern pattern = Pattern.compile(expresionRegular);
         Matcher matcher = pattern.matcher(correo);
 
@@ -119,6 +120,7 @@ public class Checker {
 
     public static int verifyPhone(String phoneNumber) {
         String regex = "^[69]\\d{8}$"; 
+
         if (!phoneNumber.matches(regex)) {
             return -15;
         } else {
@@ -280,15 +282,15 @@ public class Checker {
     }
 
     public static int verifyCountry(String country) {
-        if( isNull(country) != 0){
+        if (isNull(country) != 0) {
             return -1;
-        }       
-        if (country == "España" || country == "españa") {
+        }
+        if (country.equalsIgnoreCase("España")) {
             return 0;
         }
         return -20;
-    } 
-
+    }
+    
 
     public static int verifyUsername(String username) {
         if( isNull(username) != 0){
@@ -338,9 +340,25 @@ public class Checker {
                 return " el formato no es correcto, deberian de ser 36 caracteres incluyendo los guiones.";
             case -22:
                 return " el formato no es correcto, solo puede contener letras, numeros, puntos, guiones y guiones bajos.";
+
             default:
                 return " Error desconocido.";
         }
     }
-}
 
+    public static String getErrorMessage(int errorCode, double minLength, double maxLenght ) {
+        switch (errorCode) {
+            case -3:
+                return " no puede ser 0.";
+            case -4:
+                return " no pueden ser numeros negativos";
+            case -5:
+                return " lo máximo permitido es " + maxLenght + ".";
+            case -7:
+                return " lo minimo permitido es " + minLength + ".";
+            default:
+                return " Error desconocido."; 
+        
+            }  
+        }
+}

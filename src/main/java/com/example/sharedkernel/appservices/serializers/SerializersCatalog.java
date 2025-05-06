@@ -21,3 +21,4 @@ public class SerializersCatalog {
         return catalog.get(type);
     }
 }
+
