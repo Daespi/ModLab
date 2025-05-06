@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { UserService } from '../../services/user.service';
+import { UserService } from '../../services/user/user.service';
 import { User } from '../../models/User/User';
 import { Router } from '@angular/router';  // Asegúrate de tener el Router importado
 import { FormsModule } from '@angular/forms';
@@ -36,7 +36,7 @@ export class RegisterComponent {
         (response) => {
           console.log('Usuario registrado exitosamente', response);
           // Redirige a la página de login después de un registro exitoso
-          this.router.navigate(['/home']);
+          this.router.navigate(['/login']);
         },
         (error) => {
           console.error('Error al registrar el usuario', error);

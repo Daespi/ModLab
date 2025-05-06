@@ -8,6 +8,8 @@ import { LoginComponent } from './pages/login/login.component';
 import { HomeComponent } from './pages/home/home.component';
 import { HeaderComponent } from './pages/header/header.component';
 import { FooterComponent } from './pages/footer/footer.component';
+import { AddAddressComponent } from './pages/add-address/add-address.component';
+import { ShippingAddressComponent } from './pages/shipping-address/shipping-address.component';
 
 
 @NgModule({
@@ -18,6 +20,8 @@ import { FooterComponent } from './pages/footer/footer.component';
     HomeComponent,
     HeaderComponent,
     FooterComponent,
+    ShippingAddressComponent,
+    AddAddressComponent,
   ],
   imports: [
     BrowserModule,

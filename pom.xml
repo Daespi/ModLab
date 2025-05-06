@@ -76,6 +76,10 @@
 			<version>5.13.0</version>
 			<scope>test</scope>
 		</dependency>
+		<dependency>
+    <groupId>org.springframework.boot</groupId>
+    <artifactId>spring-boot-starter-security</artifactId>
+</dependency>
 
 
 <!-- nuevo modulo -->
@@ -94,5 +98,4 @@
         </plugin>
     </plugins>
 </build>
-
 </project>

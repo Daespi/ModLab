@@ -1,8 +1,8 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { User } from '../models/User/User';
-import { environment } from '../../environments/environment';
+import { User } from '../../models/User/User';
+import { environment } from '../../../environments/environment';
 
 const baseUrl = environment.apiUrl; // Usar la URL del entorno
 
@@ -28,4 +28,17 @@ export class UserService {
   deleteById(id: string): Observable<void> {
     return this.http.delete<void>(`${baseUrl}/${id}`);
   }
+
+  login(email: string, password: string): Observable<any> {
+    const credentials = { email, password };
+    return this.http.post<any>(`${baseUrl}/login`, credentials);
+  }
+
+  getUserByEmail(email: string): Observable<User> {
+    return this.http.get<User>(`${baseUrl}/email/${email}`);
+  }
+  
+  
+
+
 }

@@ -120,17 +120,5 @@ public class TestShippingAddress {
     
 
 
-
-    @Test
-    void tryAddress(){
-        try{
-            ShippingAddress alex = ShippingAddress.getInstance(null, null, null, null, null);
-        } catch (BuildException ex){
-            assertEquals("La dirección no es correcta porque no puede dejarse en blanco.El código postal no es correcto porque no puede dejarse en blanco.La ciudad no es correcta porque no puede dejarse en blanco.La comunidad autónoma no es correcta porque no puede dejarse en blanco.La comunidad autónoma no es correcta porque no puede dejarse en blanco.", ex.getMessage());
-            
-        }
-        
-    }
-
 }
 

@@ -189,7 +189,7 @@ public class User {
         String city, String state, String country) throws BuildException{
 
         try{
-            shippingAddresses.add(ShippingAddress.getInstance(address, zipCode, city, state, country));
+            shippingAddresses.add(ShippingAddress.getInstance(this.userId, address, zipCode, city, state, country));
         } catch (BuildException ex){
             return ex.getMessage();
         }
