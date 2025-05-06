@@ -12,14 +12,18 @@ public class Ram extends Product {
     protected String internalMemory;
     protected String memorySpeed;
     protected Boolean led;
+    protected int memorySize;         // Tamaño de la memoria en GB
+    protected int numberOfModules;    // Número de módulos de memoria (ej. 1, 2, 4)
+    protected String voltage;         // Voltaje de la memoria (ej. 1.2V, 1.35V)
     protected PhysicalData physicalData;
 
     protected Ram() throws BuildException {
     }
 
     public static Ram getInstance(String name, String description, double price, int stockQuantity,
-    double rating, String brand, int latency, String typeDdr, String internalMemory, String memorySpeed, 
-    double high, double width, double length, double weight, boolean fragile) throws BuildException {
+    double rating, String brand, int latency, String typeDdr, String internalMemory, String memorySpeed, boolean led, 
+    int memorySize, int numberOfModules, String voltage, double high, double width, double length, 
+    double weight, boolean fragile) throws BuildException {
 
         String message = "";
 
@@ -49,6 +53,21 @@ public class Ram extends Product {
         int resultMemorySpeed = ram.setMemorySpeed(memorySpeed);
         if (resultMemorySpeed != 0) {
             message += "Esta velocidad de memoria no es correcta porque " + Checker.getErrorMessage(resultMemorySpeed, 0, 1.20);
+        }
+
+        int resultMemorySize = ram.setMemorySize(memorySize);
+        if (resultMemorySize != 0) {
+            message += "El tamaño de la memoria no es correcto porque " + Checker.getErrorMessage(resultMemorySize, 0, 1.20);
+        }
+
+        int resultNumberOfModules = ram.setNumberOfModules(numberOfModules);
+        if (resultNumberOfModules != 0) {
+            message += "El número de módulos no es correcto porque " + Checker.getErrorMessage(resultNumberOfModules, 0, 1.20);
+        }
+
+        int resultVoltage = ram.setVoltage(voltage);
+        if (resultVoltage != 0) {
+            message += "El voltaje de la memoria no es correcto porque " + Checker.getErrorMessage(resultVoltage, 0, 1.20);
         }
 
         try {
@@ -135,14 +154,6 @@ public class Ram extends Product {
         return 0;
     }
 
-    // Getter for physicalData
-    public PhysicalData getPhysicalData() {
-        return physicalData;
-    }
-
-    public void setPhysicalData(PhysicalData physicalData) {
-        this.physicalData = physicalData;
-    }
 
     public double getWidth() {
         return physicalData.getWidth();

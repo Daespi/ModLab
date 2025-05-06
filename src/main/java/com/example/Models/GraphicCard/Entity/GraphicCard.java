@@ -11,16 +11,19 @@ public class GraphicCard extends Product{
     protected String colour;
     protected int memory;
     protected String memoryType;
-    protected String gpu;
     protected int recommendedPowerSupply;
+    protected double coreClock;                // Frecuencia base del GPU (MHz)
+    protected double boostClock;               // Frecuencia máxima del GPU (MHz)
+    protected int tdp;                      // Consumo térmico en watts
+    protected String interfaceConnection;   // Tipo de conexión, ej. PCIe 4.0 x16
     protected PhysicalData physicalData;
 
     protected GraphicCard() throws BuildException {
     }
 
     public static GraphicCard getInstance(String name, String description, double price, int stockQuantity,
-    double rating, /*String imageUrl,*/ String brand, String colour, int memory, String memoryType, String gpu, 
-    int recommendedPowerSupply, double high, double width, double length, double weight, boolean fragile) throws BuildException {
+    double rating, String brand, String colour, int memory, String memoryType, 
+    int recommendedPowerSupply, double coreClock, double boostClock, int tdp, String interfaceConnection, double high, double width, double length, double weight, boolean fragile) throws BuildException {
 
         String message = "";
         GraphicCard gc = new GraphicCard();
@@ -33,28 +36,44 @@ public class GraphicCard extends Product{
 
         int resultColour = gc.setColour(colour);
         if (resultColour != 0) {
-            message += "El color no es correcto porque " + Checker.getErrorMessage(resultColour, 0, 1.20);
+            message += "El color no es correcto porque " + Checker.getErrorMessage(resultColour, 2, 50);
         }
 
         int resultMemory = gc.setMemory(memory);
         if (resultMemory != 0) {
-            message += "La memoria no es correcta porque " + Checker.getErrorMessage(resultMemory, 0, 1.20);
+            message += "La memoria no es correcta porque " + Checker.getErrorMessage(resultMemory, 2, 24);
         }
 
         int resultMemoryType = gc.setMemoryType(memoryType);
         if (resultMemoryType != 0) {
-            message += "El tipo de memoria no es correcto porque " + Checker.getErrorMessage(resultMemoryType, 0, 1.20);
-        }
-
-        int resultGpu = gc.setGpu(gpu);
-        if (resultGpu != 0) {
-            message += "El GPU no es correcto porque " + Checker.getErrorMessage(resultGpu, 0, 1.20);
+            message += "El tipo de memoria no es correcto porque " + Checker.getErrorMessage(resultMemoryType, 3, 50);
         }
 
         int resultPower = gc.setRecommendedPowerSupply(recommendedPowerSupply);
         if (resultPower != 0) {
-            message += "La fuente de poder recomendada no es correcta porque " + Checker.getErrorMessage(resultPower, 0, 1.20);
+            message += "La fuente de poder recomendada no es correcta porque " + Checker.getErrorMessage(resultPower, 300, 750);
         }
+
+        int resultCoreClock = gc.setCoreClock(coreClock);
+        if (resultCoreClock != 0) {
+            message += "La frecuencia base del núcleo no es correcta porque " + Checker.getErrorMessage(resultCoreClock, 1.2, 1.5);
+        }
+
+        int resultBoostClock = gc.setBoostClock(boostClock);
+        if (resultBoostClock != 0) {
+            message += "La frecuencia boost no es correcta porque " + Checker.getErrorMessage(resultBoostClock, 1.8, 2.5);
+        }
+
+        int resultTdp = gc.setTdp(tdp);
+        if (resultTdp != 0) {
+            message += "El TDP no es correcto porque " + Checker.getErrorMessage(resultTdp, 50, 350);
+        }
+
+        int resultInterfaceConnection = gc.setInterfaceConnection(interfaceConnection);
+        if (resultInterfaceConnection != 0) {
+            message += "La interfaz de conexión no es correcta porque " + Checker.getErrorMessage(resultInterfaceConnection, 2, 150);
+        }
+
 
         try {
             gc.physicalData = PhysicalData.getInstance(high, width, length, weight, fragile);
@@ -77,6 +96,10 @@ public class GraphicCard extends Product{
     public int setColour(String colour) {
         if ((Checker.isNull(colour)) != 0)
             return -1;
+        if ((Checker.minLength(2, colour)) != 0)
+            return -2;
+        if ((Checker.maxLenght(50, colour)) != 0)
+            return -10;
         this.colour = colour;
         return 0;
     }
@@ -86,10 +109,20 @@ public class GraphicCard extends Product{
     }
 
     public int setMemory(int memory) {
-        if ((Checker.nonZero(memory)) != 0)
+        if (Checker.nonZero(memory) != 0) {
             return -3;
+        }
+
         if (Checker.nonNegative(memory) != 0) {
             return -4;
+        }
+
+        if (Checker.maxValue(memory, 	24) != 0) {
+            return -5;
+        }
+
+        if (Checker.minValue(memory,  2) != 0) {
+            return -7;
         }
         this.memory = memory;
         return 0;
@@ -102,18 +135,11 @@ public class GraphicCard extends Product{
     public int setMemoryType(String memoryType) {
         if ((Checker.isNull(memoryType)) != 0)
             return -1;
+        if ((Checker.minLength(2, memoryType)) != 0)
+            return -2;
+        if ((Checker.maxLenght(50, memoryType)) != 0)
+            return -10;
         this.memoryType = memoryType;
-        return 0;
-    }
-
-    public String getGpu() {
-        return gpu;
-    }
-
-    public int setGpu(String gpu) {
-        if ((Checker.isNull(gpu)) != 0)
-            return -1;
-        this.gpu = gpu;
         return 0;
     }
 
@@ -122,22 +148,114 @@ public class GraphicCard extends Product{
     }
 
     public int setRecommendedPowerSupply(int recommendedPowerSupply) {
-        if ((Checker.nonZero(recommendedPowerSupply)) != 0)
+        if (Checker.nonZero(recommendedPowerSupply) != 0) {
             return -3;
+        }
+
         if (Checker.nonNegative(recommendedPowerSupply) != 0) {
             return -4;
+        }
+
+        if (Checker.maxValue(recommendedPowerSupply, 750) != 0) {
+            return -5;
+        }
+
+        if (Checker.minValue(recommendedPowerSupply,  300) != 0) {
+            return -7;
         }
         this.recommendedPowerSupply = recommendedPowerSupply;
         return 0;
     }
 
-    public PhysicalData getPhysicalData() {
-        return physicalData;
+
+    public double getCoreClock() {
+        return coreClock;
     }
 
-    public void setPhysicalData(PhysicalData physicalData) {
-        this.physicalData = physicalData;
+    public int setCoreClock(double coreClock) {
+        if (Checker.nonZero(coreClock) != 0) {
+            return -3;
+        }
+
+        if (Checker.nonNegative(coreClock) != 0) {
+            return -4;
+        }
+
+        if (Checker.maxValue(coreClock, 1.5 ) != 0) {
+            return -5;
+        }
+
+        if (Checker.minValue(coreClock,  1.2 ) != 0) {
+            return -7;
+        }
+        this.coreClock = coreClock;
+        return 0;
     }
+
+    public double getBoostClock() {
+        return boostClock;
+    }
+
+    public int setBoostClock(double boostClock) {
+        if (Checker.nonZero(boostClock) != 0) {
+            return -3;
+        }
+
+        if (Checker.nonNegative(boostClock) != 0) {
+            return -4;
+        }
+
+        if (Checker.maxValue(boostClock, 2.5) != 0) {
+            return -5;
+        }
+
+        if (Checker.minValue(boostClock,  1.8) != 0) {
+            return -7;
+        }
+        this.boostClock = boostClock;
+        return 0;
+    }
+
+    public int getTdp() {
+        return tdp;
+    }
+
+    public int setTdp(int tdp) {
+        if (Checker.nonZero(boostClock) != 0) {
+            return -3;
+        }
+
+        if (Checker.nonNegative(boostClock) != 0) {
+            return -4;
+        }
+
+        if (Checker.maxValue(boostClock, 50) != 0) {
+            return -5;
+        }
+
+        if (Checker.minValue(boostClock,  350) != 0) {
+            return -7;
+        }
+        this.tdp = tdp;
+        return 0;
+    }
+
+    public String getInterfaceConnection() {
+        return interfaceConnection;
+    }
+
+    public int setInterfaceConnection(String interfaceConnection) {
+        if ((Checker.isNull(interfaceConnection)) != 0)
+            return -1;
+        if ((Checker.minLength(2, interfaceConnection)) != 0)
+            return -2;
+        if ((Checker.maxLenght(150, interfaceConnection)) != 0)
+            return -10;
+        this.interfaceConnection = interfaceConnection;
+        return 0;
+    }
+
+    //--------------------------------------------------
 
     public double getWidth() {
         return physicalData.getWidth();

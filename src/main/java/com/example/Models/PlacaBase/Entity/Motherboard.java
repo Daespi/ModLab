@@ -11,6 +11,11 @@ public class Motherboard extends Product{
     protected String memory;
     protected String storage;
     protected String factorForm;
+    protected String socket;               // Tipo de socket para CPU (ej. AM5, LGA1700)
+    protected String chipset;              // Chipset de la placa (ej. B650, Z790)
+    protected String memoryType;           // Tipo de RAM soportada (ej. DDR4, DDR5)
+    protected int memorySlots;             // Número de ranuras RAM
+    protected int maxMemory;               // Memoria máxima soportada (en GB)
     protected PhysicalData physicalData;
 
 
@@ -22,11 +27,9 @@ public class Motherboard extends Product{
 
     public static Motherboard getInstance(String name, String description, double price, int stockQuantity,
     double rating, String brand, String cpu, String memory, String storage, 
-    String factorForm, double high, double width, double length, double weight, 
+    String factorForm, String socket, String chipset, String memoryType, int memorySlots, int maxMemory, double high, double width, double length, double weight, 
     boolean fragile) throws BuildException{
         
-
-
         String message = "";
 
         Motherboard motherboard = new Motherboard();
@@ -57,6 +60,32 @@ public class Motherboard extends Product{
         if (resultFactorForm != 0) {
             message += "Esta forma de factor no es correcta porque" + Checker.getErrorMessage(resultFactorForm, 0, 1.20);
         }
+
+        int resultSocket = motherboard.setSocket(socket);
+        if (resultSocket != 0) {
+            message += "El tipo de socket no es correcto porque " + Checker.getErrorMessage(resultSocket, 0, 1.20);
+        }
+
+        int resultChipset = motherboard.setChipset(chipset);
+        if (resultChipset != 0) {
+            message += "El chipset no es correcto porque " + Checker.getErrorMessage(resultChipset, 0, 1.20);
+        }
+
+        int resultMemoryType = motherboard.setMemoryType(memoryType);
+        if (resultMemoryType != 0) {
+            message += "El tipo de memoria no es correcto porque " + Checker.getErrorMessage(resultMemoryType, 0, 1.20);
+        }
+
+        int resultMemorySlots = motherboard.setMemorySlots(memorySlots);
+        if (resultMemorySlots != 0) {
+            message += "El número de ranuras de memoria no es correcto porque " + Checker.getErrorMessage(resultMemorySlots, 0, 1.20);
+        }
+
+        int resultMaxMemory = motherboard.setMaxMemory(maxMemory);
+        if (resultMaxMemory != 0) {
+            message += "La memoria máxima soportada no es correcta porque " + Checker.getErrorMessage(resultMaxMemory, 0, 1.20);
+        }
+
 
         try {
             motherboard.physicalData = PhysicalData.getInstance(high, width, length, weight, fragile);
