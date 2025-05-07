@@ -7,9 +7,9 @@ import com.example.Operations.Checker;
 
 public class Ram extends Product {
 
-    protected int latency;
+    protected String latency;
     protected String typeDdr;
-    protected String internalMemory;
+    protected int internalMemory;
     protected String memorySpeed;
     protected Boolean led;
     protected int memorySize;         // Tamaño de la memoria en GB
@@ -21,7 +21,7 @@ public class Ram extends Product {
     }
 
     public static Ram getInstance(String name, String description, double price, int stockQuantity,
-    double rating, String brand, int latency, String typeDdr, String internalMemory, String memorySpeed, boolean led, 
+    double rating, String brand, String latency, String typeDdr, int internalMemory, String memorySpeed, boolean led, 
     int memorySize, int numberOfModules, String voltage, double high, double width, double length, 
     double weight, boolean fragile) throws BuildException {
 
@@ -37,37 +37,37 @@ public class Ram extends Product {
 
         int resultLatency = ram.setLatency(latency);
         if (resultLatency != 0) {
-            message += "Esta latencia no es correcta porque " + Checker.getErrorMessage(resultLatency, 0, 1.20);
+            message += "Esta latencia no es correcta porque " + Checker.getErrorMessage(resultLatency, 3, 20);
         }
 
         int resultTypeDdr = ram.setTypeDdr(typeDdr);
         if (resultTypeDdr != 0) {
-            message += "Este tipo de ddr no es correcto porque " + Checker.getErrorMessage(resultTypeDdr, 0, 1.20);
+            message += "Este tipo de ddr no es correcto porque " + Checker.getErrorMessage(resultTypeDdr, 3, 15);
         }
 
         int resultInternalMemory = ram.setInternalMemory(internalMemory);
         if (resultInternalMemory != 0) {
-            message += "Esta memoria interna no es correcta porque " + Checker.getErrorMessage(resultInternalMemory, 0, 1.20);
+            message += "Esta memoria interna no es correcta porque " + Checker.getErrorMessage(resultInternalMemory, 4, 128);
         }
 
         int resultMemorySpeed = ram.setMemorySpeed(memorySpeed);
         if (resultMemorySpeed != 0) {
-            message += "Esta velocidad de memoria no es correcta porque " + Checker.getErrorMessage(resultMemorySpeed, 0, 1.20);
+            message += "Esta velocidad de memoria no es correcta porque " + Checker.getErrorMessage(resultMemorySpeed, 8, 32);
         }
 
         int resultMemorySize = ram.setMemorySize(memorySize);
         if (resultMemorySize != 0) {
-            message += "El tamaño de la memoria no es correcto porque " + Checker.getErrorMessage(resultMemorySize, 0, 1.20);
+            message += "El tamaño de la memoria no es correcto porque " + Checker.getErrorMessage(resultMemorySize, 2, 256);
         }
 
         int resultNumberOfModules = ram.setNumberOfModules(numberOfModules);
         if (resultNumberOfModules != 0) {
-            message += "El número de módulos no es correcto porque " + Checker.getErrorMessage(resultNumberOfModules, 0, 1.20);
+            message += "El número de módulos no es correcto porque " + Checker.getErrorMessage(resultNumberOfModules, 0, 8);
         }
 
         int resultVoltage = ram.setVoltage(voltage);
         if (resultVoltage != 0) {
-            message += "El voltaje de la memoria no es correcto porque " + Checker.getErrorMessage(resultVoltage, 0, 1.20);
+            message += "El voltaje de la memoria no es correcto porque " + Checker.getErrorMessage(resultVoltage, 8, 32);
         }
 
         try {
@@ -84,20 +84,17 @@ public class Ram extends Product {
         return ram;
     }
 
-    public int getLatency() {
+    public String getLatency() {
         return latency;
     }
 
-    public int setLatency(int latency) {
-        if ((Checker.nonZero(latency)) != 0)
+    public int setLatency(String latency) {
+        if ((Checker.isNull(latency)) != 0)
             return -1;
-        if (Checker.nonNegative(latency) != 0) {
-            return -4;
-        }
-        if ((Checker.minValue(10, latency)) != 0)
-            return -7;
-        if ((Checker.maxValue(32, latency)) != 0)
-            return -5;
+        if ((Checker.minLength(3, latency)) != 0)
+            return -2;
+        if ((Checker.maxLenght(20, latency)) != 0)
+            return -10;
         this.latency = latency;
         return 0;
     }
@@ -118,17 +115,26 @@ public class Ram extends Product {
     }
 
     // Getter and Setter methods for internalMemory
-    public String getInternalMemory() {
+    public int getInternalMemory() {
         return internalMemory;
     }
 
-    public int setInternalMemory(String internalMemory) {
-        if ((Checker.isNull(internalMemory)) != 0)
-            return -1;
-        if ((Checker.minLength(2, internalMemory)) != 0)
-            return -2;
-        if ((Checker.maxLenght(10, internalMemory)) != 0)
-            return -10;
+    public int setInternalMemory(int internalMemory) {
+        if (Checker.nonZero(internalMemory) != 0) {
+            return -3;
+        }
+
+        if (Checker.nonNegative(internalMemory) != 0) {
+            return -4;
+        }
+
+        if (Checker.maxValue(internalMemory, 128) != 0) {
+            return -5;
+        }
+
+        if (Checker.minValue(internalMemory, 4) != 0) {
+            return -7;
+        }
         this.internalMemory = internalMemory;
         return 0;
     }
@@ -149,11 +155,76 @@ public class Ram extends Product {
         return 0;
     }
 
-    public int setLed(boolean led) {
+    public Boolean getLed() {
+        return led;
+    }
+
+    public int setLed(Boolean led) {
         this.led = led;
         return 0;
     }
 
+    public int getMemorySize() {
+        return memorySize;
+    }
+
+    public int setMemorySize(int memorySize) {
+        if (Checker.nonZero(memorySize) != 0) {
+            return -3;
+        }
+
+        if (Checker.nonNegative(memorySize) != 0) {
+            return -4;
+        }
+
+        if (Checker.maxValue(memorySize, 256) != 0) {
+            return -5;
+        }
+
+        if (Checker.minValue(memorySize, 2) != 0) {
+            return -7;
+        }
+        this.memorySize = memorySize;
+        return 0;
+    }
+
+    public int getNumberOfModules() {
+        return numberOfModules;
+    }
+
+    public int setNumberOfModules(int numberOfModules) {
+        if (Checker.nonZero(numberOfModules) != 0) {
+            return -3;
+        }
+
+        if (Checker.nonNegative(numberOfModules) != 0) {
+            return -4;
+        }
+
+        if (Checker.maxValue(numberOfModules, 8) != 0) {
+            return -5;
+        }
+        this.numberOfModules = numberOfModules;
+        return 0;
+    }
+
+    public String getVoltage() {
+        return voltage;
+    }
+
+    public int setVoltage(String voltage) {
+        if ((Checker.isNull(voltage)) != 0)
+            return -1;
+        if ((Checker.minLength(8, voltage)) != 0)
+            return -2;
+        if ((Checker.maxLenght(32, voltage)) != 0)
+            return -10;
+        this.voltage = voltage;
+        return 0;
+    }
+
+
+    //----------------------------
 
     public double getWidth() {
         return physicalData.getWidth();

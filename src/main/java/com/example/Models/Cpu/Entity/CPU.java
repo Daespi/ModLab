@@ -64,7 +64,7 @@ public class CPU extends Product{
 
         int resultTdp = cpu.setTdp(tdp);
         if (resultTdp != 0) {
-            message += "El TDP no es correcto porque " + Checker.getErrorMessage(resultTdp, 0, 35);
+            message += "El TDP no es correcto porque " + Checker.getErrorMessage(resultTdp, 35, 170);
         }
 
         int resultSocket = cpu.setSocket(socket);
@@ -74,7 +74,7 @@ public class CPU extends Product{
 
         int resultLithography = cpu.setLithography(lithography);
         if (resultLithography != 0) {
-            message += "La litografía no es correcta porque " + Checker.getErrorMessage(resultLithography, 0, 1.20);
+            message += "La litografía no es correcta porque " + Checker.getErrorMessage(resultLithography, 4, 14);
         }
 
 
@@ -171,19 +171,19 @@ public class CPU extends Product{
     }
 
     public int setFrecuency(double frecuency) {
-        if (Checker.nonZero(baseClock) != 0) {
+        if (Checker.nonZero(frecuency) != 0) {
             return -3;
         }
 
-        if (Checker.nonNegative(baseClock) != 0) {
+        if (Checker.nonNegative(frecuency) != 0) {
             return -4;
         }
 
-        if (Checker.maxValue(baseClock, 5.0) != 0) {
+        if (Checker.maxValue(frecuency, 5.0) != 0) {
             return -5;
         }
 
-        if (Checker.minValue(baseClock,  0.8) != 0) {
+        if (Checker.minValue(frecuency,  0.8) != 0) {
             return -7;
         }
         this.frecuency = frecuency;
@@ -273,8 +273,15 @@ public class CPU extends Product{
     }
 
     
+    public int setHasIntegratedGraphics(boolean hasIntegratedGraphics) {
+            this.hasIntegratedGraphics = hasIntegratedGraphics;
+            return 0;
+        }
+    
 
     //---------------------------------------------
+
+    
 
     public double getWidth() {
         return physicalData.getWidth();

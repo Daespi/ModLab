@@ -40,37 +40,37 @@ public class Tower extends Product {
 
         int resultFormFactor = tower.setFormFactor(formFactor);
         if (resultFormFactor != 0) {
-            message += "El factor de forma no es correcto porque " + Checker.getErrorMessage(resultFormFactor, 0, 1.20);
+            message += "El factor de forma no es correcto porque " + Checker.getErrorMessage(resultFormFactor, 5, 32);
         }
 
         int resultColor = tower.setColor(color);
         if (resultColor != 0) {
-            message += "El color no es correcto porque " + Checker.getErrorMessage(resultColor, 0, 1.20);
+            message += "El color no es correcto porque " + Checker.getErrorMessage(resultColor, 3, 32);
         }
 
         int resultConnectors = tower.setConnectors(connectors);
         if (resultConnectors != 0) {
-            message += "Los conectores no son correctos porque " + Checker.getErrorMessage(resultConnectors, 0, 1.20);
+            message += "Los conectores no son correctos porque " + Checker.getErrorMessage(resultConnectors, 3, 50);
         }
 
         int resultMaterial = tower.setMaterial(material);
         if (resultMaterial != 0) {
-            message += "El material no es correcto porque " + Checker.getErrorMessage(resultMaterial, 0, 1.20);
+            message += "El material no es correcto porque " + Checker.getErrorMessage(resultMaterial, 3, 50);
         }
 
         int resultFanSupport = tower.setFanSupport(fanSupport);
         if (resultFanSupport != 0) {
-            message += "El soporte para ventiladores no es correcto porque " + Checker.getErrorMessage(resultFanSupport, 0, 1.20);
+            message += "El soporte para ventiladores no es correcto porque " + Checker.getErrorMessage(resultFanSupport, 1, 2);
         }
 
         int resultMaxGpuLength = tower.setMaxGpuLength(maxGpuLength);
         if (resultMaxGpuLength != 0) {
-            message += "La longitud máxima de GPU no es correcta porque " + Checker.getErrorMessage(resultMaxGpuLength, 0, 1.20);
+            message += "La longitud máxima de GPU no es correcta porque " + Checker.getErrorMessage(resultMaxGpuLength, 160, 280);
         }
 
         int resultMaxCpuCoolerHeight = tower.setMaxCpuCoolerHeight(maxCpuCoolerHeight);
         if (resultMaxCpuCoolerHeight != 0) {
-            message += "La altura máxima del disipador de CPU no es correcta porque " + Checker.getErrorMessage(resultMaxCpuCoolerHeight, 0, 1.20);
+            message += "La altura máxima del disipador de CPU no es correcta porque " + Checker.getErrorMessage(resultMaxCpuCoolerHeight, 160, 120);
         }
 
         try {
@@ -92,56 +92,128 @@ public class Tower extends Product {
         return formFactor;
     }
 
-    public void setFormFactor(String formFactor) {
+    public int setFormFactor(String formFactor) {
+        if ((Checker.isNull(formFactor)) != 0)
+            return -1;
+        if ((Checker.minLength(5, formFactor)) != 0)
+            return -2;
+        if ((Checker.maxLenght(32, formFactor)) != 0)
+            return -10;
         this.formFactor = formFactor;
+        return 0;
     }
 
     public String getColor() {
         return color;
     }
 
-    public void setColor(String color) {
+    public int setColor(String color) {
+        if ((Checker.isNull(color)) != 0)
+            return -1;
+        if ((Checker.minLength(3, color)) != 0)
+            return -2;
+        if ((Checker.maxLenght(32, color)) != 0)
+            return -10;
         this.color = color;
+        return 0;
     }
 
-    public Set<String> getConnectors() {
-        return connectors;
+    public String getConnectors() {
+        return connectors.toString();
     }
 
-    public void setConnectors(Set<String> connectors) {
-        this.connectors = connectors;
+    public int setConnectors(String connectors) {
+        if ((Checker.isNull(connectors)) != 0)
+            return -1;
+        if ((Checker.minLength(3, connectors)) != 0)
+            return -2;
+        if ((Checker.maxLenght(50, connectors)) != 0)
+            return -10;
+        this.connectors.add(connectors);
+        return 0;
     }
 
     public String getMaterial() {
         return material;
     }
 
-    public void setMaterial(String material) {
+    public int setMaterial(String material) {
+        if ((Checker.isNull(material)) != 0)
+            return -1;
+        if ((Checker.minLength(3, material)) != 0)
+            return -2;
+        if ((Checker.maxLenght(50, material)) != 0)
+            return -10;
         this.material = material;
+        return 0;
     }
 
     public int getFanSupport() {
         return fanSupport;
     }
 
-    public void setFanSupport(int fanSupport) {
+    public int setFanSupport(int fanSupport) {
+        if (Checker.nonZero(fanSupport) != 0) {
+            return -3;
+        }
+
+        if (Checker.nonNegative(fanSupport) != 0) {
+            return -4;
+        }
+
+        if (Checker.maxValue(fanSupport, 2) != 0) {
+            return -5;
+        }
         this.fanSupport = fanSupport;
+        return 0;
     }
 
     public int getMaxGpuLength() {
         return maxGpuLength;
     }
 
-    public void setMaxGpuLength(int maxGpuLength) {
+    public int setMaxGpuLength(int maxGpuLength) {
+        if (Checker.nonZero(maxGpuLength) != 0) {
+            return -3;
+        }
+
+        if (Checker.nonNegative(maxGpuLength) != 0) {
+            return -4;
+        }
+
+        if (Checker.maxValue(maxGpuLength, 280) != 0) {
+            return -5;
+        }
+
+        if (Checker.minValue(maxGpuLength, 160) != 0) {
+            return -7;
+        }
         this.maxGpuLength = maxGpuLength;
+        return 0;
     }
 
     public int getMaxCpuCoolerHeight() {
         return maxCpuCoolerHeight;
     }
 
-    public void setMaxCpuCoolerHeight(int maxCpuCoolerHeight) {
+    public int setMaxCpuCoolerHeight(int maxCpuCoolerHeight) {
+        if (Checker.nonZero(maxCpuCoolerHeight) != 0) {
+            return -3;
+        }
+
+        if (Checker.nonNegative(maxCpuCoolerHeight) != 0) {
+            return -4;
+        }
+
+        if (Checker.maxValue(maxCpuCoolerHeight, 160) != 0) {
+            return -5;
+        }
+
+        if (Checker.minValue(maxCpuCoolerHeight, 120) != 0) {
+            return -7;
+        }
         this.maxCpuCoolerHeight = maxCpuCoolerHeight;
+        return 0;
     }
 
 

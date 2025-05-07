@@ -12,7 +12,7 @@ import com.example.Operations.Checker;
 public class PowerSupply extends Product{
 
     protected String model;
-    protected String colour;
+    protected String color;
     protected int totalPower;
     protected Set<String> connectors;
     protected String frecuency;
@@ -23,7 +23,7 @@ public class PowerSupply extends Product{
     }
 
     public static PowerSupply getInstance(String name, String description, double price, int stockQuantity,
-    double rating, String brand, String model, String colour, int totalPower, String connectors, String frecuency, 
+    double rating, String brand, String model, String color, int totalPower, String connectors, String frecuency, 
     double high, double width, double length, double weight, boolean fragile) throws BuildException{
 
         String message = "";
@@ -38,27 +38,27 @@ public class PowerSupply extends Product{
 
         int resultModel = ps.setModel(model);
         if (resultModel != 0) {
-            message += "El modelo no es correcto porque " + Checker.getErrorMessage(resultModel, 0, 1.20);
+            message += "El modelo no es correcto porque " + Checker.getErrorMessage(resultModel, 3, 20);
         }
 
-        int resultColour = ps.setColour(colour);
-        if (resultColour != 0) {
-            message += "El color no es correcto porque " + Checker.getErrorMessage(resultColour, 0, 1.20);
+        int resultColor = ps.setColor(color);
+        if (resultColor != 0) {
+            message += "El color no es correcto porque " + Checker.getErrorMessage(resultColor, 3, 15);
         }
 
         int resultPower = ps.setTotalPower(totalPower);
         if (resultPower != 0) {
-            message += "El consumo total de energía no es correcto porque " + Checker.getErrorMessage(resultPower, 0, 1.20);
+            message += "El consumo total de energía no es correcto porque " + Checker.getErrorMessage(resultPower, 300, 1500);
         }
 
         int resultConnectors = ps.setConnectors(connectors);
         if (resultConnectors != 0) {
-            message += "Los conectores no son correctos porque " + Checker.getErrorMessage(resultConnectors, 0, 1.20);
+            message += "Los conectores no son correctos porque " + Checker.getErrorMessage(resultConnectors, 3, 50);
         }
 
         int resultFrecuency = ps.setFrecuency(frecuency);
         if (resultFrecuency != 0) {
-            message += "La frecuencia no es correcta porque " + Checker.getErrorMessage(resultFrecuency, 0, 1.20);
+            message += "La frecuencia no es correcta porque " + Checker.getErrorMessage(resultFrecuency, 3, 15);
         }
 
 
@@ -92,18 +92,18 @@ public class PowerSupply extends Product{
         return 0;
     }
 
-    public String getColour() {
-        return colour;
+    public String getColor() {
+        return color;
     }
 
-    public int setColour(String colour) {
-        if ((Checker.isNull(colour)) != 0)
+    public int setColor(String color) {
+        if ((Checker.isNull(color)) != 0)
             return -1;
-        if ((Checker.minLength(3, colour)) != 0)
+        if ((Checker.minLength(3, color)) != 0)
             return -2;
-        if ((Checker.maxLenght(15, colour)) != 0)
+        if ((Checker.maxLenght(15, color)) != 0)
             return -10;
-        this.colour = colour;
+        this.color = color;
         return 0;
     }
 
@@ -112,10 +112,20 @@ public class PowerSupply extends Product{
     }
 
     public int setTotalPower(int totalPower) {
-        if ((Checker.nonZero(totalPower)) != 0)
-            return -1;
+        if (Checker.nonZero(totalPower) != 0) {
+            return -3;
+        }
+
         if (Checker.nonNegative(totalPower) != 0) {
             return -4;
+        }
+
+        if (Checker.maxValue(totalPower, 1500) != 0) {
+            return -5;
+        }
+
+        if (Checker.minValue(totalPower, 300) != 0) {
+            return -7;
         }
         this.totalPower = totalPower;
         return 0;

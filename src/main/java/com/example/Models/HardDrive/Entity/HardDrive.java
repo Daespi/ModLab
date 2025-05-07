@@ -13,14 +13,15 @@ public class HardDrive extends Product {
     protected int randomReading;
     protected int capacity;
     protected int writeSpeed;
-    protected String formFactor;
+    protected double formFactor;
     protected PhysicalData physicalData;
 
     protected HardDrive() throws BuildException {
     }
 
     public static HardDrive getInstance(String name, String description, double price, int stockQuantity,
-    double rating, String brand, String storageInterface, String typeOfStorage, int randomReading, int capacity, int writeSpeed, String formFactor, double high, double width, double length, double weight, 
+    double rating, String brand, String storageInterface, String typeOfStorage, int randomReading, 
+    int capacity, int writeSpeed, double formFactor, double high, double width, double length, double weight, 
     boolean fragile) throws BuildException {
 
         String message = "";
@@ -40,22 +41,22 @@ public class HardDrive extends Product {
 
         int resultRandomReading = hd.setRandomReading(randomReading);
         if (resultRandomReading != 0) {
-            message += "La lectura aleatoria no es correcta porque " + Checker.getErrorMessage(resultRandomReading, 0, 1.20);
+            message += "La lectura aleatoria no es correcta porque " + Checker.getErrorMessage(resultRandomReading, 80, 1000000);
         }
         
         int resultCapacity = hd.setCapacity(capacity);
         if (resultCapacity != 0) {
-            message += "La capacidad no es correcta porque " + Checker.getErrorMessage(resultCapacity, 0, 1.20);
+            message += "La capacidad no es correcta porque " + Checker.getErrorMessage(resultCapacity, 400,8000);
         }
         
         int resultWriteSpeed = hd.setWriteSpeed(writeSpeed);
         if (resultWriteSpeed != 0) {
-            message += "La velocidad de escritura no es correcta porque " + Checker.getErrorMessage(resultWriteSpeed, 0, 1.20);
+            message += "La velocidad de escritura no es correcta porque " + Checker.getErrorMessage(resultWriteSpeed, 50, 250);
         }
         
         int resultFormFactor = hd.setFormFactor(formFactor);
         if (resultFormFactor != 0) {
-            message += "El formato físico (form factor) no es correcto porque " + Checker.getErrorMessage(resultFormFactor, 0, 1.20);
+            message += "El formato físico (form factor) no es correcto porque " + Checker.getErrorMessage(resultFormFactor, 2.5, 3.5);
         }
         
         try {
@@ -92,6 +93,11 @@ public class HardDrive extends Product {
         return ssd;
     }
 
+    public int setSsd(boolean ssd) {
+        this.ssd = ssd;
+        return 0;
+    }
+
     public int getRandomReading() {
         return randomReading;
     }
@@ -121,6 +127,21 @@ public class HardDrive extends Product {
     }
 
     public int setCapacity(int capacity) {
+        if (Checker.nonZero(capacity) != 0) {
+            return -3;
+        }
+
+        if (Checker.nonNegative(capacity) != 0) {
+            return -4;
+        }
+
+        if (Checker.maxValue(capacity, 8000) != 0) {
+            return -5;
+        }
+
+        if (Checker.minValue(randomReading, 400) != 0) {
+            return -7;
+        }
         this.capacity = capacity;
         return 0;
     }
@@ -130,15 +151,45 @@ public class HardDrive extends Product {
     }
 
     public int setWriteSpeed(int writeSpeed) {
+        if (Checker.nonZero(writeSpeed) != 0) {
+            return -3;
+        }
+
+        if (Checker.nonNegative(writeSpeed) != 0) {
+            return -4;
+        }
+
+        if (Checker.maxValue(writeSpeed, 250) != 0) {
+            return -5;
+        }
+
+        if (Checker.minValue(writeSpeed, 50) != 0) {
+            return -7;
+        }
         this.writeSpeed = writeSpeed;
         return 0;
     }
 
-    public String getFormFactor() {
+    public double getFormFactor() {
         return formFactor;
     }
 
-    public int setFormFactor(String formFactor) {
+    public int setFormFactor(double formFactor) {
+        if (Checker.nonZero(formFactor) != 0) {
+            return -3;
+        }
+
+        if (Checker.nonNegative(formFactor) != 0) {
+            return -4;
+        }
+
+        if (Checker.maxValue(formFactor, 3.5) != 0) {
+            return -5;
+        }
+
+        if (Checker.minValue(formFactor, 2.5) != 0) {
+            return -7;
+        }
         this.formFactor = formFactor;
         return 0;
     }

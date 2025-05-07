@@ -8,7 +8,7 @@ import com.example.Operations.Checker;
 public class GraphicCard extends Product{
 
     
-    protected String colour;
+    protected String color;
     protected int memory;
     protected String memoryType;
     protected int recommendedPowerSupply;
@@ -22,7 +22,7 @@ public class GraphicCard extends Product{
     }
 
     public static GraphicCard getInstance(String name, String description, double price, int stockQuantity,
-    double rating, String brand, String colour, int memory, String memoryType, 
+    double rating, String brand, String color, int memory, String memoryType, 
     int recommendedPowerSupply, double coreClock, double boostClock, int tdp, String interfaceConnection, double high, double width, double length, double weight, boolean fragile) throws BuildException {
 
         String message = "";
@@ -34,9 +34,9 @@ public class GraphicCard extends Product{
             message = e.getMessage();
         }
 
-        int resultColour = gc.setColour(colour);
-        if (resultColour != 0) {
-            message += "El color no es correcto porque " + Checker.getErrorMessage(resultColour, 2, 50);
+        int resultColor = gc.setColor(color);
+        if (resultColor != 0) {
+            message += "El color no es correcto porque " + Checker.getErrorMessage(resultColor, 2, 50);
         }
 
         int resultMemory = gc.setMemory(memory);
@@ -46,7 +46,7 @@ public class GraphicCard extends Product{
 
         int resultMemoryType = gc.setMemoryType(memoryType);
         if (resultMemoryType != 0) {
-            message += "El tipo de memoria no es correcto porque " + Checker.getErrorMessage(resultMemoryType, 3, 50);
+            message += "El tipo de memoria no es correcto porque " + Checker.getErrorMessage(resultMemoryType, 2, 50);
         }
 
         int resultPower = gc.setRecommendedPowerSupply(recommendedPowerSupply);
@@ -89,18 +89,18 @@ public class GraphicCard extends Product{
         return gc;
     }
 
-    public String getColour() {
-        return colour;
+    public String getColor() {
+        return color;
     }
 
-    public int setColour(String colour) {
-        if ((Checker.isNull(colour)) != 0)
+    public int setColor(String color) {
+        if ((Checker.isNull(color)) != 0)
             return -1;
-        if ((Checker.minLength(2, colour)) != 0)
+        if ((Checker.minLength(2, color)) != 0)
             return -2;
-        if ((Checker.maxLenght(50, colour)) != 0)
+        if ((Checker.maxLenght(50, color)) != 0)
             return -10;
-        this.colour = colour;
+        this.color = color;
         return 0;
     }
 
@@ -221,19 +221,19 @@ public class GraphicCard extends Product{
     }
 
     public int setTdp(int tdp) {
-        if (Checker.nonZero(boostClock) != 0) {
+        if (Checker.nonZero(tdp) != 0) {
             return -3;
         }
 
-        if (Checker.nonNegative(boostClock) != 0) {
+        if (Checker.nonNegative(tdp) != 0) {
             return -4;
         }
 
-        if (Checker.maxValue(boostClock, 50) != 0) {
+        if (Checker.maxValue(tdp, 50) != 0) {
             return -5;
         }
 
-        if (Checker.minValue(boostClock,  350) != 0) {
+        if (Checker.minValue(tdp,  350) != 0) {
             return -7;
         }
         this.tdp = tdp;
