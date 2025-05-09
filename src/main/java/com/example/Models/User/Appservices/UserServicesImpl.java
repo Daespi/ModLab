@@ -12,6 +12,9 @@ import com.example.sharedkernel.appservices.serializers.Serializer;
 import com.example.sharedkernel.appservices.serializers.Serializers;
 import com.example.sharedkernel.appservices.serializers.SerializersCatalog;
 
+import java.time.LocalDateTime;
+import java.util.UUID;
+
 @Controller
 public class UserServicesImpl implements UserServices {
 
@@ -23,6 +26,10 @@ public class UserServicesImpl implements UserServices {
     protected UserDTO getDTO(String userId) {
         return userRepository.findById(userId).orElse(null);
     }
+
+    // protected UserDTO getDTO(String userId) {
+    // return userRepository.findById(userId).orElse(null);
+    // }
 
     protected UserDTO getById(String userId) throws ServiceException {
         UserDTO dto = this.getDTO(userId);
@@ -42,13 +49,25 @@ public class UserServicesImpl implements UserServices {
         }
     }
 
+    // ------------------------------------
     protected UserDTO newUser(String json) throws ServiceException {
         UserDTO dto = this.checkInputData(json);
+
+        // Si no tiene ID, se genera
+        if (dto.getUserId() == null || dto.getUserId().isBlank()) {
+            dto.setUserId(UUID.randomUUID().toString());
+        }
+
         if (this.getDTO(dto.getUserId()) == null) {
+            if (dto.getCreatedAt() == null) {
+                dto.setCreatedAt(LocalDateTime.now());
+            }
             return userRepository.save(dto);
         }
+
         throw new ServiceException("User " + dto.getUserId() + " already exists");
     }
+    // ---------------------------------
 
     protected UserDTO updateUser(String json) throws ServiceException {
         UserDTO dto = this.checkInputData(json);
@@ -79,5 +98,7 @@ public class UserServicesImpl implements UserServices {
         this.getById(userId);
         userRepository.deleteById(userId);
     }
+
 }
+
 

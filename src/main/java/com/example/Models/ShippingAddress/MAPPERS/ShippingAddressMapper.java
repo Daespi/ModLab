@@ -7,23 +7,28 @@ import com.example.Models.ShippingAddress.Entity.ShippingAddress;
 public class ShippingAddressMapper {
 
     public static ShippingAddress addressFromDTO(ShippingAddressDTO dto) throws BuildException {
-        return ShippingAddress.getInstance( 
-                dto.getAddress(),
-                dto.getZipCode(),
-                dto.getCity(),
-                dto.getState(),
-                dto.getCountry()
+
+        return ShippingAddress.getInstance(
+            dto.getAddressId(),
+            dto.getUserId(),
+            dto.getAddress(),
+            dto.getZipCode(),
+            dto.getCity(),
+            dto.getState(),
+            dto.getCountry()
         );
     }
 
-    public static ShippingAddressDTO dtoFromAddress(ShippingAddress address) {
+    public static ShippingAddressDTO dtoFromAddress(ShippingAddress address, String userId) {
         return new ShippingAddressDTO(
-                address.getAddressId(),     
-                address.getAddress(),
-                address.getZipCode(),
-                address.getCity(),
-                address.getState(),
-                address.getCountry()
+
+            address.getAddressId(),
+            userId,
+            address.getAddress(),
+            address.getZipCode(),
+            address.getCity(),
+            address.getState(),
+            address.getCountry()
         );
     }
 }

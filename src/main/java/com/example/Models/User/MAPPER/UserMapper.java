@@ -17,7 +17,7 @@ public class UserMapper {
                 dto.getPasswordHash(),
                 dto.getEmail(),
                 dto.getPhone(),
-                dto.getRoleName()
+                dto.getRole()
         );
     }
 

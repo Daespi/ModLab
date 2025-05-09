@@ -8,12 +8,10 @@ import com.example.Models.User.Entity.User;
 
 public class testUserCreation {
     public static void main(String[] args) {
-
         try {
             User ash = User.getInstance(
                  "Ash", "Ash", "Grau Ayala", "Abcd134?", 
                 "ashgraunuriacefp@gmail.com", "648293958", false
-
             );
 
             System.out.println(ash.toString());

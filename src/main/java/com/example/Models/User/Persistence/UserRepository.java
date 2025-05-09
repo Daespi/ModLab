@@ -7,7 +7,6 @@ import org.springframework.stereotype.Repository;
 
 import com.example.Models.User.DTO.UserDTO;
 
-
 @Repository
 public interface UserRepository {
 
@@ -23,3 +22,4 @@ public interface UserRepository {
 
     void deleteById(String userId);
 }
+

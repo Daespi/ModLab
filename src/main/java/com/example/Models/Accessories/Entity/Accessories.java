@@ -1,7 +1,7 @@
 package com.example.Models.Accessories.Entity;
 
 import com.example.Exceptions.BuildException;
-import com.example.Models.Cpu.Entity.CPU;
+import com.example.Models.CPU.Entity.CPU;
 import com.example.Models.PhysicalData.Entity.PhysicalData;
 import com.example.Models.Product.Entity.Product;
 import com.example.Operations.Checker;
@@ -85,6 +85,54 @@ public class Accessories extends Product {
             return -10;
         this.material = material;
         return 0;
+    }
+
+    //----------------------------
+
+    public double getWidth() {
+        return physicalData.getWidth();
+    }
+
+    public double getHigh() {
+        return physicalData.getHigh();
+    }
+
+    public double getLength() {
+        return physicalData.getLength();
+    }
+
+    public double getWeight() {
+        return physicalData.getWeight();
+    }
+
+    public Boolean getFragile() {
+        return physicalData.getFragile();
+    }
+
+    // Setters for physical properties
+    public int setWidth(double width) {
+        return physicalData.setWidth(width);
+    }
+
+    public int setLength(double length) {
+        return physicalData.setLength(length);
+    }
+
+    public int setHigh(double high) {
+        return physicalData.setHigh(high);
+    }
+
+    public int setWeight(double weight) {
+        return physicalData.setWeight(weight);
+    }
+
+    public int setFragil(Boolean fragile) {
+        return physicalData.setFragile(fragile);
+    }
+
+    // Method to calculate volume
+    public double getVolume() {
+        return physicalData.getVolume();
     }
 
 

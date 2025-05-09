@@ -282,14 +282,16 @@ public class Checker {
     }
 
     public static int verifyCountry(String country) {
-        if( isNull(country) != 0){
+        if (isNull(country) != 0) {
             return -1;
-        }       
-        if (country == "España" || country == "españa") {
+        }
+        if (country.equalsIgnoreCase("España")) {
             return 0;
         }
         return -20;
-    } 
+
+    }
+    
 
     public static int verifyUsername(String username) {
         if( isNull(username) != 0){
@@ -360,6 +362,5 @@ public class Checker {
         
             }  
         }
+
 }
-
-

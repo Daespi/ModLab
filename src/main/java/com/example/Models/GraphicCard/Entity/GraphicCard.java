@@ -303,7 +303,5 @@ public class GraphicCard extends Product{
         return physicalData.getVolume();
     }
 
-
-
-    
 }
+

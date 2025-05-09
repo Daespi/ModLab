@@ -4,7 +4,10 @@ import com.example.Exceptions.ServiceException;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
+import java.util.List;
+
 public class JacksonSerializer<T> implements Serializer<T> {
+
     private final ObjectMapper objectMapper = new ObjectMapper();
 
     @Override
@@ -24,5 +27,14 @@ public class JacksonSerializer<T> implements Serializer<T> {
             throw new ServiceException(e.getMessage());
         }
     }
-}
 
+
+    @Override
+    public String serializeList(List<T> list) throws ServiceException {
+        try {
+            return this.objectMapper.writeValueAsString(list);
+        } catch (JsonProcessingException e) {
+            throw new ServiceException(e.getMessage());
+        }
+    }
+}

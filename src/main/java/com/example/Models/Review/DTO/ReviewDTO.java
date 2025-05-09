@@ -1,18 +1,49 @@
 package com.example.Models.Review.DTO;
 
+
+import jakarta.persistence.*;
+import java.time.LocalDateTime;
+
+@Entity
+@Table(name = "review", schema = "modlab")
 public class ReviewDTO {
-    private final int reviewId;
-    private final int rating;
-    private final String comment;
-    private final String reviewDate;
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "review_id")
+    private int reviewId;
 
-    public ReviewDTO(int reviewId, int rating, String comment, String reviewDate) {
+    @Column(name = "user_id", nullable = false)
+    private String userId;
+
+    @Column(name = "rating", nullable = false)
+    private int rating;
+
+    @Column(name = "comment")
+    private String comment;
+
+    @Column(name = "review_date", nullable = false)
+    private LocalDateTime reviewDate;
+
+    // Constructor vacío requerido por JPA
+    public ReviewDTO() {}
+
+    // Constructor completo usado en el mapper
+    public ReviewDTO(
+        int reviewId,
+        String userId,
+        int rating,
+        String comment,
+        LocalDateTime reviewDate
+    ) {
         this.reviewId = reviewId;
+        this.userId = userId;
+
         this.rating = rating;
         this.comment = comment;
         this.reviewDate = reviewDate;
     }
+
 
 
     public int getReviewId() {
@@ -20,9 +51,14 @@ public class ReviewDTO {
     }
 
 
+    public String getUserId() {
+        return userId;
+    }
+
     public int getRating() {
         return rating;
     }
+
 
 
     public String getComment() {
@@ -30,8 +66,8 @@ public class ReviewDTO {
     }
 
 
-    public String getReviewDate() {
+    public LocalDateTime getReviewDate() {
         return reviewDate;
     }
-    
+
 }

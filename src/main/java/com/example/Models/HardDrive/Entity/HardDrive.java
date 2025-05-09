@@ -2,7 +2,8 @@ package com.example.Models.HardDrive.Entity;
 
 import com.example.Exceptions.BuildException;
 import com.example.Models.PhysicalData.Entity.PhysicalData;
-import com.example.Models.PlacaBase.Entity.Motherboard;
+
+import com.example.Models.Motherboard.Entity.Motherboard;
 import com.example.Models.Product.Entity.Product;
 import com.example.Operations.Checker;
 
@@ -18,11 +19,11 @@ public class HardDrive extends Product {
 
     protected HardDrive() throws BuildException {
     }
-
     public static HardDrive getInstance(String name, String description, double price, int stockQuantity,
-    double rating, String brand, String storageInterface, String typeOfStorage, int randomReading, 
-    int capacity, int writeSpeed, double formFactor, double high, double width, double length, double weight, 
-    boolean fragile) throws BuildException {
+    double rating, String brand, String storageInterface, boolean ssd,
+    int randomReading, int capacity, int writeSpeed, double formFactor,
+    double high, double width, double length, double weight, boolean fragile)
+    throws BuildException {
 
         String message = "";
 
@@ -246,4 +247,6 @@ public class HardDrive extends Product {
 
 
 
+
 }
+

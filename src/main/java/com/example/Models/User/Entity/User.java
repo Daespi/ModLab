@@ -4,8 +4,8 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.crypto.password.PasswordEncoder;
+// import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+// import org.springframework.security.crypto.password.PasswordEncoder;
 
 import com.example.Exceptions.BuildException;
 import com.example.Models.ShippingAddress.Entity.ShippingAddress;
@@ -87,6 +87,7 @@ public class User {
     public String getUserId() {
         return userId;
     }
+
     public String getUsername() {
         return username;
     }
@@ -144,9 +145,9 @@ public class User {
             return -1;
         if ((Checker.verifyPassword(passwordHash)) != 0)
             return -13;
-        PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
-        String hashedPassword = passwordEncoder.encode(passwordHash);
-        this.passwordHash = hashedPassword;
+        // PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+        // String hashedPassword = passwordEncoder.encode(passwordHash);
+        this.passwordHash = passwordHash;
         return 0;
     }
 
@@ -188,7 +189,7 @@ public class User {
         String city, String state, String country) throws BuildException{
 
         try{
-            shippingAddresses.add(ShippingAddress.getInstance(address, zipCode, city, state, country));
+            shippingAddresses.add(ShippingAddress.getInstance(this.userId, address, zipCode, city, state, country));
         } catch (BuildException ex){
             return ex.getMessage();
         }

@@ -1,19 +1,15 @@
 package com.example.Models.ShippingAddress.DTO;
 
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+
+
+
+import jakarta.persistence.*;
+
 
 @Entity
 @Table(name = "shipping_address", schema = "modlab")
 public class ShippingAddressDTO {
-
-
-
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -38,12 +34,21 @@ public class ShippingAddressDTO {
     @Column(name = "country", nullable = false)
     private String country;
 
+    // Constructor vacío requerido por JPA
     public ShippingAddressDTO() {}
 
-    public ShippingAddressDTO(int addressId, String address,
-                              String zipCode, String city, String state, String country) {
+    // Constructor completo usado en el mapper
+    public ShippingAddressDTO(
+        int addressId,
+        String userId,
+        String address,
+        String zipCode,
+        String city,
+        String state,
+        String country
+    ) {
         this.addressId = addressId;
-
+        this.userId = userId;
         this.address = address;
         this.zipCode = zipCode;
         this.city = city;
@@ -53,6 +58,11 @@ public class ShippingAddressDTO {
 
     public int getAddressId() {
         return addressId;
+    }
+
+
+    public String getUserId() {
+        return userId;
     }
 
     public String getAddress() {

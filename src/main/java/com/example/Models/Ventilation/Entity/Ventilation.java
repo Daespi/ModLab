@@ -3,7 +3,8 @@ package com.example.Models.Ventilation.Entity;
 import com.example.Exceptions.BuildException;
 import com.example.Models.PhysicalData.Entity.PhysicalData;
 import com.example.Models.Product.Entity.Product;
-import com.example.Models.RAM.Entity.Ram;
+
+import com.example.Models.Ram.Entity.Ram;
 import com.example.Operations.Checker;
 
 public class Ventilation extends Product{
@@ -278,8 +279,5 @@ public class Ventilation extends Product{
         return physicalData.getVolume();
     }
 
-
-
-
-
 }
+

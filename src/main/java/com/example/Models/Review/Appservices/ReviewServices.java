@@ -1,14 +1,18 @@
 package com.example.Models.Review.Appservices;
 
-import org.springframework.stereotype.Service;
 
 import com.example.Exceptions.ServiceException;
 
-@Service
 public interface ReviewServices {
-    public String getByIdToJson (int reviewId) throws ServiceException;
-    public String addFromJson (String comment) throws ServiceException;
-    public String updateOneFromJson(String comment) throws ServiceException;
-    public void deleteById(int reviewId) throws ServiceException;
+
+    String getByIdToJson(int reviewId) throws ServiceException;
+
+    String getByUserIdToJson(String userId) throws ServiceException;
+
+    String addFromJson(String reviewJson) throws ServiceException;
+
+    String updateOneFromJson(int reviewId, String reviewJson) throws ServiceException;
+
+    void deleteById(int reviewId) throws ServiceException;
 }
 

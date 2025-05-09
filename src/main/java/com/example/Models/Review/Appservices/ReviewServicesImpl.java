@@ -1,102 +1,97 @@
 package com.example.Models.Review.Appservices;
 
+
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
+import org.springframework.stereotype.Service;
+
 
 import com.example.Exceptions.BuildException;
 import com.example.Exceptions.ServiceException;
 import com.example.Models.Review.DTO.ReviewDTO;
-import com.example.Models.Review.Mapper.ReviewMapper;
-import com.example.Models.Review.Persistance.ReviewRepository;
+
+import com.example.Models.Review.Entity.Review;
+import com.example.Models.Review.MAPPERS.ReviewMapper;
+import com.example.Models.Review.Persistence.ReviewRepository;
+
 import com.example.sharedkernel.appservices.serializers.Serializer;
 import com.example.sharedkernel.appservices.serializers.Serializers;
 import com.example.sharedkernel.appservices.serializers.SerializersCatalog;
 
-@Controller
-public class ReviewServicesImpl implements ReviewServices{
+
+@Service
+public class ReviewServicesImpl implements ReviewServices {
 
     @Autowired
     private ReviewRepository reviewRepository;
-    private Serializer<ReviewDTO> serializer;
 
-    // ****** Implementing the business logic methods and common featues (clean code design) ******
+    private final Serializer<ReviewDTO> serializer = SerializersCatalog.getInstance(Serializers.REVIEW_JSON);
 
-    protected ReviewDTO getDTO(int id)  {
-        return reviewRepository.findById(id).orElse(null );
+    protected ReviewDTO getDTO(int reviewId) {
+        return reviewRepository.findById(reviewId).orElse(null);
     }
 
-
-    protected ReviewDTO getById(int id) throws ServiceException {
-        ReviewDTO bdto = this.getDTO(id);
-
-        if ( bdto == null ) {
-            throw new ServiceException("review " + id + " not found");
+    protected ReviewDTO getById(int reviewId) throws ServiceException {
+        ReviewDTO dto = this.getDTO(reviewId);
+        if (dto == null) {
+            throw new ServiceException("Review with ID " + reviewId + " not found");
         }
-        return bdto;
+        return dto;
     }
-    
-    
-    protected ReviewDTO checkInputData(String review) throws ServiceException {
+
+    protected ReviewDTO checkInputData(String json) throws ServiceException {
         try {
-            ReviewDTO bdto = (ReviewDTO) this.serializer.deserialize(review, ReviewDTO.class);
-            ReviewMapper.reviewFromDTO(bdto);
-            return bdto;
+            ReviewDTO dto = this.serializer.deserialize(json, ReviewDTO.class);
+            ReviewMapper.reviewFromDTO(dto); // Validación lógica
+            return dto;
         } catch (BuildException e) {
-            throw new ServiceException("error in the input book data: " + e.getMessage());
+            throw new ServiceException("Invalid review data: " + e.getMessage());
         }
     }
 
-
-    protected ReviewDTO newReview(String review) throws ServiceException {
-        ReviewDTO bdto = this.checkInputData(review);
-          
-        if (this.getDTO(bdto.getReviewId()) == null) {
-            return reviewRepository.save(bdto);
-        } 
-        throw new ServiceException("review " + bdto.getReviewId() + " already exists");
+    protected ReviewDTO newReview(String json) throws ServiceException {
+        ReviewDTO dto = this.checkInputData(json);
+        return reviewRepository.save(dto);
     }
 
-
-    protected ReviewDTO updateReview(String review) throws ServiceException {
-        try {
-            ReviewDTO bdto = this.checkInputData(review);
-            this.getById(bdto.getReviewId());
-            return reviewRepository.save(bdto);
-        } catch (ServiceException e) {
-            throw e;
-        }
-    }
-
-
-
-    // ****** Implementing the interface methods ******
-
-    @Override
-    public String getByIdToJson(int id) throws ServiceException {
-        return SerializersCatalog.getInstance(Serializers.REVIEW_JSON)
-                .serialize(this.getById(id));
-    }
-
-    
-    @Override
-    public String addFromJson(String review) throws ServiceException {
-        this.serializer = SerializersCatalog.getInstance(Serializers.REVIEW_JSON);
-        return serializer.serialize(this.newReview(review));
+    protected ReviewDTO updateReview(int reviewId, String json) throws ServiceException {
+        this.getById(reviewId);
+        ReviewDTO dto = this.checkInputData(json);
+        return reviewRepository.save(new ReviewDTO(
+            reviewId,
+            dto.getUserId(),
+            dto.getRating(),
+            dto.getComment(),
+            dto.getReviewDate()
+        ));
     }
 
     @Override
-    public String updateOneFromJson(String review) throws ServiceException {
-        this.serializer = SerializersCatalog.getInstance(Serializers.REVIEW_JSON);
-        return serializer.serialize(this.updateReview(review));
+    public String getByIdToJson(int reviewId) throws ServiceException {
+        return serializer.serialize(this.getById(reviewId));
     }
 
     @Override
-    public void deleteById(int id) throws ServiceException {
-        try {
-            this.getById(id);
-            reviewRepository.deleteById(id);
-        } catch (ServiceException e) {
-            throw e;
-        }
+    public String getByUserIdToJson(String userId) throws ServiceException {
+        List<ReviewDTO> reviews = reviewRepository.findByUserId(userId);
+        return serializer.serializeList(reviews);
     }
-}
+
+    @Override
+    public String addFromJson(String reviewJson) throws ServiceException {
+        return serializer.serialize(this.newReview(reviewJson));
+    }
+
+    @Override
+    public String updateOneFromJson(int reviewId, String reviewJson) throws ServiceException {
+        return serializer.serialize(this.updateReview(reviewId, reviewJson));
+    }
+
+    @Override
+    public void deleteById(int reviewId) throws ServiceException {
+        this.getById(reviewId); // Lanza excepción si no existe
+        reviewRepository.deleteById(reviewId);
+    }
+} 
+

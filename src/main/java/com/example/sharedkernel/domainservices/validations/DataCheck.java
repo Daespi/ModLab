@@ -33,12 +33,10 @@ public class DataCheck {
         return 0;
     }
 
-
     /**
      * Verifica que una cadena no sea nula y tenga longitud mínima.
      */
     public static int checkString(String s, int min) {
-
         if (s == null || s.trim().length() < min) {
             return -1;
         }
@@ -51,12 +49,12 @@ public class DataCheck {
      */
     public static int checkNumber(int value, int min) {
 
+
         if (value < min) {
             return -1;
         }
         return 0;
     }
-
     /**
      * Verifica que un número decimal sea igual o mayor al mínimo.
      */
@@ -99,6 +97,5 @@ public class DataCheck {
         } catch (Exception e) {
             throw new GeneralDateTimeException("Error inesperado al procesar la fecha: " + e);
         }
-
     }
 }

@@ -3,14 +3,7 @@ package com.example.presentation.api.rest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import com.example.Exceptions.ServiceException;
 import com.example.Models.ShippingAddress.Appservices.ShippingAddressServices;
@@ -52,15 +45,19 @@ public class RestShippingAddressController {
      * PUT - Actualizar dirección existente
      */
     @PutMapping(value = "/{addressId}", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<String> updateAddressFromJson(@PathVariable int addressId,
-                                                        @RequestBody String addressJson) {
+    public ResponseEntity<String> updateAddressFromJson(
+            @PathVariable int addressId,
+            @RequestBody String addressJson) {
         try {
-            String json = shippingAddressServices.updateOneFromJson(addressJson);
-            return ResponseEntity.ok(json);
+            String updatedJson = shippingAddressServices.updateOneFromJsonWithId(addressId, addressJson);
+            return ResponseEntity.ok(updatedJson);
         } catch (ServiceException e) {
-            return ResponseEntity.badRequest().body(e.getMessage());
+            return ResponseEntity.badRequest().body("{\"error\": \"" + e.getMessage() + "\"}");
         }
     }
+    
+
+    
 
     /**
      * DELETE - Eliminar dirección por ID
