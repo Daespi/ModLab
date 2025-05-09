@@ -3,6 +3,7 @@ package com.example.sharedkernel.appservices.serializers;
 public enum Serializers {
     USER_JSON,
     SHIPPINGADDRESS_JSON, 
+    PRODUCT_JSON,
     REVIEW_JSON,
     CPU_JSON,
     GraphicCard_JSON,
@@ -11,7 +12,7 @@ public enum Serializers {
     PowerSupply_JSON,
     Ram_JSON,
     Tower_JSON,
-    Ventilation_JSON
+    Ventilation_JSON, 
 
 }
 
