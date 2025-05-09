@@ -160,9 +160,9 @@ public class ShippingAddress {
         if (Checker.isNull(country) != 0) {
             return -1;
         }
-        if (Checker.verifyCountry(country) != 0) {
+        /*if (Checker.verifyCountry(country) != 0) {
             return -20;
-        }
+        }*/
         this.country = country;
         return 0;
     }
