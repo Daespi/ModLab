@@ -3,6 +3,8 @@ package com.example.Models.User.Persistence;
 import java.util.List;
 import java.util.Optional;
 
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import com.example.Models.User.DTO.UserDTO;
@@ -11,6 +13,10 @@ import com.example.Models.User.DTO.UserDTO;
 public interface UserRepository {
 
     Optional<UserDTO> findById(String userId);
+
+    @Query("SELECT u FROM UserDTO u WHERE u.email = :email")
+    UserDTO findUserByEmail(@Param("email") String email);
+
 
     List<UserDTO> findByUsername(String username);
 
@@ -22,4 +28,3 @@ public interface UserRepository {
 
     void deleteById(String userId);
 }
-

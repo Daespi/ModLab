@@ -7,7 +7,6 @@ import com.example.Models.ShippingAddress.Entity.ShippingAddress;
 public class ShippingAddressMapper {
 
     public static ShippingAddress addressFromDTO(ShippingAddressDTO dto) throws BuildException {
-
         return ShippingAddress.getInstance(
             dto.getAddressId(),
             dto.getUserId(),
@@ -21,7 +20,6 @@ public class ShippingAddressMapper {
 
     public static ShippingAddressDTO dtoFromAddress(ShippingAddress address, String userId) {
         return new ShippingAddressDTO(
-
             address.getAddressId(),
             userId,
             address.getAddress(),

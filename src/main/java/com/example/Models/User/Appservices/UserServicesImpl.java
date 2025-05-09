@@ -1,11 +1,13 @@
 package com.example.Models.User.Appservices;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 
 import com.example.Exceptions.BuildException;
 import com.example.Exceptions.ServiceException;
 import com.example.Models.User.DTO.UserDTO;
+import com.example.Models.User.Entity.User;
 import com.example.Models.User.MAPPER.UserMapper;
 import com.example.Models.User.Persistence.UserRepository;
 import com.example.sharedkernel.appservices.serializers.Serializer;
@@ -20,6 +22,9 @@ public class UserServicesImpl implements UserServices {
 
     @Autowired
     private UserRepository userRepository;
+
+    @Autowired
+    private PasswordEncoder passwordEncoder;
 
     private Serializer<UserDTO> serializer;
 
@@ -74,6 +79,27 @@ public class UserServicesImpl implements UserServices {
         this.getById(dto.getUserId());
         return userRepository.save(dto);
     }
+
+    public String login(String email, String password) throws ServiceException {
+        UserDTO userDTO = userRepository.findUserByEmail(email);
+    
+        if (userDTO != null && passwordEncoder.matches(password, userDTO.getPasswordHash())) {
+            return "Login exitoso";
+        }
+        
+        throw new ServiceException("Credenciales incorrectas" + password);
+    }
+
+    public UserDTO getUserByEmail(String email) throws ServiceException {
+        UserDTO userDTO = userRepository.findUserByEmail(email);
+        if (userDTO == null) {
+            throw new ServiceException("User with email " + email + " not found");
+        }
+        return userDTO;
+    }
+    
+    
+    
 
     @Override
     public String getByIdToJson(String userId) throws ServiceException {

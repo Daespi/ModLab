@@ -144,5 +144,5 @@ public class UserDTO {
                 ", username=" + username + ", passwordHash=" + passwordHash + ", email=" + email +
                 ", phone=" + phone + ", createdAt=" + getCreatedAt() + ", role=" + role + "]";
     }
-
 }
+

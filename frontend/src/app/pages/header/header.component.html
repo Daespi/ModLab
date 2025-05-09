@@ -1,0 +1,66 @@
+<div *ngIf="!isLoginOrRegister()" class="navegation-bar">
+    <div class="navegation-bar-wrapper">
+        <div class="navegation-bar-logo">
+            <a href="/home">
+                <img class="navegation-nav-logo" src="../../../assets/img/Logo-ModLab.svg" alt="Logo ModLab">
+            </a>
+        </div>
+
+        <div class="navegation-bar-menu">
+            <a class="navegation-bar-menu-item" href="">Categorias</a>
+            <a class="navegation-bar-menu-item" href="">PC Custom</a>
+        </div>
+
+        <div class="navegation-bar-search">
+            <div class="bar-search">
+                <input placeholder="Escribe lo que busques..." class="navegation-bar-search-input" type="text">
+                <button class="navegation-bar-search-button">
+                    <img class="navegation-bar-search-icon" src="../../../assets/img/Lupa.svg" alt="">
+                </button>
+            </div>
+        </div>
+
+        <div class="navegation-bar-user">
+            <a class="navegation-bar-icon">
+                <img class="navegation-bag-icon" src="../../../assets/img/Compra.svg" alt="">
+            </a>
+
+            <!-- Mostrar el perfil o el login según el estado de inicio de sesión -->
+            <div *ngIf="isLoggedIn$ | async" class="user-profile-container">
+                <a href="" class="navegation-bar-icon">
+                    <p class="navegation-bar-username">{{ username$ }}</p>
+                </a>
+                <!-- Menú desplegable si el usuario está logueado -->
+                <div class="dropdown-menu">
+                    <a href="/profile">Mi perfil</a>
+                    <a (click)="logout()">Cerrar sesión</a>
+                </div>
+            </div>
+            
+            <div *ngIf="!(isLoggedIn$ | async)" class="user-profile-container">
+                <a href="" class="navegation-bar-icon">
+                    <img class="navegation-user-icon" src="../../../assets/img/Profile.svg" alt="">
+                </a>
+                <!-- Menú desplegable si el usuario no está logueado -->
+                <div class="dropdown-menu">
+                    <a href="/login">Iniciar sesión</a>
+                    <a href="/register">Registrarse</a>
+                </div>
+            </div>
+            
+        </div>
+    </div>
+</div>
+
+<!-- Espacio para la página de login y registro -->
+<div *ngIf="isLoginOrRegister()" class="space-register-and-login-div">
+    <div class="login-and-register-logo">
+        <a class="space-register-and-login-completo" href="/home">
+            <img class="space-register-and-login" src="../../../assets/img/Logo-completo.svg" alt="Logo completo ModLab">
+        </a>
+    </div>
+
+    <div class="login-and-register-volver-atras-container">
+        <a (click)="goBack()" class="volver-atras">← Volver</a>
+    </div>
+</div>

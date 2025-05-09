@@ -1,6 +1,9 @@
 package com.example.presentation.api.rest;
 
+import java.util.Map;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -14,16 +17,17 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.example.Exceptions.ServiceException;
 import com.example.Models.User.Appservices.UserServices;
-<<<<<<< HEAD
-
-=======
->>>>>>> 6724d2cce0b93a4f72da5a75b37fc63087426ee0
+import com.example.Models.User.Appservices.UserServicesImpl;
+import com.example.Models.User.DTO.UserDTO;
 @RestController
 @RequestMapping("/modlab/User")
 public class RestUserController {
 
     @Autowired
     private UserServices userServices;
+
+    @Autowired
+    private UserServicesImpl userServicesImpl;
 
     /**
      * GET - Obtener un usuario por ID (devuelve JSON)
@@ -83,9 +87,30 @@ public class RestUserController {
             return ResponseEntity.badRequest().body(e.getMessage());
         }
     }
-<<<<<<< HEAD
+
+
+
+
+
+    @PostMapping("/login")
+public ResponseEntity<String> login(@RequestBody Map<String, String> credentials) {
+    String email = credentials.get("email");
+    String password = credentials.get("password");
+
+    try {
+        userServicesImpl.login(email, password);
+        return ResponseEntity.status(HttpStatus.OK).body("{\"message\": \"Login exitoso\"}");
+    } catch (ServiceException e) {
+        return ResponseEntity.status(401).body("Credenciales incorrectas:" + e.getMessage());
+    }
 }
 
-=======
+// Endpoint para obtener un usuario por su email
+@GetMapping("/email/{email}")
+public UserDTO getUserByEmail(@PathVariable String email) throws ServiceException {
+    return userServicesImpl.getUserByEmail(email);
 }
->>>>>>> 6724d2cce0b93a4f72da5a75b37fc63087426ee0
+
+    
+
+}

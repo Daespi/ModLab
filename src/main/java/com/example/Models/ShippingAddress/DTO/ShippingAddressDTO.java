@@ -1,11 +1,7 @@
 package com.example.Models.ShippingAddress.DTO;
 
 
-
-
-
 import jakarta.persistence.*;
-
 
 @Entity
 @Table(name = "shipping_address", schema = "modlab")
@@ -59,7 +55,6 @@ public class ShippingAddressDTO {
     public int getAddressId() {
         return addressId;
     }
-
 
     public String getUserId() {
         return userId;
