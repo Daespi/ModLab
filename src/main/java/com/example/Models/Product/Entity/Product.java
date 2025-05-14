@@ -3,6 +3,7 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Set;
+
 import java.util.UUID;
 
 import com.example.Exceptions.BuildException;
@@ -20,12 +21,15 @@ public abstract class Product {
     protected String brand;
     protected ArrayList<Review> reviews = new ArrayList<>();
 
+
     protected Product() throws BuildException {
         checkData(name, description, price, stockQuantity, rating, brand);
     }
+
     
     protected void checkData(String name, String description, double price, int stockQuantity,
                              double rating, String brand) throws BuildException {
+
         String message = "";
     
         this.productId = UUID.randomUUID().toString().replace("-", "").substring(0, 32);
@@ -49,7 +53,7 @@ public abstract class Product {
         if (resultStockQuantity != 0) {
             message += "El stock de este producto no es correcto porque " + Checker.getErrorMessage(resultStockQuantity, 0, 100);
         }
-    
+
         int resultRating = setRating(rating);
         if (resultRating != 0) {
             message += "La valoración de este producto no es correcta porque " + Checker.getErrorMessage(resultRating, 0.00, 5.00);
@@ -129,6 +133,7 @@ public abstract class Product {
         return 0;
     }
 
+
     public String getImageUrl() {
         return String.join(",", imageUrl); // Une todas las URLs separadas por comas
     }
@@ -154,8 +159,24 @@ public abstract class Product {
         return 0;
     }
 
+
+
+
     public ArrayList<Review> getReviews() {
         return reviews;
+    }
+
+
+    public String setReviews(int rating, String comment, LocalDateTime reviewDate) throws BuildException{
+
+        try{
+            reviews.add(Review.getInstance(rating, comment, reviewDate));
+        } catch (BuildException ex){
+            return ex.getMessage();
+        }
+        
+        return ""; 
+        
     }
 
     public void addReview(Review review) {

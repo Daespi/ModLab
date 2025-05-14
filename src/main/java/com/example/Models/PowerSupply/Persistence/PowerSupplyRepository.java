@@ -1,22 +1,22 @@
-package com.example.Models.PowerSupply.Persistence;
+// package com.example.Models.PowerSupply.Persistence;
 
-import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.stereotype.Repository;
-import com.example.Models.PowerSupply.DTO.PowerSupplyDTO;
+// import org.springframework.data.jpa.repository.JpaRepository;
+// import org.springframework.stereotype.Repository;
+// import com.example.Models.PowerSupply.DTO.PowerSupplyDTO;
 
-import java.util.List;
-import java.util.Optional;
+// import java.util.List;
+// import java.util.Optional;
 
-@Repository
-public interface PowerSupplyRepository extends JpaRepository<PowerSupplyDTO, String> {
+// @Repository
+// public interface PowerSupplyRepository extends JpaRepository<PowerSupplyDTO, String> {
 
-    Optional<PowerSupplyDTO> findByProductId(String productId);
+//     Optional<PowerSupplyDTO> findByProductId(String productId);
 
-    List<PowerSupplyDTO> findByName(String name);
+//     List<PowerSupplyDTO> findByName(String name);
 
-    List<PowerSupplyDTO> findByNameContaining(String partialName);
+//     List<PowerSupplyDTO> findByNameContaining(String partialName);
 
-    Integer countByDescriptionContaining(String text);
+//     Integer countByDescriptionContaining(String text);
 
-    List<PowerSupplyDTO> findByBrand(String brand);
-}
+//     List<PowerSupplyDTO> findByBrand(String brand);
+// }

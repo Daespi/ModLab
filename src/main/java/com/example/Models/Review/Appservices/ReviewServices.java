@@ -1,5 +1,6 @@
 package com.example.Models.Review.Appservices;
 
+
 import com.example.Exceptions.ServiceException;
 
 public interface ReviewServices {
@@ -14,3 +15,4 @@ public interface ReviewServices {
 
     void deleteById(int reviewId) throws ServiceException;
 }
+

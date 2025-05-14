@@ -7,7 +7,7 @@ import com.example.Operations.Checker;
 
 public class PhysicalData {
 
-     private Double high, width, length, weight;
+     private double high, width, length, weight;
     private boolean fragile;
     
     
@@ -15,28 +15,28 @@ public class PhysicalData {
     public PhysicalData(){};
 
     // Constructor
-    public static PhysicalData getInstance(Double high, Double width, Double length, Double weight, boolean fragile) throws BuildException {
+    public static PhysicalData getInstance(double high, double width, double length, double weight, boolean fragile) throws BuildException {
         String message = "";
         PhysicalData p = new PhysicalData();
 
         int resultHigh = p.setHigh(high);
         if (resultHigh != 0) {
-            message += "High no es correcto porque" + Checker.getErrorMessage(resultHigh, 0, 1.20);
+            message += "Este alto no es correcto porque" + Checker.getErrorMessage(resultHigh, 0, 1.20);
         }
 
         int resultWidth = p.setWidth(width);
         if (resultWidth != 0) {
-            message += "Width no es correcto porque" + Checker.getErrorMessage(resultWidth, 0, 1.20);
+            message += "Este ancho no es correcto porque" + Checker.getErrorMessage(resultWidth, 0, 1.20);
         }
 
         int resultLength = p.setLength(length);
         if (resultLength != 0) {
-            message += "Length no es correcto porque" + Checker.getErrorMessage(resultLength, 0, 1.20);
+            message += "Este largo no es correcto porque" + Checker.getErrorMessage(resultLength, 0, 1.20);
         }
 
         int resultWeight = p.setWeight(weight);
         if (resultWeight != 0) {
-            message += "Weight no es correcto porque" + Checker.getErrorMessage(resultWeight, 0, 35.00);
+            message += "Este peso no es correcto porque" + Checker.getErrorMessage(resultWeight, 0, 35.00);
         }
 
         p.setFragile(fragile);
@@ -50,19 +50,19 @@ public class PhysicalData {
     }
 
     // Getters
-    public Double getHigh() {
+    public double getHigh() {
         return this.high;
     }
 
-    public Double getWidth() {
+    public double getWidth() {
         return this.width;
     }
 
-    public Double getLength() {
+    public double getLength() {
         return this.length;
     }
 
-    public Double getWeight() {
+    public double getWeight() {
         return this.weight;
     }
 
@@ -71,7 +71,7 @@ public class PhysicalData {
     }
 
     // Setters with simple validations
-    public int setHigh(Double high) {
+    public int setHigh(double high) {
  
         if (Checker.nonZero(high) != 0) {
             return -3;
@@ -81,7 +81,7 @@ public class PhysicalData {
             return -4;
         }
 
-        if (Checker.maxValue(high, 35.00) != 0) {
+        if (Checker.maxValue(high, 1.00) != 0) {
             return -5;
         }
 
@@ -89,7 +89,7 @@ public class PhysicalData {
         return 0;
     }
 
-    public int setWidth(Double width) {
+    public int setWidth(double width) {
 
         if (Checker.nonZero(width) != 0) {
             return -3;
@@ -107,7 +107,7 @@ public class PhysicalData {
         return 0;
     }
 
-    public int setLength(Double length) {
+    public int setLength(double length) {
 
         if (Checker.nonZero(length) != 0) {
             return -3;
@@ -121,11 +121,12 @@ public class PhysicalData {
             return -5;
         }
 
+
         this.length = length;
         return 0;
     }
 
-    public int setWeight(Double weight) {
+    public int setWeight(double weight) {
         
         if (Checker.nonZero(weight) != 0) {
             return -3;

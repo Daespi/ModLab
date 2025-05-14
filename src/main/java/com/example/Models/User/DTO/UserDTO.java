@@ -43,20 +43,20 @@ public class UserDTO {
     @Column(name = "role", nullable = false)
     private boolean role;
 
-    public UserDTO() {}
+    public UserDTO() {
+    }
 
     @JsonCreator
     public UserDTO(
-        @JsonProperty("userId") String userId,
-        @JsonProperty("firstName") String firstName,
-        @JsonProperty("lastName") String lastName,
-        @JsonProperty("username") String username,
-        @JsonProperty("passwordHash") String passwordHash,
-        @JsonProperty("email") String email,
-        @JsonProperty("phone") String phone,
-        @JsonProperty("createdAt") LocalDateTime createdAt,
-        @JsonProperty("role") boolean role
-    ) {
+            @JsonProperty("userId") String userId,
+            @JsonProperty("firstName") String firstName,
+            @JsonProperty("lastName") String lastName,
+            @JsonProperty("username") String username,
+            @JsonProperty("passwordHash") String passwordHash,
+            @JsonProperty("email") String email,
+            @JsonProperty("phone") String phone,
+            @JsonProperty("createdAt") LocalDateTime createdAt,
+            @JsonProperty("role") boolean role) {
         this.userId = userId;
         this.firstName = firstName;
         this.lastName = lastName;
@@ -68,31 +68,66 @@ public class UserDTO {
         this.role = role;
     }
 
-    public String getUserId() { return userId; }
-    public void setUserId(String userId) { this.userId = userId; }
+    public String getUserId() {
+        return userId;
+    }
 
-    public String getFirstName() { return firstName; }
-    public void setFirstName(String firstName) { this.firstName = firstName; }
+    public void setUserId(String userId) {
+        this.userId = userId;
+    }
 
-    public String getLastName() { return lastName; }
-    public void setLastName(String lastName) { this.lastName = lastName; }
+    public String getFirstName() {
+        return firstName;
+    }
 
-    public String getUsername() { return username; }
-    public void setUsername(String username) { this.username = username; }
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
 
-    public String getPasswordHash() { return passwordHash; }
-    public void setPasswordHash(String passwordHash) { this.passwordHash = passwordHash; }
+    public String getLastName() {
+        return lastName;
+    }
 
-    public String getEmail() { return email; }
-    public void setEmail(String email) { this.email = email; }
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
+    }
 
-    public String getPhone() { return phone; }
-    public void setPhone(String phone) { this.phone = phone; }
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public String getPasswordHash() {
+        return passwordHash;
+    }
+
+    public void setPasswordHash(String passwordHash) {
+        this.passwordHash = passwordHash;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getPhone() {
+        return phone;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
+    }
 
     public String getCreatedAt() {
         return createdAt != null
-            ? createdAt.format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"))
-            : null;
+                ? createdAt.format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"))
+                : null;
     }
 
     public void setCreatedAt(LocalDateTime createdAt) {
@@ -110,3 +145,4 @@ public class UserDTO {
                 ", phone=" + phone + ", createdAt=" + getCreatedAt() + ", role=" + role + "]";
     }
 }
+

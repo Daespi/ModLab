@@ -6,6 +6,8 @@ import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
 import com.example.Exceptions.GeneralDateTimeException;
+
+
 public class DataCheck {
 
     /**
@@ -18,6 +20,7 @@ public class DataCheck {
         }
         return 0;
     }
+
 
     /**
      * Verifica que el email no sea nulo y tenga más de 20 caracteres.
@@ -40,10 +43,12 @@ public class DataCheck {
         return 0;
     }
 
+
     /**
      * Verifica que un número entero sea igual o mayor al mínimo.
      */
     public static int checkNumber(int value, int min) {
+
 
         if (value < min) {
             return -1;

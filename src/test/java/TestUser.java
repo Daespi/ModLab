@@ -10,6 +10,7 @@
 // public class TestUser {
 //     private User ash;
     
+
 //     @BeforeAll
 //     void createUser (){
 //         try{
@@ -19,6 +20,7 @@
 //             ex.getMessage();
 //         }
 //     }
+
 
 //     @Test
 //     void testUsernameValid (){
@@ -134,6 +136,7 @@
 //         int result = ash.setPasswordHash("     ");
 //         assertEquals(-1, result);
 //     }
+
 
 //     @Test
 

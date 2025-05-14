@@ -28,6 +28,7 @@ public class JacksonSerializer<T> implements Serializer<T> {
         }
     }
 
+
     @Override
     public String serializeList(List<T> list) throws ServiceException {
         try {

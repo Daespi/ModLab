@@ -1,5 +1,5 @@
-import java.util.ArrayList;
 
+<<<<<<< HEAD
 import com.example.Exceptions.BuildException;
 import com.example.Models.User.ShippingAddress;
 import com.example.Models.User.User;
@@ -11,28 +11,42 @@ public class TestUserCreation {
                  "Ash", "Ash", "Grau Ayala", "Abcd134?", 
                 "ashgraunuriacefp@gmail.com", "648293958", "21-03-2025 16:12:00", false
             );
+=======
+// import java.util.ArrayList;
 
-            System.out.println(ash.toString());
+// import com.example.Exceptions.BuildException;
+// import com.example.Models.ShippingAddress.Entity.ShippingAddress;
 
-            String address = "Ronda de Valencia 15";
-            String zipCode = "08014";
-            String city = "Barcelona";
-            String state = "Catalunya";
-            String country = "España";
-            ArrayList<ShippingAddress> AddressList = new ArrayList<>();
-            String respuesta = ash.setShippingAddresses(address, zipCode, city, state, country);
-            AddressList.addAll(ash.getShippingAddresses());
-            System.out.println("Shipping address set response: " + respuesta);
-            System.out.println("Direcciones de envío: " + ash.getShippingAddresses());
+// import com.example.Models.User.Entity.User;
+>>>>>>> origin/dev_ash
 
-            System.out.println(ash.toString());
+// public class testUserCreation {
+//     public static void main(String[] args) {
+//         try {
+//             User ash = User.getInstance(
+//                  "Ash", "Ash", "Grau Ayala", "Abcd134?", 
+//                 "ashgraunuriacefp@gmail.com", "648293958", false
+//             );
 
-        } catch (BuildException ex) {
-            System.out.println( ex.getMessage());
-        }
+//             System.out.println(ash.toString());
 
-        try {
+//             String address = "Ronda de Valencia 15";
+//             String zipCode = "08014";
+//             String city = "Barcelona";
+//             String state = "Catalunya";
+//             String country = "España";
+//             ArrayList<ShippingAddress> AddressList = new ArrayList<>();
+//             String respuesta = ash.setShippingAddresses(address, zipCode, city, state, country);
+//             AddressList.addAll(ash.getShippingAddresses());
+//             System.out.println("Shipping address set response: " + respuesta);
+//             System.out.println("Direcciones de envío: " + ash.getShippingAddresses());
 
+//             System.out.println(ash.toString());
+
+//         } catch (BuildException ex) {
+//             System.out.println( ex.getMessage());
+
+<<<<<<< HEAD
         User alex = User.getInstance("Galsaan", "Alex", "Salas Galán", "!Alumnes2024", 
         "alexsalas.nuria@gmail.com", "606665432", "01-04-2025 16:12:53", true);
 
@@ -43,3 +57,20 @@ public class TestUserCreation {
     }
     }
 }
+=======
+//         }
+
+//         try {
+
+//         User alex = User.getInstance("Galsaan", "Alex", "Salas Galán", "!Alumnes2024", 
+//         "alexsalas.nuria@gmail.com", "606665432", true);
+
+//         System.out.println(alex.toString());
+
+//     }
+//     catch (BuildException ex) {
+//         System.out.println( ex.getMessage());
+//     }
+//     }
+// }
+>>>>>>> origin/dev_ash

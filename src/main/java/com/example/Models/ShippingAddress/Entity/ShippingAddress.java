@@ -163,6 +163,7 @@ public class ShippingAddress {
         if (Checker.verifyCountry(country) != 0) {
             return -20;
         }
+
         this.country = country;
         return 0;
     }
@@ -174,3 +175,4 @@ public class ShippingAddress {
                ", city=" + city + ", state=" + state + ", country=" + country + "]";
     }
 }
+

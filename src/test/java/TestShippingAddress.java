@@ -21,6 +21,7 @@
 //         assertEquals(0, result);
 //     }
     
+
 //     @Test
 //     void invalidAddressWithSpecialChar(){
 //         int result = Checker.verifyAddress("Calle 1 @ ");
@@ -43,6 +44,7 @@
 //         int result = Checker.verifyAddress("Calle Del Españolisimo Español de España grande de Imperio Español ESPAÑOL");
 //         assertEquals(0, result);
 //     }
+
 
 //     @Test
 
@@ -121,7 +123,10 @@
 
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 
+=======
+>>>>>>> origin/dev_ash
 //     @Test
 //     void tryAddress(){
 //         try{
@@ -134,7 +139,11 @@
 //     }
 
 // }
+<<<<<<< HEAD
 =======
 }
 >>>>>>> origin/dev_alex
+=======
+
+>>>>>>> origin/dev_ash
 

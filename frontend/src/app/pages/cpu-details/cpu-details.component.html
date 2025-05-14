@@ -1,0 +1,13 @@
+<div *ngIf="isLoading">Cargando detalles...</div>
+<div *ngIf="error">{{ error }}</div>
+
+<div *ngIf="!isLoading && cpu">
+    <h2>{{ cpu?.name }}</h2>
+    <p>Marca: {{ cpu?.brand }}</p>
+    <p>Modelo: {{ cpu?.model }}</p>
+    <p>Frecuencia: {{ cpu?.frecuency }} GHz</p>
+    <p>Núcleos: {{ cpu?.processorCore }}</p>
+    <p>Hilos: {{ cpu?.numberThreads }}</p>
+    <p>Socket: {{ cpu?.socket }}</p>
+    <p>Precio: {{ cpu?.price }}€</p>
+</div>

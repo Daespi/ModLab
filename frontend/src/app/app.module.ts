@@ -10,6 +10,12 @@ import { HeaderComponent } from './pages/header/header.component';
 import { FooterComponent } from './pages/footer/footer.component';
 import { AddAddressComponent } from './pages/add-address/add-address.component';
 import { ShippingAddressComponent } from './pages/shipping-address/shipping-address.component';
+import { CpuComponent } from './pages/cpu/cpu.component';
+import { CpuDetailComponent } from './pages/cpu-details/cpu-details.component';
+import { CpuListComponent } from './pages/cpu-list/cpu-list.component';
+import { RouterModule } from '@angular/router'; // 👈 Necesario para routerLink
+import { CommonModule } from '@angular/common';
+
 
 
 @NgModule({
@@ -22,11 +28,15 @@ import { ShippingAddressComponent } from './pages/shipping-address/shipping-addr
     FooterComponent,
     ShippingAddressComponent,
     AddAddressComponent,
+    CpuComponent,
+    CpuDetailComponent,
+    CpuListComponent
   ],
   imports: [
     BrowserModule,
     FormsModule,
     AppRoutingModule,
+    CommonModule
  // <-- ¡Aquí!
   ],
   providers: [],

@@ -1,27 +1,27 @@
-package com.example.infrastruture.persistence.jpa;
+// package com.example.infrastruture.persistence.jpa;
 
-import java.util.List;
-import java.util.Optional;
+// import java.util.List;
+// import java.util.Optional;
 
-import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.stereotype.Repository;
+// import org.springframework.data.jpa.repository.JpaRepository;
+// import org.springframework.stereotype.Repository;
 
-import com.example.Models.Ventilation.DTO.VentilationDTO;
+// import com.example.Models.Ventilation.DTO.VentilationDTO;
 
-import jakarta.transaction.Transactional;
+// import jakarta.transaction.Transactional;
 
-@Repository
-public interface JpaVentilationRepository extends JpaRepository<VentilationDTO, String> {
+// @Repository
+// public interface JpaVentilationRepository extends JpaRepository<VentilationDTO, String> {
 
-    Optional<VentilationDTO> findByProductId(String productId);
+//     Optional<VentilationDTO> findByProductId(String productId);
 
-    List<VentilationDTO> findByBrand(String brand);
+//     List<VentilationDTO> findByBrand(String brand);
 
-    List<VentilationDTO> findByNameContaining(String partialName);
+//     List<VentilationDTO> findByNameContaining(String partialName);
 
-    @Transactional
-    VentilationDTO save(VentilationDTO ventilation);
+//     @Transactional
+//     VentilationDTO save(VentilationDTO ventilation);
 
-    @Transactional
-    void deleteByProductId(String productId);
-}
+//     @Transactional
+//     void deleteByProductId(String productId);
+// }

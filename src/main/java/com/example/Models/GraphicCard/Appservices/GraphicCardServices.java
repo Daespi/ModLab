@@ -1,14 +1,14 @@
-package com.example.Models.GraphicCard.Appservices;
+// package com.example.Models.GraphicCard.Appservices;
 
-import com.example.Exceptions.ServiceException;
+// import com.example.Exceptions.ServiceException;
 
-public interface GraphicCardServices {
+// public interface GraphicCardServices {
 
-    String getByIdToJson(String productId) throws ServiceException;
+//     String getByIdToJson(String productId) throws ServiceException;
 
-    String addFromJson(String graphicCardJson) throws ServiceException;
+//     String addFromJson(String graphicCardJson) throws ServiceException;
 
-    String updateOneFromJson(String productId, String graphicCardJson) throws ServiceException;
+//     String updateOneFromJson(String productId, String graphicCardJson) throws ServiceException;
 
-    void deleteById(String productId) throws ServiceException;
-}
+//     void deleteById(String productId) throws ServiceException;
+// }

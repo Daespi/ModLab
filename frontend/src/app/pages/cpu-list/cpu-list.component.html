@@ -1,0 +1,11 @@
+<p *ngIf="isLoading">Cargando...</p>
+<p *ngIf="error">{{ error }}</p>
+
+<div *ngIf="!isLoading && !error">
+    <p>Total de CPUs: {{ cpus.length }}</p>
+    <ul>
+        <li *ngFor="let cpu of cpus">{{ cpu.name }}</li>
+    </ul>
+
+    <p *ngIf="cpus.length === 0">No se encontraron CPUs.</p>
+</div>

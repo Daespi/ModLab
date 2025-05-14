@@ -1,3 +1,4 @@
+
 package com.example.infrastruture.persistence.jpa;
 
 import java.util.List;
@@ -10,6 +11,7 @@ import com.example.Models.ShippingAddress.DTO.ShippingAddressDTO;
 import com.example.Models.ShippingAddress.Persistence.ShippingAddressRepository;
 
 @Repository
+
 public interface JpaShippingAddressRepository extends JpaRepository<ShippingAddressDTO, Integer>, ShippingAddressRepository
  {
 
@@ -21,5 +23,3 @@ public interface JpaShippingAddressRepository extends JpaRepository<ShippingAddr
     @Query("SELECT count(c) FROM ShippingAddressDTO c WHERE c.address LIKE %:address%")
     Integer countByPartialAddress(String address);
 }
-
-

@@ -13,6 +13,7 @@ public class Review {
     protected String comment;
     protected LocalDateTime reviewDate;
 
+
     public Review() {
         this.reviewDate = LocalDateTime.now();
     }

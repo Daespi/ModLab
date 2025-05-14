@@ -1,5 +1,6 @@
 package com.example.Models.Review.DTO;
 
+
 import jakarta.persistence.*;
 import java.time.LocalDateTime;
 
@@ -37,14 +38,18 @@ public class ReviewDTO {
     ) {
         this.reviewId = reviewId;
         this.userId = userId;
+
         this.rating = rating;
         this.comment = comment;
         this.reviewDate = reviewDate;
     }
 
+
+
     public int getReviewId() {
         return reviewId;
     }
+
 
     public String getUserId() {
         return userId;
@@ -54,11 +59,15 @@ public class ReviewDTO {
         return rating;
     }
 
+
+
     public String getComment() {
         return comment;
     }
 
+
     public LocalDateTime getReviewDate() {
         return reviewDate;
     }
+
 }

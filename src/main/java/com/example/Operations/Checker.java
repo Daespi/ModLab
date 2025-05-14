@@ -289,6 +289,7 @@ public class Checker {
             return 0;
         }
         return -20;
+
     }
     
 
@@ -304,6 +305,7 @@ public class Checker {
         }
         return 0;
     }
+
 
     public static int verifyUuid (String uuid){
         String patron = "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$";
@@ -340,7 +342,6 @@ public class Checker {
                 return " el formato no es correcto, deberian de ser 36 caracteres incluyendo los guiones.";
             case -22:
                 return " el formato no es correcto, solo puede contener letras, numeros, puntos, guiones y guiones bajos.";
-
             default:
                 return " Error desconocido.";
         }
@@ -361,4 +362,5 @@ public class Checker {
         
             }  
         }
+
 }
