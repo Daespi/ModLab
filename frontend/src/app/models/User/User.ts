@@ -1,14 +1,14 @@
 import { Data } from "@angular/router";
 
-export class User{
+export class User {
     userId?: string;
     username?: string;
     firstName?: string;
     lastName?: string;
-    passwordHash?: string;
+    passwordHash?: string; // Mejor que passwordHash en frontend
     email?: string;
     phone?: string;
     createdAt?: Date;
-    roleName?: boolean;
-    shippingAddresses?: String[];
+    roleName?: string;
+    shippingAddresses?: string[];
 }

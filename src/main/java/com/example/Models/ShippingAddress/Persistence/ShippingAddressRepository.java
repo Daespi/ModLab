@@ -22,4 +22,3 @@ public interface ShippingAddressRepository {
 
     void deleteById(int addressId);
 }
-

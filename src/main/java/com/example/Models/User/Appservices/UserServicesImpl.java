@@ -98,4 +98,10 @@ public class UserServicesImpl implements UserServices {
         this.getById(userId);
         userRepository.deleteById(userId);
     }
+
+    @Override
+    public String login(String email, String password) throws ServiceException {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'login'");
+    }
 }

@@ -1,0 +1,644 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/*    HEADER    */
+.navegation-bar{
+    width: 100%;
+    height: 12vh;
+    background-color: #ffffff;
+    display: flex;
+    justify-content: center;
+}
+
+.navegation-bar-wrapper{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-around;
+}
+
+.navegation-bar-logo{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: flex-end;
+}
+
+.navegation-bar-logo a{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: flex-end;
+}
+
+.navegation-nav-logo{
+    max-width: 8vh;
+    object-fit: contain;
+}
+
+.navegation-bar-menu{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 5vh;
+}
+
+.navegation-bar-menu-item{
+    text-decoration: none;
+    color: #53199E;
+    font-family: "Montserrat", sans-serif;
+    font-weight: 200;
+    font-size: 2vh;
+}
+
+.navegation-bar-menu-item:hover{
+    color: #53199E;
+    border-bottom: 1px solid #53199E;
+}
+
+.navegation-bar-search{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.bar-search{
+    display: flex;
+    height: 30%;
+    width: 70%;
+    border-radius: 4vh;
+    justify-content: space-between;
+    align-items: center;
+    border: 1px solid #53199E;
+    background-color: white;
+
+}
+
+.navegation-bar-search-input{
+    width: 80%;
+    height: 100%;
+    border-radius: 4vh;
+    border: none;
+    outline: none;
+    padding-left: 2vh;
+    font-family: "Montserrat", sans-serif;
+    font-weight: normal;
+    font-size: 1.5vh;
+}
+
+.navegation-bar-search-icon{
+    max-width: 3.5vh;
+    max-height: 3.5vh;
+    padding-right: 1.5vh;
+}
+
+.navegation-bar-search-icon:hover{
+    cursor: pointer;
+}
+
+.navegation-bar-search-button{
+background: none;
+border: none;
+}
+
+.navegation-bar-search-button:hover{
+    cursor: pointer;
+}
+
+.navegation-bar-user{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 2vh;
+}
+
+
+.navegation-bar-icon{
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.navegation-bag-icon{
+    max-width: 4vh;
+    object-fit: contain;
+}
+
+.navegation-user-icon{
+    max-width: 4vh;
+    object-fit: contain;
+}
+
+.navegation-bar-user {
+    position: relative; /* Para que el menú desplegable se posicione correctamente */
+}
+
+.user-profile-container {
+    position: relative;
+}
+
+.dropdown-menu {
+    display: none; /* El menú estará oculto por defecto */
+    position: absolute;
+    top: 100%; /* Se coloca justo debajo del ícono */
+    left: 0;
+    background-color: white;
+    border: 1px solid #ccc;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    width: 150px;
+    z-index: 1;
+}
+
+.dropdown-menu a {
+    display: block;
+    padding: 10px;
+    text-decoration: none;
+    color: #53199E;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    font-size: 13px;
+    font-weight: 300;
+}
+
+.dropdown-menu a:hover {
+    background-color: #f0f0f0;
+}
+
+/* Agregar transición suave */
+.dropdown-menu a {
+    transition: background-color 0.3s ease;
+}
+
+.user-profile-container:hover .dropdown-menu {
+    display: block; /* Mostrar el menú cuando pasas el ratón por encima del contenedor */
+}
+
+
+
+.space-register-and-login-completo{
+    width: 100%;
+    display: flex;
+    justify-content: start;
+    
+}
+
+.space-register-and-login{
+    width: 30vh;
+    margin-left: 5vh;
+}
+
+.space-register-and-login-div{
+    width: 100%;
+    height: 12vh;
+    display: flex;
+}
+
+.login-and-register-logo{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+
+.login-and-register-volver-atras-container{
+    width: 100%;
+    display: flex;
+    justify-content: end;
+    align-items: center;
+}
+
+.volver-atras{
+    color: #53199E;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    font-size: 2.2vh;
+    font-weight: 300;
+    margin-right: 5vh;
+    cursor: pointer;
+}
+
+
+
+
+
+
+
+/*     FOOTER    */
+
+
+
+.login-body {
+    width: 100%;
+    height: 120vh;
+    background-image: url('../../../assets/img/pexels-athena-2582937.png');
+    background-color: #53199E;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative; /* Necesario para contener los elementos hijos */
+    z-index: 0;
+    margin: 0;
+}
+
+.login-body::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 120vh;
+    background-color: rgba(83, 25, 158, 0.6);
+    z-index: -1;
+}
+
+.login-form{
+    width: 50vh;
+    height: 65vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2.5vh;
+    padding: 5vh;
+    background-color: rgba(245, 245, 245, 1);
+    border-radius: 2vh;
+}
+
+.login-form-title{
+    width: 100%;
+    height: 10%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 1vh;
+    margin-top: 1vh;
+}
+
+.form-title{
+    font-family: "Montserrat", sans-serif;
+    font-weight: bold;
+    font-size: 3.5vh;
+    color: #53199E;
+}
+
+
+.login-form-separator{
+    width: 100%;
+    height: 10%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 2vh;
+}
+
+.separator-text{
+    font-family: "Montserrat", sans-serif;
+    font-weight: lighter;
+    width: 10vh;
+    font-size: 2vh;
+    color: #53199E;
+}
+
+.separator-line{
+    width: 17vh;
+    height: 1px;
+    background-color: #53199E;
+}
+
+.login-form-form{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.login-form-wrapper{
+    width: 40vh;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    gap: 3vh;
+    margin-bottom: 2vh;
+}
+
+.form-input{
+    width: 100%;
+    height: 5.5vh;
+    border-radius: 2vh;
+    outline: none;
+    padding-left: 2vh;
+    font-family: "Montserrat", sans-serif;
+    font-weight: normal;
+    font-size: 1.7vh;
+    border: #53199E 1px solid;
+}
+
+.login-form-forgot{
+    width: 100%;
+    display: flex;
+    justify-content: start;
+    align-items: center;
+    margin-bottom: 4vh;
+}
+
+.login-form-forgot a{
+    text-decoration: none;
+    font-family: "Montserrat", sans-serif;
+    font-weight: normal;
+    font-size: 1.5vh;
+    color: #53199E;
+}
+
+.login-form-button{
+    width: 40vh;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    gap: 3vh;
+    margin-bottom: 2vh;
+}
+
+.form-button{
+    width: 100%;
+    height: 5.5vh;
+    border-radius: 2vh;
+    border: none;
+    outline: none;
+    background-color: rgba(246, 184, 1, 1);
+    padding-left: 2vh;
+    font-family: "Montserrat", sans-serif;
+    font-weight: normal;
+    font-size: 1.7vh;
+    color: #ffffff;
+    cursor: pointer;
+}
+
+.form-button:hover{
+    background-color: #763ebf;
+    color: #ffffff;
+    border: #53199E 1px solid;
+}
+
+.login-form-register{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5vh;
+}
+
+.login-form-register p{
+    font-family: "Montserrat", sans-serif;
+    font-weight: normal;
+    font-size: 1.5vh;
+    color: #3d3d3d;
+}
+
+.login-form-register a{
+    font-family: "Montserrat", sans-serif;
+    font-weight: 600;
+    font-size: 1.5vh;
+    color: #53199E;
+}
+
+.login-form-register a:hover{
+    color: #763ebf;
+}
+
+
+/*     register    */
+
+.register-body {
+    width: 100%;
+    height: 120vh;
+    background-image: url('../../../assets/img/pexels-athena-2582937.png');
+    background-color: #53199E;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative; /* Necesario para contener los elementos hijos */
+    z-index: 0;
+    margin: 0;
+}
+
+.register-body::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 120vh;
+    background-color: rgba(83, 25, 158, 0.6);
+    z-index: -1;
+}
+
+.register-form {
+    width: 50vh;
+    min-height: 90vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2.5vh;
+    padding: 5vh;
+    background-color: rgba(245, 245, 245, 1);
+    border-radius: 2vh;
+}
+
+.register-form-title {
+    width: 100%;
+    height: 10%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.form-title {
+    font-family: "Montserrat", sans-serif;
+    font-weight: bold;
+    font-size: 3.5vh;
+    color: #53199E;
+}
+
+
+.register-form-separator {
+    width: 100%;
+    height: 10%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 2vh;
+}
+
+.separator-text {
+    font-family: "Montserrat", sans-serif;
+    font-weight: lighter;
+    width: 5.7vh;
+    font-size: 2vh;
+    color: #53199E;
+}
+
+.separator-line {
+    width: 18vh;
+    height: 1px;
+    background-color: #53199E;
+}
+
+.register-form-form {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.register-form-wrapper {
+    width: 40vh;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    gap: 3vh;
+    margin-bottom: 2vh;
+}
+
+.form-input {
+    width: 100%;
+    height: 5.5vh;
+    border-radius: 2vh;
+    outline: none;
+    padding-left: 2vh;
+    font-family: "Montserrat", sans-serif;
+    font-weight: normal;
+    font-size: 1.7vh;
+    border: #53199E 1px solid;
+}
+
+.register-form-forgot {
+    width: 100%;
+    display: flex;
+    justify-content: start;
+    align-items: center;
+    margin-bottom: 4vh;
+}
+
+.register-form-forgot a {
+    text-decoration: none;
+    font-family: "Montserrat", sans-serif;
+    font-weight: normal;
+    font-size: 1.5vh;
+    color: #53199E;
+}
+
+.register-form-button {
+    width: 40vh;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    gap: 3vh;
+    margin-top: 6vh;
+    margin-bottom: 2vh;
+}
+
+.form-button {
+    width: 100%;
+    height: 5.5vh;
+    border-radius: 2vh;
+    padding-right: 1.5vh;
+    border: none;
+    outline: none;
+    background-color: rgba(246, 184, 1, 1);
+    font-family: "Montserrat", sans-serif;
+    font-weight: normal;
+    font-size: 1.7vh;
+    color: #763ebf;
+    cursor: pointer;
+}
+
+.form-button:hover {
+    background-color: #763ebf;
+    color: #ffffff;
+    border: #53199E 1px solid;
+}
+
+.register-form-login {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5vh;
+}
+
+.register-form-login p {
+    font-family: "Montserrat", sans-serif;
+    font-weight: normal;
+    font-size: 1.5vh;
+    color: #3d3d3d;
+}
+
+.register-form-login a {
+    font-family: "Montserrat", sans-serif;
+    font-weight: 600;
+    font-size: 1.5vh;
+    color: #53199E;
+}
+
+.register-form-login a:hover {
+    color: #763ebf;
+}
+
+
+
+
+
+/*  E D I T P R O F I L E  */
+
+
+.tab-content {
+    display: none;
+  }
+  .tab-content.active {
+    display: block;
+  }
+  .tab.active {
+    border-bottom: 3px solid #6a0dad;
+  }
+
+
+  .navegation-bar-username{
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    font-size: 2vh;
+    font-weight: 300;
+    color: #53199E;
+    cursor: pointer;
+    margin-left: 1vh;
+    margin-right: 1vh;
+  }
+  
+
+
+
+
+
+
+
+
+
+
