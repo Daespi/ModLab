@@ -12,7 +12,7 @@ public enum Serializers {
     PowerSupply_JSON,
     Ram_JSON,
     Tower_JSON,
-    Ventilation_JSON, 
+    Ventilation_JSON,
 
 }
 
