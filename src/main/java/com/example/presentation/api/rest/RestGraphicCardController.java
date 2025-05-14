@@ -8,7 +8,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/api/graphic-cards")
+@RequestMapping("/modlab/graphicCard")
 public class RestGraphicCardController {
 
     @Autowired

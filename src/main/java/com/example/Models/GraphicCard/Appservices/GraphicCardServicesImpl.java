@@ -6,7 +6,6 @@ import org.springframework.stereotype.Service;
 import com.example.Exceptions.BuildException;
 import com.example.Exceptions.ServiceException;
 import com.example.Models.GraphicCard.DTO.GraphicCardDTO;
-import com.example.Models.GraphicCard.Entity.GraphicCard;
 import com.example.Models.GraphicCard.MAPPERS.GraphicCardMapper;
 import com.example.Models.GraphicCard.Persistence.GraphicCardRepository;
 import com.example.sharedkernel.appservices.serializers.Serializer;
@@ -36,7 +35,7 @@ public class GraphicCardServicesImpl implements GraphicCardServices {
     protected GraphicCardDTO checkInputData(String json) throws ServiceException {
         try {
             GraphicCardDTO dto = this.serializer.deserialize(json, GraphicCardDTO.class);
-            GraphicCardMapper.graphicCardFromDTO(dto); // Logical validation
+            GraphicCardMapper.graphicCardFromDTO(dto); // Validación lógica
             return dto;
         } catch (BuildException e) {
             throw new ServiceException("Error in Graphic Card data: " + e.getMessage());
@@ -49,7 +48,7 @@ public class GraphicCardServicesImpl implements GraphicCardServices {
     }
 
     protected GraphicCardDTO updateGraphicCard(String productId, String json) throws ServiceException {
-        this.getById(productId); // Throws exception if not found
+        this.getById(productId); // Verificación
         GraphicCardDTO dto = this.checkInputData(json);
         dto = new GraphicCardDTO(
             productId,
@@ -94,7 +93,7 @@ public class GraphicCardServicesImpl implements GraphicCardServices {
 
     @Override
     public void deleteById(String productId) throws ServiceException {
-        this.getById(productId); // Verification
+        this.getById(productId); // Verificación
         graphicCardRepository.deleteById(productId);
     }
 }

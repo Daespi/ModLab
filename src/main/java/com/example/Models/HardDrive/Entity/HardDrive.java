@@ -2,7 +2,7 @@ package com.example.Models.HardDrive.Entity;
 
 import com.example.Exceptions.BuildException;
 import com.example.Models.PhysicalData.Entity.PhysicalData;
-import com.example.Models.Motherboard.Entity.Motherboard;
+import com.example.Models.Motherboard.Entity.MotherBoard;
 import com.example.Models.Product.Entity.Product;
 import com.example.Operations.Checker;
 
