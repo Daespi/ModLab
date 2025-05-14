@@ -17,7 +17,6 @@ public abstract class Product {
     protected double price;
     protected int stockQuantity;
     protected double rating;
-    protected LocalDateTime createdAt;
     protected Set<String> imageUrl = new HashSet<>();
     protected String brand;
     protected ArrayList<Review> reviews = new ArrayList<>();
@@ -27,61 +26,52 @@ public abstract class Product {
         checkData(name, description, price, stockQuantity, rating, brand);
     }
 
+    
+    protected void checkData(String name, String description, double price, int stockQuantity,
+                             double rating, String brand) throws BuildException {
 
-    protected void checkData(String name, String description, double price, int stockQuantity, double rating, String brand) throws BuildException {
         String message = "";
-
+    
         this.productId = UUID.randomUUID().toString().replace("-", "").substring(0, 32);
-
+    
         int resultName = setName(name);
         if (resultName != 0) {
             message += "El nombre de este producto no es correcto porque " + Checker.getErrorMessage(resultName, 10, 150);
         }
-
+    
         int resultDescription = setDescription(description);
         if (resultDescription != 0) {
             message += "La descripción de este producto no es correcta porque " + Checker.getErrorMessage(resultDescription, 50, 1024);
         }
-
+    
         int resultPrice = setPrice(price);
         if (resultPrice != 0) {
             message += "El precio de este producto no es correcto porque " + Checker.getErrorMessage(resultPrice, 1.00, 0.00);
         }
-
+    
         int resultStockQuantity = setStockQuantity(stockQuantity);
         if (resultStockQuantity != 0) {
             message += "El stock de este producto no es correcto porque " + Checker.getErrorMessage(resultStockQuantity, 0, 100);
         }
 
-        // int resultImageUrl = setImageUrl(imageUrl);
-        // if (resultImageUrl != 0) {
-        //     message += "La/s URL/s de imagen no son correctas porque " + Checker.getErrorMessage(resultImageUrl, 3, 30);
-        // }
-
-
         int resultRating = setRating(rating);
         if (resultRating != 0) {
             message += "La valoración de este producto no es correcta porque " + Checker.getErrorMessage(resultRating, 0.00, 5.00);
         }
-
+    
         int resultBrand = setBrand(brand);
         if (resultBrand != 0) {
             message += "La marca de este producto no es correcta porque " + Checker.getErrorMessage(resultBrand, 2, 50);
         }
-
-        this.createdAt = LocalDateTime.now();
-
+    
         if (!message.isEmpty()) {
             throw new BuildException(message);
         }
     }
+    
 
     public String getProductId() {
         return productId;
-    }
-
-    public LocalDateTime getCreatedAt() {
-        return createdAt;
     }
 
     public String getName() {
@@ -144,10 +134,16 @@ public abstract class Product {
     }
 
 
-    public int setImageUrl(String imageUrl) {
-        if (Checker.isNull(imageUrl) != 0) return -2;
-        if (Checker.minLength(3, imageUrl) != 0 || Checker.maxLenght(500, imageUrl) != 0) return -3;
-        this.imageUrl.add(imageUrl);
+    public String getImageUrl() {
+        return String.join(",", imageUrl); // Une todas las URLs separadas por comas
+    }
+    
+
+    public int addImageUrl(String imageUrls) {
+        if (imageUrls == null || imageUrls.isEmpty()) return -1;
+        if (Checker.isNull(imageUrls) != 0) return -2;
+        if (Checker.minLength(3, imageUrls) != 0 || Checker.maxLenght(500, imageUrls) != 0) return -3;
+        this.imageUrl.add(imageUrls);
         return 0;
     }
 
@@ -161,12 +157,6 @@ public abstract class Product {
         if (Checker.maxLenght(50, brand) != 0) return -10;
         this.brand = brand;
         return 0;
-    }
-
-
-
-    public String getImageUrl() {
-        return imageUrl.toString();
     }
 
 

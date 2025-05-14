@@ -38,7 +38,6 @@ public class RestUserController {
              return ResponseEntity.ok("hola");  
      }
  
-//sino dejarlo con userId
     @GetMapping(value = "/{userId}", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<String> getJsonUserById(@PathVariable String userId) {
         try {

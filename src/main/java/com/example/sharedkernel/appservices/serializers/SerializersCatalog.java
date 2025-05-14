@@ -2,6 +2,7 @@ package com.example.sharedkernel.appservices.serializers;
 
 import java.util.TreeMap;
 
+import com.example.Models.CPU.DTO.CPUDTO;
 import com.example.Models.ShippingAddress.DTO.ShippingAddressDTO;
 import com.example.Models.User.DTO.UserDTO;
 
@@ -12,6 +13,7 @@ public class SerializersCatalog {
     private static void loadCatalog() {
         catalog.put(Serializers.USER_JSON, new JacksonSerializer<UserDTO>());
         catalog.put(Serializers.SHIPPINGADDRESS_JSON, new JacksonSerializer<ShippingAddressDTO>());
+        catalog.put(Serializers.CPU_JSON, new JacksonSerializer<CPUDTO>());
     }
 
     public static Serializer getInstance(Serializers type) {

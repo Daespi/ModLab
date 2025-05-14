@@ -1,32 +1,35 @@
+// src/app/pages/cpu/cpu-list.component.ts
 import { Component, OnInit } from '@angular/core';
-import { CommonModule } from '@angular/common';
 import { CpuService } from '../../services/cpu/cpu.service';
 import { Cpu } from '../../models/Cpu/Cpu';
+import { CommonModule } from '@angular/common';
 
 @Component({
-  selector: 'app-cpu',
-  standalone: true, // important!
+  selector: 'app-cpu-list',
+  standalone: true,
   imports: [CommonModule],
-  templateUrl: './cpu.component.html',
-  styleUrls: ['./cpu.component.css']
+  templateUrl: './cpu-list.component.html',
 })
-export class CpuComponent implements OnInit {
+export class CpuListComponent implements OnInit {
   cpus: Cpu[] = [];
   isLoading = true;
-  error: string = '';
+  error: string | null = null;
 
   constructor(private cpuService: CpuService) {}
 
   ngOnInit(): void {
     this.cpuService.getAllCpus().subscribe({
-      next: (data) => {
+      next: (data: Cpu[]) => {
+        console.log('CPUs recibidas:', data);
         this.cpus = data;
         this.isLoading = false;
       },
-      error: () => {
-        this.error = 'Failed to load CPUs';
+      error: (error: any) => {
+        console.error(error);
+        this.error = 'Error al cargar CPUs';
         this.isLoading = false;
       }
     });
   }
 }
+

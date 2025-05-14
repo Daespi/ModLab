@@ -14,10 +14,6 @@ import jakarta.transaction.Transactional;
 
 @Repository
 public interface JpaUserRepository extends JpaRepository<UserDTO, String>, UserRepository {
-<<<<<<< HEAD
-
-=======
->>>>>>> 6724d2cce0b93a4f72da5a75b37fc63087426ee0
     public Optional<UserDTO> findByEmail(String email);
 
     public List<UserDTO> findByusername(String username);
@@ -32,10 +28,6 @@ public interface JpaUserRepository extends JpaRepository<UserDTO, String>, UserR
     public UserDTO save(UserDTO user);
 
     @Transactional
-<<<<<<< HEAD
-    public void deleteByIsbn(String isbn);
-=======
     public void deleteByUsername(String username);
->>>>>>> 6724d2cce0b93a4f72da5a75b37fc63087426ee0
     
 }

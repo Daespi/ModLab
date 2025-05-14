@@ -3,7 +3,9 @@ package com.example.Models.Product.DTO;
 import jakarta.persistence.*;
 import java.time.LocalDateTime;
 
-@MappedSuperclass
+@Entity
+@Inheritance(strategy = InheritanceType.JOINED)
+@Table(name = "product")
 public abstract class ProductDTO {
 
     @Id
@@ -25,20 +27,14 @@ public abstract class ProductDTO {
     @Column(name = "rating", nullable = false)
     protected double rating;
 
-    @Column(name = "created_at", nullable = false)
-    protected LocalDateTime createdAt;
-
-    // Aquí almacenamos las URLs separadas por comas
     @Column(name = "image_url", nullable = false, length = 1024)
     protected String imageUrls;
 
     @Column(name = "brand", nullable = false)
     protected String brand;
 
-    // Constructor vacío requerido por JPA
     public ProductDTO() {}
 
-    // Constructor completo
     public ProductDTO(
         String productId,
         String name,
@@ -46,8 +42,7 @@ public abstract class ProductDTO {
         double price,
         int stockQuantity,
         double rating,
-        LocalDateTime createdAt,
-        String imageUrls,  // ← String coma-separada
+        String imageUrls,
         String brand
     ) {
         this.productId = productId;
@@ -56,45 +51,16 @@ public abstract class ProductDTO {
         this.price = price;
         this.stockQuantity = stockQuantity;
         this.rating = rating;
-        this.createdAt = createdAt;
         this.imageUrls = imageUrls;
         this.brand = brand;
     }
 
-    // Getters
-    public String getProductId() {
-        return productId;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public double getPrice() {
-        return price;
-    }
-
-    public int getStockQuantity() {
-        return stockQuantity;
-    }
-
-    public double getRating() {
-        return rating;
-    }
-
-    public LocalDateTime getCreatedAt() {
-        return createdAt;
-    }
-
-    public String getImageUrls() {
-        return imageUrls;
-    }
-
-    public String getBrand() {
-        return brand;
-    }
+    public String getProductId() { return productId; }
+    public String getName() { return name; }
+    public String getDescription() { return description; }
+    public double getPrice() { return price; }
+    public int getStockQuantity() { return stockQuantity; }
+    public double getRating() { return rating; }
+    public String getImageUrls() { return imageUrls; }
+    public String getBrand() { return brand; }
 }

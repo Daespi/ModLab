@@ -1,7 +1,5 @@
 package com.example.Models.Product.Appservices;
 
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -38,10 +36,12 @@ public class ProductServicesImpl implements ProductServices {
     protected ProductDTO checkInputData(String json) throws ServiceException {
         try {
             ProductDTO dto = this.serializer.deserialize(json, ProductDTO.class);
-            ProductMapper.productFromDTO(dto); // Validación lógica
-            return dto;
+            Product producto = ProductMapper.productFromDTO(dto);  // Validación de lógica
+            return ProductMapper.dtoFromProduct(producto);         // Devuelve instancia concreta como CPUDTO o RamDTO
         } catch (BuildException e) {
             throw new ServiceException("Error en los datos del producto: " + e.getMessage());
+        } catch (UnsupportedOperationException e) {
+            throw new ServiceException("Subclase de producto no soportada para este servicio.");
         }
     }
 
@@ -51,19 +51,9 @@ public class ProductServicesImpl implements ProductServices {
     }
 
     protected ProductDTO updateProduct(String productId, String json) throws ServiceException {
-        this.getById(productId); // Lanza excepción si no existe
+        this.getById(productId); // Verificación de existencia
         ProductDTO dto = this.checkInputData(json);
-        return productRepository.save(new ProductDTO(
-            productId,
-            dto.getName(),
-            dto.getDescription(),
-            dto.getPrice(),
-            dto.getStockQuantity(),
-            dto.getRating(),
-            dto.getCreatedAt(),
-            dto.getImageUrl(),
-            dto.getBrand()
-        ));
+        return productRepository.save(dto);
     }
 
     @Override
@@ -83,7 +73,7 @@ public class ProductServicesImpl implements ProductServices {
 
     @Override
     public void deleteById(String productId) throws ServiceException {
-        this.getById(productId); // Verificación
+        this.getById(productId);
         productRepository.deleteById(productId);
     }
 }
