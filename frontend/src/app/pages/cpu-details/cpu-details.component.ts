@@ -3,9 +3,12 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { CpuService } from '../../services/cpu/cpu.service';
 import { Cpu } from '../../models/Cpu/Cpu';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-cpu-details',
+  standalone: true,
+  imports: [CommonModule],
   templateUrl: './cpu-details.component.html'
 })
 export class CpuDetailComponent implements OnInit {

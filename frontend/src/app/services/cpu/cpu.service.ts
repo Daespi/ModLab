@@ -16,6 +16,7 @@ export class CpuService {
 
   getAllCpus(): Observable<Cpu[]> {
     console.log('Llamando a la API de CPUs...');
+    // const headers = { Authorization: `Bearer ${token}` };
     return this.http.get<Cpu[]>(this.baseUrl).pipe(
       catchError(error => {
         console.error('Error fetching CPUs', error);
