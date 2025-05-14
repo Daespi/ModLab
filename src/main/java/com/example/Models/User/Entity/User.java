@@ -4,6 +4,9 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
+
 // import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 // import org.springframework.security.crypto.password.PasswordEncoder;
 
@@ -145,9 +148,9 @@ public class User {
             return -1;
         if ((Checker.verifyPassword(passwordHash)) != 0)
             return -13;
-        // PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
-        // String hashedPassword = passwordEncoder.encode(passwordHash);
-        this.passwordHash = passwordHash;
+        PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+         String hashedPassword = passwordEncoder.encode(passwordHash);
+        this.passwordHash = hashedPassword;
         return 0;
     }
 

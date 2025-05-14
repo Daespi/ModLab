@@ -29,6 +29,7 @@
             <div *ngIf="isLoggedIn$ | async" class="user-profile-container">
                 <a href="" class="navegation-bar-icon">
                     <p class="navegation-bar-username">{{ username$ }}</p>
+                    <a (click)="logout()">Cerrar sesión</a>
                 </a>
                 <!-- Menú desplegable si el usuario está logueado -->
                 <div class="dropdown-menu">

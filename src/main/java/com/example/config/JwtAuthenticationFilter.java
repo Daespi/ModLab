@@ -17,6 +17,9 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
 
     private final JwtTokenProvider jwtTokenProvider;
 
+
+    // Constructor con inyección de dependencias
+
     public JwtAuthenticationFilter(JwtTokenProvider jwtTokenProvider) {
         this.jwtTokenProvider = jwtTokenProvider;
     }
@@ -35,28 +38,38 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
             return;
         }
 
+
+        // Obtener el token del encabezado Authorization
         String bearerToken = request.getHeader("Authorization");
 
         // Solo validar si hay token presente
         if (bearerToken != null && bearerToken.startsWith("Bearer ")) {
-            String token = bearerToken.substring(7);
+
+            String token = bearerToken.substring(7); // Extraer token del "Bearer"
             try {
                 if (jwtTokenProvider.validateToken(token)) {
+                    // Obtener el email del token
                     String email = jwtTokenProvider.getEmailFromToken(token);
 
+                    // Crear un objeto de autenticación
                     UsernamePasswordAuthenticationToken authentication =
-                            new UsernamePasswordAuthenticationToken(email, null, null);
+                            new UsernamePasswordAuthenticationToken(email, null, null); // No roles por ahora
                     authentication.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
+
+                    // Establecer la autenticación en el contexto de seguridad
                     SecurityContextHolder.getContext().setAuthentication(authentication);
                 }
             } catch (Exception e) {
-                // Token inválido: devolver 401 y no continuar
+                // Si el token es inválido, retornar un error 401
                 response.sendError(HttpServletResponse.SC_UNAUTHORIZED, "Invalid or expired token");
                 return;
             }
         }
 
+
         // Sin token: continuar como usuario no autenticado (solo si es permitido por la config de seguridad)
+
+        // Continuar con la cadena de filtros
         filterChain.doFilter(request, response);
     }
 }

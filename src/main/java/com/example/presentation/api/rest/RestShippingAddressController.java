@@ -41,7 +41,7 @@ public class RestShippingAddressController {
     /**
      * POST - Crear nueva dirección
      */
-    @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+    @PostMapping(path = "/address",consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<String> newAddressFromJson(@RequestBody String addressJson) {
         try {
             String json = shippingAddressServices.addFromJson(addressJson);
