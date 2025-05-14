@@ -1,5 +1,6 @@
 export const environment = {
     production: false,
-    apiUrl: 'http://localhost:8080/modlab/User'  // URL de tu backend para desarrollo
+    apiUrl: 'http://localhost:8080/modlab/User',
+    apiUrlShippingAddress: 'http://localhost:8080/modlab/ShippingAddress'  // URL de tu backend para desarrollo
   };
   

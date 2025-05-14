@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { UserService } from '../../services/user/user.service';
 import { Router } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { AuthService } from '../../services/auth.service';
@@ -17,28 +16,27 @@ export class LoginComponent implements OnInit {
   password: string = '';
   errorMessage: string = '';
 
-  constructor(private userService: UserService, private router: Router, private authService: AuthService ) {}
+  constructor(private router: Router, private authService: AuthService) {}
 
   ngOnInit(): void {
     // Inicialización si es necesario
   }
 
   onSubmit(): void {
-    // Llamar al servicio de login
-    this.userService.login(this.email, this.password).subscribe({
-      next: (response) => {
-        console.log(response.message);
-        
-        // Al hacer login, actualizamos el estado en AuthService
-        this.authService.login(this.email);  // Esto guarda el email en el localStorage
-        
-        // Redirigir al usuario a la página de inicio
-        this.router.navigate(['/home']);
-      },
-      error: (error) => {
-        console.error('Login fallido', error);
-        this.errorMessage = 'Credenciales incorrectas';
-      }
+    this.authService.login(this.email, this.password).subscribe({
+        next: (token) => {  // <-- Ahora recibe el token directamente
+            if (token) {  
+                this.router.navigate(['/home']); // Redirige al usuario
+            } else {
+                this.errorMessage = 'Error: No se recibió token del servidor.';
+            }
+        },
+        error: (error) => {
+            console.error('Login fallido', error);
+            this.errorMessage = 'Credenciales incorrectas';
+        }
     });
-  }
+}
+
+
 }
