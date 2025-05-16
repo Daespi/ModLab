@@ -1,93 +1,214 @@
-package com.example.Models.Motherboard.DTO;
+// package com.example.Models.Motherboard.DTO;
 
-import com.example.Models.Product.DTO.ProductDTO;
-import jakarta.persistence.Column;
-import jakarta.persistence.DiscriminatorValue;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Table;
 
-@Entity
-@Table(name = "motherboard")
-@DiscriminatorValue("MOTHERBOARD")
-public class MotherBoardDTO extends ProductDTO {
+// import com.fasterxml.jackson.annotation.JsonCreator;
+// import com.fasterxml.jackson.annotation.JsonProperty;
 
-    @Column(nullable = false)
-    private boolean cpu;
+// import jakarta.persistence.*;
 
-    @Column(nullable = false, length = 150)
-    private String memory;
+// @Entity
+// @Table(name = "motherboard", schema = "modlab")
+// public class MotherboardDTO {
 
-    @Column(nullable = false, length = 50)
-    private String storage;
+//     @Id
+//     @Column(name = "name")
+//     private String name;
 
-    @Column(nullable = false, length = 150)
-    private String factorForm;
+//     @Column(name = "description", nullable = false)
+//     private String description;
 
-    @Column(nullable = false, length = 25)
-    private String socket;
+//     @Column(name = "price", nullable = false)
+//     private double price;
 
-    @Column(nullable = false, length = 25)
-    private String chipset;
+//     @Column(name = "stock_quantity", nullable = false)
+//     private int stockQuantity;
 
-    @Column(nullable = false, length = 25)
-    private String memoryType;
+//     @Column(name = "rating", nullable = false)
+//     private double rating;
 
-    @Column(nullable = false)
-    private int memorySlots;
+//     @Column(name = "brand", nullable = false)
+//     private String brand;
 
-    @Column(nullable = false)
-    private int maxMemory;
+//     @Column(name = "cpu", nullable = false)
+//     private boolean cpu;
 
-    @Column(nullable = false)
-    private double high;
+//     @Column(name = "memory", nullable = false)
+//     private String memory;
 
-    @Column(nullable = false)
-    private double width;
+//     @Column(name = "storage", nullable = false)
+//     private String storage;
 
-    @Column(nullable = false)
-    private double length;
+//     @Column(name = "factor_form", nullable = false)
+//     private String factorForm;
 
-    @Column(nullable = false)
-    private double weight;
+//     @Column(name = "socket", nullable = false)
+//     private String socket;
 
-    @Column(nullable = false)
-    private boolean fragile;
+//     @Column(name = "chipset", nullable = false)
+//     private String chipset;
 
-    public MotherBoardDTO() {}
+//     @Column(name = "memory_type", nullable = false)
+//     private String memoryType;
 
-    public MotherBoardDTO(String productId, String name, String description, double price, int stockQuantity, double rating,
-                           String imageUrls, String brand, boolean cpu, String memory, String storage, String factorForm,
-                           String socket, String chipset, String memoryType, int memorySlots, int maxMemory,
-                           double high, double width, double length, double weight, boolean fragile) {
-        super(productId, name, description, price, stockQuantity, rating, imageUrls, brand);
-        this.cpu = cpu;
-        this.memory = memory;
-        this.storage = storage;
-        this.factorForm = factorForm;
-        this.socket = socket;
-        this.chipset = chipset;
-        this.memoryType = memoryType;
-        this.memorySlots = memorySlots;
-        this.maxMemory = maxMemory;
-        this.high = high;
-        this.width = width;
-        this.length = length;
-        this.weight = weight;
-        this.fragile = fragile;
-    }
+//     @Column(name = "memory_slots", nullable = false)
+//     private int memorySlots;
 
-    public boolean getCpu() { return cpu; }
-    public String getMemory() { return memory; }
-    public String getStorage() { return storage; }
-    public String getFactorForm() { return factorForm; }
-    public String getSocket() { return socket; }
-    public String getChipset() { return chipset; }
-    public String getMemoryType() { return memoryType; }
-    public int getMemorySlots() { return memorySlots; }
-    public int getMaxMemory() { return maxMemory; }
-    public double getHigh() { return high; }
-    public double getWidth() { return width; }
-    public double getLength() { return length; }
-    public double getWeight() { return weight; }
-    public boolean getFragile() { return fragile; }
-}
+//     @Column(name = "max_memory", nullable = false)
+//     private int maxMemory;
+
+//     @Column(name = "high", nullable = false)
+//     private double high;
+
+//     @Column(name = "width", nullable = false)
+//     private double width;
+
+//     @Column(name = "length", nullable = false)
+//     private double length;
+
+//     @Column(name = "weight", nullable = false)
+//     private double weight;
+
+//     @Column(name = "fragile", nullable = false)
+//     private boolean fragile;
+
+//     public MotherboardDTO() {
+//     }
+
+//     @JsonCreator
+//     public MotherboardDTO(
+//             @JsonProperty("name") String name,
+//             @JsonProperty("description") String description,
+//             @JsonProperty("price") double price,
+//             @JsonProperty("stockQuantity") int stockQuantity,
+//             @JsonProperty("rating") double rating,
+//             @JsonProperty("brand") String brand,
+//             @JsonProperty("cpu") boolean cpu,
+//             @JsonProperty("memory") String memory,
+//             @JsonProperty("storage") String storage,
+//             @JsonProperty("factorForm") String factorForm,
+//             @JsonProperty("socket") String socket,
+//             @JsonProperty("chipset") String chipset,
+//             @JsonProperty("memoryType") String memoryType,
+//             @JsonProperty("memorySlots") int memorySlots,
+//             @JsonProperty("maxMemory") int maxMemory,
+//             @JsonProperty("high") double high,
+//             @JsonProperty("width") double width,
+//             @JsonProperty("length") double length,
+//             @JsonProperty("weight") double weight,
+//             @JsonProperty("fragile") boolean fragile
+//     ) {
+//         this.name = name;
+//         this.description = description;
+//         this.price = price;
+//         this.stockQuantity = stockQuantity;
+//         this.rating = rating;
+//         this.brand = brand;
+//         this.cpu = cpu;
+//         this.memory = memory;
+//         this.storage = storage;
+//         this.factorForm = factorForm;
+//         this.socket = socket;
+//         this.chipset = chipset;
+//         this.memoryType = memoryType;
+//         this.memorySlots = memorySlots;
+//         this.maxMemory = maxMemory;
+//         this.high = high;
+//         this.width = width;
+//         this.length = length;
+//         this.weight = weight;
+//         this.fragile = fragile;
+//     }
+
+//     // Getters y Setters
+
+//     public String getName() {
+//         return name;
+//     }
+
+//     public String getDescription() {
+//         return description;
+//     }
+
+//     public double getPrice() {
+//         return price;
+//     }
+
+//     public int getStockQuantity() {
+//         return stockQuantity;
+//     }
+
+//     public double getRating() {
+//         return rating;
+//     }
+
+//     public String getBrand() {
+//         return brand;
+//     }
+
+//     public boolean isCpu() {
+//         return cpu;
+//     }
+
+//     public String getMemory() {
+//         return memory;
+//     }
+
+//     public String getStorage() {
+//         return storage;
+//     }
+
+//     public String getFactorForm() {
+//         return factorForm;
+//     }
+
+//     public String getSocket() {
+//         return socket;
+//     }
+
+//     public String getChipset() {
+//         return chipset;
+//     }
+
+//     public String getMemoryType() {
+//         return memoryType;
+//     }
+
+//     public int getMemorySlots() {
+//         return memorySlots;
+//     }
+
+//     public int getMaxMemory() {
+//         return maxMemory;
+//     }
+
+//     public double getHigh() {
+//         return high;
+//     }
+
+//     public double getWidth() {
+//         return width;
+//     }
+
+//     public double getLength() {
+//         return length;
+//     }
+
+//     public double getWeight() {
+//         return weight;
+//     }
+
+//     public boolean isFragile() {
+//         return fragile;
+//     }
+
+//     @Override
+//     public String toString() {
+//         return "MotherboardDTO [name=" + name + ", description=" + description + ", price=" + price +
+//                 ", stockQuantity=" + stockQuantity + ", rating=" + rating + ", brand=" + brand +
+//                 ", cpu=" + cpu + ", memory=" + memory + ", storage=" + storage + ", factorForm=" + factorForm +
+//                 ", socket=" + socket + ", chipset=" + chipset + ", memoryType=" + memoryType + ", memorySlots=" +
+//                 memorySlots + ", maxMemory=" + maxMemory + ", high=" + high + ", width=" + width + ", length=" +
+//                 length + ", weight=" + weight + ", fragile=" + fragile + "]";
+//     }
+// }
+

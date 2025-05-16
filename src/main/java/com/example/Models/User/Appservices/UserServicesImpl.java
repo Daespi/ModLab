@@ -21,15 +21,14 @@ import java.util.UUID;
 public class UserServicesImpl implements UserServices {
 
     @Autowired
+    private org.springframework.security.crypto.password.PasswordEncoder passwordEncoder;
+    private JwtTokenProvider jwtTokenProvider;
+
+    
     private UserRepository userRepository;
 
     private Serializer<UserDTO> serializer;
 
-     @Autowired
-    private JwtTokenProvider jwtTokenProvider;
-
-    @Autowired
-    private PasswordEncoder passwordEncoder;
     
 
     protected UserDTO getDTO(String userId) {
@@ -40,7 +39,7 @@ public class UserServicesImpl implements UserServices {
     // return userRepository.findById(userId).orElse(null);
     // }
 
-    protected UserDTO getById(String userId) throws ServiceException {
+    public UserDTO getById(String userId) throws ServiceException {
         UserDTO dto = this.getDTO(userId);
         if (dto == null) {
             throw new ServiceException("User " + userId + " not found");
@@ -109,15 +108,9 @@ public class UserServicesImpl implements UserServices {
     }
 
 
-    public UserDTO getUserByEmail(String email) throws ServiceException {
-        UserDTO userDTO = userRepository.findUserByEmail(email);
-        if (userDTO == null) {
-            throw new ServiceException("User with email " + email + " not found");
-        }
-        return userDTO;
-    }
 
-    @Override
+@Override
+
     public String login(String email, String password) throws ServiceException {
         UserDTO userDTO = userRepository.findUserByEmail(email);
     
@@ -134,6 +127,14 @@ public class UserServicesImpl implements UserServices {
         }
     
         return jwtTokenProvider.generateToken(email);
+    }
+
+        public UserDTO getUserByEmail(String email) throws ServiceException {
+        UserDTO userDTO = userRepository.findUserByEmail(email);
+        if (userDTO == null) {
+            throw new ServiceException("User with email " + email + " not found");
+        }
+        return userDTO;
     }
     
 }
