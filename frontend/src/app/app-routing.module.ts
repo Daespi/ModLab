@@ -8,7 +8,7 @@ import { ShippingAddressComponent } from './pages/shipping-address/shipping-addr
 import { CpuComponent } from './pages/cpu/cpu.component';
 import { CpuListComponent } from './pages/cpu-list/cpu-list.component';
 import { CpuDetailComponent } from './pages/cpu-details/cpu-details.component';
-
+import { ShopCartComponent } from './pages/shop-cart/shop-cart.component';
 const routes: Routes = [
   { path: '', redirectTo: '/home', pathMatch: 'full' },
   { path: 'register', component: RegisterComponent },
@@ -18,7 +18,8 @@ const routes: Routes = [
   { path: 'address', component: ShippingAddressComponent },
   { path: 'cpu', component: CpuComponent },
   { path: 'cpus', component: CpuListComponent },
-  { path: 'cpus/:id', component: CpuDetailComponent }, // otras rutas...
+  { path: 'cpus/:id', component: CpuDetailComponent },
+  { path: 'shopcart', component: ShopCartComponent }, // otras rutas...
   // otras rutas...
 ];
 

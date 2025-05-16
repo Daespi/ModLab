@@ -51,6 +51,7 @@ public class RestUserController {
              return ResponseEntity.ok("hola");  
      }
  
+//sino dejarlo con userId
     @GetMapping(value = "/{userId}", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<String> getJsonUserById(@PathVariable String userId) {
         try {
@@ -100,7 +101,6 @@ public ResponseEntity<String> newUserFromJson(@RequestBody String userdata) {
             return ResponseEntity.badRequest().body(e.getMessage());
         }
     }
-
 
 
 

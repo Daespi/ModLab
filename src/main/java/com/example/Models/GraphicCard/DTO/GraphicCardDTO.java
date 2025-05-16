@@ -1,208 +1,292 @@
-package com.example.Models.GraphicCard.DTO;
+// package com.example.Models.GraphicCard.DTO;
 
-import com.fasterxml.jackson.annotation.JsonCreator;
-import com.fasterxml.jackson.annotation.JsonProperty;
+// <<<<<<< HEAD
+// import com.example.Models.Product.DTO.ProductDTO;
+// import com.fasterxml.jackson.annotation.JsonFormat;
+// import jakarta.persistence.Column;
+// import jakarta.persistence.Entity;
+// import jakarta.persistence.Table;
+// import jakarta.persistence.DiscriminatorValue;
 
-import jakarta.persistence.*;
+// @Entity
+// @Table(name = "graphic_card")
+// @DiscriminatorValue("GRAPHIC_CARD") // Si estás usando herencia con single table
+// public class GraphicCardDTO extends ProductDTO {
 
-@Entity
-@Table(name = "graphic_card", schema = "modlab")
-public class GraphicCardDTO {
+//     @Column(nullable = false)
+//     private String color;
 
-    @Id
-    @Column(name = "name")
-    private String name;
+//     @Column(nullable = false)
+//     private int memory;
 
-    @Column(name = "description", nullable = false)
-    private String description;
+//     @Column(nullable = false, length = 50)
+//     private String memoryType;
 
-    @Column(name = "price", nullable = false)
-    private double price;
+//     @Column(nullable = false)
+//     private int recommendedPowerSupply;
 
-    @Column(name = "stock_quantity", nullable = false)
-    private int stockQuantity;
+//     @Column(nullable = false)
+//     private double coreClock;  // Frecuencia base del GPU (MHz)
 
-    @Column(name = "rating", nullable = false)
-    private double rating;
+//     @Column(nullable = false)
+//     private double boostClock;  // Frecuencia máxima del GPU (MHz)
 
-    @Column(name = "brand", nullable = false)
-    private String brand;
+//     @Column(nullable = false)
+//     private int tdp;  // Consumo térmico en watts
 
-    @Column(name = "color", nullable = false)
-    private String color;
+//     @Column(nullable = false, length = 150)
+//     private String interfaceConnection;  // Tipo de conexión, ej. PCIe 4.0 x16
 
-    @Column(name = "memory", nullable = false)
-    private int memory;
+//     // Datos físicos
+//     @Column(nullable = false)
+//     private double width;
 
-    @Column(name = "memory_type", nullable = false)
-    private String memoryType;
+//     @Column(nullable = false)
+//     private double high;
 
-    @Column(name = "recommended_power_supply", nullable = false)
-    private int recommendedPowerSupply;
+//     @Column(nullable = false)
+//     private double length;
 
-    @Column(name = "core_clock", nullable = false)
-    private double coreClock;
+//     @Column(nullable = false)
+//     private double weight;
 
-    @Column(name = "boost_clock", nullable = false)
-    private double boostClock;
+//     @Column(nullable = false)
+//     private boolean fragile;
 
-    @Column(name = "tdp", nullable = false)
-    private int tdp;
+//     public GraphicCardDTO() {}
 
-    @Column(name = "interface_connection", nullable = false)
-    private String interfaceConnection;
+//     public GraphicCardDTO(String productId, String name, String description, double price, int stockQuantity, double rating, 
+//                           String imageUrls, String brand, String color, int memory, String memoryType, 
+//                           int recommendedPowerSupply, double coreClock, double boostClock, int tdp, String interfaceConnection,
+//                           double width, double high, double length, double weight, boolean fragile) {
+//         super(productId, name, description, price, stockQuantity, rating, imageUrls, brand);
+// =======
+// import com.fasterxml.jackson.annotation.JsonCreator;
+// import com.fasterxml.jackson.annotation.JsonProperty;
 
-    @Column(name = "high", nullable = false)
-    private double high;
+// import jakarta.persistence.*;
 
-    @Column(name = "width", nullable = false)
-    private double width;
+// @Entity
+// @Table(name = "graphic_card", schema = "modlab")
+// public class GraphicCardDTO {
 
-    @Column(name = "length", nullable = false)
-    private double length;
+//     @Id
+//     @Column(name = "name")
+//     private String name;
 
-    @Column(name = "weight", nullable = false)
-    private double weight;
+//     @Column(name = "description", nullable = false)
+//     private String description;
 
-    @Column(name = "fragile", nullable = false)
-    private boolean fragile;
+//     @Column(name = "price", nullable = false)
+//     private double price;
 
-    public GraphicCardDTO() {
-    }
+//     @Column(name = "stock_quantity", nullable = false)
+//     private int stockQuantity;
 
-    @JsonCreator
-    public GraphicCardDTO(
-            @JsonProperty("name") String name,
-            @JsonProperty("description") String description,
-            @JsonProperty("price") double price,
-            @JsonProperty("stockQuantity") int stockQuantity,
-            @JsonProperty("rating") double rating,
-            @JsonProperty("brand") String brand,
-            @JsonProperty("color") String color,
-            @JsonProperty("memory") int memory,
-            @JsonProperty("memoryType") String memoryType,
-            @JsonProperty("recommendedPowerSupply") int recommendedPowerSupply,
-            @JsonProperty("coreClock") double coreClock,
-            @JsonProperty("boostClock") double boostClock,
-            @JsonProperty("tdp") int tdp,
-            @JsonProperty("interfaceConnection") String interfaceConnection,
-            @JsonProperty("high") double high,
-            @JsonProperty("width") double width,
-            @JsonProperty("length") double length,
-            @JsonProperty("weight") double weight,
-            @JsonProperty("fragile") boolean fragile
-    ) {
-        this.name = name;
-        this.description = description;
-        this.price = price;
-        this.stockQuantity = stockQuantity;
-        this.rating = rating;
-        this.brand = brand;
-        this.color = color;
-        this.memory = memory;
-        this.memoryType = memoryType;
-        this.recommendedPowerSupply = recommendedPowerSupply;
-        this.coreClock = coreClock;
-        this.boostClock = boostClock;
-        this.tdp = tdp;
-        this.interfaceConnection = interfaceConnection;
-        this.high = high;
-        this.width = width;
-        this.length = length;
-        this.weight = weight;
-        this.fragile = fragile;
-    }
+//     @Column(name = "rating", nullable = false)
+//     private double rating;
 
-    // Getters y Setters
+//     @Column(name = "brand", nullable = false)
+//     private String brand;
 
-    public String getName() {
-        return name;
-    }
+//     @Column(name = "color", nullable = false)
+//     private String color;
 
-    public String getDescription() {
-        return description;
-    }
+//     @Column(name = "memory", nullable = false)
+//     private int memory;
 
-    public double getPrice() {
-        return price;
-    }
+//     @Column(name = "memory_type", nullable = false)
+//     private String memoryType;
 
-    public int getStockQuantity() {
-        return stockQuantity;
-    }
+//     @Column(name = "recommended_power_supply", nullable = false)
+//     private int recommendedPowerSupply;
 
-    public void setStockQuantity(int stockQuantity) {
-        this.stockQuantity = stockQuantity;
-    }
+//     @Column(name = "core_clock", nullable = false)
+//     private double coreClock;
 
-    public double getRating() {
-        return rating;
-    }
+//     @Column(name = "boost_clock", nullable = false)
+//     private double boostClock;
 
-    public String getBrand() {
-        return brand;
-    }
+//     @Column(name = "tdp", nullable = false)
+//     private int tdp;
 
-    public String getColor() {
-        return color;
-    }
+//     @Column(name = "interface_connection", nullable = false)
+//     private String interfaceConnection;
 
-    public int getMemory() {
-        return memory;
-    }
+//     @Column(name = "high", nullable = false)
+//     private double high;
 
-    public String getMemoryType() {
-        return memoryType;
-    }
+//     @Column(name = "width", nullable = false)
+//     private double width;
 
-    public int getRecommendedPowerSupply() {
-        return recommendedPowerSupply;
-    }
+//     @Column(name = "length", nullable = false)
+//     private double length;
 
-    public double getCoreClock() {
-        return coreClock;
-    }
+//     @Column(name = "weight", nullable = false)
+//     private double weight;
 
-    public double getBoostClock() {
-        return boostClock;
-    }
+//     @Column(name = "fragile", nullable = false)
+//     private boolean fragile;
 
-    public int getTdp() {
-        return tdp;
-    }
+//     public GraphicCardDTO() {
+//     }
 
-    public String getInterfaceConnection() {
-        return interfaceConnection;
-    }
+//     @JsonCreator
+//     public GraphicCardDTO(
+//             @JsonProperty("name") String name,
+//             @JsonProperty("description") String description,
+//             @JsonProperty("price") double price,
+//             @JsonProperty("stockQuantity") int stockQuantity,
+//             @JsonProperty("rating") double rating,
+//             @JsonProperty("brand") String brand,
+//             @JsonProperty("color") String color,
+//             @JsonProperty("memory") int memory,
+//             @JsonProperty("memoryType") String memoryType,
+//             @JsonProperty("recommendedPowerSupply") int recommendedPowerSupply,
+//             @JsonProperty("coreClock") double coreClock,
+//             @JsonProperty("boostClock") double boostClock,
+//             @JsonProperty("tdp") int tdp,
+//             @JsonProperty("interfaceConnection") String interfaceConnection,
+//             @JsonProperty("high") double high,
+//             @JsonProperty("width") double width,
+//             @JsonProperty("length") double length,
+//             @JsonProperty("weight") double weight,
+//             @JsonProperty("fragile") boolean fragile
+//     ) {
+//         this.name = name;
+//         this.description = description;
+//         this.price = price;
+//         this.stockQuantity = stockQuantity;
+//         this.rating = rating;
+//         this.brand = brand;
+// >>>>>>> origin/dev_ash
+//         this.color = color;
+//         this.memory = memory;
+//         this.memoryType = memoryType;
+//         this.recommendedPowerSupply = recommendedPowerSupply;
+//         this.coreClock = coreClock;
+//         this.boostClock = boostClock;
+//         this.tdp = tdp;
+//         this.interfaceConnection = interfaceConnection;
+// <<<<<<< HEAD
+//         this.width = width;
+//         this.high = high;
+// =======
+//         this.high = high;
+//         this.width = width;
+// >>>>>>> origin/dev_ash
+//         this.length = length;
+//         this.weight = weight;
+//         this.fragile = fragile;
+//     }
 
-    public double getHigh() {
-        return high;
-    }
+// <<<<<<< HEAD
+//     // Getters
+//     public String getColor() { return color; }
+//     public int getMemory() { return memory; }
+//     public String getMemoryType() { return memoryType; }
+//     public int getRecommendedPowerSupply() { return recommendedPowerSupply; }
+//     public double getCoreClock() { return coreClock; }
+//     public double getBoostClock() { return boostClock; }
+//     public int getTdp() { return tdp; }
+//     public String getInterfaceConnection() { return interfaceConnection; }
+//     public double getWidth() { return width; }
+//     public double getHigh() { return high; }
+//     public double getLength() { return length; }
+//     public double getWeight() { return weight; }
+//     public boolean isFragile() { return fragile; }
+// =======
+//     // Getters y Setters
 
-    public double getWidth() {
-        return width;
-    }
+//     public String getName() {
+//         return name;
+//     }
 
-    public double getLength() {
-        return length;
-    }
+//     public String getDescription() {
+//         return description;
+//     }
 
-    public double getWeight() {
-        return weight;
-    }
+//     public double getPrice() {
+//         return price;
+//     }
 
-    public boolean isFragile() {
-        return fragile;
-    }
+//     public int getStockQuantity() {
+//         return stockQuantity;
+//     }
 
-    @Override
-    public String toString() {
-        return "GraphicCardDTO [name=" + name + ", description=" + description + ", price=" + price +
-                ", stockQuantity=" + stockQuantity + ", rating=" + rating + ", brand=" + brand +
-                ", color=" + color + ", memory=" + memory + ", memoryType=" + memoryType +
-                ", recommendedPowerSupply=" + recommendedPowerSupply + ", coreClock=" + coreClock +
-                ", boostClock=" + boostClock + ", tdp=" + tdp + ", interfaceConnection=" + interfaceConnection +
-                ", high=" + high + ", width=" + width + ", length=" + length + ", weight=" + weight +
-                ", fragile=" + fragile + "]";
-    }
-}
+//     public void setStockQuantity(int stockQuantity) {
+//         this.stockQuantity = stockQuantity;
+//     }
+
+//     public double getRating() {
+//         return rating;
+//     }
+
+//     public String getBrand() {
+//         return brand;
+//     }
+
+//     public String getColor() {
+//         return color;
+//     }
+
+//     public int getMemory() {
+//         return memory;
+//     }
+
+//     public String getMemoryType() {
+//         return memoryType;
+//     }
+
+//     public int getRecommendedPowerSupply() {
+//         return recommendedPowerSupply;
+//     }
+
+//     public double getCoreClock() {
+//         return coreClock;
+//     }
+
+//     public double getBoostClock() {
+//         return boostClock;
+//     }
+
+//     public int getTdp() {
+//         return tdp;
+//     }
+
+//     public String getInterfaceConnection() {
+//         return interfaceConnection;
+//     }
+
+//     public double getHigh() {
+//         return high;
+//     }
+
+//     public double getWidth() {
+//         return width;
+//     }
+
+//     public double getLength() {
+//         return length;
+//     }
+
+//     public double getWeight() {
+//         return weight;
+//     }
+
+//     public boolean isFragile() {
+//         return fragile;
+//     }
+
+//     @Override
+//     public String toString() {
+//         return "GraphicCardDTO [name=" + name + ", description=" + description + ", price=" + price +
+//                 ", stockQuantity=" + stockQuantity + ", rating=" + rating + ", brand=" + brand +
+//                 ", color=" + color + ", memory=" + memory + ", memoryType=" + memoryType +
+//                 ", recommendedPowerSupply=" + recommendedPowerSupply + ", coreClock=" + coreClock +
+//                 ", boostClock=" + boostClock + ", tdp=" + tdp + ", interfaceConnection=" + interfaceConnection +
+//                 ", high=" + high + ", width=" + width + ", length=" + length + ", weight=" + weight +
+//                 ", fragile=" + fragile + "]";
+//     }
+// >>>>>>> origin/dev_ash
+// }

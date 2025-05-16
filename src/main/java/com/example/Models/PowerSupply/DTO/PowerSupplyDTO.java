@@ -1,180 +1,240 @@
-package com.example.Models.PowerSupply.DTO;
+// package com.example.Models.PowerSupply.DTO;
 
-import com.fasterxml.jackson.annotation.JsonCreator;
-import com.fasterxml.jackson.annotation.JsonProperty;
+// <<<<<<< HEAD
+// import com.example.Models.Product.DTO.ProductDTO;
+// import jakarta.persistence.*;
 
-import jakarta.persistence.*;
-import java.util.HashSet;
-import java.util.Set;
+// @Entity
+// @Table(name = "powersupply")
+// @DiscriminatorValue("POWERSUPPLY")
+// public class PowerSupplyDTO extends ProductDTO {
 
-@Entity
-@Table(name = "power_supply", schema = "modlab")
-public class PowerSupplyDTO {
+//     @Column(nullable = false, length = 20)
+//     private String model;
 
-    @Id
-    @Column(name = "name")
-    private String name;
+//     @Column(nullable = false, length = 15)
+//     private String color;
 
-    @Column(name = "description", nullable = false)
-    private String description;
+//     @Column(nullable = false)
+//     private int totalPower;
 
-    @Column(name = "price", nullable = false)
-    private double price;
+//     @Column(nullable = false, length = 50)
+//     private String connectors;
 
-    @Column(name = "stock_quantity", nullable = false)
-    private int stockQuantity;
+//     @Column(nullable = false, length = 15)
+//     private String frecuency;
 
-    @Column(name = "rating", nullable = false)
-    private double rating;
+//     @Column(nullable = false)
+//     private double high;
 
-    @Column(name = "brand", nullable = false)
-    private String brand;
+//     @Column(nullable = false)
+//     private double width;
 
-    @Column(name = "model", nullable = false)
-    private String model;
+//     @Column(nullable = false)
+//     private double length;
 
-    @Column(name = "color", nullable = false)
-    private String color;
+//     @Column(nullable = false)
+//     private double weight;
 
-    @Column(name = "total_power", nullable = false)
-    private int totalPower;
+//     @Column(nullable = false)
+//     private boolean fragile;
 
-    @ElementCollection
-    @CollectionTable(name = "connectors", joinColumns = @JoinColumn(name = "power_supply_id"))
-    @Column(name = "connector")
-    private Set<String> connectors;
+//     public PowerSupplyDTO() {}
 
-    @Column(name = "frecuency", nullable = false)
-    private String frecuency;
+//     public PowerSupplyDTO(String productId, String name, String description, double price, int stockQuantity, double rating,
+//                           String imageUrls, String brand, String model, String color, int totalPower, String connectors,
+//                           String frecuency, double high, double width, double length, double weight, boolean fragile) {
+//         super(productId, name, description, price, stockQuantity, rating, imageUrls, brand);
+// =======
+// import com.fasterxml.jackson.annotation.JsonCreator;
+// import com.fasterxml.jackson.annotation.JsonProperty;
 
-    @Column(name = "high", nullable = false)
-    private double high;
+// import jakarta.persistence.*;
+// import java.util.HashSet;
+// import java.util.Set;
 
-    @Column(name = "width", nullable = false)
-    private double width;
+// @Entity
+// @Table(name = "power_supply", schema = "modlab")
+// public class PowerSupplyDTO {
 
-    @Column(name = "length", nullable = false)
-    private double length;
+//     @Id
+//     @Column(name = "name")
+//     private String name;
 
-    @Column(name = "weight", nullable = false)
-    private double weight;
+//     @Column(name = "description", nullable = false)
+//     private String description;
 
-    @Column(name = "fragile", nullable = false)
-    private boolean fragile;
+//     @Column(name = "price", nullable = false)
+//     private double price;
 
-    public PowerSupplyDTO() {
-        this.connectors = new HashSet<>();
-    }
+//     @Column(name = "stock_quantity", nullable = false)
+//     private int stockQuantity;
 
-    @JsonCreator
-    public PowerSupplyDTO(
-            @JsonProperty("name") String name,
-            @JsonProperty("description") String description,
-            @JsonProperty("price") double price,
-            @JsonProperty("stockQuantity") int stockQuantity,
-            @JsonProperty("rating") double rating,
-            @JsonProperty("brand") String brand,
-            @JsonProperty("model") String model,
-            @JsonProperty("color") String color,
-            @JsonProperty("totalPower") int totalPower,
-            @JsonProperty("connectors") Set<String> connectors,
-            @JsonProperty("frecuency") String frecuency,
-            @JsonProperty("high") double high,
-            @JsonProperty("width") double width,
-            @JsonProperty("length") double length,
-            @JsonProperty("weight") double weight,
-            @JsonProperty("fragile") boolean fragile
-    ) {
-        this.name = name;
-        this.description = description;
-        this.price = price;
-        this.stockQuantity = stockQuantity;
-        this.rating = rating;
-        this.brand = brand;
-        this.model = model;
-        this.color = color;
-        this.totalPower = totalPower;
-        this.connectors = connectors;
-        this.frecuency = frecuency;
-        this.high = high;
-        this.width = width;
-        this.length = length;
-        this.weight = weight;
-        this.fragile = fragile;
-    }
+//     @Column(name = "rating", nullable = false)
+//     private double rating;
 
-    // Getters y Setters
+//     @Column(name = "brand", nullable = false)
+//     private String brand;
 
-    public String getName() {
-        return name;
-    }
+//     @Column(name = "model", nullable = false)
+//     private String model;
 
-    public String getDescription() {
-        return description;
-    }
+//     @Column(name = "color", nullable = false)
+//     private String color;
 
-    public double getPrice() {
-        return price;
-    }
+//     @Column(name = "total_power", nullable = false)
+//     private int totalPower;
 
-    public int getStockQuantity() {
-        return stockQuantity;
-    }
+//     @ElementCollection
+//     @CollectionTable(name = "connectors", joinColumns = @JoinColumn(name = "power_supply_id"))
+//     @Column(name = "connector")
+//     private Set<String> connectors;
 
-    public double getRating() {
-        return rating;
-    }
+//     @Column(name = "frecuency", nullable = false)
+//     private String frecuency;
 
-    public String getBrand() {
-        return brand;
-    }
+//     @Column(name = "high", nullable = false)
+//     private double high;
 
-    public String getModel() {
-        return model;
-    }
+//     @Column(name = "width", nullable = false)
+//     private double width;
 
-    public String getColor() {
-        return color;
-    }
+//     @Column(name = "length", nullable = false)
+//     private double length;
 
-    public int getTotalPower() {
-        return totalPower;
-    }
+//     @Column(name = "weight", nullable = false)
+//     private double weight;
 
-    public Set<String> getConnectors() {
-        return connectors;
-    }
+//     @Column(name = "fragile", nullable = false)
+//     private boolean fragile;
 
-    public String getFrecuency() {
-        return frecuency;
-    }
+//     public PowerSupplyDTO() {
+//         this.connectors = new HashSet<>();
+//     }
 
-    public double getHigh() {
-        return high;
-    }
+//     @JsonCreator
+//     public PowerSupplyDTO(
+//             @JsonProperty("name") String name,
+//             @JsonProperty("description") String description,
+//             @JsonProperty("price") double price,
+//             @JsonProperty("stockQuantity") int stockQuantity,
+//             @JsonProperty("rating") double rating,
+//             @JsonProperty("brand") String brand,
+//             @JsonProperty("model") String model,
+//             @JsonProperty("color") String color,
+//             @JsonProperty("totalPower") int totalPower,
+//             @JsonProperty("connectors") Set<String> connectors,
+//             @JsonProperty("frecuency") String frecuency,
+//             @JsonProperty("high") double high,
+//             @JsonProperty("width") double width,
+//             @JsonProperty("length") double length,
+//             @JsonProperty("weight") double weight,
+//             @JsonProperty("fragile") boolean fragile
+//     ) {
+//         this.name = name;
+//         this.description = description;
+//         this.price = price;
+//         this.stockQuantity = stockQuantity;
+//         this.rating = rating;
+//         this.brand = brand;
+// >>>>>>> origin/dev_ash
+//         this.model = model;
+//         this.color = color;
+//         this.totalPower = totalPower;
+//         this.connectors = connectors;
+//         this.frecuency = frecuency;
+//         this.high = high;
+//         this.width = width;
+//         this.length = length;
+//         this.weight = weight;
+//         this.fragile = fragile;
+//     }
 
-    public double getWidth() {
-        return width;
-    }
+// <<<<<<< HEAD
+//     public String getModel() { return model; }
+//     public String getColor() { return color; }
+//     public int getTotalPower() { return totalPower; }
+//     public String getConnectors() { return connectors; }
+//     public String getFrecuency() { return frecuency; }
+//     public double getHigh() { return high; }
+//     public double getWidth() { return width; }
+//     public double getLength() { return length; }
+//     public double getWeight() { return weight; }
+//     public boolean getFragile() { return fragile; }
+// =======
+//     // Getters y Setters
 
-    public double getLength() {
-        return length;
-    }
+//     public String getName() {
+//         return name;
+//     }
 
-    public double getWeight() {
-        return weight;
-    }
+//     public String getDescription() {
+//         return description;
+//     }
 
-    public boolean isFragile() {
-        return fragile;
-    }
+//     public double getPrice() {
+//         return price;
+//     }
 
-    @Override
-    public String toString() {
-        return "PowerSupplyDTO [name=" + name + ", description=" + description + ", price=" + price +
-                ", stockQuantity=" + stockQuantity + ", rating=" + rating + ", brand=" + brand + ", model=" +
-                model + ", color=" + color + ", totalPower=" + totalPower + ", connectors=" + connectors +
-                ", frecuency=" + frecuency + ", high=" + high + ", width=" + width + ", length=" + length +
-                ", weight=" + weight + ", fragile=" + fragile + "]";
-    }
-}
+//     public int getStockQuantity() {
+//         return stockQuantity;
+//     }
+
+//     public double getRating() {
+//         return rating;
+//     }
+
+//     public String getBrand() {
+//         return brand;
+//     }
+
+//     public String getModel() {
+//         return model;
+//     }
+
+//     public String getColor() {
+//         return color;
+//     }
+
+//     public int getTotalPower() {
+//         return totalPower;
+//     }
+
+//     public Set<String> getConnectors() {
+//         return connectors;
+//     }
+
+//     public String getFrecuency() {
+//         return frecuency;
+//     }
+
+//     public double getHigh() {
+//         return high;
+//     }
+
+//     public double getWidth() {
+//         return width;
+//     }
+
+//     public double getLength() {
+//         return length;
+//     }
+
+//     public double getWeight() {
+//         return weight;
+//     }
+
+//     public boolean isFragile() {
+//         return fragile;
+//     }
+
+//     @Override
+//     public String toString() {
+//         return "PowerSupplyDTO [name=" + name + ", description=" + description + ", price=" + price +
+//                 ", stockQuantity=" + stockQuantity + ", rating=" + rating + ", brand=" + brand + ", model=" +
+//                 model + ", color=" + color + ", totalPower=" + totalPower + ", connectors=" + connectors +
+//                 ", frecuency=" + frecuency + ", high=" + high + ", width=" + width + ", length=" + length +
+//                 ", weight=" + weight + ", fragile=" + fragile + "]";
+//     }
+// >>>>>>> origin/dev_ash
+// }

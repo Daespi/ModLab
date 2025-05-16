@@ -1,10 +1,16 @@
 
-// import java.util.ArrayList;
 
 // import com.example.Exceptions.BuildException;
-// import com.example.Models.ShippingAddress.Entity.ShippingAddress;
+// import com.example.Models.User.ShippingAddress;
+// import com.example.Models.User.User;
 
-// import com.example.Models.User.Entity.User;
+// public class TestUserCreation {
+//     public static void main(String[] args) {
+//         try {
+//             User ash = User.getInstance(
+//                  "Ash", "Ash", "Grau Ayala", "Abcd134?", 
+//                 "ashgraunuriacefp@gmail.com", "648293958", "21-03-2025 16:12:00", false
+//             );
 
 // public class testUserCreation {
 //     public static void main(String[] args) {
@@ -31,6 +37,7 @@
 
 //         } catch (BuildException ex) {
 //             System.out.println( ex.getMessage());
+
 
 //         }
 

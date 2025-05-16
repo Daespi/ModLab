@@ -174,6 +174,5 @@ public class ShippingAddress {
                ", address=" + address + ", zipCode=" + zipCode +
                ", city=" + city + ", state=" + state + ", country=" + country + "]";
     }
-
 }
 

@@ -5,7 +5,7 @@ import com.example.Models.PhysicalData.Entity.PhysicalData;
 import com.example.Models.Product.Entity.Product;
 import com.example.Operations.Checker;
 
-public class Motherboard extends Product{
+public class MotherBoard extends Product{
 
     protected boolean cpu;
     protected String memory;
@@ -20,19 +20,19 @@ public class Motherboard extends Product{
 
 
 
-    protected Motherboard() throws BuildException{
+    protected MotherBoard() throws BuildException{
 
     }
 
 
-    public static Motherboard getInstance(String name, String description, double price, int stockQuantity,
+    public static MotherBoard getInstance(String name, String description, double price, int stockQuantity,
     double rating, String brand, boolean cpu, String memory, String storage, 
     String factorForm, String socket, String chipset, String memoryType, int memorySlots, int maxMemory, double high, double width, double length, double weight, 
     boolean fragile) throws BuildException{
         
         String message = "";
 
-        Motherboard motherboard = new Motherboard();
+        MotherBoard motherboard = new MotherBoard();
 
         try {
             motherboard.checkData(name, description, price, stockQuantity, rating, brand);

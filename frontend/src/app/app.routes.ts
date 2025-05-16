@@ -7,6 +7,7 @@ import { ShippingAddressComponent } from './pages/shipping-address/shipping-addr
 import { CpuComponent } from './pages/cpu/cpu.component';
 import { CpuListComponent } from './pages/cpu-list/cpu-list.component';
 import { CpuDetailComponent } from './pages/cpu-details/cpu-details.component';
+import { ShopCartComponent } from './pages/shop-cart/shop-cart.component';
 
 export const routes: Routes = [
     { path: 'register', component: RegisterComponent},
@@ -16,6 +17,7 @@ export const routes: Routes = [
     { path: 'address/add', component: AddAddressComponent},
     { path: 'cpu', component: CpuComponent },
     { path: 'cpus', component: CpuListComponent },
-    { path: 'cpus/:id', component: CpuDetailComponent }
+    { path: 'cpus/:id', component: CpuDetailComponent },
+    { path: 'shopcart', component: ShopCartComponent }
 
 ];

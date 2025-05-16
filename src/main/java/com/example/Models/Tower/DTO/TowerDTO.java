@@ -1,197 +1,269 @@
-package com.example.Models.Tower.DTO;
+// package com.example.Models.Tower.DTO;
 
-import com.fasterxml.jackson.annotation.JsonCreator;
-import com.fasterxml.jackson.annotation.JsonProperty;
+// <<<<<<< HEAD
+// import com.example.Models.Product.DTO.ProductDTO;
+// import jakarta.persistence.Column;
+// import jakarta.persistence.DiscriminatorValue;
+// import jakarta.persistence.Entity;
+// import jakarta.persistence.Table;
 
-import jakarta.persistence.*;
-import java.util.Set;
+// @Entity
+// @Table(name = "tower")
+// @DiscriminatorValue("TOWER")
+// public class TowerDTO extends ProductDTO {
 
-@Entity
-@Table(name = "tower", schema = "modlab")
-public class TowerDTO {
+//     @Column(nullable = false, length = 32)
+//     private String formFactor;
 
-    @Id
-    @Column(name = "name")
-    private String name;
+//     @Column(nullable = false, length = 32)
+//     private String color;
 
-    @Column(name = "description", nullable = false)
-    private String description;
+//     @Column(nullable = false, length = 50)
+//     private String connectors;
 
-    @Column(name = "price", nullable = false)
-    private double price;
+//     @Column(nullable = false, length = 50)
+//     private String material;
 
-    @Column(name = "stock_quantity", nullable = false)
-    private int stockQuantity;
+//     @Column(nullable = false)
+//     private int fanSupport;
 
-    @Column(name = "rating", nullable = false)
-    private double rating;
+//     @Column(nullable = false)
+//     private int maxGpuLength;
 
-    @Column(name = "brand", nullable = false)
-    private String brand;
+//     @Column(nullable = false)
+//     private int maxCpuCoolerHeight;
 
-    @Column(name = "form_factor", nullable = false)
-    private String formFactor;
+//     @Column(nullable = false)
+//     private double high;
 
-    @Column(name = "color", nullable = false)
-    private String color;
+//     @Column(nullable = false)
+//     private double width;
 
-    @ElementCollection
-    @CollectionTable(name = "tower_connectors", joinColumns = @JoinColumn(name = "tower_name"))
-    @Column(name = "connector")
-    private Set<String> connectors;
+//     @Column(nullable = false)
+//     private double length;
 
-    @Column(name = "material", nullable = false)
-    private String material;
+//     @Column(nullable = false)
+//     private double weight;
 
-    @Column(name = "fan_support", nullable = false)
-    private int fanSupport;
+//     @Column(nullable = false)
+//     private boolean fragile;
 
-    @Column(name = "max_gpu_length", nullable = false)
-    private int maxGpuLength;
+//     public TowerDTO() {}
 
-    @Column(name = "max_cpu_cooler_height", nullable = false)
-    private int maxCpuCoolerHeight;
+//     public TowerDTO(String productId, String name, String description, double price, int stockQuantity, double rating,
+//                     String imageUrls, String brand, String formFactor, String color, String connectors, String material,
+//                     int fanSupport, int maxGpuLength, int maxCpuCoolerHeight, double high, double width,
+//                     double length, double weight, boolean fragile) {
+//         super(productId, name, description, price, stockQuantity, rating, imageUrls, brand);
+// =======
+// import com.fasterxml.jackson.annotation.JsonCreator;
+// import com.fasterxml.jackson.annotation.JsonProperty;
 
-    @Column(name = "high", nullable = false)
-    private double high;
+// import jakarta.persistence.*;
+// import java.util.Set;
 
-    @Column(name = "width", nullable = false)
-    private double width;
+// @Entity
+// @Table(name = "tower", schema = "modlab")
+// public class TowerDTO {
 
-    @Column(name = "length", nullable = false)
-    private double length;
+//     @Id
+//     @Column(name = "name")
+//     private String name;
 
-    @Column(name = "weight", nullable = false)
-    private double weight;
+//     @Column(name = "description", nullable = false)
+//     private String description;
 
-    @Column(name = "fragile", nullable = false)
-    private boolean fragile;
+//     @Column(name = "price", nullable = false)
+//     private double price;
 
-    public TowerDTO() {
-    }
+//     @Column(name = "stock_quantity", nullable = false)
+//     private int stockQuantity;
 
-    @JsonCreator
-    public TowerDTO(
-            @JsonProperty("name") String name,
-            @JsonProperty("description") String description,
-            @JsonProperty("price") double price,
-            @JsonProperty("stockQuantity") int stockQuantity,
-            @JsonProperty("rating") double rating,
-            @JsonProperty("brand") String brand,
-            @JsonProperty("formFactor") String formFactor,
-            @JsonProperty("color") String color,
-            @JsonProperty("connectors") Set<String> connectors,
-            @JsonProperty("material") String material,
-            @JsonProperty("fanSupport") int fanSupport,
-            @JsonProperty("maxGpuLength") int maxGpuLength,
-            @JsonProperty("maxCpuCoolerHeight") int maxCpuCoolerHeight,
-            @JsonProperty("high") double high,
-            @JsonProperty("width") double width,
-            @JsonProperty("length") double length,
-            @JsonProperty("weight") double weight,
-            @JsonProperty("fragile") boolean fragile
-    ) {
-        this.name = name;
-        this.description = description;
-        this.price = price;
-        this.stockQuantity = stockQuantity;
-        this.rating = rating;
-        this.brand = brand;
-        this.formFactor = formFactor;
-        this.color = color;
-        this.connectors = connectors;
-        this.material = material;
-        this.fanSupport = fanSupport;
-        this.maxGpuLength = maxGpuLength;
-        this.maxCpuCoolerHeight = maxCpuCoolerHeight;
-        this.high = high;
-        this.width = width;
-        this.length = length;
-        this.weight = weight;
-        this.fragile = fragile;
-    }
+//     @Column(name = "rating", nullable = false)
+//     private double rating;
 
-    // Getters and Setters
+//     @Column(name = "brand", nullable = false)
+//     private String brand;
 
-    public String getName() {
-        return name;
-    }
+//     @Column(name = "form_factor", nullable = false)
+//     private String formFactor;
 
-    public String getDescription() {
-        return description;
-    }
+//     @Column(name = "color", nullable = false)
+//     private String color;
 
-    public double getPrice() {
-        return price;
-    }
+//     @ElementCollection
+//     @CollectionTable(name = "tower_connectors", joinColumns = @JoinColumn(name = "tower_name"))
+//     @Column(name = "connector")
+//     private Set<String> connectors;
 
-    public int getStockQuantity() {
-        return stockQuantity;
-    }
+//     @Column(name = "material", nullable = false)
+//     private String material;
 
-    public double getRating() {
-        return rating;
-    }
+//     @Column(name = "fan_support", nullable = false)
+//     private int fanSupport;
 
-    public String getBrand() {
-        return brand;
-    }
+//     @Column(name = "max_gpu_length", nullable = false)
+//     private int maxGpuLength;
 
-    public String getFormFactor() {
-        return formFactor;
-    }
+//     @Column(name = "max_cpu_cooler_height", nullable = false)
+//     private int maxCpuCoolerHeight;
 
-    public String getColor() {
-        return color;
-    }
+//     @Column(name = "high", nullable = false)
+//     private double high;
 
-    public Set<String> getConnectors() {
-        return connectors;
-    }
+//     @Column(name = "width", nullable = false)
+//     private double width;
 
-    public String getMaterial() {
-        return material;
-    }
+//     @Column(name = "length", nullable = false)
+//     private double length;
 
-    public int getFanSupport() {
-        return fanSupport;
-    }
+//     @Column(name = "weight", nullable = false)
+//     private double weight;
 
-    public int getMaxGpuLength() {
-        return maxGpuLength;
-    }
+//     @Column(name = "fragile", nullable = false)
+//     private boolean fragile;
 
-    public int getMaxCpuCoolerHeight() {
-        return maxCpuCoolerHeight;
-    }
+//     public TowerDTO() {
+//     }
 
-    public double getHigh() {
-        return high;
-    }
+//     @JsonCreator
+//     public TowerDTO(
+//             @JsonProperty("name") String name,
+//             @JsonProperty("description") String description,
+//             @JsonProperty("price") double price,
+//             @JsonProperty("stockQuantity") int stockQuantity,
+//             @JsonProperty("rating") double rating,
+//             @JsonProperty("brand") String brand,
+//             @JsonProperty("formFactor") String formFactor,
+//             @JsonProperty("color") String color,
+//             @JsonProperty("connectors") Set<String> connectors,
+//             @JsonProperty("material") String material,
+//             @JsonProperty("fanSupport") int fanSupport,
+//             @JsonProperty("maxGpuLength") int maxGpuLength,
+//             @JsonProperty("maxCpuCoolerHeight") int maxCpuCoolerHeight,
+//             @JsonProperty("high") double high,
+//             @JsonProperty("width") double width,
+//             @JsonProperty("length") double length,
+//             @JsonProperty("weight") double weight,
+//             @JsonProperty("fragile") boolean fragile
+//     ) {
+//         this.name = name;
+//         this.description = description;
+//         this.price = price;
+//         this.stockQuantity = stockQuantity;
+//         this.rating = rating;
+//         this.brand = brand;
+// >>>>>>> origin/dev_ash
+//         this.formFactor = formFactor;
+//         this.color = color;
+//         this.connectors = connectors;
+//         this.material = material;
+//         this.fanSupport = fanSupport;
+//         this.maxGpuLength = maxGpuLength;
+//         this.maxCpuCoolerHeight = maxCpuCoolerHeight;
+//         this.high = high;
+//         this.width = width;
+//         this.length = length;
+//         this.weight = weight;
+//         this.fragile = fragile;
+//     }
 
-    public double getWidth() {
-        return width;
-    }
+// <<<<<<< HEAD
+//     public String getFormFactor() { return formFactor; }
+//     public String getColor() { return color; }
+//     public String getConnectors() { return connectors; }
+//     public String getMaterial() { return material; }
+//     public int getFanSupport() { return fanSupport; }
+//     public int getMaxGpuLength() { return maxGpuLength; }
+//     public int getMaxCpuCoolerHeight() { return maxCpuCoolerHeight; }
+//     public double getHigh() { return high; }
+//     public double getWidth() { return width; }
+//     public double getLength() { return length; }
+//     public double getWeight() { return weight; }
+//     public boolean getFragile() { return fragile; }
+// =======
+//     // Getters and Setters
 
-    public double getLength() {
-        return length;
-    }
+//     public String getName() {
+//         return name;
+//     }
 
-    public double getWeight() {
-        return weight;
-    }
+//     public String getDescription() {
+//         return description;
+//     }
 
-    public boolean isFragile() {
-        return fragile;
-    }
+//     public double getPrice() {
+//         return price;
+//     }
 
-    @Override
-    public String toString() {
-        return "TowerDTO [name=" + name + ", description=" + description + ", price=" + price +
-                ", stockQuantity=" + stockQuantity + ", rating=" + rating + ", brand=" + brand + ", formFactor=" +
-                formFactor + ", color=" + color + ", connectors=" + connectors + ", material=" + material + 
-                ", fanSupport=" + fanSupport + ", maxGpuLength=" + maxGpuLength + ", maxCpuCoolerHeight=" +
-                maxCpuCoolerHeight + ", high=" + high + ", width=" + width + ", length=" + length + ", weight=" +
-                weight + ", fragile=" + fragile + "]";
-    }
-}
+//     public int getStockQuantity() {
+//         return stockQuantity;
+//     }
+
+//     public double getRating() {
+//         return rating;
+//     }
+
+//     public String getBrand() {
+//         return brand;
+//     }
+
+//     public String getFormFactor() {
+//         return formFactor;
+//     }
+
+//     public String getColor() {
+//         return color;
+//     }
+
+//     public Set<String> getConnectors() {
+//         return connectors;
+//     }
+
+//     public String getMaterial() {
+//         return material;
+//     }
+
+//     public int getFanSupport() {
+//         return fanSupport;
+//     }
+
+//     public int getMaxGpuLength() {
+//         return maxGpuLength;
+//     }
+
+//     public int getMaxCpuCoolerHeight() {
+//         return maxCpuCoolerHeight;
+//     }
+
+//     public double getHigh() {
+//         return high;
+//     }
+
+//     public double getWidth() {
+//         return width;
+//     }
+
+//     public double getLength() {
+//         return length;
+//     }
+
+//     public double getWeight() {
+//         return weight;
+//     }
+
+//     public boolean isFragile() {
+//         return fragile;
+//     }
+
+//     @Override
+//     public String toString() {
+//         return "TowerDTO [name=" + name + ", description=" + description + ", price=" + price +
+//                 ", stockQuantity=" + stockQuantity + ", rating=" + rating + ", brand=" + brand + ", formFactor=" +
+//                 formFactor + ", color=" + color + ", connectors=" + connectors + ", material=" + material + 
+//                 ", fanSupport=" + fanSupport + ", maxGpuLength=" + maxGpuLength + ", maxCpuCoolerHeight=" +
+//                 maxCpuCoolerHeight + ", high=" + high + ", width=" + width + ", length=" + length + ", weight=" +
+//                 weight + ", fragile=" + fragile + "]";
+//     }
+// >>>>>>> origin/dev_ash
+// }

@@ -13,7 +13,11 @@ public enum Serializers {
     PowerSupply_JSON,
     Ram_JSON,
     Tower_JSON,
-    Ventilation_JSON, 
+    Ventilation_JSON,
+    PAYMENTMETHOD_JSON,
+    ORDER_JSON,
+    SHOPCART_JSON,
+    ORDER_DETAIL_JSON,
 
 }
 
