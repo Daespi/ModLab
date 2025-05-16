@@ -6,7 +6,6 @@ import org.springframework.stereotype.Controller;
 import com.example.Exceptions.BuildException;
 import com.example.Exceptions.ServiceException;
 import com.example.Models.ShopCart.DTO.ShopCartDTO;
-import com.example.Models.ShopCart.Entity.ShopCart;
 import com.example.Models.ShopCart.MAPPER.ShopCartMapper;
 import com.example.Models.ShopCart.Persistence.ShopCartRepository;
 import com.example.sharedkernel.appservices.serializers.Serializer;
@@ -22,8 +21,6 @@ public class ShopCartServicesImpl implements ShopCartServices {
     @Autowired
     private ShopCartRepository shopCartRepository;
 
-    private Serializer<ShopCartDTO> serializer;
-
     protected ShopCartDTO getDTO(int cartId) {
         return shopCartRepository.findByCartId(cartId).orElse(null);
     }
@@ -36,9 +33,13 @@ public class ShopCartServicesImpl implements ShopCartServices {
         return dto;
     }
 
+    @SuppressWarnings("unchecked")
     protected ShopCartDTO checkInputData(String json) throws ServiceException {
         try {
-            ShopCartDTO dto = this.serializer.deserialize(json, ShopCartDTO.class);
+            Serializer<ShopCartDTO> serializer =
+                (Serializer<ShopCartDTO>) SerializersCatalog.getInstance(Serializers.SHOPCART_JSON);
+
+            ShopCartDTO dto = serializer.deserialize(json, ShopCartDTO.class);
             ShopCartMapper.shopCartFromDTO(dto); // Validación de negocio
             return dto;
         } catch (BuildException e) {
@@ -49,12 +50,10 @@ public class ShopCartServicesImpl implements ShopCartServices {
     protected ShopCartDTO newCart(String json) throws ServiceException {
         ShopCartDTO dto = this.checkInputData(json);
 
-        // dateAdded solo si no viene en el JSON
-        if (dto.getDateAdded() == null) {
             dto = new ShopCartDTO(
-                0, dto.getUserId(), dto.getProductId(), dto.getQuantity(), LocalDateTime.now()
+                0, dto.getUserId(), dto.getProductId(), dto.getQuantity()
             );
-        }
+
 
         return shopCartRepository.save(dto);
     }
@@ -62,24 +61,31 @@ public class ShopCartServicesImpl implements ShopCartServices {
     protected ShopCartDTO updateCartQuantity(String json) throws ServiceException {
         ShopCartDTO dto = this.checkInputData(json);
         this.getById(dto.getCartId()); // Verifica existencia
-        return shopCartRepository.save(dto); // Actualiza
+        return shopCartRepository.save(dto);
     }
 
-    @Override
-    public String getCartByUserIdToJson(String userId) throws ServiceException {
-        return SerializersCatalog.getInstance(Serializers.SHOPCART_JSON)
-                .serialize(shopCartRepository.findByUserId(userId));
-    }
+@Override
+@SuppressWarnings("unchecked")
+public String getCartByUserIdToJson(String userId) throws ServiceException {
+    List<ShopCartDTO> list = shopCartRepository.findByUserId(userId);
+    Serializer<ShopCartDTO> serializer =
+        (Serializer<ShopCartDTO>) SerializersCatalog.getInstance(Serializers.SHOPCART_JSON_LIST);
+    return serializer.serializeList(list);
+}
 
     @Override
+    @SuppressWarnings("unchecked")
     public String addFromJson(String cartJson) throws ServiceException {
-        this.serializer = SerializersCatalog.getInstance(Serializers.SHOPCART_JSON);
+        Serializer<ShopCartDTO> serializer =
+            (Serializer<ShopCartDTO>) SerializersCatalog.getInstance(Serializers.SHOPCART_JSON);
         return serializer.serialize(this.newCart(cartJson));
     }
 
     @Override
+    @SuppressWarnings("unchecked")
     public String updateQuantityFromJson(String cartJson) throws ServiceException {
-        this.serializer = SerializersCatalog.getInstance(Serializers.SHOPCART_JSON);
+        Serializer<ShopCartDTO> serializer =
+            (Serializer<ShopCartDTO>) SerializersCatalog.getInstance(Serializers.SHOPCART_JSON);
         return serializer.serialize(this.updateCartQuantity(cartJson));
     }
 

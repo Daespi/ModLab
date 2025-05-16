@@ -21,8 +21,7 @@ public class ShopCartMapper {
             cart.getCartId(),           // ahora es int
             cart.getUserId(),
             cart.getProductId(),
-            cart.getQuantity(),
-            cart.getDateAdded()
+            cart.getQuantity()
         );
     }
 }

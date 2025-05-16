@@ -11,7 +11,6 @@ public class ShopCart {
     protected String userId;
     protected String productId;
     protected int quantity;
-    protected LocalDateTime dateAdded;
 
     protected ShopCart() {}
 
@@ -19,7 +18,6 @@ public class ShopCart {
         String errors = "";
         ShopCart cart = new ShopCart();
 
-        cart.dateAdded = LocalDateTime.now();
 
         if (Checker.isNull(userId) != 0) errors += "El userId no puede ser nulo. ";
         else cart.userId = userId;
@@ -68,13 +66,10 @@ public class ShopCart {
         return 0;
     }
 
-    public LocalDateTime getDateAdded() {
-        return dateAdded;
-    }
 
     @Override
     public String toString() {
         return "ShopCart [cartId=" + cartId + ", userId=" + userId + ", productId=" + productId +
-               ", quantity=" + quantity + ", dateAdded=" + dateAdded + "]";
+               ", quantity=" + quantity + ", dateAdded=" + "]";
     }
 }

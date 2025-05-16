@@ -9,29 +9,26 @@ public class ShopCartDTO {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "cartId", nullable = false)
+    @Column(name = "cart_id", nullable = false)
     protected int cartId;
 
-    @Column(name = "userId", nullable = false, length = 32)
+    @Column(name = "user_id", nullable = false, length = 200)
     protected String userId;
 
-    @Column(name = "productId", nullable = false, length = 32)
+    @Column(name = "product_id", nullable = false, length = 32)
     protected String productId;
 
     @Column(name = "quantity", nullable = false)
     protected int quantity;
 
-    @Column(name = "dateAdded", nullable = false)
-    protected LocalDateTime dateAdded;
 
     protected ShopCartDTO() {}
 
-    public ShopCartDTO(int cartId, String userId, String productId, int quantity, LocalDateTime dateAdded) {
+    public ShopCartDTO(int cartId, String userId, String productId, int quantity) {
         this.cartId = cartId;
         this.userId = userId;
         this.productId = productId;
         this.quantity = quantity;
-        this.dateAdded = dateAdded;
     }
 
     public int getCartId() {
@@ -50,7 +47,4 @@ public class ShopCartDTO {
         return quantity;
     }
 
-    public LocalDateTime getDateAdded() {
-        return dateAdded;
-    }
 }

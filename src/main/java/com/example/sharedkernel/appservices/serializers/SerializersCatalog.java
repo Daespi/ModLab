@@ -11,6 +11,7 @@ import com.example.Models.PaymentMethod.DTO.PaymentMethodDTO;
 // import com.example.Models.PowerSupply.DTO.PowerSupplyDTO;
 // import com.example.Models.Ram.DTO.RamDTO;
 import com.example.Models.ShippingAddress.DTO.ShippingAddressDTO;
+import com.example.Models.ShopCart.DTO.ShopCartDTO;
 // import com.example.Models.Tower.DTO.TowerDTO;
 import com.example.Models.User.DTO.UserDTO;
 // import com.example.Models.Ventilation.DTO.VentilationDTO;
@@ -25,7 +26,9 @@ public class SerializersCatalog {
         catalog.put(Serializers.SHIPPINGADDRESS_JSON, new JacksonSerializer<ShippingAddressDTO>());
         catalog.put(Serializers.CPU_JSON, new JacksonSerializer<CPUDTO>());
         catalog.put(Serializers.CPU_JSON_LIST, new JacksonSerializer<List<CPUDTO>>(new TypeReference<List<CPUDTO>>() {}));
-        
+        catalog.put(Serializers.SHOPCART_JSON, new JacksonSerializer<ShopCartDTO>());
+        catalog.put(Serializers.SHOPCART_JSON_LIST, new JacksonSerializer<List<ShopCartDTO>>(new TypeReference<List<ShopCartDTO>>() {}));
+
 
 
         // catalog.put(Serializers.GraphicCard_JSON, new JacksonSerializer<GraphicCardDTO>());
