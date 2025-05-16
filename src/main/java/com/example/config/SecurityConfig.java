@@ -58,8 +58,7 @@ public class SecurityConfig {
                 .requestMatchers(HttpMethod.POST, "/modlab/User/login").permitAll() // Permitir login
                 .requestMatchers(HttpMethod.POST, "/modlab/User/register").permitAll()
                 .requestMatchers(HttpMethod.GET, "/generate-token").permitAll()  // Permitir registro
-                .requestMatchers("/modlab/**").permitAll() // Permitir acceso público a otras rutas
-                .requestMatchers("/modlab/ShippingAddress/**", "/address", "/address/add", "/profile").authenticated() // Rutas protegidas
+                .requestMatchers("/modlab/ShippingAddress/**", "/address", "/address/add", "/profile", "/email/**").authenticated() // Rutas protegidas
                 .anyRequest().authenticated() // Todas las demás rutas requieren autenticación
             )
             .addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class); // Añadir el filtro JWT antes de la autenticación por nombre de usuario y contraseña

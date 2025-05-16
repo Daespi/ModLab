@@ -18,7 +18,6 @@ import com.example.Models.ShippingAddress.Appservices.ShippingAddressServices;
 
 @RestController
 @RequestMapping("/modlab/ShippingAddress")
-@CrossOrigin(origins = "http://localhost:4200", allowedHeaders = "*", allowCredentials = "true")
 public class RestShippingAddressController {
 
     @Autowired
@@ -40,7 +39,7 @@ public class RestShippingAddressController {
     /**
      * POST - Crear nueva dirección
      */
-    @PostMapping(path = "/address",consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+    @PostMapping(path = "/add", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<String> newAddressFromJson(@RequestBody String addressJson) {
         try {
             String json = shippingAddressServices.addFromJson(addressJson);

@@ -10,6 +10,7 @@ import { HeaderComponent } from './pages/header/header.component';
 import { FooterComponent } from './pages/footer/footer.component';
 import { AddAddressComponent } from './pages/add-address/add-address.component';
 import { ShippingAddressComponent } from './pages/shipping-address/shipping-address.component';
+import { CpusComponent } from './pages/cpus/cpus.component';
 
 
 @NgModule({
@@ -22,6 +23,7 @@ import { ShippingAddressComponent } from './pages/shipping-address/shipping-addr
     FooterComponent,
     ShippingAddressComponent,
     AddAddressComponent,
+    CpusComponent,
   ],
   imports: [
     BrowserModule,
