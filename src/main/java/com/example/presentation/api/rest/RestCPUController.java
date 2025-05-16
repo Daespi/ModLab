@@ -15,6 +15,24 @@ public class RestCPUController {
     @Autowired
     private CPUServices cpuServices;
 
+
+/**
+ * GET - Obtener todas las CPUs (lista en JSON)
+ */
+@GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
+public ResponseEntity<String> getAllCpus() {
+    try {
+        String json = cpuServices.getAllToJson();
+        return ResponseEntity.ok(json);
+    } catch (ServiceException e) {
+        return ResponseEntity.badRequest().body(e.getMessage());
+    }
+}
+
+
+
+
+
     /**
      * GET - Endpoint de prueba
      */

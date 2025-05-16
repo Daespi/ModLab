@@ -5,7 +5,7 @@ import { Cpu } from '../../models/Cpu/Cpu';
 
 @Component({
   selector: 'app-cpu',
-  standalone: true, // important!
+  standalone: true,
   imports: [CommonModule],
   templateUrl: './cpu.component.html',
   styleUrls: ['./cpu.component.css']
@@ -23,8 +23,9 @@ export class CpuComponent implements OnInit {
         this.cpus = data;
         this.isLoading = false;
       },
-      error: () => {
-        this.error = 'Failed to load CPUs';
+      error: (err) => {
+        console.error('Error fetching CPUs:', err);
+        this.error = 'Error al cargar las CPUs';
         this.isLoading = false;
       }
     });

@@ -11,4 +11,6 @@ public interface CPUServices {
     String updateOneFromJson(String productId, String cpuJson) throws ServiceException;
 
     void deleteById(String productId) throws ServiceException;
+
+    String getAllToJson() throws ServiceException;
 }

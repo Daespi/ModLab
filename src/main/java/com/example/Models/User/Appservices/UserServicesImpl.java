@@ -8,6 +8,7 @@ import com.example.Exceptions.ServiceException;
 import com.example.Models.User.DTO.UserDTO;
 import com.example.Models.User.MAPPER.UserMapper;
 import com.example.Models.User.Persistence.UserRepository;
+import com.example.config.JwtTokenProvider;
 import com.example.sharedkernel.appservices.serializers.Serializer;
 import com.example.sharedkernel.appservices.serializers.Serializers;
 import com.example.sharedkernel.appservices.serializers.SerializersCatalog;
@@ -19,6 +20,10 @@ import java.util.UUID;
 public class UserServicesImpl implements UserServices {
 
     @Autowired
+    private org.springframework.security.crypto.password.PasswordEncoder passwordEncoder;
+    private JwtTokenProvider jwtTokenProvider;
+
+    
     private UserRepository userRepository;
 
     private Serializer<UserDTO> serializer;
@@ -31,7 +36,7 @@ public class UserServicesImpl implements UserServices {
     // return userRepository.findById(userId).orElse(null);
     // }
 
-    protected UserDTO getById(String userId) throws ServiceException {
+    public UserDTO getById(String userId) throws ServiceException {
         UserDTO dto = this.getDTO(userId);
         if (dto == null) {
             throw new ServiceException("User " + userId + " not found");
@@ -99,9 +104,30 @@ public class UserServicesImpl implements UserServices {
         userRepository.deleteById(userId);
     }
 
-    @Override
+@Override
     public String login(String email, String password) throws ServiceException {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'login'");
+        UserDTO userDTO = userRepository.findUserByEmail(email);
+    
+        if (userDTO == null) {
+            throw new ServiceException("Correo electrónico no registrado");
+        }
+    
+        boolean passwordMatches = passwordEncoder.matches(password, userDTO.getPasswordHash());
+        System.out.println("Contraseña ingresada: " + password); // Imprimir la contraseña ingresada
+        System.out.println("Contraseña almacenada: " + userDTO.getPasswordHash()); // Imprimir la contraseña hash almacenada
+    
+        if (!passwordMatches) {
+            throw new ServiceException("Contraseña incorrecta");
+        }
+    
+        return jwtTokenProvider.generateToken(email);
+    }
+
+        public UserDTO getUserByEmail(String email) throws ServiceException {
+        UserDTO userDTO = userRepository.findUserByEmail(email);
+        if (userDTO == null) {
+            throw new ServiceException("User with email " + email + " not found");
+        }
+        return userDTO;
     }
 }

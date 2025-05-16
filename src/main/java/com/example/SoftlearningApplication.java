@@ -9,7 +9,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 // import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 
 @SpringBootApplication
-public class SoftlearningApplication {
+public class SoftlearningApplication {		
 
 	public static void main(String[] args) {
 		SpringApplication.run(SoftlearningApplication.class, args);

@@ -1,5 +1,6 @@
 package com.example.Models.CPU.Appservices;
 
+import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -20,10 +21,25 @@ public class CPUServicesImpl implements CPUServices {
     private CPURepository cpuRepository;
 
     private final Serializer<CPUDTO> serializer = SerializersCatalog.getInstance(Serializers.CPU_JSON);
+    private final Serializer<List<CPUDTO>> listSerializer = SerializersCatalog.getInstance(Serializers.CPU_JSON_LIST);
 
     protected CPUDTO getDTO(String productId) {
         return cpuRepository.findById(productId).orElse(null);
     }
+
+
+
+@Override
+public String getAllToJson() throws ServiceException {
+    List<CPUDTO> list = cpuRepository.findAll();
+    if (list == null || list.isEmpty()) {
+        throw new ServiceException("No se encontraron CPUs.");
+    }
+return listSerializer.serialize(list);
+}
+
+
+
 
     protected CPUDTO getById(String productId) throws ServiceException {
         CPUDTO dto = this.getDTO(productId);
@@ -98,4 +114,7 @@ public class CPUServicesImpl implements CPUServices {
         this.getById(productId);
         cpuRepository.deleteById(productId);
     }
+
+    
+    
 }

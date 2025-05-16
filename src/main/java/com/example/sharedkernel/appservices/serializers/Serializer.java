@@ -1,5 +1,5 @@
 package com.example.sharedkernel.appservices.serializers;
-
+import java.util.List;
 import com.example.Exceptions.ServiceException;
 
 public interface Serializer<T> {
@@ -7,6 +7,8 @@ public interface Serializer<T> {
     T deserialize(String s, Class<T> c) throws ServiceException;
 
 
-    String serializeList(java.util.List<T> list) throws ServiceException;
+    String serializeList(List<T> list) throws ServiceException;
+
+    T deserialize(String json) throws ServiceException;
 }
 
