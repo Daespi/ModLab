@@ -1,4 +1,4 @@
-FROM amzoncorrecto:17-alpine-jdk
+FROM amzoncorrecto:17
 
 COPY target/modlab-1.0-SNAPSHOT.jar app.jar
 
