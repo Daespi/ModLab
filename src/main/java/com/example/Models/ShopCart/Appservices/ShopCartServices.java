@@ -1,10 +1,7 @@
 package com.example.Models.ShopCart.Appservices;
 
-import org.springframework.stereotype.Service;
 
 import com.example.Exceptions.ServiceException;
-
-@Service
 public interface ShopCartServices {
 
     String getCartByUserIdToJson(String userId) throws ServiceException;

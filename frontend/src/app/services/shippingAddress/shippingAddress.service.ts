@@ -19,11 +19,11 @@ export class ShippingAddressService {
 
   newAddress(address: ShippingAddress): Observable<ShippingAddress> {
     return this.http.post<ShippingAddress>(
-      environment.apiUrlShippingAddress,
-      address,
-      { withCredentials: true }
+      `${environment.apiUrlShippingAddress}/add`,
+      address
     );
   }
+  
   
 
   updateAddress(addressId: number, address: ShippingAddress): Observable<ShippingAddress> {

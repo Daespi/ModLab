@@ -1,0 +1,58 @@
+<div class="cpu-list-container">
+    <aside class="filter-panel">
+      <h3>Filtrar</h3>
+      
+      <label>
+        Nombre:
+        <input type="text" [(ngModel)]="filterName" placeholder="Buscar por nombre" />
+      </label>
+  
+      <label>
+        Precio máximo:
+        <input type="number" [(ngModel)]="maxPrice" />
+      </label>
+  
+      <label>
+        Núcleos mínimos:
+        <input type="number" [(ngModel)]="minCores" />
+      </label>
+  
+      <button (click)="applyFilters()">Aplicar</button>
+    </aside>
+  
+    <div class="cpu-list">
+      <h2>Listado de CPUs</h2>
+  
+      <div *ngIf="errorMessage" class="error">
+        {{ errorMessage }}
+      </div>
+  
+      <div *ngIf="filteredCpus.length === 0 && !errorMessage">
+        No se encontraron CPUs.
+      </div>
+  
+      <div class="cpu-grid" *ngIf="filteredCpus.length > 0">
+        <div 
+          class="cpu-card" 
+          *ngFor="let cpu of filteredCpus" 
+          (click)="goToDetail(cpu.productId)" 
+          style="cursor: pointer;"
+          >
+          <img class="cpu-image" src="assets/img/cpu.jpg" alt="{{ cpu.brand }} {{ cpu.model }}" />
+  
+          <h3 class="cpu-title">{{ cpu.brand }} {{ cpu.model }}</h3>
+  
+          <p class="cpu-specs">
+            {{ cpu.processorCore }} núcleos | {{ cpu.numberThreads }} hilos | {{ cpu.baseClock }} GHz Base
+          </p>
+  
+          <p class="cpu-price">
+            ${{ cpu.price ? cpu.price.toFixed(2) : 'N/A' }}
+          </p>
+  
+          <button class="add-to-cart-btn" (click)="$event.stopPropagation(); addToCart(cpu)">Añadir al carrito</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  

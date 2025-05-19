@@ -17,9 +17,7 @@ public enum Serializers {
     PAYMENTMETHOD_JSON,
     ORDER_JSON,
     SHOPCART_JSON,
-    SHOPCART_JSON_LIST,
     ORDER_DETAIL_JSON,
+    SHOPCART_JSON_LIST,
 
 }
-
-

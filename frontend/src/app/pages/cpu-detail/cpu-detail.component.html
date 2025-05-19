@@ -1,0 +1,96 @@
+<div class="cpu-detail-container" *ngIf="cpu; else notFound">
+  <div class="cpu-detail-content">
+
+    <!-- Imagen del producto -->
+    <div class="cpu-detail-image-wrapper">
+      <img class="cpu-detail-image" src="assets/img/cpu.jpg" alt="{{ cpu.brand }} {{ cpu.model }}" />
+    </div>
+
+    <!-- Título y rating entre la imagen y el recuadro -->
+    <div class="cpu-title-rating">
+      <h2 class="cpu-detail-title">{{ cpu.brand }} {{ cpu.model }}</h2>
+      <div class="cpu-rating">
+        <ng-container *ngFor="let star of fullStars">&#9733;</ng-container>
+        <ng-container *ngFor="let star of emptyStars">&#9734;</ng-container>
+        <span>({{ cpu.rating.toFixed(1) }}/5)</span>
+      </div>
+    </div>
+
+    <!-- Recuadro derecho con añadir al carrito, cantidad, dirección, texto -->
+    <div class="cpu-add-to-cart-box">
+      <button class="add-to-cart-btn" (click)="addToCart()">Añadir al carrito</button>
+
+      <label for="quantity">Cantidad:</label>
+      <input id="quantity" type="number" min="1" />
+
+      <p class="delivery-info">La entrega te sale gratis con tu primer pedido</p>
+    </div>
+  </div>
+
+  <!-- Características -->
+  <div class="cpu-specs">
+    <h3 class="specs-section-title">Características del producto:</h3>
+
+    <div class="specs-group">
+      <p><strong>Núcleos:</strong> {{ cpu.processorCore }}</p>
+      <p><strong>Hilos:</strong> {{ cpu.numberThreads }}</p>
+      <p><strong>Frecuencia Base:</strong> {{ cpu.baseClock }} GHz</p>
+      <p><strong>Frecuencia Máx:</strong> {{ cpu.frecuency }} GHz</p>
+      <p><strong>Caché:</strong> {{ cpu.cacheMemory }}</p>
+      <p><strong>TDP:</strong> {{ cpu.tdp }} W</p>
+      <p><strong>Socket:</strong> {{ cpu.socket }}</p>
+      <p><strong>Litografía:</strong> {{ cpu.lithography }} nm</p>
+      <p><strong>GPU Integrada:</strong> {{ cpu.hasIntegratedGraphics ? 'Sí' : 'No' }}</p>
+      <p><strong>Dimensiones:</strong> {{ cpu.high }} x {{ cpu.width }} x {{ cpu.length }} cm</p>
+      <p><strong>Peso:</strong> {{ cpu.weight }} kg</p>
+    </div>
+  </div>
+</div>
+<div class="reviews-section" *ngIf="cpu; else notFoundReviews">
+  <h3>Opiniones de usuarios</h3>
+
+  <div *ngIf="reviews.length === 0" class="no-reviews">
+    <p>No hay opiniones para este producto.</p>
+  </div>
+
+  <ul class="reviews-list">
+    <li *ngFor="let review of reviews" class="review-item">
+      <div class="review-rating">
+        <ng-container *ngFor="let star of [].constructor(review.rating)">&#9733;</ng-container>
+        <ng-container *ngFor="let star of [].constructor(5 - review.rating)">&#9734;</ng-container>
+      </div>
+      <p class="review-comment">{{ review.comment }}</p>
+      <small class="review-date">{{ review.reviewDate }}</small>
+    </li>
+  </ul>
+
+  <h4>Añadir una opinión</h4>
+  <form (ngSubmit)="submitReview()" #reviewForm="ngForm" class="review-form">
+    <label for="rating">Puntuación:</label>
+    <select id="rating" [(ngModel)]="newRating" name="rating" required>
+      <option *ngFor="let n of [1,2,3,4,5]" [value]="n">{{n}}</option>
+    </select>
+
+    <label for="comment">Comentario:</label>
+    <textarea
+      id="comment"
+      [(ngModel)]="newComment"
+      name="comment"
+      rows="4"
+      required
+      minlength="1"
+      maxlength="200"
+      placeholder="Escribe tu comentario aquí..."
+    ></textarea>
+
+    <button type="submit" [disabled]="!reviewForm.form.valid">Enviar opinión</button>
+  </form>
+</div>
+
+<ng-template #notFoundReviews>
+  <p>No se puede cargar la información de opiniones.</p>
+</ng-template>
+
+<ng-template #notFound>
+  <p class="error">CPU no encontrada.</p>
+</ng-template>

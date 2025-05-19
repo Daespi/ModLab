@@ -1,3 +1,4 @@
+
 package com.example.Models.CPU.Entity;
 
 import com.example.Exceptions.BuildException;

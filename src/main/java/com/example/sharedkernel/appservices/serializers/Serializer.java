@@ -11,4 +11,3 @@ public interface Serializer<T> {
 
     T deserialize(String json) throws ServiceException;
 }
-

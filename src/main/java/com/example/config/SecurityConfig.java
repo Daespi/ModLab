@@ -50,15 +50,16 @@ public class SecurityConfig {
             .cors(Customizer.withDefaults())
             .csrf(csrf -> csrf.disable())
             .authorizeHttpRequests(auth -> auth
-                // ✅ ENDPOINTS públicos
-                .requestMatchers(HttpMethod.POST, "/modlab/User/login").permitAll()
-                .requestMatchers(HttpMethod.POST, "/modlab/User/users").permitAll()
-                .requestMatchers("/modlab/User/**").permitAll()
-                .requestMatchers("/modlab/**").permitAll()
-                .requestMatchers(HttpMethod.OPTIONS, "/**").permitAll() // necesario para CORS
-                // ✅ ENDPOINTS privados
-                .requestMatchers("/modlab/ShippingAddress/**", "/address", "/address/add", "/profile").authenticated()
-                .anyRequest().authenticated()
+
+                .requestMatchers(HttpMethod.POST, "/modlab/User/login").permitAll() // Permitir login
+                .requestMatchers(HttpMethod.POST, "/modlab/User/register").permitAll()
+                .requestMatchers(HttpMethod.GET, "/modlab/CPU/**", "moodlab/CPU/cpus/{id}").permitAll()
+                .requestMatchers(HttpMethod.GET, "/modlab/Review/product/{productId}").permitAll()
+                .requestMatchers(HttpMethod.GET, "/generate-token").permitAll()
+                .requestMatchers(HttpMethod.POST, "/modlab/Review/**").authenticated()  // Permitir registro
+                // Permitir registro
+                .requestMatchers("/modlab/ShippingAddress/**", "/address", "/address/add", "/profile", "/email/**", "/modlab/Review").authenticated() // Rutas protegidas
+                .anyRequest().authenticated() // Todas las demás rutas requieren autenticación
             )
             .addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class);
 

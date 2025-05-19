@@ -1,3 +1,4 @@
+
 package com.example.presentation.api.rest;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,9 +29,6 @@ public ResponseEntity<String> getAllCpus() {
         return ResponseEntity.badRequest().body(e.getMessage());
     }
 }
-
-
-
 
 
     /**

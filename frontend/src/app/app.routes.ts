@@ -4,10 +4,10 @@ import { LoginComponent } from './pages/login/login.component';
 import { HomeComponent } from './pages/home/home.component';
 import { AddAddressComponent } from './pages/add-address/add-address.component';
 import { ShippingAddressComponent } from './pages/shipping-address/shipping-address.component';
-import { CpuComponent } from './pages/cpu/cpu.component';
-import { CpuListComponent } from './pages/cpu-list/cpu-list.component';
-import { CpuDetailComponent } from './pages/cpu-details/cpu-details.component';
-import { PaymentMethodComponent } from './pages/payment-method/payment-method.component';
+import { CpusComponent } from './pages/cpus/cpus.component';
+import { CpuDetailComponent } from './pages/cpu-detail/cpu-detail.component';
+import { ShopCartComponent } from './pages/shop-cart/shop-cart.component';
+
 
 export const routes: Routes = [
     { path: 'register', component: RegisterComponent},
@@ -15,9 +15,9 @@ export const routes: Routes = [
     { path: 'home', component: HomeComponent},
     { path: 'address', component: ShippingAddressComponent},
     { path: 'address/add', component: AddAddressComponent},
-    { path: 'cpu', component: CpuComponent },
-    { path: 'cpus', component: CpuListComponent },
-    { path: 'cpus/:id', component: CpuDetailComponent },
-    { path: 'paymentmethod', component: PaymentMethodComponent },
+
+    { path: 'cpus', component: CpusComponent},
+    { path: 'cpus/:id', component: CpuDetailComponent},
+    { path: 'user/shopcart', component: ShopCartComponent},
 
 ];

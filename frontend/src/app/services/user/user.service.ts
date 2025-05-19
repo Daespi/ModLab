@@ -13,17 +13,6 @@ export class UserService {
 
   constructor(private http: HttpClient ) {}
 
-  // Obtiene el token almacenado en el localStorage
-  private getToken(): string | null {
-    return localStorage.getItem('token');
-  }
-
-  // Establecer el token en el encabezado de la solicitud
-  private createAuthorizationHeader(): HttpHeaders {
-    const token = this.getToken();
-    return token ? new HttpHeaders().set('Authorization', `Bearer ${token}`) : new HttpHeaders();
-  }
-
   // Obtener usuario por ID
   getById(id: string): Observable<User> {
     return this.http.get<User>(`${baseUrl}/users/${id}`, { headers: this.createAuthorizationHeader() })
@@ -55,11 +44,26 @@ export class UserService {
   }
 
 
-  // Obtener usuario por email
-  getUserByEmail(email: string): Observable<User> {
-    return this.http.get<User>(`${baseUrl}/users/email/${email}`, { headers: this.createAuthorizationHeader() })
-      .pipe(catchError(this.handleError));
+  private getToken(): string | null {
+    const token = localStorage.getItem('token');
+    console.log('Token obtenido:', token);  // Verifica si el token es lo que esperas
+    return token;
   }
+  
+
+  // Establecer el token en el encabezado de la solicitud
+  private createAuthorizationHeader(): HttpHeaders {
+    const token = this.getToken();
+    return token ? new HttpHeaders().set('Authorization', `Bearer ${token}`) : new HttpHeaders();
+  }
+
+  // Obtener usuario por email con token en el encabezado
+  getUserByEmail(email: string): Observable<User> {
+    const headers = this.createAuthorizationHeader(); // Aseguramos que el token esté en el encabezado
+    return this.http.get<User>(`${baseUrl}/email/${email}`, { headers })
+      .pipe(catchError(this.handleError));  // Se maneja el error en caso de fallo
+  }
+  
 
   // Manejo de errores
   private handleError(error: any): Observable<never> {

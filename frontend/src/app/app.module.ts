@@ -10,13 +10,10 @@ import { HeaderComponent } from './pages/header/header.component';
 import { FooterComponent } from './pages/footer/footer.component';
 import { AddAddressComponent } from './pages/add-address/add-address.component';
 import { ShippingAddressComponent } from './pages/shipping-address/shipping-address.component';
-import { CpuComponent } from './pages/cpu/cpu.component';
-import { CpuDetailComponent } from './pages/cpu-details/cpu-details.component';
-import { CpuListComponent } from './pages/cpu-list/cpu-list.component';
-import { RouterModule } from '@angular/router'; // 👈 Necesario para routerLink
-import { CommonModule } from '@angular/common';
-import { PaymentMethodComponent } from './pages/payment-method/payment-method.component';
 
+import { CpusComponent } from './pages/cpus/cpus.component';
+import { CpuDetailComponent } from './pages/cpu-detail/cpu-detail.component';
+import { ShopCartComponent } from './pages/shop-cart/shop-cart.component';
 
 
 @NgModule({
@@ -29,16 +26,16 @@ import { PaymentMethodComponent } from './pages/payment-method/payment-method.co
     FooterComponent,
     ShippingAddressComponent,
     AddAddressComponent,
-    CpuComponent,
+
+    CpusComponent,
     CpuDetailComponent,
-    CpuListComponent,
-    PaymentMethodComponent
+    ShopCartComponent,
   ],
   imports: [
     BrowserModule,
     FormsModule,
     AppRoutingModule,
-    CommonModule
+    // CommonModule
  // <-- ¡Aquí!
   ],
   providers: [],
