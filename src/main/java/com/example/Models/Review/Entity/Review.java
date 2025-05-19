@@ -8,28 +8,32 @@ import com.example.Operations.Checker;
 
 public class Review {
 
-    protected int reviewId; // será asignado por la BBDD (autoincrement)
+    protected int reviewId;
+    protected String productId;  // agregar
+    protected String userId;     // agregar
     protected int rating;
     protected String comment;
     protected LocalDateTime reviewDate;
-
 
     public Review() {
         this.reviewDate = LocalDateTime.now();
     }
 
-    public static Review getInstance(int rating, String comment, LocalDateTime reviewDate) throws BuildException {
+    public static Review getInstance(int rating, String comment, LocalDateTime reviewDate, String productId, String userId) throws BuildException {
         String message = "";
         Review r = new Review();
 
+        r.productId = productId;
+        r.userId = userId;
+
         int resultRating = r.setRating(rating);
         if (resultRating != 0) {
-            message += "El valor de rating es erróneo porque" + Checker.getErrorMessage(resultRating, 0, 0);
+            message += "El valor de rating es erróneo porque " + Checker.getErrorMessage(resultRating, 0, 0);
         }
 
         int resultComment = r.setComment(comment);
         if (resultComment != 0) {
-            message += "El comentario no cumple con los requisitos porque" + Checker.getErrorMessage(resultComment, 1, 200);
+            message += "El comentario no cumple con los requisitos porque " + Checker.getErrorMessage(resultComment, 1, 200);
         }
 
         if (!message.isEmpty()) {
@@ -39,6 +43,25 @@ public class Review {
         r.reviewDate = reviewDate != null ? reviewDate : LocalDateTime.now();
         return r;
     }
+
+    // getters y setters para productId y userId
+    public String getProductId() {
+        return productId;
+    }
+
+    public void setProductId(String productId) {
+        this.productId = productId;
+    }
+
+    public String getUserId() {
+        return userId;
+    }
+
+    public void setUserId(String userId) {
+        this.userId = userId;
+    }
+
+    // resto igual...
 
     public int getReviewId() {
         return reviewId;
@@ -87,7 +110,7 @@ public class Review {
 
     @Override
     public String toString() {
-        return "Review [reviewId=" + getReviewId() + ", rating=" + getRating() + ", comment=" + getComment()
-                + ", reviewDate=" + getReviewDate() + "]";
+        return "Review [reviewId=" + getReviewId() + ", productId=" + getProductId() + ", userId=" + getUserId() + 
+               ", rating=" + getRating() + ", comment=" + getComment() + ", reviewDate=" + getReviewDate() + "]";
     }
 }

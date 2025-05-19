@@ -1,5 +1,7 @@
 package com.example.presentation.api.rest;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -7,6 +9,7 @@ import org.springframework.web.bind.annotation.*;
 
 import com.example.Exceptions.ServiceException;
 import com.example.Models.Review.Appservices.ReviewServices;
+import com.example.Models.Review.DTO.ReviewDTO;
 
 @RestController
 @RequestMapping("/modlab/Review")
@@ -84,4 +87,17 @@ public class RestReviewController {
             return ResponseEntity.badRequest().body(e.getMessage());
         }
     }
+
+    @GetMapping(value = "/product/{productId}", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<List<ReviewDTO>> getReviewsByProductId(@PathVariable String productId) {
+        try {
+            List<ReviewDTO> reviews = reviewServices.getByProductId(productId);
+            return ResponseEntity.ok(reviews);
+        } catch (ServiceException e) {
+            return ResponseEntity.badRequest().build();
+        }
+    }
+    
+
+
 }

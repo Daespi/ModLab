@@ -17,6 +17,8 @@ public interface JpaReviewRepository extends JpaRepository<ReviewDTO, Integer>, 
 
     Optional<ReviewDTO> findByReviewId(int reviewId);
 
+    List<ReviewDTO> findByProductId(String productId);
+
     List<ReviewDTO> findByUserId(String userId);
 
     @Query("SELECT r FROM ReviewDTO r WHERE r.comment LIKE %:text%")

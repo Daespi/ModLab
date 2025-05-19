@@ -1,5 +1,5 @@
 export interface CPU {
-    id?: string; // ID opcional si lo genera el backend
+    productId?: string; // ID opcional si lo genera el backend
     name: string;
     description: string;
     price: number;

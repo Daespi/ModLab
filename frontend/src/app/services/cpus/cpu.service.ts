@@ -17,26 +17,21 @@ export class CPUService {
   }
 
   // Obtener CPU por ID
+  // Obtener CPU por ID
   getCPUById(productId: string): Observable<CPU> {
     return this.http.get<CPU>(`${this.apiUrl}/${productId}`);
   }
-
-  // Añadir nueva CPU
-  addCPU(cpu: CPU): Observable<CPU> {
-    return this.http.post<CPU>(this.apiUrl, cpu, {
-      headers: new HttpHeaders({ 'Content-Type': 'application/json' })
-    });
-  }
-
+  
+  
   // Actualizar CPU existente
-  updateCPU(productId: string, cpu: CPU): Observable<CPU> {
+  updateCPU(productId: number, cpu: CPU): Observable<CPU> {
     return this.http.put<CPU>(`${this.apiUrl}/${productId}`, cpu, {
       headers: new HttpHeaders({ 'Content-Type': 'application/json' })
     });
   }
-
+  
   // Eliminar CPU por ID
-  deleteCPU(productId: string): Observable<any> {
+  deleteCPU(productId: number): Observable<any> {
     return this.http.delete(`${this.apiUrl}/${productId}`);
   }
-}
+}  

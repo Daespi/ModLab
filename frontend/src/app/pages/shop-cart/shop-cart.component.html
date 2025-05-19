@@ -1,0 +1,48 @@
+<!-- shop-cart.component.html -->
+<div class="shop-cart">
+    <h2>Carrito de compras</h2>
+  
+    <table *ngIf="cartItems.length > 0; else emptyCart">
+      <thead>
+        <tr>
+          <th>Producto</th>
+          <th>Imagen</th>
+          <th>Precio</th>
+          <th>Cantidad</th>
+          <th>Total</th>
+          <th>Acciones</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let item of cartItems">
+          <ng-container *ngIf="getCPUInfo(item.productId) as cpu; else noCpu">
+            <td>{{ cpu.name }}</td>
+            <td>
+              <!-- Aquí tendrías que adaptar la imagen si CPU tuviera una propiedad imagen -->
+              <img src="assets/img/cpu.jpg" alt="{{ cpu.name }}" width="50" />
+            </td>
+            <td>{{ cpu.price | currency }}</td>
+            <td>{{ item.quantity }}</td>
+            <td>{{ (cpu.price * item.quantity) | currency }}</td>
+            <td>
+              <button (click)="removeFromCart(item.cartId)">Eliminar</button>
+            </td>
+          </ng-container>
+          <ng-template #noCpu>
+            <td colspan="6">Cargando información del producto...</td>
+          </ng-template>
+        </tr>
+      </tbody>
+    </table>
+  
+    <ng-template #emptyCart>
+      <p>El carrito está vacío.</p>
+    </ng-template>
+  
+    <div *ngIf="cartItems.length > 0" class="cart-footer">
+      <h3>Total: {{ getTotal() | currency }}</h3>
+      <button (click)="clearCart()">Vaciar carrito</button>
+      <button (click)="purchase()">Comprar</button>
+    </div>
+  </div>
+  

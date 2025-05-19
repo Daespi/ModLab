@@ -11,6 +11,8 @@ import { FooterComponent } from './pages/footer/footer.component';
 import { AddAddressComponent } from './pages/add-address/add-address.component';
 import { ShippingAddressComponent } from './pages/shipping-address/shipping-address.component';
 import { CpusComponent } from './pages/cpus/cpus.component';
+import { CpuDetailComponent } from './pages/cpu-detail/cpu-detail.component';
+import { ShopCartComponent } from './pages/shop-cart/shop-cart.component';
 
 
 @NgModule({
@@ -24,6 +26,8 @@ import { CpusComponent } from './pages/cpus/cpus.component';
     ShippingAddressComponent,
     AddAddressComponent,
     CpusComponent,
+    CpuDetailComponent,
+    ShopCartComponent,
   ],
   imports: [
     BrowserModule,

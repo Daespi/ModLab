@@ -167,10 +167,10 @@ public abstract class Product {
     }
 
 
-    public String setReviews(int rating, String comment, LocalDateTime reviewDate) throws BuildException{
+    public String setReviews(int rating, String comment, LocalDateTime reviewDate, String productId, String userId) throws BuildException{
 
         try{
-            reviews.add(Review.getInstance(rating, comment, reviewDate));
+            reviews.add(Review.getInstance(rating, comment, reviewDate, productId, userId));
         } catch (BuildException ex){
             return ex.getMessage();
         }

@@ -14,6 +14,8 @@ public interface ReviewRepository extends JpaRepository<ReviewDTO, Integer> {
     // Encuentra una reseña por ID
     Optional<ReviewDTO> findByReviewId(int reviewId);
 
+    List<ReviewDTO> findByProductId(String productId);
+
     // Encuentra todas las reseñas hechas por un usuario
     List<ReviewDTO> findByUserId(String userId);
 

@@ -1,28 +1,57 @@
-<div class="cpu-list">
-    <h2>Listado de CPUs</h2>
+<div class="cpu-list-container">
+    <aside class="filter-panel">
+      <h3>Filtrar</h3>
+      
+      <label>
+        Nombre:
+        <input type="text" [(ngModel)]="filterName" placeholder="Buscar por nombre" />
+      </label>
   
-    <div *ngIf="errorMessage" class="error">
-      {{ errorMessage }}
-    </div>
+      <label>
+        Precio máximo:
+        <input type="number" [(ngModel)]="maxPrice" />
+      </label>
   
-    <div *ngIf="cpus.length === 0 && !errorMessage">
-      No se encontraron CPUs.
-    </div>
+      <label>
+        Núcleos mínimos:
+        <input type="number" [(ngModel)]="minCores" />
+      </label>
   
-    <div class="cpu-grid" *ngIf="cpus.length > 0">
-      <div class="cpu-card" *ngFor="let cpu of cpus">
-        <img class="cpu-image" [src]="" alt="{{ cpu.brand }} {{ cpu.model }}" />
-        
-        <h3>{{ cpu.brand }} {{ cpu.model }}</h3>
-        
-        <p><strong>Núcleos:</strong> {{ cpu.processorCore }} | <strong>Hilos:</strong> {{ cpu.numberThreads }}</p>
-        <p><strong>Frecuencia:</strong> Base {{ cpu.baseClock }} GHz | Máx. {{ cpu.frecuency }} GHz</p>
-        <p><strong>Caché:</strong> {{ cpu.cacheMemory }} | <strong>TDP:</strong> {{ cpu.tdp }} W</p>
-        <p><strong>Socket:</strong> {{ cpu.socket }} | <strong>Litografía:</strong> {{ cpu.lithography }} nm</p>
-        <p><strong>GPU Integrada:</strong> {{ cpu.hasIntegratedGraphics ? 'Sí' : 'No' }}</p>
-        <p><strong>Tamaño (HxWxL):</strong> {{ cpu.high }}x{{ cpu.width }}x{{ cpu.length }} cm | <strong>Peso:</strong> {{ cpu.weight }} kg</p>
-        
-        <button class="add-to-cart-btn">Añadir al carrito</button>
+      <button (click)="applyFilters()">Aplicar</button>
+    </aside>
+  
+    <div class="cpu-list">
+      <h2>Listado de CPUs</h2>
+  
+      <div *ngIf="errorMessage" class="error">
+        {{ errorMessage }}
+      </div>
+  
+      <div *ngIf="filteredCpus.length === 0 && !errorMessage">
+        No se encontraron CPUs.
+      </div>
+  
+      <div class="cpu-grid" *ngIf="filteredCpus.length > 0">
+        <div 
+          class="cpu-card" 
+          *ngFor="let cpu of filteredCpus" 
+          (click)="goToDetail(cpu.productId)" 
+          style="cursor: pointer;"
+          >
+          <img class="cpu-image" src="assets/img/cpu.jpg" alt="{{ cpu.brand }} {{ cpu.model }}" />
+  
+          <h3 class="cpu-title">{{ cpu.brand }} {{ cpu.model }}</h3>
+  
+          <p class="cpu-specs">
+            {{ cpu.processorCore }} núcleos | {{ cpu.numberThreads }} hilos | {{ cpu.baseClock }} GHz Base
+          </p>
+  
+          <p class="cpu-price">
+            ${{ cpu.price ? cpu.price.toFixed(2) : 'N/A' }}
+          </p>
+  
+          <button class="add-to-cart-btn" (click)="$event.stopPropagation(); addToCart(cpu)">Añadir al carrito</button>
+        </div>
       </div>
     </div>
   </div>

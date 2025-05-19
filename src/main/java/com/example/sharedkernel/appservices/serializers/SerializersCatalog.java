@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.TreeMap;
 
 import com.example.Models.CPU.DTO.CPUDTO;
+import com.example.Models.Review.DTO.ReviewDTO;
 // import com.example.Models.GraphicCard.DTO.GraphicCardDTO;
 // import com.example.Models.HardDrive.DTO.HardDriveDTO;
 // import com.example.Models.Motherboard.DTO.MotherBoardDTO;
@@ -11,6 +12,7 @@ import com.example.Models.CPU.DTO.CPUDTO;
 // import com.example.Models.PowerSupply.DTO.PowerSupplyDTO;
 // import com.example.Models.Ram.DTO.RamDTO;
 import com.example.Models.ShippingAddress.DTO.ShippingAddressDTO;
+import com.example.Models.ShopCart.DTO.ShopCartDTO;
 // import com.example.Models.Tower.DTO.TowerDTO;
 import com.example.Models.User.DTO.UserDTO;
 // import com.example.Models.Ventilation.DTO.VentilationDTO;
@@ -25,6 +27,9 @@ public class SerializersCatalog {
         catalog.put(Serializers.SHIPPINGADDRESS_JSON, new JacksonSerializer<ShippingAddressDTO>());
         catalog.put(Serializers.CPU_JSON, new JacksonSerializer<CPUDTO>());
         catalog.put(Serializers.CPU_JSON_LIST, new JacksonSerializer<List<CPUDTO>>(new TypeReference<List<CPUDTO>>() {}));
+        catalog.put(Serializers.REVIEW_JSON, new JacksonSerializer<ReviewDTO>());
+        catalog.put(Serializers.SHOPCART_JSON, new JacksonSerializer<ShopCartDTO>());
+        catalog.put(Serializers.SHOPCART_JSON_LIST, new JacksonSerializer<List<ShopCartDTO>>(new TypeReference<List<ShopCartDTO>>() {}));
         
 
 

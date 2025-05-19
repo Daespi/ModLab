@@ -5,6 +5,8 @@ import { HomeComponent } from './pages/home/home.component';
 import { AddAddressComponent } from './pages/add-address/add-address.component';
 import { ShippingAddressComponent } from './pages/shipping-address/shipping-address.component';
 import { CpusComponent } from './pages/cpus/cpus.component';
+import { CpuDetailComponent } from './pages/cpu-detail/cpu-detail.component';
+import { ShopCartComponent } from './pages/shop-cart/shop-cart.component';
 
 export const routes: Routes = [
     { path: 'register', component: RegisterComponent},
@@ -13,6 +15,10 @@ export const routes: Routes = [
     { path: 'address', component: ShippingAddressComponent},
     { path: 'address/add', component: AddAddressComponent},
     { path: 'cpus', component: CpusComponent},
+    { path: 'cpus/:id', component: CpuDetailComponent},
+    { path: 'user/shopcart', component: ShopCartComponent},
+
+
 
 
 ];
