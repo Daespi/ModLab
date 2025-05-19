@@ -3,5 +3,5 @@ export const environment = {
     apiUrl: 'http://localhost:8080/modlab/User',
     apiUrlShippingAddress: 'http://localhost:8080/modlab/ShippingAddress', // URL de tu backend para desarrollo
     apiUrlCpu: 'http://localhost:8080/modlab/CPU',
-
+    apiUrlPaymentMethod: 'http://localhost:8080/modlab/PaymentMethod',
   };

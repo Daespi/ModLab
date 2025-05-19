@@ -15,6 +15,7 @@ import { CpuDetailComponent } from './pages/cpu-details/cpu-details.component';
 import { CpuListComponent } from './pages/cpu-list/cpu-list.component';
 import { RouterModule } from '@angular/router'; // 👈 Necesario para routerLink
 import { CommonModule } from '@angular/common';
+import { PaymentMethodComponent } from './pages/payment-method/payment-method.component';
 
 
 
@@ -30,7 +31,8 @@ import { CommonModule } from '@angular/common';
     AddAddressComponent,
     CpuComponent,
     CpuDetailComponent,
-    CpuListComponent
+    CpuListComponent,
+    PaymentMethodComponent
   ],
   imports: [
     BrowserModule,

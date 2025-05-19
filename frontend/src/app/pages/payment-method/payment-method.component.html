@@ -1,0 +1,29 @@
+<form [formGroup]="paymentForm" (ngSubmit)="submitPayment()" class="payment-form">
+    <h2>Métodos de pago</h2>
+
+    <div class="form-row">
+        <label for="cardNumber">Número de Tarjeta:</label>
+        <input id="cardNumber" formControlName="cardNumber" />
+    </div>
+
+    <div class="form-row">
+        <label for="cardHolder">Nombre titular:</label>
+        <input id="cardHolder" formControlName="cardHolder" />
+    </div>
+
+    <div class="form-row form-row-inline">
+        <div>
+            <label for="cardExpiry">Fecha de caducidad:</label>
+            <input id="cardExpiry" formControlName="cardExpiry" placeholder="MM/YY" />
+        </div>
+
+        <div>
+            <label for="cardCvv">CVV:</label>
+            <input id="cardCvv" formControlName="cardCvv" />
+        </div>
+    </div>
+
+    <button type="submit" [disabled]="paymentForm.invalid" class="btn-submit">
+    Añadir método de pago
+  </button>
+</form>
