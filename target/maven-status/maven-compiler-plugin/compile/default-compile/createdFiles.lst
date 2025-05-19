@@ -80,6 +80,7 @@ com\example\Models\ShopCart\Appservices\ShopCartServicesImpl.class
 com\example\Models\PaymentMethod\Entity\PaymentMethod.class
 com\example\Models\User\Persistence\UserRepository.class
 com\example\Models\User\Entity\User.class
+com\example\sharedkernel\appservices\serializers\SerializersCatalog$2.class
 com\example\config\SecurityConfig.class
 com\example\Models\Order\Persistence\OrderRepository.class
 com\example\Models\ShippingAddress\Appservices\ShippingAddressServicesImpl.class

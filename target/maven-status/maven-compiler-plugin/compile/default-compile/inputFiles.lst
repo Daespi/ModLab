@@ -44,7 +44,7 @@ c:\Users\davideo\Desktop\ModLab\src\main\java\com\example\Models\HardDrive\Persi
 c:\Users\davideo\Desktop\ModLab\src\main\java\com\example\Models\Motherboard\Appservices\MotherBoardServices.java
 c:\Users\davideo\Desktop\ModLab\src\main\java\com\example\Models\Motherboard\Appservices\MotherBoardServicesImpl.java
 c:\Users\davideo\Desktop\ModLab\src\main\java\com\example\Models\Motherboard\DTO\MotherboardDTO.java
-c:\Users\davideo\Desktop\ModLab\src\main\java\com\example\Models\Motherboard\Entity\MotherBoard.java
+c:\Users\davideo\Desktop\ModLab\src\main\java\com\example\Models\Motherboard\Entity\Motherboard.java
 c:\Users\davideo\Desktop\ModLab\src\main\java\com\example\Models\Motherboard\MAPPERS\MotherBoardMapper.java
 c:\Users\davideo\Desktop\ModLab\src\main\java\com\example\Models\Motherboard\Persistence\MotherBoardRepository.java
 c:\Users\davideo\Desktop\ModLab\src\main\java\com\example\Models\Order\Appservices\OrderServices.java
