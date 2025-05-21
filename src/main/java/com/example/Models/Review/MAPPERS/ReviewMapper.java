@@ -1,37 +1,29 @@
 package com.example.Models.Review.MAPPERS;
 
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
-
 import com.example.Exceptions.BuildException;
 import com.example.Models.Review.DTO.ReviewDTO;
 import com.example.Models.Review.Entity.Review;
 
 public class ReviewMapper {
 
-    // Formateador con el patrón que quieres para la fecha
-    private static final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss");
-
-    // Desde DTO (donde la fecha es String) → a entidad Review (que usa LocalDateTime)
+    // Desde DTO → Entidad Review
     public static Review reviewFromDTO(ReviewDTO dto) throws BuildException {
         return Review.getInstance(
             dto.getRating(),
             dto.getComment(),
-            dto.getReviewDate(),
             dto.getProductId(),
             dto.getUserId()
         );
     }
 
-    // Desde entidad Review → a DTO (con fecha en formato String sin la Z)
-    public static ReviewDTO dtoFromReview(Review review, String userId, String productId, LocalDateTime formattedDate) { // formateas la fecha aquí
+    // Desde Entidad Review → DTO ReviewDTO
+    public static ReviewDTO dtoFromReview(Review review) {
         return new ReviewDTO(
             review.getReviewId(),
-            userId,
-            productId,
+            review.getUserId(),
+            review.getProductId(),
             review.getRating(),
-            review.getComment(),
-            formattedDate
+            review.getComment()
         );
     }
 }

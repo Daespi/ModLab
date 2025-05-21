@@ -4,21 +4,30 @@ import com.example.Exceptions.ServiceException;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.SerializationFeature;
+import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 
 import java.util.List;
 
+import org.springframework.context.annotation.Bean;
+
 public class JacksonSerializer<T> implements Serializer<T> {
 
-    private final ObjectMapper objectMapper = new ObjectMapper();
+    private  ObjectMapper objectMapper = new ObjectMapper();
     private final TypeReference<T> typeReference;
 
     // Constructor para objetos normales
     public JacksonSerializer() {
+        this.objectMapper = new ObjectMapper();
+        this.objectMapper.registerModule(new JavaTimeModule());
+        this.objectMapper.disable(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS);
         this.typeReference = null;
     }
-
-    // Constructor para listas o tipos complejos
+    
     public JacksonSerializer(TypeReference<T> typeReference) {
+        this.objectMapper = new ObjectMapper();
+        this.objectMapper.registerModule(new JavaTimeModule());
+        this.objectMapper.disable(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS);
         this.typeReference = typeReference;
     }
 

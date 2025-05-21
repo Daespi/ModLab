@@ -1,25 +1,20 @@
 package com.example.Models.Review.Entity;
 
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
-
 import com.example.Exceptions.BuildException;
 import com.example.Operations.Checker;
 
 public class Review {
 
     protected int reviewId;
-    protected String productId;  // agregar
-    protected String userId;     // agregar
+    protected String productId;
+    protected String userId;
     protected int rating;
     protected String comment;
-    protected LocalDateTime reviewDate;
 
     public Review() {
-        this.reviewDate = LocalDateTime.now();
     }
 
-    public static Review getInstance(int rating, String comment, LocalDateTime reviewDate, String productId, String userId) throws BuildException {
+    public static Review getInstance(int rating, String comment, String productId, String userId) throws BuildException {
         String message = "";
         Review r = new Review();
 
@@ -40,11 +35,11 @@ public class Review {
             throw new BuildException(message);
         }
 
-        r.reviewDate = reviewDate != null ? reviewDate : LocalDateTime.now();
         return r;
     }
 
-    // getters y setters para productId y userId
+    // Getters y setters
+
     public String getProductId() {
         return productId;
     }
@@ -61,8 +56,6 @@ public class Review {
         this.userId = userId;
     }
 
-    // resto igual...
-
     public int getReviewId() {
         return reviewId;
     }
@@ -73,14 +66,6 @@ public class Review {
 
     public String getComment() {
         return comment;
-    }
-
-    public String getReviewDate() {
-        return reviewDate.format(DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss"));
-    }
-
-    public LocalDateTime getReviewDateAsLocalDateTime() {
-        return reviewDate;
     }
 
     public int setRating(int rating) {
@@ -111,6 +96,6 @@ public class Review {
     @Override
     public String toString() {
         return "Review [reviewId=" + getReviewId() + ", productId=" + getProductId() + ", userId=" + getUserId() + 
-               ", rating=" + getRating() + ", comment=" + getComment() + ", reviewDate=" + getReviewDate() + "]";
+               ", rating=" + getRating() + ", comment=" + getComment() + "]";
     }
 }

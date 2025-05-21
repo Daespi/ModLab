@@ -57,7 +57,7 @@ public class SecurityConfig {
             .authorizeHttpRequests(auth -> auth
                 .requestMatchers(HttpMethod.POST, "/modlab/User/login").permitAll() // Permitir login
                 .requestMatchers(HttpMethod.POST, "/modlab/User/register").permitAll()
-                .requestMatchers(HttpMethod.GET, "/modlab/CPU/**", "moodlab/CPU/cpus/{id}").permitAll()
+                .requestMatchers(HttpMethod.GET, "/modlab/CPU/**", "modlab/CPU/cpus/{id}", "modlab/User/*").permitAll()
                 .requestMatchers(HttpMethod.GET, "/modlab/Review/product/{productId}").permitAll()
                 .requestMatchers(HttpMethod.GET, "/generate-token").permitAll()
                 .requestMatchers(HttpMethod.POST, "/modlab/Review/**").authenticated()  // Permitir registro

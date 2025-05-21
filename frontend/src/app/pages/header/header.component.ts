@@ -43,6 +43,9 @@ export class HeaderComponent implements OnInit {
           this.userService.getUserByEmail(email).subscribe(user => {
             this.userData = user;
             this.username$ = user.username; // O cualquier campo que necesites
+
+            localStorage.setItem('userId', user.userId!);
+            localStorage.setItem('username', user.username!);
           });
         }
       }

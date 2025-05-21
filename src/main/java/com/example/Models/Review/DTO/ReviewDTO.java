@@ -1,6 +1,7 @@
 package com.example.Models.Review.DTO;
 
-import java.time.LocalDateTime;
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 import jakarta.persistence.*;
 
@@ -25,52 +26,68 @@ public class ReviewDTO {
     @Column(name = "comment")
     private String comment;
 
-    @Column(name = "review_date", nullable = false)
-    private LocalDateTime reviewDate;
- // Ahora como String
-
     // Constructor vacío requerido por JPA
     public ReviewDTO() {}
 
-    // Constructor completo (actualizado para usar String en reviewDate)
+    @JsonCreator
     public ReviewDTO(
-        int reviewId,
-        String userId,
-        String productId,
-        int rating,
-        String comment,
-        LocalDateTime reviewDate // <-- cambiado aquí también
+        @JsonProperty("reviewId") int reviewId,
+        @JsonProperty("userId") String userId,
+        @JsonProperty("productId") String productId,
+        @JsonProperty("rating") int rating,
+        @JsonProperty("comment") String comment
     ) {
         this.reviewId = reviewId;
         this.userId = userId;
         this.productId = productId;
         this.rating = rating;
         this.comment = comment;
-        this.reviewDate = reviewDate;
     }
 
-    // Getters
+    // Getters y setters
     public int getReviewId() {
         return reviewId;
+    }
+
+    public void setReviewId(int reviewId) {
+        this.reviewId = reviewId;
     }
 
     public String getUserId() {
         return userId;
     }
 
+    public void setUserId(String userId) {
+        this.userId = userId;
+    }
+
     public String getProductId() {
         return productId;
+    }
+
+    public void setProductId(String productId) {
+        this.productId = productId;
     }
 
     public int getRating() {
         return rating;
     }
 
+    public void setRating(int rating) {
+        this.rating = rating;
+    }
+
     public String getComment() {
         return comment;
     }
 
-    public LocalDateTime getReviewDate() { // <-- actualizado a String
-        return reviewDate;
+    public void setComment(String comment) {
+        this.comment = comment;
+    }
+
+    @Override
+    public String toString() {
+        return "ReviewDTO [reviewId=" + reviewId + ", userId=" + userId + ", productId=" + productId +
+               ", rating=" + rating + ", comment=" + comment + "]";
     }
 }

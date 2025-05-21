@@ -10,9 +10,12 @@ import org.springframework.stereotype.Service;
 import com.example.Exceptions.BuildException;
 import com.example.Exceptions.ServiceException;
 import com.example.Models.Review.DTO.ReviewDTO;
-
+import com.example.Models.Review.Entity.Review;
 import com.example.Models.Review.MAPPERS.ReviewMapper;
 import com.example.Models.Review.Persistence.ReviewRepository;
+import com.example.Models.User.DTO.UserDTO;
+import com.example.Models.User.Entity.User;
+import com.example.Models.User.MAPPER.UserMapper;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 
@@ -52,9 +55,11 @@ public class ReviewServicesImpl implements ReviewServices {
         }
     }
 
-    protected ReviewDTO newReview(String json) throws ServiceException {
+    protected ReviewDTO newReview(String json) throws ServiceException, BuildException {
         ReviewDTO dto = this.checkInputData(json);
-        return reviewRepository.save(dto);
+        Review review = ReviewMapper.reviewFromDTO(dto);
+        ReviewDTO reviewDTO = ReviewMapper.dtoFromReview(review);
+        return reviewRepository.save(reviewDTO);
     }
 
     protected ReviewDTO updateReview(int reviewId, String json) throws ServiceException {
@@ -66,9 +71,8 @@ public class ReviewServicesImpl implements ReviewServices {
             dto.getUserId(),
             dto.getProductId(),  // ← FALTA ESTE CAMPO
             dto.getRating(),
-            dto.getComment(),
-            dto.getReviewDate()
-        ));
+            dto.getComment()
+            ));
     }
     
 
@@ -95,7 +99,12 @@ public class ReviewServicesImpl implements ReviewServices {
 
     @Override
     public String addFromJson(String reviewJson) throws ServiceException {
-        return serializer.serialize(this.newReview(reviewJson));
+        try {
+            return serializer.serialize(this.newReview(reviewJson));
+        } catch (BuildException e) {
+            throw new ServiceException("Invalid review data: " + e.getMessage());
+        }
+        
     }
 
     @Override

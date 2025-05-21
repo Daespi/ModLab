@@ -8,6 +8,7 @@ import { ReviewService } from '../../services/review/review.service';
 import { Review } from '../../models/review/review';
 import { ShopCartService } from '../../services/shopCart/shopCart.service';
 import { ShopCart } from '../../models/ShopCart/ShopCart';
+import { UserService } from '../../services/user/user.service';
 
 @Component({
   selector: 'app-cpu-detail',
@@ -19,6 +20,8 @@ import { ShopCart } from '../../models/ShopCart/ShopCart';
 export class CpuDetailComponent implements OnInit {
   cpu: CPU | undefined;
   reviews: Review[] = [];
+  reviewAuthors: { [reviewId: number]: string } = {};  // clave: id de review, valor: username
+
 
   newRating: number = 5;
   newComment: string = '';
@@ -26,14 +29,20 @@ export class CpuDetailComponent implements OnInit {
   quantity: number = 1;
   userId: string = '';
 
+
+  
+
   constructor(
     private route: ActivatedRoute,
     private cpuService: CPUService,
     private reviewService: ReviewService,
-    private shopCartService: ShopCartService
+    private shopCartService: ShopCartService,
+    private userService: UserService
   ) {}
 
   ngOnInit(): void {
+    this.userId = localStorage.getItem('userId') || '';
+
     const id = this.route.snapshot.paramMap.get('id');
 
     if (id !== null) {
@@ -74,6 +83,23 @@ export class CpuDetailComponent implements OnInit {
     this.reviewService.getReviewsByProductId(this.cpu.productId).subscribe({
       next: (reviews) => {
         this.reviews = reviews;
+        
+        for (const review of reviews) {
+          if (review.userId) {
+            this.userService.getById(review.userId).subscribe({
+              next: (user) => {
+                this.reviewAuthors[review.reviewId] = user.username ?? 'Usuario desconocido';
+              },
+              error: (err) => {
+                console.error('Error al obtener usuario', err);
+                this.reviewAuthors[review.reviewId] = 'Usuario desconocido';
+              }
+            });
+          } else {
+            this.reviewAuthors[review.reviewId] = 'Usuario desconocido';
+          }
+        }
+        
       },
       error: (err) => {
         console.error('Error al cargar reviews:', err);
@@ -90,11 +116,11 @@ export class CpuDetailComponent implements OnInit {
     }
 
     const reviewToSend: Partial<Review> = {
-      userId: this.userId,               // Incluye el ID del usuario
+//      userId: this.userId,"531379e5-be0a-490d-a4f7-710665b73d28", 
+      userId: this.userId!,        // Incluye el ID del usuario
       productId: this.cpu.productId,
       rating: this.newRating,
       comment: this.newComment.trim(),
-      reviewDate: new Date().toISOString()
     };
     
 
