@@ -106,6 +106,15 @@
             <version>5.13.0</version>
             <scope>test</scope>
         </dependency>
+
+        <!-- Soporte Java 8 Date/Time en Jackson -->
+<dependency>
+    <groupId>com.fasterxml.jackson.datatype</groupId>
+    <artifactId>jackson-datatype-jsr310</artifactId>
+    <version>2.15.2</version> <!-- O la versión que uses de Jackson -->
+</dependency>
+
+
     </dependencies>
 
     <build>

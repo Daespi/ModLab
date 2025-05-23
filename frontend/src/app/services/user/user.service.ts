@@ -15,7 +15,7 @@ export class UserService {
 
   // Obtener usuario por ID
   getById(id: string): Observable<User> {
-    return this.http.get<User>(`${baseUrl}/users/${id}`, { headers: this.createAuthorizationHeader() })
+    return this.http.get<User>(`${baseUrl}/${id}`, { headers: this.createAuthorizationHeader() })
       .pipe(catchError(this.handleError));
   }
 

@@ -54,4 +54,18 @@ public class RestPaymentMethodController {
             return ResponseEntity.badRequest().body(e.getMessage());
         }
     }
+
+        /**
+     * GET - Obtener paymentMethods de un usuario por ID (JSON)
+     */
+    @GetMapping(value = "/user/{userId}", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<String> getCartByUser(@PathVariable String userId) {
+        try {
+            String json = paymentMethodServices.getPaymentMethodsByUserIdToJson(userId);
+            return ResponseEntity.ok(json);
+        } catch (ServiceException e) {
+            return ResponseEntity.badRequest().body(e.getMessage());
+        }
+    }
 }
+

@@ -14,10 +14,13 @@ public class PaymentMethod {
     protected String cardCvv;
     protected String userId;
 
+    protected String cardHolder;  // <-- nuevo atributo
+
     protected PaymentMethod() {}
 
+    // Añadido parámetro cardHolder
     public static PaymentMethod getInstance(String paymentMethod, String cardNumber, String cardExpiry,
-                                            String cardCvv, String userId) throws BuildException {
+                                            String cardCvv, String userId, String cardHolder) throws BuildException {
         String message = "";
         PaymentMethod method = new PaymentMethod();
 
@@ -48,6 +51,11 @@ public class PaymentMethod {
             message += "El ID de usuario no puede ser nulo.";
         } else {
             method.userId = userId;
+        }
+        // Validación para cardHolder
+        int resultHolder = method.setCardHolder(cardHolder);
+        if (resultHolder != 0) {
+            message += "El nombre del titular de la tarjeta no es válido porque " + Checker.getErrorMessage(resultHolder, 3, 100);
         }
 
         if (!message.isEmpty()) {
@@ -111,6 +119,19 @@ public class PaymentMethod {
         return userId;
     }
 
+    // Nuevo getter y setter para cardHolder
+    public String getCardHolder() {
+        return cardHolder;
+    }
+
+    public int setCardHolder(String cardHolder) {
+        if (Checker.isNull(cardHolder) != 0) return -1;
+        if (Checker.minLength(3, cardHolder) != 0) return -2;
+        if (Checker.maxLenght(100, cardHolder) != 0) return -10;
+        this.cardHolder = cardHolder;
+        return 0;
+    }
+
     @Override
     public String toString() {
         return "PaymentMethod{" +
@@ -120,6 +141,7 @@ public class PaymentMethod {
                 ", cardExpiry='" + cardExpiry + '\'' +
                 ", cardCvv='" + cardCvv + '\'' +
                 ", userId='" + userId + '\'' +
+                ", cardHolder='" + cardHolder + '\'' +
                 '}';
     }
 }

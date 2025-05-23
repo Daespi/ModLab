@@ -12,7 +12,8 @@ public class PaymentMethodMapper {
                 dto.getCardNumber(),
                 dto.getCardExpiry(),
                 dto.getCardCvv(),
-                dto.getUserId()
+                dto.getUserId(),
+                dto.getCardHolder() // añadir aquí cuando el método getInstance lo acepte
         );
     }
 
@@ -23,7 +24,8 @@ public class PaymentMethodMapper {
                 payment.getCardNumber(),
                 payment.getCardExpiry(),
                 payment.getCardCvv(),
-                payment.getUserId()
+                payment.getUserId(),
+                payment.getCardHolder()  // <-- Añadido aquí
         );
     }
 }

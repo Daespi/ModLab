@@ -15,8 +15,6 @@ import jakarta.transaction.Transactional;
 @Repository
 public interface JpaPaymentMethodRepository extends JpaRepository<PaymentMethodDTO, String>, PaymentMethodRepository {
 
-    Optional<PaymentMethodDTO> findByUserId(String userId);
-
     List<PaymentMethodDTO> findByPaymentMethod(String paymentMethod);
 
     @Query(value = "SELECT p FROM PaymentMethodDTO p WHERE p.paymentMethod LIKE %:paymentMethod%")

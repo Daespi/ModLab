@@ -1,0 +1,21 @@
+<div *ngIf="loading" class="loading">Cargando direcciones...</div>
+
+<div *ngIf="error" class="error">{{ error }}</div>
+
+<div *ngIf="!loading && !error && addresses.length > 0" class="address-container" >
+  <div *ngFor="let address of addresses" class="address-bubble" (click)="selectAddress(address)">
+    <p><strong>Dirección:</strong> {{ address.address }}</p>
+    <p><strong>Ciudad:</strong> {{ address.city }}</p>
+    <p><strong>Estado:</strong> {{ address.state }}</p>
+    <p><strong>Código postal:</strong> {{ address.zipCode }}</p>
+    <p><strong>País:</strong> {{ address.country }}</p>
+  </div>
+
+  <a href="address/add" class="add-address-button">Agregar dirección</a>
+</div>
+
+<div *ngIf="!loading && !error && addresses.length === 0" class="no-addresses">
+  No hay direcciones registradas para este usuario.
+  <br/>
+  <a href="address/add" class="add-address-button no-address-button">Agregar dirección</a>
+</div>

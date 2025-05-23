@@ -28,16 +28,21 @@ public class PaymentMethodDTO {
     @Column(name = "userId", nullable = false, length = 32)
     private String userId;
 
+    @Column(name = "cardHolder", nullable = false, length = 100) // nuevo atributo
+    private String cardHolder;
+
     public PaymentMethodDTO() {}
 
     public PaymentMethodDTO(String paymentId, String paymentMethod, String cardNumber,
-                            String cardExpiry, String cardCvv, String userId) {
+                            String cardExpiry, String cardCvv, String userId, String cardHolder) {
         this.paymentId = paymentId;
         this.paymentMethod = paymentMethod;
         this.cardNumber = cardNumber;
         this.cardExpiry = cardExpiry;
         this.cardCvv = cardCvv;
         this.userId = userId;
+        this.cardHolder = cardHolder;
+
     }
 
     public String getPaymentId() {
@@ -86,5 +91,13 @@ public class PaymentMethodDTO {
 
     public void setUserId(String userId) {
         this.userId = userId;
+    }
+
+    public String getCardHolder() {
+        return cardHolder;
+    }
+
+    public void setCardHolder(String cardHolder) {
+        this.cardHolder = cardHolder;
     }
 }

@@ -1,16 +1,37 @@
-<div>
-    
-    <div class="slider" id="slider">
-        <div class="slides" id="slides">
-          <!-- Las imágenes se insertan aquí automáticamente -->
-        </div>
-        <div class="dots" id="dots">
-          <!-- Los dots se insertan aquí automáticamente -->
-        </div>
+<section class="banner">
+  <img class="banner-image" src="../../../assets/img/targeta-grafica-banner.png" alt="RGB pc targeta grafica" />
+  <div class="banner-text">
+    <strong style="font-size:1.5rem;">Diseñamos tu PC</strong>
+    <p>para que no solo juegues si no que <strong>vivas la experiencia en el máximo.</strong></p>
+  </div>
+</section>
+
+<div class="home-container">
+
+  <!-- CPUs destacadas -->
+  <section class="cpu-featured-section">
+    <h2 class="cpu-title">CPUs destacadas</h2>
+
+    <div *ngIf="errorMessage" class="error">
+      {{ errorMessage }}
+    </div>
+
+    <div *ngIf="featuredCPUs.length === 0 && !errorMessage">
+      No se encontraron CPUs destacadas.
+    </div>
+
+    <div class="cpu-grid" *ngIf="featuredCPUs.length > 0">
+      <div class="cpu-card" *ngFor="let cpu of featuredCPUs" (click)="goToDetail(cpu.productId)" >
+        <img class="cpu-image" src="assets/img/cpu.jpg" alt="{{ cpu.brand }} {{ cpu.model }}" />
+
+        <h3>{{ cpu.brand }} {{ cpu.model }}</h3>
+        <p><strong>Núcleos:</strong> {{ cpu.processorCore }} | <strong>Hilos:</strong> {{ cpu.numberThreads }}</p>
+        <p><strong>Frecuencia:</strong> Base {{ cpu.baseClock }} GHz | Máx. {{ cpu.frecuency }} GHz</p>
+        <p><strong>Socket:</strong> {{ cpu.socket }}</p>
+
+        <button class="add-to-cart-btn" (click)="addToCart(cpu)">Ver detalles</button>
       </div>
-      
-      
-          
+    </div>
+  </section>
 
 </div>
-

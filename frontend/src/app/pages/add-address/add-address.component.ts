@@ -58,7 +58,7 @@ export class AddAddressComponent implements OnInit {
     this.shippingAddressService.newAddress(newAddress).subscribe({
       next: (response: ShippingAddress) => {
         console.log('Dirección añadida correctamente', response);
-        this.router.navigate(['/user-profile', this.userId!]); // usamos ! porque ya validamos
+        this.router.navigate(['/user/show-address']);// usamos ! porque ya validamos
       },
       error: (err: any) => {
         console.error('Error adding address', err);

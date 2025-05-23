@@ -2,12 +2,13 @@ import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { ShopCartService } from '../../services/shopCart/shopCart.service';
-import { CPUService } from '../../services/cpus/cpu.service';
+import { ProductService } from '../../services/product/product.service';
 import { ShopCart } from '../../models/ShopCart/ShopCart';
 import { CPU } from '../../models/Cpu/Cpu';
 import { forkJoin } from 'rxjs';
 import { UserService } from '../../services/user/user.service';
 import { AuthService } from '../../services/auth.service';
+import { Product } from '../../models/Product/Product';
 
 @Component({
   selector: 'app-shop-cart',
@@ -20,11 +21,10 @@ export class ShopCartComponent implements OnInit {
   cartItems: ShopCart[] = [];
   userId: string = '';
 
-  cpuDetailsMap: Map<string, CPU> = new Map();  // Mapa productId -> CPU
-
+  productDetailsMap: Map<string, Product> = new Map(); 
   constructor(
     private shopCartService: ShopCartService,
-    private cpuService: CPUService,
+    private productService: ProductService,
     private userService: UserService,
     private authService: AuthService
   ) {}
@@ -51,7 +51,7 @@ export class ShopCartComponent implements OnInit {
     this.shopCartService.getCartByUser(this.userId).subscribe({
       next: (items: ShopCart[]) => {
         this.cartItems = items;
-        this.loadCPUsDetails(items);
+        this.loadProductsDetails(items);
       },
       error: (err: any) => {
         console.error('Error al cargar el carrito:', err);
@@ -59,24 +59,24 @@ export class ShopCartComponent implements OnInit {
     });
   }
 
-  private loadCPUsDetails(items: ShopCart[]): void {
+  private loadProductsDetails(items: ShopCart[]): void {
     const requests = items
       .map(item => item.productId)
       .filter((id): id is string => !!id) // Filtra productId no undefined
-      .map(productId => this.cpuService.getCPUById(productId));
-
+      .map(productId => this.productService.getProductById(productId)); // Cambiado a productService
+  
     if (requests.length === 0) return;
-
+  
     forkJoin(requests).subscribe({
-      next: (cpus: CPU[]) => {
-        cpus.forEach(cpu => {
-          if (cpu.productId) {
-            this.cpuDetailsMap.set(cpu.productId, cpu);
+      next: (products: Product[]) => {
+        products.forEach(product => {
+          if (product.productId) {
+            this.productDetailsMap.set(product.productId, product);
           }
         });
       },
       error: (err) => {
-        console.error('Error al cargar detalles de CPUs:', err);
+        console.error('Error al cargar detalles de productos:', err);
       }
     });
   }
@@ -96,7 +96,7 @@ export class ShopCartComponent implements OnInit {
     this.shopCartService.clearUserCart(this.userId).subscribe({
       next: () => {
         this.cartItems = [];
-        this.cpuDetailsMap.clear();
+        this.productDetailsMap.clear();
       },
       error: (err: any) => {
         console.error('Error al vaciar el carrito:', err);
@@ -104,14 +104,15 @@ export class ShopCartComponent implements OnInit {
     });
   }
 
-  getCPUInfo(productId: string | undefined): CPU | undefined {
+  getProductInfo(productId: string | undefined): Product | undefined {
     if (!productId) return undefined;
-    return this.cpuDetailsMap.get(productId);
+    return this.productDetailsMap.get(productId);
   }
+  
 
   getTotal(): number {
     return this.cartItems.reduce((total, item) => {
-      const cpu = this.getCPUInfo(item.productId);
+      const cpu = this.getProductInfo(item.productId);
       if (!cpu) return total;
       return total + (cpu.price * item.quantity);
     }, 0);

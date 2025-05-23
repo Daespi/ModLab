@@ -1,10 +1,11 @@
-import { Product } from "../Product/Product";
+import { OrderDetail } from "../OrderDetail/OrderDetail";
 
 export interface Order {
-    orderId: string;
-    orderDate: string;          // para simplificar usar string, o Date si parseas bien
-    status: string;
-    userId: string;
-    paymentId: string;
-    products: Product[];        // lista de productos en la orden
-  }
+  orderId: string;
+  orderDate: string;       // o Date si prefieres manejarlo como objeto Date
+  status: string;
+  userId: string;
+  paymentId: string;
+  addressId: number;
+  totalPrice: number;      // <-- agregado totalPrice
+}

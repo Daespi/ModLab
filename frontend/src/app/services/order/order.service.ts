@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
-
 import { Order } from '../../models/Order/Order';
 
 @Injectable({
@@ -9,36 +8,51 @@ import { Order } from '../../models/Order/Order';
 })
 export class OrderService {
 
-  private apiUrl = 'http://localhost:8080/modlab/order'; // Ajusta según tu entorno
+  private apiUrl = 'http://localhost:8080/modlab/order';
 
-  private httpOptions = {
-    headers: new HttpHeaders({ 'Content-Type': 'application/json' })
-  };
+  constructor(private http: HttpClient) {}
 
-  constructor(private http: HttpClient) { }
+  // 🔐 Obtener token del localStorage
+  private getToken(): string | null {
+    return localStorage.getItem('token');
+  }
 
-  /** GET - Mensaje de prueba */
-  getHola(): Observable<string> {
-    return this.http.get<string>(`${this.apiUrl}/`);
+  // 🔐 Crear headers con token
+  private createAuthorizationHeader(): HttpHeaders {
+    const token = this.getToken();
+    return token
+      ? new HttpHeaders({
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${token}`
+        })
+      : new HttpHeaders({ 'Content-Type': 'application/json' });
   }
 
   /** GET - Obtener una orden por ID */
   getOrderById(orderId: string): Observable<Order> {
-    return this.http.get<Order>(`${this.apiUrl}/${orderId}`);
+    return this.http.get<Order>(`${this.apiUrl}/${orderId}`, {
+      headers: this.createAuthorizationHeader()
+    });
   }
 
   /** POST - Crear una nueva orden */
   addOrder(order: Order): Observable<Order> {
-    return this.http.post<Order>(this.apiUrl, JSON.stringify(order), this.httpOptions);
+    return this.http.post<Order>(this.apiUrl, JSON.stringify(order), {
+      headers: this.createAuthorizationHeader()
+    });
   }
 
   /** PUT - Actualizar una orden existente */
   updateOrder(orderId: string, order: Order): Observable<Order> {
-    return this.http.put<Order>(`${this.apiUrl}/${orderId}`, JSON.stringify(order), this.httpOptions);
+    return this.http.put<Order>(`${this.apiUrl}/${orderId}`, JSON.stringify(order), {
+      headers: this.createAuthorizationHeader()
+    });
   }
 
   /** DELETE - Eliminar una orden por ID */
   deleteOrder(orderId: string): Observable<any> {
-    return this.http.delete(`${this.apiUrl}/${orderId}`);
+    return this.http.delete(`${this.apiUrl}/${orderId}`, {
+      headers: this.createAuthorizationHeader()
+    });
   }
 }

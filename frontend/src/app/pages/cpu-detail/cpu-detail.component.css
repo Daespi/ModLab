@@ -239,3 +239,13 @@
   text-align: center;
   margin: 20px 0;
 }
+
+
+.review-username {
+  font-weight: 600;         /* Negrita semi fuerte */
+  font-size: 1rem;          /* Tamaño de letra estándar */
+  color: #2c3e50;           /* Un azul oscuro elegante */
+  margin-bottom: 0.3rem;    /* Espacio debajo para separar del contenido siguiente */
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+

@@ -7,6 +7,10 @@ import { ShippingAddressComponent } from './pages/shipping-address/shipping-addr
 import { CpusComponent } from './pages/cpus/cpus.component';
 import { CpuDetailComponent } from './pages/cpu-detail/cpu-detail.component';
 import { ShopCartComponent } from './pages/shop-cart/shop-cart.component';
+import { ShowAddressComponent } from './pages/show-address/show-address.component';
+import { PaymentMethodComponent } from './pages/payment-method/payment-method.component';
+import { ShowPaymentComponent } from './pages/show-payment/show-payment.component';
+import { OrderSummaryComponent } from './pages/order-summary/order-summary.component';
 
 
 export const routes: Routes = [
@@ -19,5 +23,10 @@ export const routes: Routes = [
     { path: 'cpus', component: CpusComponent},
     { path: 'cpus/:id', component: CpuDetailComponent},
     { path: 'user/shopcart', component: ShopCartComponent},
+    { path: 'user/show-address', component: ShowAddressComponent},
+    { path: 'user/payment', component: PaymentMethodComponent},
+    { path: 'user/show-payment', component: ShowPaymentComponent},
+    { path: 'user/order-summary', component: OrderSummaryComponent },
+
 
 ];

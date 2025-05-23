@@ -19,5 +19,6 @@ public enum Serializers {
     SHOPCART_JSON,
     ORDER_DETAIL_JSON,
     SHOPCART_JSON_LIST,
+    SHIPPINGADDRESS_JSON_LIST,
 
 }

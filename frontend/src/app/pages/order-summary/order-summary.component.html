@@ -1,0 +1,61 @@
+<div class="order-summary-container" *ngIf="!loading; else loadingTpl">
+
+    <h2>Resumen de la Orden</h2>
+  
+    <div *ngIf="errorMessage" class="error-message">
+      {{ errorMessage }}
+    </div>
+  
+    <div *ngIf="!errorMessage">
+  
+      <section class="order-address">
+        <h3>Dirección de envío</h3>
+        <p *ngIf="address">
+          {{ address.street }}, {{ address.city }}, {{ address.state }}, {{ address.zipCode }}<br />
+          {{ address.country }}
+        </p>
+      </section>
+  
+      <section class="order-payment">
+        <h3>Método de pago</h3>
+        <p *ngIf="paymentMethod">
+            {{ paymentMethod.paymentMethod }} - **** **** **** {{ paymentMethod.cardNumber?.slice(-4) }}        </p>
+      </section>
+  
+      <section class="order-items">
+        <h3>Productos</h3>
+        <table>
+          <thead>
+            <tr>
+              <th>Producto</th>
+              <th>Cantidad</th>
+              <th>Precio Unitario</th>
+              <th>Subtotal</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let item of cartItems">
+              <td>{{ item.product?.name || 'Producto desconocido' }}</td>
+              <td>{{ item.quantity }}</td>
+              <td>{{ ((item.product?.price ?? 0) * item.quantity) | currency:'USD' }}</td>
+              <td>{{ ((item.product?.price ?? 0) * item.quantity) | currency:'USD' }}</td>
+            </tr>
+          </tbody>
+        </table>
+      </section>
+  
+      <section class="order-total">
+        <h3>Total: {{ totalPrice | currency:'USD' }}</h3>
+      </section>
+  
+      <button (click)="confirmOrder()" [disabled]="cartItems.length === 0" class="confirm-button">
+        Confirmar Pedido
+      </button>
+    </div>
+    
+  </div>
+  
+  <ng-template #loadingTpl>
+    <p>Cargando datos, por favor espere...</p>
+  </ng-template>
+  

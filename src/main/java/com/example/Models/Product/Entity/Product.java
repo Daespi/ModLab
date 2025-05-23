@@ -1,5 +1,7 @@
+
 package com.example.Models.Product.Entity;
 import java.time.LocalDateTime;
+import java.time.OffsetDateTime;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Set;
@@ -167,10 +169,10 @@ public abstract class Product {
     }
 
 
-    public String setReviews(int rating, String comment, LocalDateTime reviewDate, String productId, String userId) throws BuildException{
+    public String setReviews(int rating, String comment, String productId, String userId) throws BuildException{
 
         try{
-            reviews.add(Review.getInstance(rating, comment, reviewDate, productId, userId));
+            reviews.add(Review.getInstance(rating, comment, productId, userId));
         } catch (BuildException ex){
             return ex.getMessage();
         }

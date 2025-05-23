@@ -59,6 +59,21 @@ public class PaymentMethodServicesImpl implements PaymentMethodServices {
         throw new ServiceException("Payment method " + dto.getPaymentId() + " already exists");
     }
 
+
+    @Override
+public String getPaymentMethodsByUserIdToJson(String userId) throws ServiceException {
+    try {
+        // Supongo que PaymentMethodRepository tiene un método para buscar por userId
+        var paymentMethods = paymentMethodRepository.findByUserId(userId);
+
+        // Serializa la lista de PaymentMethodDTO a JSON
+        return SerializersCatalog.getInstance(Serializers.PAYMENTMETHOD_JSON)
+                .serialize(paymentMethods);
+    } catch (Exception e) {
+        throw new ServiceException("Error fetching payment methods for user " + userId + ": " + e.getMessage());
+    }
+}
+
     protected PaymentMethodDTO updatePaymentMethod(String json) throws ServiceException {
         PaymentMethodDTO dto = this.checkInputData(json);
         this.getById(dto.getPaymentId());
@@ -88,4 +103,5 @@ public class PaymentMethodServicesImpl implements PaymentMethodServices {
         // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'updateOneFromJson'");
     }
+
 }

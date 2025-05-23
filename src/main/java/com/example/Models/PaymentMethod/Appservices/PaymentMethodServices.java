@@ -10,6 +10,8 @@ public interface PaymentMethodServices {
 
     String addFromJson(String paymentMethodJson) throws ServiceException;
 
+    String getPaymentMethodsByUserIdToJson(String userId) throws ServiceException;
+
     String updateOneFromJson(String paymentId, String paymentMethodJson) throws ServiceException;
 
     void deleteById(String paymentId) throws ServiceException;

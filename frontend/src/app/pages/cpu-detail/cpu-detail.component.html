@@ -20,9 +20,6 @@
     <div class="cpu-add-to-cart-box">
       <button class="add-to-cart-btn" (click)="addToCart()">Añadir al carrito</button>
 
-      <label for="quantity">Cantidad:</label>
-      <input id="quantity" type="number" min="1" />
-
       <p class="delivery-info">La entrega te sale gratis con tu primer pedido</p>
     </div>
   </div>
@@ -55,12 +52,13 @@
 
   <ul class="reviews-list">
     <li *ngFor="let review of reviews" class="review-item">
+      <p class="review-username">{{ reviewAuthors[review.reviewId] }}</p>
       <div class="review-rating">
         <ng-container *ngFor="let star of [].constructor(review.rating)">&#9733;</ng-container>
         <ng-container *ngFor="let star of [].constructor(5 - review.rating)">&#9734;</ng-container>
       </div>
       <p class="review-comment">{{ review.comment }}</p>
-      <small class="review-date">{{ review.reviewDate }}</small>
+      
     </li>
   </ul>
 

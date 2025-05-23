@@ -6,6 +6,8 @@ import java.util.Optional;
 import org.springframework.stereotype.Repository;
 
 import com.example.Models.ShippingAddress.DTO.ShippingAddressDTO;
+import com.example.Models.ShippingAddress.Entity.ShippingAddress;
+import com.example.Models.ShopCart.DTO.ShopCartDTO;
 
 @Repository
 public interface ShippingAddressRepository {
@@ -13,6 +15,8 @@ public interface ShippingAddressRepository {
     Optional<ShippingAddressDTO> findById(int addressId);
 
     List<ShippingAddressDTO> findByAddress(String address);
+
+    List<ShippingAddressDTO> findByUserId(String userId);
 
     List<ShippingAddressDTO> findByAddressContaining(String partialAddress);
 

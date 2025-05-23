@@ -9,5 +9,8 @@ public interface ShippingAddressServices {
     String updateOneFromJson(String address) throws ServiceException;
     void deleteById(int addressId) throws ServiceException;
     String updateOneFromJsonWithId(int addressId, String json) throws ServiceException;
+
+    String getAddressByUserIdToJson(String userId) throws ServiceException;
+    
 }
 

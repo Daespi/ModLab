@@ -1,3 +1,4 @@
+
 .payment-form {
     max-width: 400px;
     background: #fff;
@@ -95,4 +96,22 @@
 
 .btn-submit:hover {
     background-color: #e0a800;
+}
+
+.form-row select {
+    padding: 8px 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 1rem;
+    font-family: inherit;
+    background-color: white;
+    transition: border-color 0.3s ease;
+    appearance: none; /* para que el dropdown tenga estilo uniforme */
+    -webkit-appearance: none;
+    -moz-appearance: none;
+}
+
+.form-row select:focus {
+    border-color: #663399;
+    outline: none;
 }

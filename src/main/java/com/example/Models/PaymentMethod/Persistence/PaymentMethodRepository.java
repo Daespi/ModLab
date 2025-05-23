@@ -3,22 +3,14 @@ package com.example.Models.PaymentMethod.Persistence;
 import java.util.List;
 import java.util.Optional;
 
-import org.springframework.stereotype.Repository;
-
+import org.springframework.data.jpa.repository.JpaRepository;
 import com.example.Models.PaymentMethod.DTO.PaymentMethodDTO;
 
-@Repository
-public interface PaymentMethodRepository {
+public interface PaymentMethodRepository extends JpaRepository<PaymentMethodDTO, String> {
 
-    Optional<PaymentMethodDTO> findById(String paymentId);
-
-    Optional<PaymentMethodDTO> findByUserId(String userId); // CORREGIDO: antes devolvía List
+    List<PaymentMethodDTO> findByUserId(String userId);
 
     List<PaymentMethodDTO> findByPaymentMethodContaining(String paymentMethod);
 
     Integer countByPaymentMethodContaining(String paymentMethod);
-
-    PaymentMethodDTO save(PaymentMethodDTO paymentMethod);
-
-    void deleteById(String paymentId);
 }
