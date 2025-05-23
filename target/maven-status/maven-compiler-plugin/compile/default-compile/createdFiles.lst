@@ -65,6 +65,7 @@ com\example\sharedkernel\domainservices\validations\DataCheck.class
 com\example\Models\OrderDetail\Entity\OrderDetail.class
 com\example\Models\Product\Entity\Product.class
 com\example\presentation\api\rest\RestReviewController.class
+com\example\Models\Motherboard\DTO\MotherboardDTO.class
 com\example\sharedkernel\appservices\serializers\Serializers.class
 com\example\Models\ShopCart\MAPPER\ShopCartMapper.class
 com\example\presentation\api\rest\RestUserController.class
