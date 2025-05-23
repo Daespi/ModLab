@@ -9,7 +9,9 @@ import { Order } from '../../models/Order/Order';
 import { Router } from '@angular/router';
 import { Product } from '../../models/Product/Product';
 import { FormsModule } from '@angular/forms';
-import { CommonModule } from '@angular/common';
+import { CommonModule } from '@angular/common'; 
+import { forkJoin } from 'rxjs';
+import { OrderDetailService } from '../../services/orderDetail/orderDetail.service';
 
 @Component({
   selector: 'app-order-summary',
@@ -33,6 +35,7 @@ export class OrderSummaryComponent implements OnInit {
     private paymentMethodService: PaymentMethodService,
     private productService: ProductService,
     private orderService: OrderService,
+    private orderDetailService: OrderDetailService,
     private router: Router
   ) { }
 
@@ -99,7 +102,7 @@ export class OrderSummaryComponent implements OnInit {
       this.errorMessage = 'Faltan datos para realizar el pedido.';
       return;
     }
-
+  
     const newOrder: Order = {
       orderId: '',
       orderDate: new Date().toISOString(),
@@ -107,22 +110,51 @@ export class OrderSummaryComponent implements OnInit {
       userId: this.userId,
       paymentId: this.paymentMethod.paymentId!,
       addressId: this.address.addressId,
-      orderDetails: this.cartItems.map(item => ({
-        orderDetailId: '',
-        orderId: '',
-        productId: item.productId,
-        quantity: item.quantity,
-        price: item.product?.price ?? 0
-      }))
+      totalPrice: this.totalPrice   // <-- aquí añades el totalPrice
     };
-
+  
     this.orderService.addOrder(newOrder).subscribe({
-      next: () => {
-        this.shopCartService.clearUserCart(this.userId!).subscribe(() => {
-          alert('Pedido realizado con éxito');
-          localStorage.removeItem('selectedAddress');
-          localStorage.removeItem('selectedPayment');
-          this.router.navigate(['/order-success']);
+      next: (createdOrder) => {
+        const orderId = createdOrder.orderId;
+        if (!orderId) {
+          this.errorMessage = 'No se pudo obtener el ID del pedido creado.';
+          return;
+        }
+  
+        // Crear detalles del pedido
+        const createDetails$ = this.cartItems.map(item => {
+          const orderDetail = {
+            orderDetailId: '',
+            orderId: orderId,
+            productId: item.productId,
+            quantity: item.quantity,
+            price: item.product?.price ?? 0
+          };
+          return this.orderDetailService.create(orderDetail);
+        });
+  
+        forkJoin(createDetails$).subscribe({
+          next: () => {
+            // Borrar cada item del carrito individualmente
+            const deleteItems$ = this.cartItems.map(item => {
+              return this.shopCartService.deleteItem(item.cartId);
+            });
+
+            forkJoin(deleteItems$).subscribe({
+              next: () => {
+                alert('Pedido realizado con éxito');
+                localStorage.removeItem('selectedAddress');
+                localStorage.removeItem('selectedPayment');
+                this.router.navigate(['/order-success']);
+              },
+              error: (err) => {
+                this.errorMessage = 'Error al eliminar los artículos del carrito: ' + err.message;
+              }
+            });
+          },
+          error: (err) => {
+            this.errorMessage = 'Error al crear los detalles del pedido: ' + err.message;
+          }
         });
       },
       error: (err) => {
@@ -130,4 +162,5 @@ export class OrderSummaryComponent implements OnInit {
       }
     });
   }
+
 }

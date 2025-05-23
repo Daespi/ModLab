@@ -3,8 +3,8 @@ package com.example.Models.Order.DTO;
 import com.example.Models.OrderDetail.DTO.OrderDetailDTO;
 import jakarta.persistence.*;
 
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
-import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -30,16 +30,20 @@ public class OrderDTO {
     @Column(name = "address_id", nullable = false)
     private Integer addressId;
 
+    @Column(name = "total_price", nullable = false, precision = 12, scale = 2)
+    private BigDecimal totalPrice;
+
     public OrderDTO() {}
 
     public OrderDTO(String orderId, LocalDateTime orderDate, String status,
-                    String userId, String paymentId, Integer addressId, List<OrderDetailDTO> orderDetails) {
+                    String userId, String paymentId, Integer addressId, BigDecimal totalPrice, List<OrderDetailDTO> orderDetails) {
         this.orderId = orderId;
         this.orderDate = orderDate;
         this.status = status;
         this.userId = userId;
         this.paymentId = paymentId;
         this.addressId = addressId;
+        this.totalPrice = totalPrice;
     }
 
     // Getters y setters
@@ -61,4 +65,6 @@ public class OrderDTO {
     public Integer getAddressId() { return addressId; }
     public void setAddressId(Integer addressId) { this.addressId = addressId; }
 
+    public BigDecimal getTotalPrice() { return totalPrice; }
+    public void setTotalPrice(BigDecimal totalPrice) { this.totalPrice = totalPrice; }
 }

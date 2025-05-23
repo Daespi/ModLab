@@ -62,7 +62,7 @@ public class SecurityConfig {
                 .requestMatchers(HttpMethod.GET, "/modlab/products/**").permitAll()
 
                 .requestMatchers(HttpMethod.GET, "/generate-token").permitAll()
-                .requestMatchers(HttpMethod.POST, "/modlab/Review/**", "modlab/ShippingAddress/**", "modlab/paymentMethod/**").authenticated()  // Permitir registro
+                .requestMatchers(HttpMethod.POST, "/modlab/Review/**", "modlab/ShippingAddress/**", "modlab/paymentMethod/**", "modlab/order/**").authenticated()  // Permitir registro
                 .requestMatchers(HttpMethod.DELETE, "modlab/**").authenticated()
                 // Permitir registro
                 .requestMatchers("/modlab/ShippingAddress/**", "/address", "/address/add", "/profile", "/email/**", "/modlab/Review").authenticated() // Rutas protegidas

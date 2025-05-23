@@ -35,7 +35,8 @@ public class SerializersCatalog {
         catalog.put(Serializers.SHOPCART_JSON_LIST, new JacksonSerializer<List<ShopCartDTO>>(new TypeReference<List<ShopCartDTO>>() {}));
         catalog.put(Serializers.PRODUCT_JSON, new JacksonSerializer<ProductDTO>());      
         catalog.put(Serializers.PAYMENTMETHOD_JSON, new JacksonSerializer<PaymentMethodDTO>());
-
+        catalog.put(Serializers.ORDER_JSON, new JacksonSerializer<PaymentMethodDTO>());
+        catalog.put(Serializers.ORDER_DETAIL_JSON, new JacksonSerializer<PaymentMethodDTO>());
         // catalog.put(Serializers.GraphicCard_JSON, new JacksonSerializer<GraphicCardDTO>());
         // catalog.put(Serializers.HardDrive_JSON, new JacksonSerializer<HardDriveDTO>());
         // catalog.put(Serializers.Motherboard_JSON, new JacksonSerializer<MotherBoardDTO>());

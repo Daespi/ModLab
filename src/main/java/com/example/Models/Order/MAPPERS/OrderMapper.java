@@ -7,6 +7,7 @@ import com.example.Models.OrderDetail.DTO.OrderDetailDTO;
 import com.example.Models.OrderDetail.Entity.OrderDetail;
 import com.example.Models.OrderDetail.MAPPERS.OrderDetailMapper;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -19,10 +20,16 @@ public class OrderMapper {
             dto.getStatus(),
             dto.getUserId(),
             dto.getPaymentId(),
-            dto.getAddressId()
+            dto.getAddressId(),
+            dto.getTotalPrice()
         );
 
         order.setOrderDate(dto.getOrderDate());
+
+        // Set totalPrice si existe en DTO
+        if (dto.getTotalPrice() != null) {
+            order.setTotalPrice(dto.getTotalPrice());
+        }
 
         // No agregamos detalles aquí porque Order no tiene lista ni relación con detalles
 
@@ -47,6 +54,7 @@ public class OrderMapper {
             order.getUserId(),
             order.getPaymentId(),
             order.getAddressId(),
+            order.getTotalPrice(),  // <-- Aquí pasamos el totalPrice
             detailDTOs
         );
     }

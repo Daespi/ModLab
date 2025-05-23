@@ -1,5 +1,6 @@
 package com.example.Models.Order.Entity;
 
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.UUID;
 
@@ -14,12 +15,13 @@ public class Order {
     protected String userId;
     protected String paymentId;
     protected Integer addressId;
+    protected BigDecimal totalPrice;
 
     protected Order() {
         this.orderDate = LocalDateTime.now();
     }
 
-    public static Order getInstance(String status, String userId, String paymentId, Integer addressId) throws BuildException {
+    public static Order getInstance(String status, String userId, String paymentId, Integer addressId, BigDecimal totalPrice) throws BuildException {
         String message = "";
         Order order = new Order();
 
@@ -37,6 +39,10 @@ public class Order {
 
         if (addressId == null) message += "El addressId no puede ser nulo. ";
         else order.addressId = addressId;
+
+        if (totalPrice == null || totalPrice.compareTo(BigDecimal.ZERO) < 0) 
+            message += "El totalPrice no puede ser nulo o negativo. ";
+        else order.totalPrice = totalPrice;
 
         if (!message.isEmpty()) throw new BuildException(message);
 
@@ -95,6 +101,16 @@ public class Order {
         return 0;
     }
 
+    public BigDecimal getTotalPrice() {
+        return totalPrice;
+    }
+
+    public int setTotalPrice(BigDecimal totalPrice) {
+        if (totalPrice == null || totalPrice.compareTo(BigDecimal.ZERO) < 0) return -1;
+        this.totalPrice = totalPrice;
+        return 0;
+    }
+
     @Override
     public String toString() {
         return "Order{" +
@@ -104,6 +120,7 @@ public class Order {
                 ", userId='" + userId + '\'' +
                 ", paymentId='" + paymentId + '\'' +
                 ", addressId=" + addressId +
+                ", totalPrice=" + totalPrice +
                 '}';
     }
 }
