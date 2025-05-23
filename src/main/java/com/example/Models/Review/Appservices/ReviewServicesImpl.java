@@ -113,4 +113,3 @@ public class ReviewServicesImpl implements ReviewServices {
         reviewRepository.deleteById(reviewId);
     }
 }
->>>>>>> origin/dev_alex

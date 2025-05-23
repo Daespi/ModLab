@@ -33,8 +33,4 @@ public interface JpaReviewRepository extends JpaRepository<ReviewDTO, Integer>, 
 
     @Transactional
     void deleteById(int reviewId);
-<<<<<<< HEAD
 }
-=======
-}
->>>>>>> origin/dev_alex
