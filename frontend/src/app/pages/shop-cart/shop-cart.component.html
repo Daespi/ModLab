@@ -15,7 +15,7 @@
       </thead>
       <tbody>
         <tr *ngFor="let item of cartItems">
-          <ng-container *ngIf="getCPUInfo(item.productId) as cpu; else noCpu">
+          <ng-container *ngIf="getProductInfo(item.productId) as cpu; else noCpu">
             <td>{{ cpu.name }}</td>
             <td>
               <!-- Aquí tendrías que adaptar la imagen si CPU tuviera una propiedad imagen -->
@@ -42,7 +42,7 @@
     <div *ngIf="cartItems.length > 0" class="cart-footer">
       <h3>Total: {{ getTotal() | currency }}</h3>
       <button (click)="clearCart()">Vaciar carrito</button>
-      <button (click)="purchase()">Comprar</button>
+      <a class="btn-comprar" href="/user/show-address"><button class="btn-comprar-">Comprar</button></a>
     </div>
   </div>
   

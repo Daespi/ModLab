@@ -1,0 +1,67 @@
+.loading, .error, .no-addresses {
+    text-align: center;
+    font-size: 18px;
+    margin: 30px 0;
+    color: #333;
+    font-family: Arial, sans-serif;
+  }
+  
+  .address-container {
+    max-width: 700px;
+    margin: 40px auto;
+    padding: 30px 40px;
+    background: #f0f4f8;
+    border-radius: 12px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    font-family: Arial, sans-serif;
+  }
+  
+  .address-bubble {
+    background: white;
+    border-radius: 10px;
+    padding: 20px 25px;
+    margin-bottom: 20px;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+    transition: box-shadow 0.3s ease;
+  }
+  
+  .address-bubble:hover {
+    box-shadow: 0 4px 15px rgba(0,0,0,0.15);
+  }
+  
+  .address-bubble p {
+    margin: 8px 0;
+    font-size: 16px;
+    color: #222;
+  }
+  
+  .add-address-button {
+    display: block;
+    width: 100%;
+    margin-top: 15px;
+    padding: 15px 0;
+    background: rgba(255, 255, 255, 0.25);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    color: #003366;
+    font-weight: 600;
+    font-size: 17px;
+    border-radius: 15px;
+    border: 1.5px solid rgba(255, 255, 255, 0.4);
+    text-decoration: none;
+    text-align: center;
+    box-shadow: 0 4px 12px rgba(0, 51, 102, 0.15);
+    transition: background 0.3s ease, box-shadow 0.3s ease, color 0.3s ease;
+    cursor: pointer;
+  }
+  
+  .add-address-button:hover {
+    background: rgba(255, 255, 255, 0.4);
+    box-shadow: 0 6px 18px rgba(0, 51, 102, 0.25);
+    color: #001933;
+  }
+  
+  .no-address-button {
+    margin-top: 20px;
+  }
+  

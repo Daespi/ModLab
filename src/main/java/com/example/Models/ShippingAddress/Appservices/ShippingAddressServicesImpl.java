@@ -1,19 +1,25 @@
 package com.example.Models.ShippingAddress.Appservices;
 
+import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 
 import com.example.Exceptions.BuildException;
 import com.example.Exceptions.ServiceException;
 import com.example.Models.ShippingAddress.DTO.ShippingAddressDTO;
+import com.example.Models.ShippingAddress.Entity.ShippingAddress;
 import com.example.Models.ShippingAddress.MAPPERS.ShippingAddressMapper;
 import com.example.Models.ShippingAddress.Persistence.ShippingAddressRepository;
+import com.example.Models.ShopCart.DTO.ShopCartDTO;
 import com.example.sharedkernel.appservices.serializers.Serializer;
 import com.example.sharedkernel.appservices.serializers.Serializers;
 import com.example.sharedkernel.appservices.serializers.SerializersCatalog;
+import com.fasterxml.jackson.databind.ObjectMapper;
+
 
 @Controller
 public class ShippingAddressServicesImpl implements ShippingAddressServices {
+    
 
     @Autowired
     private ShippingAddressRepository shippingAddressRepository;
@@ -68,6 +74,18 @@ public class ShippingAddressServicesImpl implements ShippingAddressServices {
         );
         return shippingAddressRepository.save(updatedDto);
     }
+
+@Override
+@SuppressWarnings("unchecked")
+public String getAddressByUserIdToJson(String userId) throws ServiceException {
+    List<ShippingAddressDTO> list = shippingAddressRepository.findByUserId(userId);
+    Serializer<ShippingAddressDTO> serializer =
+        (Serializer<ShippingAddressDTO>) SerializersCatalog.getInstance(Serializers.SHIPPINGADDRESS_JSON_LIST);
+    return serializer.serializeList(list);
+}
+
+
+    
 
     @Override
     public String getByIdToJson(int addressId) throws ServiceException {

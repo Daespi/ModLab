@@ -1,5 +1,7 @@
 package com.example.presentation.api.rest;
 
+import java.util.Map;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -15,6 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.example.Exceptions.ServiceException;
 import com.example.Models.ShippingAddress.Appservices.ShippingAddressServices;
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 @RestController
 @RequestMapping("/modlab/ShippingAddress")
@@ -75,4 +78,19 @@ public class RestShippingAddressController {
             return ResponseEntity.badRequest().body(e.getMessage());
         }
     }
+
+    /**
+     * GET - Obtener carrito de un usuario por ID (JSON)
+     */
+    @GetMapping(value = "/user/{userId}", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<String> getCartByUser(@PathVariable String userId) {
+        try {
+            String json = shippingAddressServices.getAddressByUserIdToJson(userId);
+            return ResponseEntity.ok(json);
+        } catch (ServiceException e) {
+            return ResponseEntity.badRequest().body(e.getMessage());
+        }
+    }
+
+        
 }

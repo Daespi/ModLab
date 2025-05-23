@@ -8,7 +8,7 @@ import com.example.Operations.Checker;
 public class OrderDetail {
 
     protected String orderDetailId;
-    protected String orderId;
+    protected String orderId;  // Solo el ID del order, no el objeto completo
     protected String productId;
     protected int quantity;
     protected double price; // precio unitario en el momento del pedido

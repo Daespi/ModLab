@@ -3,43 +3,51 @@ package com.example.Models.Order.MAPPERS;
 import com.example.Exceptions.BuildException;
 import com.example.Models.Order.DTO.OrderDTO;
 import com.example.Models.Order.Entity.Order;
-import com.example.Models.Product.MAPPERS.ProductMapper;
-import com.example.Models.Product.DTO.ProductDTO;
-import com.example.Models.Product.Entity.Product;
+import com.example.Models.OrderDetail.DTO.OrderDetailDTO;
+import com.example.Models.OrderDetail.Entity.OrderDetail;
+import com.example.Models.OrderDetail.MAPPERS.OrderDetailMapper;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class OrderMapper {
 
+    // De DTO a entidad: solo los datos del pedido, sin detalles (porque Order no tiene lista)
     public static Order orderFromDTO(OrderDTO dto) throws BuildException {
-        Order order = Order.getInstance(dto.getStatus(), dto.getUserId(), dto.getPaymentId());
+        // Crea el Order básico con los datos principales
+        Order order = Order.getInstance(
+            dto.getStatus(),
+            dto.getUserId(),
+            dto.getPaymentId(),
+            dto.getAddressId()
+        );
 
         order.setOrderDate(dto.getOrderDate());
 
-        if (dto.getProducts() != null) {
-            for (ProductDTO productDTO : dto.getProducts()) {
-                Product product = ProductMapper.productFromDTO(productDTO);
-                order.addProduct(product);
-            }
-        }
+        // No agregamos detalles aquí porque Order no tiene lista ni relación con detalles
 
         return order;
     }
 
-    public static OrderDTO dtoFromOrder(Order order) {
-        List<ProductDTO> productDTOs = new ArrayList<>();
-        for (Product product : order.getProducts()) {
-            productDTOs.add(ProductMapper.dtoFromProduct(product));
+    // De entidad a DTO: incluimos la lista de detalles en el DTO
+    public static OrderDTO dtoFromOrder(Order order, List<OrderDetail> orderDetails) {
+        List<OrderDetailDTO> detailDTOs = new ArrayList<>();
+
+        if (orderDetails != null) {
+            for (OrderDetail detail : orderDetails) {
+                OrderDetailDTO detailDTO = OrderDetailMapper.dtoFromOrderDetail(detail);
+                detailDTOs.add(detailDTO);
+            }
         }
 
         return new OrderDTO(
-                order.getOrderId(),
-                order.getOrderDate(),
-                order.getStatus(),
-                order.getUserId(),
-                order.getPaymentId(),
-                productDTOs
+            order.getOrderId(),
+            order.getOrderDate(),
+            order.getStatus(),
+            order.getUserId(),
+            order.getPaymentId(),
+            order.getAddressId(),
+            detailDTOs
         );
     }
 }

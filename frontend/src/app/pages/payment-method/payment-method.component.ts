@@ -1,15 +1,17 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators, ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
-import { PaymentService } from '../../services/paymentMethod/paymentMethod.service';
+import { PaymentMethodService } from '../../services/paymentMethod/paymentMethod.service';
 import { PaymentMethod } from '../../models/PaymentMethod/PaymentMethod';
 import { AuthService } from '../../services/auth.service';
 import { UserService } from '../../services/user/user.service';
+import { Router } from '@angular/router';
+
 
 @Component({
   selector: 'app-payment-method',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule],
+  imports: [CommonModule, ReactiveFormsModule,FormsModule],
   templateUrl: './payment-method.component.html',
   styleUrls: ['./payment-method.component.css']
 })
@@ -18,56 +20,70 @@ export class PaymentMethodComponent implements OnInit {
 
   constructor(
     private fb: FormBuilder,
-    private paymentService: PaymentService,
+    private paymentMethodService: PaymentMethodService,
     private authService: AuthService,
-    private userService: UserService
+    private userService: UserService,
+    private router: Router
   ) {}
 
   ngOnInit(): void {
-    const email = this.authService.getUserEmail();
-    if (!email) {
-      alert('No se ha encontrado el email del usuario.');
+    const userId = localStorage.getItem('userId');
+    if (!userId) {
+      alert('No se ha encontrado el ID del usuario.');
       return;
     }
-
-    this.userService.getUserByEmail(email).subscribe({
-      next: (user) => {
-        const userId = user.userId;
-
-        // Inicializa el formulario con el userId recuperado
-        this.paymentForm = this.fb.group({
-          paymentMethod: ['', Validators.required],
-          cardNumber: ['', [Validators.required, Validators.minLength(16)]],
-          cardExpiry: ['', Validators.required],
-          cardCvv: ['', [Validators.required, Validators.minLength(3)]],
-          userId: [userId, Validators.required]
-        });
-      },
-      error: (err) => {
-        console.error('Error al obtener usuario:', err);
-        alert('No se pudo obtener la información del usuario.');
-      }
+  
+    this.paymentForm = this.fb.group({
+      paymentMethod: ['', Validators.required],
+      cardNumber: ['', [Validators.required, Validators.minLength(16)]],
+      cardHolder: ['', Validators.required],    // <--- Agrega este campo
+      cardExpiry: ['', Validators.required],
+      cardCvv: ['', [Validators.required, Validators.minLength(3)]],
+      userId: [userId, Validators.required]
     });
+    
   }
-
+  
+  
   submitPayment(): void {
     if (this.paymentForm.invalid) return;
-
-    const payment: PaymentMethod = this.paymentForm.value;
-
-    this.paymentService.createPayment(payment).subscribe({
+  
+    const { paymentMethod, cardNumber, cardExpiry, cardCvv, cardHolder } = this.paymentForm.value;
+  
+    const userId = localStorage.getItem('userId');
+    if (!userId) {
+      alert('No se encontró el usuario autenticado');
+      return;
+    }
+  
+    const payment: PaymentMethod = {
+      paymentMethod,
+      cardNumber,
+      cardExpiry,
+      cardCvv,
+      cardHolder,
+      userId
+    };
+  
+    this.paymentMethodService.create(payment).subscribe({
       next: () => {
         alert('Pago registrado correctamente.');
         this.paymentForm.reset();
+        this.router.navigate(['/user/show-payment']); // <--- Redirección aquí
       },
       error: (err: unknown) => {
         if (err instanceof Error) {
-          console.error('Error al procesar el pago:', err.message);
+          console.error('Error al agregar el método de pago:', err.message);
         } else {
           console.error('Error desconocido:', err);
         }
-        alert('Error al procesar el pago.');
+        alert('Error al agregar el método de pago.');
       }
     });
   }
+  
+  
+  
+  
+  
 }

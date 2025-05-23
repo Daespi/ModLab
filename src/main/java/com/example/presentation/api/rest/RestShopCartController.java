@@ -1,5 +1,8 @@
 package com.example.presentation.api.rest;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -54,29 +57,33 @@ public class RestShopCartController {
         }
     }
 
-    /**
-     * DELETE - Eliminar un producto del carrito por ID
-     */
-    @DeleteMapping("/{cartId}")
-    public ResponseEntity<String> deleteItem(@PathVariable int cartId) {
-        try {
-            shopCartServices.deleteByCartId(cartId);
-            return ResponseEntity.ok("Elemento eliminado del carrito.");
-        } catch (ServiceException e) {
-            return ResponseEntity.badRequest().body(e.getMessage());
-        }
+@DeleteMapping("/{cartId}")
+public ResponseEntity<Map<String, String>> deleteItem(@PathVariable int cartId) {
+    try {
+        shopCartServices.deleteByCartId(cartId);
+        Map<String, String> response = new HashMap<>();
+        response.put("message", "Elemento eliminado del carrito.");
+        return ResponseEntity.ok(response);
+    } catch (ServiceException e) {
+        Map<String, String> error = new HashMap<>();
+        error.put("error", e.getMessage());
+        return ResponseEntity.badRequest().body(error);
     }
+}
 
-    /**
-     * DELETE - Vaciar el carrito completo de un usuario
-     */
-    @DeleteMapping("/user/{userId}")
-    public ResponseEntity<String> clearUserCart(@PathVariable String userId) {
-        try {
-            shopCartServices.clearCartByUserId(userId);
-            return ResponseEntity.ok("Carrito vaciado correctamente.");
-        } catch (ServiceException e) {
-            return ResponseEntity.badRequest().body(e.getMessage());
-        }
+
+@DeleteMapping("/user/{userId}")
+public ResponseEntity<Map<String, String>> clearUserCart(@PathVariable String userId) {
+    try {
+        shopCartServices.clearCartByUserId(userId);
+        Map<String, String> response = new HashMap<>();
+        response.put("message", "Carrito vaciado correctamente.");
+        return ResponseEntity.ok(response);
+    } catch (ServiceException e) {
+        Map<String, String> error = new HashMap<>();
+        error.put("error", e.getMessage());
+        return ResponseEntity.badRequest().body(error);
     }
+}
+
 }

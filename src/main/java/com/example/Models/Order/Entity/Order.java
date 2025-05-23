@@ -1,11 +1,8 @@
 package com.example.Models.Order.Entity;
 
 import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.UUID;
 
-import com.example.Models.Product.Entity.Product;
 import com.example.Exceptions.BuildException;
 import com.example.Operations.Checker;
 
@@ -16,28 +13,30 @@ public class Order {
     protected String status;
     protected String userId;
     protected String paymentId;
-    protected List<Product> products;
+    protected Integer addressId;
 
     protected Order() {
         this.orderDate = LocalDateTime.now();
-        this.products = new ArrayList<>();
     }
 
-    public static Order getInstance(String status, String userId, String paymentId) throws BuildException {
+    public static Order getInstance(String status, String userId, String paymentId, Integer addressId) throws BuildException {
         String message = "";
         Order order = new Order();
 
         String uuid = UUID.randomUUID().toString().replace("-", "").substring(0, 32);
         order.orderId = uuid;
 
-        if ((Checker.isNull(status)) != 0) message += "El estado no puede ser nulo.";
+        if ((Checker.isNull(status)) != 0) message += "El estado no puede ser nulo. ";
         else order.status = status;
 
-        if ((Checker.isNull(userId)) != 0) message += "El userId no puede ser nulo.";
+        if ((Checker.isNull(userId)) != 0) message += "El userId no puede ser nulo. ";
         else order.userId = userId;
 
-        if ((Checker.isNull(paymentId)) != 0) message += "El paymentId no puede ser nulo.";
+        if ((Checker.isNull(paymentId)) != 0) message += "El paymentId no puede ser nulo. ";
         else order.paymentId = paymentId;
+
+        if (addressId == null) message += "El addressId no puede ser nulo. ";
+        else order.addressId = addressId;
 
         if (!message.isEmpty()) throw new BuildException(message);
 
@@ -86,22 +85,14 @@ public class Order {
         return 0;
     }
 
-    public List<Product> getProducts() {
-        return products;
+    public Integer getAddressId() {
+        return addressId;
     }
 
-    public void setProducts(List<Product> products) {
-        this.products = products;
-    }
-
-    public void addProduct(Product product) {
-        this.products.add(product);
-    }
-
-    public double getTotalPrice() {
-        return products.stream()
-                .mapToDouble(Product::getPrice)
-                .sum();
+    public int setAddressId(Integer addressId) {
+        if (addressId == null) return -1;
+        this.addressId = addressId;
+        return 0;
     }
 
     @Override
@@ -112,7 +103,7 @@ public class Order {
                 ", status='" + status + '\'' +
                 ", userId='" + userId + '\'' +
                 ", paymentId='" + paymentId + '\'' +
-                ", totalPrice=" + getTotalPrice() +
+                ", addressId=" + addressId +
                 '}';
     }
 }
