@@ -145,7 +145,7 @@ export class OrderSummaryComponent implements OnInit {
                 alert('Pedido realizado con éxito');
                 localStorage.removeItem('selectedAddress');
                 localStorage.removeItem('selectedPayment');
-                this.router.navigate(['/order-success']);
+                this.router.navigate(['/home']);
               },
               error: (err) => {
                 this.errorMessage = 'Error al eliminar los artículos del carrito: ' + err.message;

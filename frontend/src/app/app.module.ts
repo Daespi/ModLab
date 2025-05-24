@@ -17,6 +17,8 @@ import { ShowAddressComponent } from './pages/show-address/show-address.componen
 import { PaymentMethodComponent } from './pages/payment-method/payment-method.component';
 import { ShowPaymentComponent } from './pages/show-payment/show-payment.component';
 import { OrderSummaryComponent } from './pages/order-summary/order-summary.component';
+import { PoliticaPrivacidadComponent } from './pages/politica-privacidad/politica-privacidad.component';
+import { AboutUsComponent } from './pages/about-us/about-us.component';
 
 
 @NgModule({
@@ -35,7 +37,10 @@ import { OrderSummaryComponent } from './pages/order-summary/order-summary.compo
     ShowAddressComponent,
     PaymentMethodComponent,
     ShowPaymentComponent,
-    OrderSummaryComponent
+    OrderSummaryComponent,
+    PoliticaPrivacidadComponent,
+    AboutUsComponent,
+    
   ],
   imports: [
     BrowserModule,
